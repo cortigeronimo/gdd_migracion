@@ -1,9 +1,13 @@
+-- CREANDO SCHEMA SI NO EXISTE
+
 IF (NOT EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'PLEASE_HELP'))
 	BEGIN
 		EXEC('CREATE SCHEMA PLEASE_HELP AUTHORIZATION gdEspectaculos2018');
 	END;
 
 GO
+
+-- CREANDO TABLAS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.ROL_FUNCIONALIDAD') IS NOT NULL DROP TABLE PLEASE_HELP.ROL_FUNCIONALIDAD;
 
@@ -35,11 +39,13 @@ IF OBJECT_ID('PLEASE_HELP.CLIENTE') IS NOT NULL DROP TABLE PLEASE_HELP.CLIENTE;
 
 IF OBJECT_ID('PLEASE_HELP.USUARIO') IS NOT NULL DROP TABLE PLEASE_HELP.USUARIO;
 
--- PROCEDURES
+-- CREANDO PROCEDURES SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_CLIENTES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MIGRAR_CLIENTES;
 
 IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MIGRAR_EMPRESAS;
+
+-- CREANDO ESTRUCTURAS DE TABLAS
 
 create table PLEASE_HELP.Funcionalidad
 (
@@ -75,9 +81,7 @@ create table PLEASE_HELP.Usuario_Rol
 create table PLEASE_HELP.Usuario
 (
 	Usuario_Id int identity(1,1), 
---	Usuario_Username nvarchar(30) NOT NULL, 
---	Usuario_Password nvarchar(100) NOT NULL,
-	Usuario_Username nvarchar(50), 
+	Usuario_Username nvarchar(50) NOT NULL, 
 	Usuario_Password nvarchar(100),
 	CONSTRAINT UQ_USUARIO_USERNAME UNIQUE (Usuario_Username),
 	CONSTRAINT PK_USUARIO_ID PRIMARY KEY (Usuario_Id)
@@ -133,7 +137,7 @@ create table PLEASE_HELP.Publicacion
 	Pub_Fecha_Evento datetime,
 	Pub_Descripcion nvarchar(255),
 	Pub_Direccion nvarchar(255),
-	Pub_Rubro nvarchar(255),
+	Pub_Rubro int,
 	Pub_Grado int,
 	Pub_Empresa int,
 	Pub_Estado nvarchar(255),
@@ -151,7 +155,7 @@ create table PLEASE_HELP.Rubro
 create table PLEASE_HELP.Grado
 (
 	Grado_Id int identity(1,1),
-	Grado_Comision numeric(3,2) NOT NULL,
+	Grado_Comision numeric(3,1) NOT NULL,
 	Grado_Descripcion nvarchar(255),
 	CONSTRAINT PK_GRADO_ID PRIMARY KEY (Grado_Id),
 	CONSTRAINT UQ_GRADO_DESRCIPCION UNIQUE (Grado_Descripcion)
@@ -159,13 +163,13 @@ create table PLEASE_HELP.Grado
 
 create table PLEASE_HELP.Ubicacion
 (
+	Ubicacion_Publicacion numeric(18,0),
 	Ubicacion_Fila varchar(3),
 	Ubicacion_Asiento numeric(18,0),
 	Ubicacion_Precio numeric(18,0) NOT NULL,
 	Ubicacion_Tipo_Codigo numeric(18,0),
 	Ubicacion_Descripcion nvarchar(255),
 	Ubicacion_Sin_Numerar bit,
-	Ubicacion_Publicacion numeric(18,0),
 	CONSTRAINT PK_UBICACION_FILAXASIENTOXPUBLICACION 
 		PRIMARY KEY (Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Publicacion)
 )
@@ -187,7 +191,6 @@ create table PLEASE_HELP.Factura
 	Factura_Nro numeric(18,0),
 	Factura_Fecha datetime NOT NULL,
 	Factura_Total numeric(18,2) NOT NULL,
---	Factura_Pago_Descripcion nvarchar(255) NOT NULL,
 	Factura_Empresa int,
 	CONSTRAINT PK_FACTURA_NRO PRIMARY KEY (Factura_Nro)
 )
@@ -214,6 +217,8 @@ create table PLEASE_HELP.Puntuacion
 
 GO
 
+-- CREANDO FOREIGN KEYS
+
 ALTER TABLE PLEASE_HELP.Rol_Funcionalidad
 ADD CONSTRAINT FK_ROLXFUNCIONALIDAD_ROL FOREIGN KEY (Rol_Id) REFERENCES PLEASE_HELP.Rol(Rol_Id),
 CONSTRAINT FK_ROLXFUNCIONALIDAD_FUNC FOREIGN KEY (Func_Id) REFERENCES PLEASE_HELP.Funcionalidad(Func_Id)
@@ -238,7 +243,8 @@ GO
 
 ALTER TABLE PLEASE_HELP.Publicacion
 ADD CONSTRAINT FK_PUBLICACION_GRADO FOREIGN KEY (Pub_Grado) REFERENCES PLEASE_HELP.Grado(Grado_Id),
-CONSTRAINT FK_PUBLICACION_EMPRESA FOREIGN KEY (Pub_Empresa) REFERENCES PLEASE_HELP.Empresa(Emp_Usuario)
+CONSTRAINT FK_PUBLICACION_EMPRESA FOREIGN KEY (Pub_Empresa) REFERENCES PLEASE_HELP.Empresa(Emp_Usuario),
+CONSTRAINT FK_PUBLICACION_RUBRO FOREIGN KEY (Pub_Rubro) REFERENCES PLEASE_HELP.Rubro(Rubro_Id)
 
 GO
 
@@ -267,11 +273,17 @@ ALTER TABLE PLEASE_HELP.Item
 ADD CONSTRAINT FK_ITEM_FACTURA FOREIGN KEY (Item_Factura) REFERENCES PLEASE_HELP.Factura(Factura_Nro),
 CONSTRAINT FK_ITEM_COMPRA FOREIGN KEY (Item_Compra) REFERENCES PLEASE_HELP.Compra(Compra_Id)
 
+-- CREACION DE FUNCIONALIDADES
+
 INSERT INTO PLEASE_HELP.Funcionalidad (Func_Desc) VALUES ('ABM_ROL'), ('REGISTRO_USUARIO'), ('ABM_CLIENTE'), ('ABM_EMPRESA_ESPECTACULO'),
 ('ABM_RUBRO'), ('ABM_GRADO_PUBLICACION'), ('GENERAR_PUBLICACION'), ('EDITAR_PUBLICACION'), ('COMPRAR'), ('HISTORIAL_CLIENTE'),
 ('CANJE_ADMINISTRACION_PUNTOS'), ('GENERAR_PAGOS_COMISIONES'), ('LISTADO_ESTADISTICO');
 
+-- CREACION DE ROLES
+
 INSERT INTO PLEASE_HELP.Rol (Rol_Nombre) VALUES ('EMPRESA'), ('ADMINISTRATIVO'), ('CLIENTE')
+
+--CREACION DE ROLES X FUNCIONALIDADES
 
 INSERT INTO PLEASE_HELP.ROL_FUNCIONALIDAD (Rol_Id, Func_Id) SELECT r.Rol_Id, f.Func_Id FROM PLEASE_HELP.Rol r, PLEASE_HELP.Funcionalidad f WHERE r.Rol_Nombre = 'ADMINISTRATIVO'
 
@@ -282,6 +294,20 @@ INSERT INTO PLEASE_HELP.ROL_FUNCIONALIDAD (Rol_Id, Func_Id) SELECT r.Rol_Id, f.F
 f.Func_Desc IN ('REGISTRO_USUARIO', 'COMPRAR', 'HISTORIAL_CLIENTE', 'CANJE_ADMINISTRACION_PUNTOS')
 
 GO
+
+-- CREACION DE ADMINISTRADOR DEL SISTEMA
+
+INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) VALUES ('admin', 'w23e')
+
+-- CREACION DE ADMINISTRADOR X ROL
+
+INSERT INTO PLEASE_HELP.Usuario_Rol (Usuario_Id, Rol_Id) 
+SELECT u.Usuario_Id, (SELECT r.Rol_Id FROM PLEASE_HELP.Rol r 
+WHERE r.Rol_Nombre = 'ADMINISTRATIVO') FROM PLEASE_HELP.Usuario u WHERE u.Usuario_Username = 'admin'
+
+GO
+
+-- CREACION DE CLIENTES
 
 CREATE PROCEDURE PLEASE_HELP.SP_MIGRAR_CLIENTES AS 
 BEGIN
@@ -322,7 +348,7 @@ BEGIN
 		WHERE u.Usuario_Username = ('USUARIO' + CAST(m.Cli_Dni AS varchar(225))) AND m.Cli_Dni IS NOT NULL
 		
 		INSERT INTO PLEASE_HELP.Usuario_Rol (Usuario_Id, Rol_Id)
-		SELECT c.Cli_Usuario, (select r.Rol_Id from PLEASE_HELP.Rol r where r.Rol_Nombre = 'CLIENTE') from PLEASE_HELP.Cliente c
+		SELECT c.Cli_Usuario, (SELECT r.Rol_Id FROM PLEASE_HELP.Rol r WHERE r.Rol_Nombre = 'CLIENTE') FROM PLEASE_HELP.Cliente c
 
 
 	COMMIT TRANSACTION
@@ -333,6 +359,8 @@ GO
 EXEC PLEASE_HELP.SP_MIGRAR_CLIENTES
 
 GO
+
+-- CREACION DE EMPRESAS
 
 CREATE PROCEDURE PLEASE_HELP.SP_MIGRAR_EMPRESAS AS 
 BEGIN
@@ -376,3 +404,31 @@ GO
 EXEC PLEASE_HELP.SP_MIGRAR_EMPRESAS
 
 GO
+
+-- CREACION DE RUBRO
+
+INSERT INTO PLEASE_HELP.Rubro SELECT DISTINCT Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
+
+-- CREACION DE PUBLICACION
+
+INSERT INTO PLEASE_HELP.Publicacion SELECT DISTINCT m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, m.Espectaculo_Descripcion,
+NULL, 1, NULL, e.Emp_Usuario, m.Espectaculo_Estado FROM gd_esquema.Maestra m, PLEASE_HELP.Empresa e WHERE e.Emp_Cuit = m.Espec_Empresa_Cuit
+
+-- CREACION DE UBICACION
+
+INSERT INTO PLEASE_HELP.Ubicacion SELECT DISTINCT m.Espectaculo_Cod, m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo,
+m.Ubicacion_Tipo_Descripcion, m.Ubicacion_Sin_Numerar FROM gd_esquema.Maestra m
+
+-- CREACION DE GRADOS
+INSERT INTO PLEASE_HELP.Grado (Grado_Comision, Grado_Descripcion) VALUES (30.0, 'ALTA'), (20.0, 'MEDIA'), (10.0, 'BAJA')
+
+-- CREACION DE FACTURA
+
+INSERT INTO PLEASE_HELP.Factura 
+SELECT m.Factura_nro, m.Factura_Fecha, m.Factura_Total, e.Emp_Usuario 
+FROM (select m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit
+	FROM gd_esquema.Maestra m 
+	WHERE m.Factura_Nro IS NOT NULL 
+	GROUP BY m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit) 
+m inner join PLEASE_HELP.Empresa e
+ON m.Espec_Empresa_Cuit = e.Emp_Cuit
