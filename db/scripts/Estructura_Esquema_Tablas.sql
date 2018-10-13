@@ -1,6 +1,6 @@
 IF (NOT EXISTS(SELECT 1 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'PLEASE_HELP'))
 	BEGIN
-		EXEC('CREATE SCHEMA PLEASE_HELP AUTHORIZATION gd');
+		EXEC('CREATE SCHEMA PLEASE_HELP AUTHORIZATION gdEspectaculos2018');
 	END;
 
 GO
@@ -170,6 +170,7 @@ create table PLEASE_HELP.Compra
 	Compra_Cantidad numeric(18,0) NOT NULL,
 	Compra_Fecha datetime NOT NULL,
 	Compra_Metodo_Pago nvarchar(255) NOT NULL,
+	Compra_Fecha_Rendida datetime,
 	CONSTRAINT PK_COMPRA_ID PRIMARY KEY (Compra_Id),
 )
 
@@ -178,7 +179,7 @@ create table PLEASE_HELP.Factura
 	Factura_Nro numeric(18,0),
 	Factura_Fecha datetime NOT NULL,
 	Factura_Total numeric(18,2) NOT NULL,
-	Factura_Pago_Descripcion nvarchar(255) NOT NULL,
+--	Factura_Pago_Descripcion nvarchar(255) NOT NULL,
 	Factura_Empresa int,
 	CONSTRAINT PK_FACTURA_NRO PRIMARY KEY (Factura_Nro)
 )
@@ -190,15 +191,17 @@ create table PLEASE_HELP.Item
 	Item_Cantidad numeric(18,0) NOT NULL,
 	Item_Descripcion nvarchar(60) NOT NULL,
 	Item_Factura numeric(18,0),
-	CONSTRAINT PK_ITEM_ID PRIMARY KEY (Item_Id)
+	Item_Compra int,
+	CONSTRAINT PK_ITEM_ID PRIMARY KEY (Item_Id),
 )
 
 create table PLEASE_HELP.Puntuacion
 (
-	Puntuacion_Cliente int,
+	Puntuacion_Id int,
 	Puntuacion_Cantidad int DEFAULT 0,
 	Puntuacion_Fecha_Vencimiento datetime,
-	CONSTRAINT PK_PUNTUACION_CLIENTE PRIMARY KEY (Puntuacion_Cliente), 
+	Puntuacion_Cliente int,
+	CONSTRAINT PK_PUNTUACION_ID PRIMARY KEY (Puntuacion_Id), 
 )
 
 GO
@@ -253,4 +256,6 @@ ADD CONSTRAINT FK_FACTURA_EMPRESA FOREIGN KEY (Factura_Empresa) REFERENCES PLEAS
 GO
 
 ALTER TABLE PLEASE_HELP.Item
-ADD CONSTRAINT FK_ITEM_FACTURA FOREIGN KEY (Item_Factura) REFERENCES PLEASE_HELP.Factura(Factura_Nro)
+ADD CONSTRAINT FK_ITEM_FACTURA FOREIGN KEY (Item_Factura) REFERENCES PLEASE_HELP.Factura(Factura_Nro),
+CONSTRAINT FK_ITEM_COMPRA FOREIGN KEY (Item_Compra) REFERENCES PLEASE_HELP.Compra(Compra_Id)
+
