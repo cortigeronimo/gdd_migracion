@@ -13,6 +13,8 @@ IF OBJECT_ID('PLEASE_HELP.USUARIO_ROL') IS NOT NULL DROP TABLE PLEASE_HELP.USUAR
 
 IF OBJECT_ID('PLEASE_HELP.ROL') IS NOT NULL DROP TABLE PLEASE_HELP.ROL;
 
+IF OBJECT_ID('PLEASE_HELP.ITEM') IS NOT NULL DROP TABLE PLEASE_HELP.ITEM;
+
 IF OBJECT_ID('PLEASE_HELP.COMPRA') IS NOT NULL DROP TABLE PLEASE_HELP.COMPRA;
 
 IF OBJECT_ID('PLEASE_HELP.UBICACION') IS NOT NULL DROP TABLE PLEASE_HELP.UBICACION;
@@ -25,15 +27,19 @@ IF OBJECT_ID('PLEASE_HELP.GRADO') IS NOT NULL DROP TABLE PLEASE_HELP.GRADO;
 
 IF OBJECT_ID('PLEASE_HELP.PUNTUACION') IS NOT NULL DROP TABLE PLEASE_HELP.PUNTUACION;
 
-IF OBJECT_ID('PLEASE_HELP.ITEM') IS NOT NULL DROP TABLE PLEASE_HELP.ITEM;
-
 IF OBJECT_ID('PLEASE_HELP.FACTURA') IS NOT NULL DROP TABLE PLEASE_HELP.FACTURA;
 
 IF OBJECT_ID('PLEASE_HELP.EMPRESA') IS NOT NULL DROP TABLE PLEASE_HELP.EMPRESA;
 
 IF OBJECT_ID('PLEASE_HELP.CLIENTE') IS NOT NULL DROP TABLE PLEASE_HELP.CLIENTE;
 
-IF OBJECT_ID('PLEASE_HELP.USUARIO') IS NOT NULL DROP TABLE PLEASE_HELP.USUARIO
+IF OBJECT_ID('PLEASE_HELP.USUARIO') IS NOT NULL DROP TABLE PLEASE_HELP.USUARIO;
+
+-- PROCEDURES
+
+IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_CLIENTES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MIGRAR_CLIENTES;
+
+IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MIGRAR_EMPRESAS;
 
 create table PLEASE_HELP.Funcionalidad
 (
@@ -54,7 +60,7 @@ create table PLEASE_HELP.Rol
 (
 	Rol_Id int identity(1,1), 
 	Rol_Nombre nvarchar(20) NOT NULL, 
-	Rol_Habilitado bit,
+	Rol_Habilitado bit DEFAULT 1,
 	CONSTRAINT UQ_ROL_NOMBRE UNIQUE (Rol_Nombre),
 	CONSTRAINT PK_ROL_ID PRIMARY KEY (Rol_Id)
 )
@@ -69,8 +75,10 @@ create table PLEASE_HELP.Usuario_Rol
 create table PLEASE_HELP.Usuario
 (
 	Usuario_Id int identity(1,1), 
-	Usuario_Username nvarchar(30) NOT NULL, 
-	Usuario_Password nvarchar(100) NOT NULL,
+--	Usuario_Username nvarchar(30) NOT NULL, 
+--	Usuario_Password nvarchar(100) NOT NULL,
+	Usuario_Username nvarchar(50), 
+	Usuario_Password nvarchar(100),
 	CONSTRAINT UQ_USUARIO_USERNAME UNIQUE (Usuario_Username),
 	CONSTRAINT PK_USUARIO_ID PRIMARY KEY (Usuario_Id)
 )
@@ -81,7 +89,7 @@ create table PLEASE_HELP.Cliente
 	Cli_Nombre nvarchar(255),
 	Cli_Apellido nvarchar(255),
 	Cli_Tipo_Documento nvarchar(255),
-	Cli_Nro_Docuemtno numeric(18,0),
+	Cli_Nro_Documento numeric(18,0),
 	Cli_Cuil numeric(11,0),
 	Cli_Email nvarchar(255),
 	Cli_Telefono numeric(15,0),
@@ -93,9 +101,9 @@ create table PLEASE_HELP.Cliente
 	Cli_Fecha_Nac datetime,
 	Cli_Fecha_Creacion datetime,
 	Cli_Tarjeta_Credito nvarchar(255),
-	Cli_Habilitado bit,
-	Cli_Intentos_Fallidos smallint,
-	Cli_Baja int,
+	Cli_Habilitado bit DEFAULT 1,
+	Cli_Intentos_Fallidos smallint DEFAULT 0,
+	Cli_Baja bit DEFAULT 0,
 	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario)
 )
 
@@ -112,9 +120,9 @@ create table PLEASE_HELP.Empresa
 	Emp_Cod_Postal nvarchar(50),
 	Emp_Ciudad nvarchar(255),
 	Emp_Cuit nvarchar(255),
-	Emp_Habilitado bit,
-	Emp_Intentos_Fallidos smallint,
-	Emp_Baja bit,
+	Emp_Habilitado bit DEFAULT 1,
+	Emp_Intentos_Fallidos smallint DEFAULT 0,
+	Emp_Baja bit DEFAULT 0,
 	CONSTRAINT PK_EMPRESA_USUARIO PRIMARY KEY (Emp_Usuario)
 )
 
@@ -259,3 +267,112 @@ ALTER TABLE PLEASE_HELP.Item
 ADD CONSTRAINT FK_ITEM_FACTURA FOREIGN KEY (Item_Factura) REFERENCES PLEASE_HELP.Factura(Factura_Nro),
 CONSTRAINT FK_ITEM_COMPRA FOREIGN KEY (Item_Compra) REFERENCES PLEASE_HELP.Compra(Compra_Id)
 
+INSERT INTO PLEASE_HELP.Funcionalidad (Func_Desc) VALUES ('ABM_ROL'), ('REGISTRO_USUARIO'), ('ABM_CLIENTE'), ('ABM_EMPRESA_ESPECTACULO'),
+('ABM_RUBRO'), ('ABM_GRADO_PUBLICACION'), ('GENERAR_PUBLICACION'), ('EDITAR_PUBLICACION'), ('COMPRAR'), ('HISTORIAL_CLIENTE'),
+('CANJE_ADMINISTRACION_PUNTOS'), ('GENERAR_PAGOS_COMISIONES'), ('LISTADO_ESTADISTICO');
+
+INSERT INTO PLEASE_HELP.Rol (Rol_Nombre) VALUES ('EMPRESA'), ('ADMINISTRATIVO'), ('CLIENTE')
+
+INSERT INTO PLEASE_HELP.ROL_FUNCIONALIDAD (Rol_Id, Func_Id) SELECT r.Rol_Id, f.Func_Id FROM PLEASE_HELP.Rol r, PLEASE_HELP.Funcionalidad f WHERE r.Rol_Nombre = 'ADMINISTRATIVO'
+
+INSERT INTO PLEASE_HELP.ROL_FUNCIONALIDAD (Rol_Id, Func_Id) SELECT r.Rol_Id, f.Func_Id FROM PLEASE_HELP.Rol r, PLEASE_HELP.Funcionalidad f WHERE r.Rol_Nombre = 'EMPRESA' AND
+f.Func_Desc IN ('REGISTRO_USUARIO', 'ABM_RUBRO', 'ABM_GRADO_PUBLICACION', 'GENERAR_PUBLICACION', 'EDITAR_PUBLICACION')
+
+INSERT INTO PLEASE_HELP.ROL_FUNCIONALIDAD (Rol_Id, Func_Id) SELECT r.Rol_Id, f.Func_Id FROM PLEASE_HELP.Rol r, PLEASE_HELP.Funcionalidad f WHERE r.Rol_Nombre = 'CLIENTE' AND
+f.Func_Desc IN ('REGISTRO_USUARIO', 'COMPRAR', 'HISTORIAL_CLIENTE', 'CANJE_ADMINISTRACION_PUNTOS')
+
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_MIGRAR_CLIENTES AS 
+BEGIN
+	BEGIN TRANSACTION
+
+		INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) 
+		SELECT 'USUARIO' + CAST(Cli_Dni AS varchar(225)), Cli_Dni 
+		FROM gd_esquema.Maestra 
+		WHERE Cli_Dni IS NOT NULL
+		GROUP BY Cli_Dni
+
+		
+
+		INSERT INTO PLEASE_HELP.Cliente (
+			Cli_Usuario,
+			Cli_Nombre,
+			Cli_Apellido,
+			Cli_Tipo_Documento,
+			Cli_Nro_Documento,
+			Cli_Cuil,
+			Cli_Email,
+			Cli_Telefono,
+			Cli_Localidad,
+			Cli_Direccion,
+			Cli_Nro_Piso,
+			Cli_Depto,
+			Cli_Cod_Postal,
+			Cli_Fecha_Nac,
+			Cli_Fecha_Creacion,
+			Cli_Tarjeta_Credito,
+			Cli_Habilitado,
+			Cli_Intentos_Fallidos,
+			Cli_Baja
+		)
+		SELECT DISTINCT u.Usuario_Id, m.Cli_Nombre, m.Cli_Apeliido, 'DNI', m.Cli_Dni, NULL, m.Cli_Mail, NULL, NULL, m.Cli_Dom_Calle + CAST(m.Cli_Nro_Calle AS nvarchar(255))
+		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, getDate(), NULL, 1, 0, 0 
+		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
+		WHERE u.Usuario_Username = ('USUARIO' + CAST(m.Cli_Dni AS varchar(225))) AND m.Cli_Dni IS NOT NULL
+		
+		INSERT INTO PLEASE_HELP.Usuario_Rol (Usuario_Id, Rol_Id)
+		SELECT c.Cli_Usuario, (select r.Rol_Id from PLEASE_HELP.Rol r where r.Rol_Nombre = 'CLIENTE') from PLEASE_HELP.Cliente c
+
+
+	COMMIT TRANSACTION
+END
+
+GO
+
+EXEC PLEASE_HELP.SP_MIGRAR_CLIENTES
+
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_MIGRAR_EMPRESAS AS 
+BEGIN
+	BEGIN TRANSACTION
+
+		INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) 
+		SELECT 'EMPRESA' + CAST(Espec_Empresa_Cuit AS varchar(225)), Espec_Empresa_Cuit 
+		FROM gd_esquema.Maestra 
+		WHERE Espec_Empresa_Cuit IS NOT NULL
+		GROUP BY Espec_Empresa_Cuit
+
+		INSERT INTO PLEASE_HELP.Empresa (
+			Emp_Usuario,
+			Emp_Razon_Social,
+			Emp_Email,
+			Emp_Telefono,
+			Emp_Localidad,
+			Emp_Direccion,
+			Emp_Piso,
+			Emp_Depto,
+			Emp_Cod_Postal,
+			Emp_Ciudad,
+			Emp_Cuit,
+			Emp_Habilitado,
+			Emp_Intentos_Fallidos,
+			Emp_Baja
+		)
+		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
+		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0
+		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
+		WHERE u.Usuario_Username = ('EMPRESA' + CAST(m.Espec_Empresa_Cuit AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
+
+		INSERT INTO PLEASE_HELP.Usuario_Rol (Usuario_Id, Rol_Id)
+		SELECT e.Emp_Usuario, (select r.Rol_Id from PLEASE_HELP.Rol r where r.Rol_Nombre = 'EMPRESA') from PLEASE_HELP.EMPRESA e
+
+	COMMIT TRANSACTION
+END
+
+GO
+
+EXEC PLEASE_HELP.SP_MIGRAR_EMPRESAS
+
+GO
