@@ -176,7 +176,8 @@ create table PLEASE_HELP.Ubicacion
 
 create table PLEASE_HELP.Compra
 (
-	Compra_Id int,
+--	Compra_Id int,
+	Compra_Id int identity(1,1),
 	Compra_Publicacion numeric(18,0),
 	Compra_Cliente int,
 	Compra_Cantidad numeric(18,0) NOT NULL,
@@ -197,7 +198,8 @@ create table PLEASE_HELP.Factura
 
 create table PLEASE_HELP.Item
 (
-	Item_Id int,
+--	Item_Id int,
+	Item_Id int identity(1,1),
 	Item_Monto numeric(18,2) NOT NULL,
 	Item_Cantidad numeric(18,0) NOT NULL,
 	Item_Descripcion nvarchar(60) NOT NULL,
@@ -432,3 +434,13 @@ FROM (select m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cu
 	GROUP BY m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit) 
 m inner join PLEASE_HELP.Empresa e
 ON m.Espec_Empresa_Cuit = e.Emp_Cuit
+
+-- CREACION DE COMPRAS
+
+INSERT INTO PLEASE_HELP.Compra
+SELECT g.Espectaculo_Cod, (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Factura_Fecha
+FROM gd_esquema.Maestra g
+WHERE g.Cli_Dni IS NOT NULL AND g.Forma_Pago_Desc IS NOT NULL 
+ORDER BY g.Compra_Fecha ASC
+
+-- CREACION DE ITEMS
