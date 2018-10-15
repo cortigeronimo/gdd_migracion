@@ -178,12 +178,14 @@ create table PLEASE_HELP.Compra
 (
 --	Compra_Id int,
 	Compra_Id int identity(1,1),
-	Compra_Publicacion numeric(18,0),
 	Compra_Cliente int,
 	Compra_Cantidad numeric(18,0) NOT NULL,
 	Compra_Fecha datetime NOT NULL,
 	Compra_Metodo_Pago nvarchar(255) NOT NULL,
 	Compra_Fecha_Rendida datetime,
+	Compra_Fila varchar(3) NOT NULL,
+	Compra_Asiento numeric(18,0) NOT NULL,
+	Compra_Publicacion numeric(18,0),
 	CONSTRAINT PK_COMPRA_ID PRIMARY KEY (Compra_Id),
 )
 
@@ -261,7 +263,7 @@ ADD CONSTRAINT FK_PUNTUACION_CLIENTE FOREIGN KEY (Puntuacion_Cliente) REFERENCES
 GO
 
 ALTER TABLE PLEASE_HELP.Compra
-ADD CONSTRAINT FK_COMPRA_PUBLICACION FOREIGN KEY (Compra_Publicacion) REFERENCES PLEASE_HELP.Publicacion(Pub_Codigo),
+ADD CONSTRAINT FK_COMPRA_UBICACION FOREIGN KEY (Compra_Fila, Compra_Asiento, Compra_Publicacion) REFERENCES PLEASE_HELP.Ubicacion(Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Publicacion),
 CONSTRAINT FK_COMPRA_CLIENTE FOREIGN KEY (Compra_Cliente) REFERENCES PLEASE_HELP.Cliente(Cli_Usuario)
 
 GO
@@ -438,9 +440,14 @@ ON m.Espec_Empresa_Cuit = e.Emp_Cuit
 -- CREACION DE COMPRAS
 
 INSERT INTO PLEASE_HELP.Compra
-SELECT g.Espectaculo_Cod, (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Factura_Fecha
+SELECT (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Factura_Fecha, g.Ubicacion_Fila, g.Ubicacion_Asiento, g.Espectaculo_Cod
 FROM gd_esquema.Maestra g
 WHERE g.Cli_Dni IS NOT NULL AND g.Forma_Pago_Desc IS NOT NULL 
 ORDER BY g.Compra_Fecha ASC
 
 -- CREACION DE ITEMS
+
+INSERT INTO PLEASE_HELP.Item
+SELECT G.Item_Factura_Monto, G.Item_Factura_Cantidad, G.Item_Factura_Descripcion, G.Factura_Nro, (SELECT P.Compra_Id FROM PLEASE_HELP.Compra P WHERE G.Espectaculo_Cod = P.Compra_Publicacion AND G.Ubicacion_Asiento = P.Compra_Asiento AND G.Ubicacion_Fila = P.Compra_Fila)
+FROM gd_esquema.Maestra G
+WHERE G.Factura_Nro IS NOT NULL
