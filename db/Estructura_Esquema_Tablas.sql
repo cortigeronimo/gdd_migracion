@@ -478,3 +478,16 @@ INSERT INTO PLEASE_HELP.Item
 SELECT G.Item_Factura_Monto, G.Item_Factura_Cantidad, G.Item_Factura_Descripcion, G.Factura_Nro, (SELECT P.Compra_Id FROM PLEASE_HELP.Compra P WHERE G.Espectaculo_Cod = P.Compra_Publicacion AND G.Ubicacion_Asiento = P.Compra_Asiento AND G.Ubicacion_Fila = P.Compra_Fila)
 FROM gd_esquema.Maestra G
 WHERE G.Factura_Nro IS NOT NULL
+
+
+
+
+--PROCEDURE LOGIN
+
+CREATE PROCEDURE PLEASE_HELP.SP_LOGIN (@user nvarchar(50), @password nvarchar(100))
+AS 
+BEGIN 
+SELECT * FROM PLEASE_HELP.Usuario WHERE Usuario_Username = @user AND Usuario_Password = @password
+END
+
+--------------------------------------
