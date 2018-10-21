@@ -227,6 +227,7 @@ create table PLEASE_HELP.Premio
 (
 	Premio_Id int identity(1,1),
 	Premio_Descripcion nvarchar(50),
+	Premio_Puntos int,
 	CONSTRAINT PK_PREMIO_ID PRIMARY KEY (Premio_Id),
 )
 
