@@ -8,31 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace PalcoNet
 {
-    public partial class Login : Form
+    public partial class Principal : Form
     {
-        Usuario user = new Usuario();
-
-        public Login()
+        public Principal()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void Principal_Load(object sender, EventArgs e)
         {
-
-            //llamar repositorio
-
+            Login login = new Login();
+            login.MdiParent = this;
+            login.Show();
         }
 
-        void verificarLogin()
+        public static void open(Form form)
         {
-            user.Username = txtUsername.Text;
-            user.Password = txtPassword.Text;
-
+            form.Show();
         }
-
     }
 }

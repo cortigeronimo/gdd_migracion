@@ -16,7 +16,9 @@ namespace PalcoNet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Principal form = new Principal();
+            form.IsMdiContainer = true;
+            Application.Run(form);
         }
     }
 }

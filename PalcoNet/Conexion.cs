@@ -11,30 +11,24 @@ namespace PalcoNet
 {
     public class Conexion
     {
-        public SqlConnection con { get; set; }
 
-        public Conexion()
+        public static SqlDataReader obtenerDatos(SqlCommand command)
         {
-            con = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString);
-        }
-
-        void abrirConexion()
-        {
-            if (con.State == ConnectionState.Closed) con.Open();
-        }
-
-        void cerrarConexion()
-        {
-            if (con.State == ConnectionState.Open) con.Close();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString))
+            {
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                return reader;
+            }
         }
 
 
 
-        //EJECUTAR SP
+        /*
         public void ejecutarSP(String nombreSP, List<Parametro> listaParametros)
         {
-            SqlCommand cmd;
-
+            SqlCommand cmd = new SqlCommand();
             try
             {
                 abrirConexion();
@@ -74,10 +68,12 @@ namespace PalcoNet
             }
             cerrarConexion();
         }
+         * */
 
 
 
         //EJECUTAR QUERY (sin parametros de salida)
+        /*
         public DataTable ejecutarQuery(String nombreSP, List<Parametro> listaParametros)
         {
             DataTable dt = new DataTable();
@@ -102,7 +98,7 @@ namespace PalcoNet
                 throw ex;
             }
             return dt;
-        }
+        }*/
 
 
     }
