@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet
 {
-    partial class Principal
+    partial class FormManager
     {
         /// <summary>
         /// Required designer variable.

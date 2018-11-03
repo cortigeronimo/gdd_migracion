@@ -16,9 +16,9 @@ namespace PalcoNet
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Principal form = new Principal();
-            form.IsMdiContainer = true;
-            Application.Run(form);
+            //minimiza la ventana que dispara un evento en el cual oculta la ventana
+            FormManager.getInstance().WindowState = FormWindowState.Minimized;
+            Application.Run(FormManager.getInstance());
         }
     }
 }

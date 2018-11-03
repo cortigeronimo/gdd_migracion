@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Vistas;
 
 
 namespace PalcoNet
@@ -18,19 +19,33 @@ namespace PalcoNet
         public Login()
         {
             InitializeComponent();
+            //el login se encarga de ocultar al manager porque sino
+            //hay que hacer algo rebuscado
+            
         }
+
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
-            //llamar repositorio
-
+            if (IsRegistered())
+            {
+                FormManager.getInstance().OpenAndClose(new Home(), this);
+                //FormManager.getInstance().open(new Menu());
+            }
+            
         }
 
-        void verificarLogin()
+        private Boolean IsRegistered()
         {
             user.Username = txtUsername.Text;
             user.Password = txtPassword.Text;
+            //esta hardcodeado para que podamos entrar directamente
+            return true;
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
 
         }
 
