@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace PalcoNet.Vistas
 {
-    public partial class Home : Form
+    public partial class Home : CustomForm
     {
 
         private void InitializeComponent()

@@ -12,7 +12,7 @@ using PalcoNet.Vistas;
 
 namespace PalcoNet
 {
-    public partial class Login : Form
+    public partial class Login : CustomForm
     {
         Usuario user = new Usuario();
 
