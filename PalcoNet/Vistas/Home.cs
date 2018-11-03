@@ -10,11 +10,18 @@ namespace PalcoNet.Vistas
     public partial class Home : CustomForm
     {
 
+        public Home() {
+            this.InitializeComponent();
+            this.InitializeElements();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
         private void InitializeComponent()
         {
             this.SuspendLayout();
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "MainMenu";
+            this.Name = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             this.ResumeLayout(false);
 
@@ -22,7 +29,8 @@ namespace PalcoNet.Vistas
 
         private void Home_Load(object sender, EventArgs e)
         {
-            this.InitializeComponent();
+
         }
+
     }
 }
