@@ -8,19 +8,28 @@ using System.Drawing;
 
 namespace PalcoNet.Vistas
 {
-    public class CustomForm : Form
+    public abstract class CustomForm : Form
     {
+
+        public CustomForm() {
+            InitializeComponent();
+            InitializeElements();
+        }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
             FormManager.getInstance().CloseForm(this);
         }
 
-        private void InitializeComponent()
+        protected abstract void InitializeElements();
+
+        protected virtual void InitializeComponent() 
         {
             this.SuspendLayout();
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(300, 400);
             this.Name = "CustomForm";
+            this.Load += new System.EventHandler(this.CustomForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -45,9 +54,8 @@ namespace PalcoNet.Vistas
             label.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label.Location = new Point(0, 0);
             label.Name = "Default Name, Change Please";
-            label.Size = new Size(73, 17);
-            label.TabIndex = 3;
-            label.Text = "Default Text, Change Please";
+            label.Size = new Size(100, 17);
+            label.Text = "Default Text";
             return label;
         }
 
@@ -57,8 +65,7 @@ namespace PalcoNet.Vistas
             textBox.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBox.Location = new Point(0, 0);
             textBox.Name = "Default Name, Change Please";
-            textBox.Size = new Size(133, 23);
-            textBox.TabIndex = 2;
+            textBox.Size = new Size(73, 17);
             return textBox;
         }
 
@@ -71,6 +78,20 @@ namespace PalcoNet.Vistas
             linkLabel.Size = new Size(133, 23);
             linkLabel.Text = "Default Text, Change Please";
             return linkLabel;
+        }
+
+        protected NumericUpDown DefaultNumericUpDown(){
+            NumericUpDown number = new NumericUpDown();
+            number.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            number.Location = new Point(0, 0);
+            number.Name = "Default Name, Change Please";
+            number.Size = new Size(133, 23);
+            return number;
+        }
+
+        private void CustomForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

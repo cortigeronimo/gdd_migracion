@@ -23,6 +23,17 @@ namespace PalcoNet
             }
         }
 
+        public static int insertData(SqlCommand command){
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString))
+            {
+                command.Connection = connection;
+                connection.Open();
+                int i = command.ExecuteNonQuery();
+                connection.Close();
+                return i;
+            }
+        }
+
 
 
         /*

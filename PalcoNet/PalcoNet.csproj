@@ -57,12 +57,13 @@
     <Compile Include="Abm Empresa Espectaculo\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Grado\Form1.cs">
+    <Compile Include="Abm Grado\AbmGrado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Grado\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Grado\AbmGrado.Designer.cs">
+      <DependentUpon>AbmGrado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Grado\Grado.cs" />
     <Compile Include="Abm Rol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,12 +119,13 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
     <Compile Include="Vistas\CustomForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
+    <Compile Include="Vistas\UserHome.Designer.cs">
+      <DependentUpon>UserHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
@@ -148,7 +150,7 @@
     </Compile>
     <Compile Include="Repositorios\RepoUsuario.cs" />
     <Compile Include="Modelo\Usuario.cs" />
-    <Compile Include="Vistas\Home.cs">
+    <Compile Include="Vistas\UserHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <EmbeddedResource Include="Vistas\CustomForm.resx">
@@ -169,8 +171,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Vistas\Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\UserHome.resx">
+      <DependentUpon>UserHome.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

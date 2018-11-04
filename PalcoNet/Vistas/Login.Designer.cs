@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        protected override void InitializeElements()
         {
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -109,6 +109,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.TreeView treeView1;
+        
     }
 }

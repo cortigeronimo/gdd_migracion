@@ -16,11 +16,8 @@ namespace PalcoNet
     {
         Usuario user = new Usuario();
 
-        public Login()
+        public Login() : base()
         {
-            InitializeComponent();
-            //el login se encarga de ocultar al manager porque sino
-            //hay que hacer algo rebuscado
             
         }
 
@@ -29,8 +26,7 @@ namespace PalcoNet
         {
             if (IsRegistered())
             {
-                FormManager.getInstance().OpenAndClose(new Home(), this);
-                //FormManager.getInstance().open(new Menu());
+                FormManager.getInstance().OpenAndClose(new UserHome(), this);
             }
             
         }
