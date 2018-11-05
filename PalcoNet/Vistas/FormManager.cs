@@ -47,7 +47,7 @@ namespace PalcoNet
             login.Show();
         }
 
-        private void Open(Form form)
+        public void Open(Form form)
         {
             windows.Add(form);
             form.Show();

@@ -15,12 +15,11 @@ namespace PalcoNet
 {
     public partial class Login : CustomForm
     {
-        
-        public Login()
+
+        Usuario user = new Usuario();
+
+        public Login() : base()
         {
-            InitializeComponent();
-            //el login se encarga de ocultar al manager porque sino
-            //hay que hacer algo rebuscado
             
         }
 
@@ -30,14 +29,13 @@ namespace PalcoNet
         private void btnLogin_Click(object sender, EventArgs e)
         {                  
             if (IsRegistered())
-            {
-                //MessageBox.Show("Login Correcto");
-                FormManager.getInstance().OpenAndClose(new Home(), this);
+            {                  
                 //FormManager.getInstance().open(new Menu());
+
+                FormManager.getInstance().OpenAndClose(new UserHome(), this);
             }
             else
             {
-                //MessageBox.Show("Login Incorrecto");
                 ClearTextBox();
             }
             
@@ -97,16 +95,19 @@ namespace PalcoNet
             }
         }
 
+
         private void ClearTextBox()
         {
             txtUsername.Clear();
             txtPassword.Clear();
         }
 
+
         private void Login_Load(object sender, EventArgs e)
         {
 
         }
+
 
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {

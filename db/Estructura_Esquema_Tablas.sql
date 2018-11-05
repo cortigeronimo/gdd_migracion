@@ -168,7 +168,7 @@ create table PLEASE_HELP.Rubro
 create table PLEASE_HELP.Grado
 (
 	Grado_Id int identity(1,1),
-	Grado_Comision numeric(3,1) NOT NULL,
+	Grado_Comision int NOT NULL,
 	Grado_Descripcion nvarchar(255),
 	CONSTRAINT PK_GRADO_ID PRIMARY KEY (Grado_Id),
 	CONSTRAINT UQ_GRADO_DESRCIPCION UNIQUE (Grado_Descripcion)
@@ -460,7 +460,7 @@ INSERT INTO PLEASE_HELP.Ubicacion SELECT DISTINCT m.Espectaculo_Cod, m.Ubicacion
 m.Ubicacion_Tipo_Descripcion, m.Ubicacion_Sin_Numerar FROM gd_esquema.Maestra m
 
 -- CREACION DE GRADOS
-INSERT INTO PLEASE_HELP.Grado (Grado_Comision, Grado_Descripcion) VALUES (30.0, 'ALTA'), (20.0, 'MEDIA'), (10.0, 'BAJA')
+INSERT INTO PLEASE_HELP.Grado (Grado_Comision, Grado_Descripcion) VALUES (30, 'ALTA'), (20, 'MEDIA'), (10, 'BAJA')
 
 -- CREACION DE FACTURA
 
