@@ -27,3 +27,5 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Properties.Reso
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.FormManager.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.Home.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.FormManager.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.Home.resources

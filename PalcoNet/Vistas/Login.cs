@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
+using PalcoNet.Repositorios;
 
 
 namespace PalcoNet
 {
     public partial class Login : CustomForm
     {
-        Usuario user = new Usuario();
-
+        
         public Login()
         {
             InitializeComponent();
@@ -25,28 +25,97 @@ namespace PalcoNet
         }
 
 
+
+
         private void btnLogin_Click(object sender, EventArgs e)
-        {
+        {                  
             if (IsRegistered())
             {
+                //MessageBox.Show("Login Correcto");
                 FormManager.getInstance().OpenAndClose(new Home(), this);
                 //FormManager.getInstance().open(new Menu());
+            }
+            else
+            {
+                //MessageBox.Show("Login Incorrecto");
+                ClearTextBox();
             }
             
         }
 
         private Boolean IsRegistered()
         {
+            Usuario user = new Usuario();
+            RepoUsuario repo = new RepoUsuario();
+
             user.Username = txtUsername.Text;
             user.Password = txtPassword.Text;
-            //esta hardcodeado para que podamos entrar directamente
-            return true;
+            user.IsAdmin = false;
 
+            if (repo.ExistsUser(user))
+            {
+                if (repo.EnabledUser(user))
+                {
+                    if (repo.ValidPassword(user))
+                    {
+                        MessageBox.Show("Login Correcto");
+                        return true;
+                    }
+                    else
+                    {           
+                        if(!user.IsAdmin)
+                            repo.AddFailedAttempt(user);
+                        MessageBox.Show("Username y/o Password Incorrecto");
+                        return false;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Usuario Inhabilitado");
+                    return false;
+                }
+            }
+            else
+            {          
+                MessageBox.Show("Usuario inexistente");
+                return false;
+            }
+
+        }
+
+
+        private void CheckTextBox()
+        {
+            if (txtUsername.Text != string.Empty && txtPassword.Text != string.Empty)
+            {
+                btnLogin.Enabled = true;
+            }
+            else
+            {
+                btnLogin.Enabled = false;
+            }
+        }
+
+        private void ClearTextBox()
+        {
+            txtUsername.Clear();
+            txtPassword.Clear();
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            CheckTextBox();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            CheckTextBox();
         }
 
     }

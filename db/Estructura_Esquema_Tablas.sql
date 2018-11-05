@@ -49,6 +49,14 @@ IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_CLIENTES') IS NOT NULL DROP PROCEDURE PLEASE
 
 IF OBJECT_ID('PLEASE_HELP.SP_MIGRAR_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MIGRAR_EMPRESAS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS;
+
+IF OBJECT_ID('PLEASE_HELP.SP_VERIFICAR_ADMIN') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_VERIFICAR_ADMIN;
+
+-- CREANDO TRIGGERS SI NO EXISTEN
+
+IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO;
+
 -- CREANDO ESTRUCTURAS DE TABLAS
 
 create table PLEASE_HELP.Funcionalidad
@@ -86,7 +94,8 @@ create table PLEASE_HELP.Usuario
 (
 	Usuario_Id int identity(1,1), 
 	Usuario_Username nvarchar(50) NOT NULL, 
-	Usuario_Password nvarchar(100),
+	--Usuario_Password nvarchar(100),
+	Usuario_Password varbinary(255),
 	CONSTRAINT UQ_USUARIO_USERNAME UNIQUE (Usuario_Username),
 	CONSTRAINT PK_USUARIO_ID PRIMARY KEY (Usuario_Id)
 )
@@ -328,7 +337,7 @@ GO
 
 -- CREACION DE ADMINISTRADOR DEL SISTEMA
 
-INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) VALUES ('admin', 'w23e')
+INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) VALUES ('admin', HASHBYTES('SHA2_256','w23e'))
 
 -- CREACION DE ADMINISTRADOR X ROL
 
@@ -345,7 +354,7 @@ BEGIN
 	BEGIN TRANSACTION
 
 		INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) 
-		SELECT 'USUARIO' + CAST(Cli_Dni AS varchar(225)), Cli_Dni 
+		SELECT 'USUARIO' + CAST(Cli_Dni AS varchar(225)), HASHBYTES('SHA2_256', CAST(Cli_Dni AS VARCHAR(255)))
 		FROM gd_esquema.Maestra 
 		WHERE Cli_Dni IS NOT NULL
 		GROUP BY Cli_Dni
@@ -398,7 +407,7 @@ BEGIN
 	BEGIN TRANSACTION
 
 		INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) 
-		SELECT 'EMPRESA' + CAST(Espec_Empresa_Cuit AS varchar(225)), Espec_Empresa_Cuit 
+		SELECT 'EMPRESA' + CAST(Espec_Empresa_Cuit AS varchar(225)), HASHBYTES('SHA2_256', Espec_Empresa_Cuit) 
 		FROM gd_esquema.Maestra 
 		WHERE Espec_Empresa_Cuit IS NOT NULL
 		GROUP BY Espec_Empresa_Cuit
@@ -479,15 +488,50 @@ SELECT G.Item_Factura_Monto, G.Item_Factura_Cantidad, G.Item_Factura_Descripcion
 FROM gd_esquema.Maestra G
 WHERE G.Factura_Nro IS NOT NULL
 
+GO
 
+-- STORED PROCEDURES LOGIN
 
-
---PROCEDURE LOGIN
-
-CREATE PROCEDURE PLEASE_HELP.SP_LOGIN (@user nvarchar(50), @password nvarchar(100))
-AS 
-BEGIN 
-SELECT * FROM PLEASE_HELP.Usuario WHERE Usuario_Username = @user AND Usuario_Password = @password
+CREATE PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS (@username NVARCHAR(50))
+AS
+BEGIN
+DECLARE @idCliente INT
+SELECT @idCliente = Cli_Usuario FROM PLEASE_HELP.Usuario INNER JOIN PLEASE_HELP.Cliente ON Usuario_Id = Cli_Usuario AND Usuario_Username = @username
+UPDATE PLEASE_HELP.Cliente SET Cli_Intentos_Fallidos = Cli_Intentos_Fallidos + 1 WHERE Cli_Usuario = @idCliente
 END
 
---------------------------------------
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_VERIFICAR_ADMIN (@username NVARCHAR(50))
+AS
+BEGIN
+	DECLARE @idAdmin INT, @idUsuario INT, @esAdmin BIT
+	SELECT @idAdmin = Rol_Id FROM Rol WHERE Rol_Nombre = 'ADMINISTRATIVO'
+	SELECT @idUsuario = Usuario_Id FROM PLEASE_HELP.Usuario WHERE Usuario_Username = @username
+	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Usuario_Rol UXR WHERE UXR.Usuario_Id = @idUsuario AND UXR.Rol_Id = @idAdmin)
+		BEGIN
+			SET @esAdmin = 1
+		END
+	ELSE
+		BEGIN
+			SET @esAdmin = 0
+		END
+	RETURN @esAdmin
+END
+GO
+
+
+-- TRIGGERS LOGIN
+
+CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO
+ON PLEASE_HELP.Cliente
+AFTER UPDATE
+AS
+BEGIN
+	IF UPDATE(Cli_Intentos_Fallidos)
+		DECLARE @userId INT, @intentosFallidos SMALLINT
+		SELECT @userId = Cli_Usuario, @intentosFallidos = Cli_Intentos_Fallidos FROM INSERTED
+		IF(@intentosFallidos) >= 3
+			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 0, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
+END
+GO

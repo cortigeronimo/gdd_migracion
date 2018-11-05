@@ -12,16 +12,36 @@ namespace PalcoNet
     public class Conexion
     {
 
-        public static SqlDataReader obtenerDatos(SqlCommand command)
+        public static DataTable GetData(SqlCommand command)
         {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString))
+            {
+                DataTable table = new DataTable();
+                command.Connection = connection;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                //cargo la datatable con el contenido del reader
+                table.Load(reader);
+               
+                return table;
+            }
+        }
+
+         
+       
+
+        public static void ExecuteProcedure(SqlCommand command)
+        {       
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString))
             {
                 command.Connection = connection;
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                return reader;
+                command.ExecuteNonQuery();
             }
         }
+
+        
 
 
 
