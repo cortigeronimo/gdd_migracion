@@ -57,12 +57,6 @@
     <Compile Include="Abm Empresa Espectaculo\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Grado\AbmGrado.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Grado\AbmGrado.Designer.cs">
-      <DependentUpon>AbmGrado.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Rol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,13 +114,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Grado.cs" />
+    <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
     <Compile Include="Vistas\CustomForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\UserHome.Designer.cs">
-      <DependentUpon>UserHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
@@ -151,8 +143,11 @@
     </Compile>
     <Compile Include="Repositorios\RepoUsuario.cs" />
     <Compile Include="Modelo\Usuario.cs" />
-    <Compile Include="Vistas\UserHome.cs">
+    <Compile Include="Vistas\RolSelector.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\RolSelector.Designer.cs">
+      <DependentUpon>RolSelector.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Vistas\CustomForm.resx">
       <DependentUpon>CustomForm.cs</DependentUpon>
@@ -172,8 +167,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Vistas\UserHome.resx">
-      <DependentUpon>UserHome.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\RolSelector.resx">
+      <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -190,7 +185,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Abm Grado\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

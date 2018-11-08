@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 
 using PalcoNet.Config;
 
+using PalcoNet.Modelo;
+
 namespace PalcoNet.Repositorios
 {
     class RepoUsuario
@@ -44,6 +46,7 @@ namespace PalcoNet.Repositorios
         }
         */
 
+        //Verifica si el usario existe en la DB
         public Boolean ExistsUser(Usuario user)
         {
             DataTable table = new DataTable();
@@ -54,7 +57,7 @@ namespace PalcoNet.Repositorios
             return false;
         }
 
-
+        //Verifica si la contraseña ingresada es correcta
         public Boolean ValidPassword(Usuario user)
         {
             byte[] textboxPassword = Hashing.GetSHA256Encrypt(user.Password);
@@ -70,7 +73,7 @@ namespace PalcoNet.Repositorios
           
         }
 
-
+        //Verifica si el usuario esta habilitado
         public Boolean EnabledUser(Usuario user)
         {
             DataTable table = new DataTable();
@@ -90,6 +93,7 @@ namespace PalcoNet.Repositorios
         
         }
 
+
         /*
         public int GetFailedAttempts(Usuario user)
         {
@@ -100,6 +104,8 @@ namespace PalcoNet.Repositorios
         }
         */
 
+
+        //Registra un intento fallido del usuario en la DB
         public void AddFailedAttempt(Usuario user)
         {
             String updateSQL = "PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS";
@@ -137,22 +143,71 @@ namespace PalcoNet.Repositorios
             return table;
         }
 
-        //Verifica si el susuario tiene rol de admin
+        
+        //Obtener lista de roles de usuario
+        private List<Rol> GetRolesUsuario(Usuario user)
+        {
+            String query = "PLEASE_HELP.SP_LISTA_ROLES_USUARIO";
+            SqlCommand command = new SqlCommand(query);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@USERNAME", user.Username);
+
+            DataTable table = new DataTable();
+            table = Conexion.GetData(command);
+
+            //Seteo en el objeto usuario los objetos roles obtenidos
+            user.SetRoles(FromRowsToRoles(table));
+
+            return user.GetRoles();
+        }
+
+        //Pasar de datatable a lista de objetos
+        private List<Rol> FromRowsToRoles(DataTable table)
+        {
+            List<Rol> roles = new List<Rol>();
+            int i = 0;
+            while (table.Rows.Count > i)
+            {
+                Rol rol = new Rol();
+                rol.SetNombre(table.Rows[i][0].ToString());
+                roles.Add(rol);
+                i++;
+            }
+            return roles;
+        }
+
+        //Toma la lista de roles del usuario y verifica si tiene el rol de ADMIN
         private Boolean IsAdmin(Usuario user)
         {
-            String SP = "PLEASE_HELP.SP_VERIFICAR_ADMIN";
-            SqlCommand command = new SqlCommand(SP);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@username", user.Username);
+            List<Rol> list = new List<Rol>();
+            list = GetRolesUsuario(user);
 
-            SqlParameter returnParameter = command.Parameters.Add("@esAdmin", SqlDbType.Bit);
-            returnParameter.Direction = ParameterDirection.ReturnValue;
+            int i = 0;
+            while (list.Count > i)
+            {
+                string nombreRol = list[i].GetNombre();
+                if (nombreRol == "ADMINISTRATIVO")
+                    return true;
+                else
+                    i++;     
+            }
 
-            
-            Conexion.ExecuteProcedure(command);
-
-            return Convert.ToBoolean(returnParameter.Value);
+            return false;
         }
+
+        //Resetea los intentos fallidos a cero ante un logueo correcto
+        public void CleanFailedAttemps(Usuario user)
+        {
+            string username = user.Username;
+
+            string sp = "PLEASE_HELP.SP_LIMPIAR_INTENTOS_FALLIDOS";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@USERNAME", username);
+
+            Conexion.ExecuteProcedure(command);
+        }
+
 
     }
 }

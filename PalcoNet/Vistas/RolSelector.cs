@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PalcoNet.Vistas;
 
-namespace PalcoNet.Abm_Grado
+namespace PalcoNet.Vistas
 {
-    public partial class AbmGrado : CustomForm
+    public partial class RolSelector : CustomForm
     {
-        public AbmGrado() : base()
+        public RolSelector()
         {
-            
+            InitializeComponent();
         }
-
-        
     }
 }

@@ -15,12 +15,20 @@ namespace PalcoNet
 {
     public partial class Login : CustomForm
     {
-
         Usuario user = new Usuario();
+        RepoUsuario repo = new RepoUsuario();
+        
 
-        public Login() : base()
-        {
+        //public Login() : base()
+        //{
             
+        //}
+
+        public Login()
+        {
+            InitializeComponent();
+            
+
         }
 
 
@@ -29,22 +37,33 @@ namespace PalcoNet
         private void btnLogin_Click(object sender, EventArgs e)
         {                  
             if (IsRegistered())
-            {                  
+            {
+                if (user.CantRoles() > 1)
+                    FormManager.getInstance().OpenAndClose(new RolSelector(), this);
+                else
+                    MessageBox.Show("Abrir el menu de funcionalidades....");
+                    //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
+                  
                 //FormManager.getInstance().open(new Menu());
 
-                FormManager.getInstance().OpenAndClose(new UserHome(), this);
+                //FormManager.getInstance().OpenAndClose(new UserHome(), this);
             }
             else
             {
                 ClearTextBox();
+
+                user.ClearRolesList();
+                user.Username = "";
+                user.Password = "";
             }
             
         }
 
+
         private Boolean IsRegistered()
         {
-            Usuario user = new Usuario();
-            RepoUsuario repo = new RepoUsuario();
+            //Usuario user = new Usuario();
+            //RepoUsuario repo = new RepoUsuario();
 
             user.Username = txtUsername.Text;
             user.Password = txtPassword.Text;
@@ -57,6 +76,8 @@ namespace PalcoNet
                     if (repo.ValidPassword(user))
                     {
                         MessageBox.Show("Login Correcto");
+                        if (!user.IsAdmin)
+                            repo.CleanFailedAttemps(user);
                         return true;
                     }
                     else
