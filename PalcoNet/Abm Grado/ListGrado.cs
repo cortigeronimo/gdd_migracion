@@ -26,6 +26,20 @@ namespace PalcoNet.Abm_Grado
             numComisionGrado.Value = 0;
         }
 
+        private void ListGrado_Load(object sender, EventArgs e)
+        {
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.RowHeadersVisible = false;
+            float widthForm = this.dataGridView1.Width;
+            int columnCount = dataGridView1.ColumnCount;
+            float widthColumn = widthForm / columnCount;
+            this.columnNombre.Width = (int)widthColumn;
+            this.columnComision.Width = (int)widthColumn;
+            this.columnDelete.Width = (int)widthColumn;
+            this.columnUpdate.Width = (int)widthColumn;
+            this.columnId.Width = (int)widthColumn;
+        }
+
     }
 }
 

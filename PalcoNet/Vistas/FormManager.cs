@@ -46,6 +46,7 @@ namespace PalcoNet
             Open(new Login());
             //Open(new CreateGrado());
             //Open(new UpdateGrado());
+            Open(new ListGrado());
         }
 
         public void Open(Form form)
