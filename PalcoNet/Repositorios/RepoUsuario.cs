@@ -52,9 +52,7 @@ namespace PalcoNet.Repositorios
             DataTable table = new DataTable();
             table = GetUserRow(user);
 
-            if (table.Rows.Count != 0)
-                return true;
-            return false;
+            return table.Rows.Count != 0;
         }
 
         //Verifica si la contraseña ingresada es correcta

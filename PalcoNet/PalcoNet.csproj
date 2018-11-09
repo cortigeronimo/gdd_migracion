@@ -57,6 +57,24 @@
     <Compile Include="Abm Empresa Espectaculo\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Grado\CreateGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\CreateGrado.Designer.cs">
+      <DependentUpon>CreateGrado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Grado\ListGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\ListGrado.Designer.cs">
+      <DependentUpon>ListGrado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Grado\UpdateGrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Grado\UpdateGrado.Designer.cs">
+      <DependentUpon>UpdateGrado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +167,12 @@
     <Compile Include="Vistas\RolSelector.Designer.cs">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Grado\ListGrado.resx">
+      <DependentUpon>ListGrado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Grado\UpdateGrado.resx">
+      <DependentUpon>UpdateGrado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\CustomForm.resx">
       <DependentUpon>CustomForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,9 +209,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abm Grado\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

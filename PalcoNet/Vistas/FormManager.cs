@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
+using PalcoNet.Abm_Grado;
 
 namespace PalcoNet
 {
@@ -42,9 +43,9 @@ namespace PalcoNet
         private void Principal_Load(object sender, EventArgs e)
         {
             Hide();
-            Login login = new Login();
-            windows.Add(login);
-            login.Show();
+            Open(new Login());
+            //Open(new CreateGrado());
+            //Open(new UpdateGrado());
         }
 
         public void Open(Form form)

@@ -8,12 +8,20 @@ namespace PalcoNet.Abm_Grado
 {
     public class Grado
     {
+        private int id;
         private int comision;
         private String descripcion;
 
+        public Grado(int id, int comision, String descripcion)
+        {
+            this.id = id;
+            this.comision = comision;
+            this.descripcion = descripcion.ToUpper();
+        }
+
         public Grado(int comision, String descripcion){
             this.comision = comision;
-            this.descripcion = descripcion;
+            this.descripcion = descripcion.ToUpper();
         }
 
         public void SetComision(int value) {
@@ -22,7 +30,7 @@ namespace PalcoNet.Abm_Grado
 
         public void SetDescripcion(String value)
         {
-            descripcion = value;
+            descripcion = value.ToUpper();
         }
 
         public int GetComision(){
@@ -32,6 +40,16 @@ namespace PalcoNet.Abm_Grado
         public String GetDescripcion()
         {
             return descripcion;
+        }
+
+        public int getId()
+        {
+            return id;
+        }
+
+        public void setId(int id) 
+        {
+            this.id = id;
         }
 
     }

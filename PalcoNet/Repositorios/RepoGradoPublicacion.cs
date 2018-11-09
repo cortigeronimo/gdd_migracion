@@ -11,10 +11,10 @@ namespace PalcoNet.Repositorios
 {
     public class RepoGradoPublicacion
     {
-        private String tabla = "PLEASE_HELP.Grado";
+        private String table = "PLEASE_HELP.Grado";
 
         public void InsertGrado(Grado grado) {
-            String query = "INSERT INTO " + tabla + " (Grado_Comision, Grado_Descripcion) VALUES (@comision, @descripcion)";
+            String query = "INSERT INTO " + table + " (Grado_Comision, Grado_Descripcion) VALUES (@comision, @descripcion)";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@comision", grado.GetComision());
             command.Parameters.AddWithValue("@descripcion", grado.GetDescripcion());
@@ -24,42 +24,27 @@ namespace PalcoNet.Repositorios
             }
         }
 
-
-        /*
-        public List<Grado> GetGrados()
+        public int UpdateGrado(Grado grado)
         {
-            String query = "select * from " + tabla;
+            String query = "update " + table + " set ";
+            query += "Grado_Comision = @comision, ";
+            query += "Grado_Descripcion = @descripcion ";
+            query += "where Grado_Id = @id";
+
             SqlCommand command = new SqlCommand(query);
-            SqlDataReader reader = Conexion.obtenerDatos(command);
-            return FromRowsToGrados(reader);
-        }
+            command.Parameters.AddWithValue("@comision", grado.GetComision());
+            command.Parameters.AddWithValue("@descripcion", grado.GetDescripcion());
+            command.Parameters.AddWithValue("@id", grado.getId());
 
-        public List<Grado> FromRowsToGrados(SqlDataReader reader)
-        {
-            List<Grado> grados = new List<Grado>();
-            try
-            {
-                while (reader.Read())
-                {
-                    //lee un row, lo mapea y lo mete en la lista
-                }
-                return grados;
-            }
-            finally
-            {
-                reader.Close();
-            }
-
+            return Conexion.insertData(command);
         }
-        */
 
         public List<Grado> GetGrados()
         {
-            String query = "select * from " + tabla;
+            String query = "select * from " + table;
             SqlCommand command = new SqlCommand(query);
-            DataTable table = new DataTable();
-            table = Conexion.GetData(command);
-            return FromRowsToGrados(table);
+            DataTable result = Conexion.GetData(command);
+            return FromRowsToGrados(result);
         }
 
         public List<Grado> FromRowsToGrados(DataTable table)
@@ -70,7 +55,7 @@ namespace PalcoNet.Repositorios
             {
                 //lee un row, lo mapea y lo mete en la lista
                 int comision = (int)table.Rows[i]["Grado_Comision"];
-                String descripcion = table.Rows[i]["Grado_Descripcion"].ToString();
+                String descripcion = (String)table.Rows[i]["Grado_Descripcion"];
                 Grado grado = new Grado(comision, descripcion);
                 grados.Add(grado);
                 i++;
