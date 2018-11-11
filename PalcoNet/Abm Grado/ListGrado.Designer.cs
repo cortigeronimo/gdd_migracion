@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDelete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblComisionGrado = new System.Windows.Forms.Label();
@@ -41,6 +36,11 @@
             this.txtNombreGrado = new System.Windows.Forms.TextBox();
             this.lblNombreGrado = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDelete = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).BeginInit();
@@ -59,36 +59,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(416, 180);
             this.dataGridView1.TabIndex = 7;
-            // 
-            // columnId
-            // 
-            this.columnId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnId.HeaderText = "Id";
-            this.columnId.Name = "columnId";
-            // 
-            // columnNombre
-            // 
-            this.columnNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnNombre.HeaderText = "Nombre";
-            this.columnNombre.Name = "columnNombre";
-            // 
-            // columnComision
-            // 
-            this.columnComision.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnComision.HeaderText = "Comision";
-            this.columnComision.Name = "columnComision";
-            // 
-            // columnUpdate
-            // 
-            this.columnUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnUpdate.HeaderText = "Editar";
-            this.columnUpdate.Name = "columnUpdate";
-            // 
-            // columnDelete
-            // 
-            this.columnDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.columnDelete.HeaderText = "Eliminar";
-            this.columnDelete.Name = "columnDelete";
             // 
             // btnLimpiar
             // 
@@ -158,6 +128,40 @@
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // columnId
+            // 
+            this.columnId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnId.DataPropertyName = "Grado_Id";
+            this.columnId.HeaderText = "Id";
+            this.columnId.Name = "columnId";
+            // 
+            // columnNombre
+            // 
+            this.columnNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnNombre.DataPropertyName = "Grado_Descripcion";
+            this.columnNombre.HeaderText = "Nombre";
+            this.columnNombre.Name = "columnNombre";
+            // 
+            // columnComision
+            // 
+            this.columnComision.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnComision.DataPropertyName = "Grado_Comision";
+            this.columnComision.HeaderText = "Comision";
+            this.columnComision.Name = "columnComision";
+            // 
+            // columnUpdate
+            // 
+            this.columnUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnUpdate.HeaderText = "Editar";
+            this.columnUpdate.Name = "columnUpdate";
+            // 
+            // columnDelete
+            // 
+            this.columnDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.columnDelete.HeaderText = "Eliminar";
+            this.columnDelete.Name = "columnDelete";
             // 
             // ListGrado
             // 
