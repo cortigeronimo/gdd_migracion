@@ -203,6 +203,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ListadoRol.resx">
       <DependentUpon>ListadoRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateCliente.resx">
       <DependentUpon>CreateCliente.cs</DependentUpon>
     </EmbeddedResource>

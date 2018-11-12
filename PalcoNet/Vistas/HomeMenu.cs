@@ -11,7 +11,6 @@ using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Grado;
 using PalcoNet.Abm_Cliente;
-using PalcoNet.Abm_Empresa_Espectaculo;
 using PalcoNet.Abm_Rol;
 using PalcoNet.Abm_Rubro;
 using PalcoNet.Comprar;

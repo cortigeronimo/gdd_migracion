@@ -4,20 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PalcoNet.Modelo;
-<<<<<<< HEAD
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
-=======
-using System.Data;
-using System.Data.SqlClient;
->>>>>>> 496d760215dc286e030a031e26985c104a37e7ec
 
 namespace PalcoNet.Repositorios
 {
     class RepoRol
     {
-<<<<<<< HEAD
         private string table = "PLEASE_HELP.Rol";
 
         public List<Funcionalidad> GetFuncionalidades(string filter)
@@ -62,8 +56,7 @@ namespace PalcoNet.Repositorios
                 i++;
             }
             return roles;
-=======
-        private String table = "PLEASE_HELP.Rol";
+        }
 
         public Rol FindRolByName(String name)
         {
@@ -80,10 +73,7 @@ namespace PalcoNet.Repositorios
             {
                 throw new Exception("La tabla debe tener 1 solo resultado");
             }
-            Rol rol = new Rol();
-            rol.id = ((int)table.Rows[0]["Rol_Id"]);
-            rol.nombre = ((String)table.Rows[0]["Rol_Nombre"]);
-            rol.habilitado = ((bool)table.Rows[0]["Rol_Habilitado"]);
+            Rol rol = new Rol((int)table.Rows[0]["Rol_Id"],(String)table.Rows[0]["Rol_Nombre"],(bool)table.Rows[0]["Rol_Habilitado"]);
 
             return rol;
         }
@@ -93,10 +83,9 @@ namespace PalcoNet.Repositorios
             String sp = "PLEASE_HELP.SP_LISTA_FUNCIONALIDADES";
             SqlCommand command = new SqlCommand(sp);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@idRol", rol.id);
+            command.Parameters.AddWithValue("@idRol", rol.Id);
 
             return Conexion.GetData(command);
->>>>>>> 496d760215dc286e030a031e26985c104a37e7ec
         }
     }
 }

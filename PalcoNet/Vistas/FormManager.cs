@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Abm_Grado;
-<<<<<<< HEAD
 using PalcoNet.Abm_Rol;
-=======
 using PalcoNet.Registro_de_Usuario;
->>>>>>> 496d760215dc286e030a031e26985c104a37e7ec
 
 namespace PalcoNet
 {
@@ -49,14 +46,11 @@ namespace PalcoNet
         {
             Hide();
             Open(new Login());
-<<<<<<< HEAD
             //Open(new CreateGrado());
             //Open(new UpdateGrado());
             Open(new ListGrado());
             Open(new ListadoRol());
-=======
             //Open(new CreateUsuario());
->>>>>>> 496d760215dc286e030a031e26985c104a37e7ec
         }
 
         public void Open(Form form)
