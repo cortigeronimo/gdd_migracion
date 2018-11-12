@@ -53,7 +53,7 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ReadAllTextBox();
-                repo.InsertCliente(cliente);
+                repo.InsertClienteCreatedByAdmin(cliente);
                 MessageBox.Show("Cliente registrado correctamente.");
             }
             catch (Exception)

@@ -31,6 +31,15 @@ namespace PalcoNet.Modelo
         {
         }
 
+        public Cliente(Usuario usuario)
+        {
+            id = usuario.id;
+            username = usuario.username;
+            SetPassword(usuario.GetPassword());
+            SetRoles(usuario.GetRoles());
+            isAdmin = usuario.isAdmin;
+        }
+
         public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, string cuil,
             string email, int telefono, string localidad, string direccion, byte nroPiso, string depto, string codPostal, DateTime fechaNac, DateTime fechaCreacion,
             string tarjetaCredito)

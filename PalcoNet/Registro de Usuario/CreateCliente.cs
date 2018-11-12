@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Modelo;
+using PalcoNet.Repositorios;
 
 namespace PalcoNet.Registro_de_Usuario
 {
     public partial class CreateCliente : CustomForm
     {
         private Usuario usuario;
+
+        private RepoCliente repoCliente = new RepoCliente();
 
         public CreateCliente(Usuario usuario)
         {
@@ -41,9 +44,7 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente();
-            cliente.username = usuario.username;
-            cliente.SetPassword(usuario.GetPassword());
+            Cliente cliente = new Cliente(usuario);
             cliente.nombre = txtNombre.Text;
             cliente.apellido = txtApellido.Text;
             cliente.tipoDocumento = txtTipoDocumento.Text;
@@ -57,6 +58,7 @@ namespace PalcoNet.Registro_de_Usuario
             cliente.localidad = txtLocalidad.Text;
             cliente.codigoPostal = txtCodigoPostal.Text;
             cliente.tarjetaCredito = txtTarjetaCredito.Text;
+            repoCliente.InsertClienteCreatedByUser(cliente);
         }
     }
 }

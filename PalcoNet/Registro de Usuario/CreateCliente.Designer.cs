@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
+            this.numPiso = new System.Windows.Forms.NumericUpDown();
+            this.numTelefono = new System.Windows.Forms.NumericUpDown();
+            this.numCuil = new System.Windows.Forms.NumericUpDown();
+            this.numNumeroDocumento = new System.Windows.Forms.NumericUpDown();
             this.txtTarjetaCredito = new System.Windows.Forms.TextBox();
             this.lblTarjetaCredito = new System.Windows.Forms.Label();
             this.pickerFechaNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -55,15 +59,11 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.numNumeroDocumento = new System.Windows.Forms.NumericUpDown();
-            this.numCuil = new System.Windows.Forms.NumericUpDown();
-            this.numTelefono = new System.Windows.Forms.NumericUpDown();
-            this.numPiso = new System.Windows.Forms.NumericUpDown();
             this.groupBoxCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPiso)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCliente
@@ -102,6 +102,79 @@
             this.groupBoxCliente.TabIndex = 0;
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Cliente";
+            // 
+            // numPiso
+            // 
+            this.numPiso.Location = new System.Drawing.Point(6, 262);
+            this.numPiso.Name = "numPiso";
+            this.numPiso.Size = new System.Drawing.Size(131, 20);
+            this.numPiso.TabIndex = 30;
+            // 
+            // numTelefono
+            // 
+            this.numTelefono.Location = new System.Drawing.Point(6, 207);
+            this.numTelefono.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.numTelefono.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numTelefono.Name = "numTelefono";
+            this.numTelefono.Size = new System.Drawing.Size(131, 20);
+            this.numTelefono.TabIndex = 29;
+            this.numTelefono.Value = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            // 
+            // numCuil
+            // 
+            this.numCuil.Location = new System.Drawing.Point(6, 151);
+            this.numCuil.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
+            this.numCuil.Minimum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.numCuil.Name = "numCuil";
+            this.numCuil.Size = new System.Drawing.Size(131, 20);
+            this.numCuil.TabIndex = 28;
+            this.numCuil.Value = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            // 
+            // numNumeroDocumento
+            // 
+            this.numNumeroDocumento.Location = new System.Drawing.Point(217, 99);
+            this.numNumeroDocumento.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.numNumeroDocumento.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numNumeroDocumento.Name = "numNumeroDocumento";
+            this.numNumeroDocumento.Size = new System.Drawing.Size(131, 20);
+            this.numNumeroDocumento.TabIndex = 27;
+            this.numNumeroDocumento.Value = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             // 
             // txtTarjetaCredito
             // 
@@ -322,34 +395,6 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // numNumeroDocumento
-            // 
-            this.numNumeroDocumento.Location = new System.Drawing.Point(217, 99);
-            this.numNumeroDocumento.Name = "numNumeroDocumento";
-            this.numNumeroDocumento.Size = new System.Drawing.Size(131, 20);
-            this.numNumeroDocumento.TabIndex = 27;
-            // 
-            // numCuil
-            // 
-            this.numCuil.Location = new System.Drawing.Point(6, 151);
-            this.numCuil.Name = "numCuil";
-            this.numCuil.Size = new System.Drawing.Size(131, 20);
-            this.numCuil.TabIndex = 28;
-            // 
-            // numTelefono
-            // 
-            this.numTelefono.Location = new System.Drawing.Point(6, 207);
-            this.numTelefono.Name = "numTelefono";
-            this.numTelefono.Size = new System.Drawing.Size(131, 20);
-            this.numTelefono.TabIndex = 29;
-            // 
-            // numPiso
-            // 
-            this.numPiso.Location = new System.Drawing.Point(6, 262);
-            this.numPiso.Name = "numPiso";
-            this.numPiso.Size = new System.Drawing.Size(131, 20);
-            this.numPiso.TabIndex = 30;
-            // 
             // CreateCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -362,10 +407,10 @@
             this.Text = "CreateCliente";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPiso)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).EndInit();
             this.ResumeLayout(false);
 
         }
