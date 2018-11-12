@@ -23,4 +23,7 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.RolSelec
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.ListGrado.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.UpdateGrado.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateCliente.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache

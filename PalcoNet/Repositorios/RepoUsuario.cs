@@ -58,16 +58,14 @@ namespace PalcoNet.Repositorios
         //Verifica si la contraseña ingresada es correcta
         public Boolean ValidPassword(Usuario user)
         {
-            byte[] textboxPassword = Hashing.GetSHA256Encrypt(user.Password);
+            byte[] textboxPassword = user.GetPassword();
 
             DataTable table = new DataTable();
             table = GetUserRow(user);
 
             byte[] dbPassword = (byte[])(table.Rows[0]["Usuario_Password"]);
 
-            if (Hashing.EqualPasswords(textboxPassword, dbPassword))
-                return true;
-            return false;
+            return Hashing.EqualPasswords(textboxPassword, dbPassword);
           
         }
 
@@ -79,14 +77,12 @@ namespace PalcoNet.Repositorios
 
             if (IsAdmin(user))
             {
-                user.IsAdmin = true;
+                user.isAdmin = true;
                 return true;
             }
             else
             {
-                if (Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]))
-                    return true;
-                return false;
+                return Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]);
             }
         
         }
@@ -109,7 +105,7 @@ namespace PalcoNet.Repositorios
             String updateSQL = "PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS";
             SqlCommand command = new SqlCommand(updateSQL);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@username", user.Username);
+            command.Parameters.AddWithValue("@username", user.username);
 
             Conexion.ExecuteProcedure(command);
         }
@@ -120,7 +116,7 @@ namespace PalcoNet.Repositorios
         {
             String query = "select * from " + userTable + " where Usuario_Username = @user";
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@user", user.Username);
+            command.Parameters.AddWithValue("@user", user.username);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -133,7 +129,7 @@ namespace PalcoNet.Repositorios
         {
             String query = "select * from " + clientTable + " inner join " + userTable + " on Cli_Usuario = Usuario_Id and Usuario_Username = @user";
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@user", user.Username);
+            command.Parameters.AddWithValue("@user", user.username);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -148,7 +144,7 @@ namespace PalcoNet.Repositorios
             String query = "PLEASE_HELP.SP_LISTA_ROLES_USUARIO";
             SqlCommand command = new SqlCommand(query);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@USERNAME", user.Username);
+            command.Parameters.AddWithValue("@USERNAME", user.username);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -167,7 +163,7 @@ namespace PalcoNet.Repositorios
             while (table.Rows.Count > i)
             {
                 Rol rol = new Rol();
-                rol.SetNombre(table.Rows[i][0].ToString());
+                rol.nombre = table.Rows[i][0].ToString();
                 roles.Add(rol);
                 i++;
             }
@@ -183,7 +179,7 @@ namespace PalcoNet.Repositorios
             int i = 0;
             while (list.Count > i)
             {
-                string nombreRol = list[i].GetNombre();
+                string nombreRol = list[i].nombre;
                 if (nombreRol == "ADMINISTRATIVO")
                     return true;
                 else
@@ -196,7 +192,7 @@ namespace PalcoNet.Repositorios
         //Resetea los intentos fallidos a cero ante un logueo correcto
         public void CleanFailedAttemps(Usuario user)
         {
-            string username = user.Username;
+            string username = user.username;
 
             string sp = "PLEASE_HELP.SP_LIMPIAR_INTENTOS_FALLIDOS";
             SqlCommand command = new SqlCommand(sp);

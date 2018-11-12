@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PalcoNet.Modelo;
+using PalcoNet.Config;
 
 namespace PalcoNet
 {
     public class Usuario
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
+        public int id { get; set; }
+        public String username { get; set; }
+        private byte[] password;
+        public bool isAdmin { get; set; }
+        public TipoUsuario tipoUsuario { get; set; }
 
         private List<Rol> listaRoles = new List<Rol>();
 
@@ -28,14 +30,28 @@ namespace PalcoNet
             this.listaRoles = roles;
         }
 
+        public void AddRol(Rol rol)
+        {
+            this.listaRoles.Add(rol);
+        }
+
         public void ClearRolesList()
         {
             this.listaRoles.Clear();
         }
 
-        public int CantRoles()
+        public int CountRoles()
         {
             return this.listaRoles.Count;
+        }
+
+        public void SetPassword(String password){
+            this.password = Hashing.GetSHA256Encrypt(password);
+        }
+
+        public byte[] GetPassword()
+        {
+            return this.password;
         }
     }
 

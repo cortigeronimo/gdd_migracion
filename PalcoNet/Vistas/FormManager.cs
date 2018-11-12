@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Abm_Grado;
+using PalcoNet.Registro_de_Usuario;
 
 namespace PalcoNet
 {
@@ -44,6 +45,7 @@ namespace PalcoNet
         {
             Hide();
             Open(new Login());
+            Open(new CreateUsuario());
         }
 
         public void Open(Form form)
