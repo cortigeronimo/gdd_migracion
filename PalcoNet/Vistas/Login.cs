@@ -67,6 +67,8 @@ namespace PalcoNet
                 user.ClearRolesList();
                 user.username = "";
                 user.SetPassword("");
+                user.isAdmin = false;
+                user.id = 0;
             }
             
         }

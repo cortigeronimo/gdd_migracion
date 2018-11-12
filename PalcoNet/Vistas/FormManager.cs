@@ -45,7 +45,7 @@ namespace PalcoNet
         {
             Hide();
             Open(new Login());
-            Open(new CreateUsuario());
+            //Open(new CreateUsuario());
         }
 
         public void Open(Form form)

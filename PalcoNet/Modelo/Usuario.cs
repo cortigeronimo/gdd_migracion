@@ -15,6 +15,7 @@ namespace PalcoNet
         public String username { get; set; }
         private byte[] password;
         public bool isAdmin { get; set; }
+        public bool isClient { get; set; }
 
         private List<Rol> listaRoles = new List<Rol>();
 

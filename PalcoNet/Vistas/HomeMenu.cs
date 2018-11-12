@@ -48,20 +48,25 @@ namespace PalcoNet.Vistas
             int i = 0;
             while (tableFuncionalidad.Rows.Count > i)
             {
+                
                 String idFuncionalidad = tableFuncionalidad.Rows[i][0].ToString();
                 String funcionalidad = tableFuncionalidad.Rows[i][1].ToString();
-                funcionalidad = funcionalidad.Replace('_', ' ');
 
-                ToolStripMenuItem itemFuncionalidad = new ToolStripMenuItem();
-                itemFuncionalidad.Text = funcionalidad;
-                itemFuncionalidad.Name = idFuncionalidad;
+                if (funcionalidad != "REGISTRO_USUARIO")
+                {
+                    funcionalidad = funcionalidad.Replace('_', ' ');
 
-                menúToolStripMenuItem.DropDownItems.Add(itemFuncionalidad);
+                    ToolStripMenuItem itemFuncionalidad = new ToolStripMenuItem();
+                    itemFuncionalidad.Text = funcionalidad;
+                    itemFuncionalidad.Name = idFuncionalidad;
 
-                AddSubItems(itemFuncionalidad);
+                    menúToolStripMenuItem.DropDownItems.Add(itemFuncionalidad);
 
-                AddClickEventsItems(itemFuncionalidad);
+                    AddSubItems(itemFuncionalidad);
 
+                    AddClickEventsItems(itemFuncionalidad);
+                }
+               
                 i++;
 
             }
