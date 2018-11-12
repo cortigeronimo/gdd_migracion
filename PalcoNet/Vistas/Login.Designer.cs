@@ -34,6 +34,7 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.lblRegistroUsuario = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -41,10 +42,10 @@
             this.btnLogin.Enabled = false;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnLogin.Location = new System.Drawing.Point(138, 158);
+            this.btnLogin.Location = new System.Drawing.Point(127, 135);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(84, 27);
-            this.btnLogin.TabIndex = 0;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -52,7 +53,7 @@
             // txtUsername
             // 
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(138, 54);
+            this.txtUsername.Location = new System.Drawing.Point(127, 31);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(156, 23);
             this.txtUsername.TabIndex = 1;
@@ -61,7 +62,7 @@
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(138, 107);
+            this.txtPassword.Location = new System.Drawing.Point(127, 84);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(156, 23);
@@ -72,7 +73,7 @@
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(43, 57);
+            this.lblUsername.Location = new System.Drawing.Point(44, 34);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(77, 17);
             this.lblUsername.TabIndex = 3;
@@ -82,17 +83,30 @@
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(43, 110);
+            this.lblPassword.Location = new System.Drawing.Point(44, 87);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(73, 17);
             this.lblPassword.TabIndex = 4;
             this.lblPassword.Text = "Password:";
             // 
+            // lblRegistroUsuario
+            // 
+            this.lblRegistroUsuario.AutoSize = true;
+            this.lblRegistroUsuario.LinkColor = System.Drawing.Color.Black;
+            this.lblRegistroUsuario.Location = new System.Drawing.Point(124, 176);
+            this.lblRegistroUsuario.Name = "lblRegistroUsuario";
+            this.lblRegistroUsuario.Size = new System.Drawing.Size(119, 13);
+            this.lblRegistroUsuario.TabIndex = 4;
+            this.lblRegistroUsuario.TabStop = true;
+            this.lblRegistroUsuario.Text = "Registrar nuevo usuario";
+            this.lblRegistroUsuario.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRegistroUsuario_LinkClicked);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 229);
+            this.ClientSize = new System.Drawing.Size(364, 208);
+            this.Controls.Add(this.lblRegistroUsuario);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtPassword);
@@ -113,6 +127,7 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.LinkLabel lblRegistroUsuario;
         
     }
 }

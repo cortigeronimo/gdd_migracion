@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Cliente;
+using PalcoNet.Modelo;
+using PalcoNet.Registro_de_Usuario;
 
 
 namespace PalcoNet
@@ -40,9 +42,17 @@ namespace PalcoNet
             if (IsRegistered())
             {
                 if (user.CountRoles() > 1)
+                {
                     FormManager.getInstance().OpenAndClose(new RolSelector(), this);
+                }
                 else
-                    FormManager.getInstance().OpenAndClose(new CreateCliente(), this);
+                {
+                    Rol rol = new Rol();
+                    TakeRolFromUser(user, rol);
+                    FormManager.getInstance().OpenAndClose(new HomeMenu(user, rol), this);
+                }
+                  
+                    
                     //MessageBox.Show("Abrir el menu de funcionalidades....");
                     //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
                   
@@ -140,6 +150,19 @@ namespace PalcoNet
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             CheckTextBox();
+        }
+
+        private void TakeRolFromUser(Usuario user, Rol rol)
+        {
+            List<Rol> rolList = user.GetRoles();
+            rol.nombre = rolList[0].nombre;
+            rol.id = rolList[0].id;
+            rol.habilitado = rolList[0].habilitado;
+        }
+
+        private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormManager.getInstance().Open(new CreateUsuario());
         }
 
     }

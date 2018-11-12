@@ -88,17 +88,6 @@ namespace PalcoNet.Repositorios
         }
 
 
-        /*
-        public int GetFailedAttempts(Usuario user)
-        {
-            DataTable table = new DataTable();
-            table = GetClientRow(user);
-
-            return ((int)table.Rows[0]["Cli_Intentos_Fallidos"]);
-        }
-        */
-
-
         //Registra un intento fallido del usuario en la DB
         public void AddFailedAttempt(Usuario user)
         {
@@ -163,7 +152,9 @@ namespace PalcoNet.Repositorios
             while (table.Rows.Count > i)
             {
                 Rol rol = new Rol();
-                rol.nombre = table.Rows[i][0].ToString();
+                rol.id = (int)table.Rows[i][0];
+                rol.nombre = table.Rows[i][1].ToString();
+                rol.habilitado = (bool)table.Rows[i][2];
                 roles.Add(rol);
                 i++;
             }

@@ -35,5 +35,15 @@ namespace PalcoNet.Repositorios
 
             return rol;
         }
+
+        public DataTable GetFuncionalidades(Rol rol)
+        {
+            String sp = "PLEASE_HELP.SP_LISTA_FUNCIONALIDADES";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@idRol", rol.id);
+
+            return Conexion.GetData(command);
+        }
     }
 }
