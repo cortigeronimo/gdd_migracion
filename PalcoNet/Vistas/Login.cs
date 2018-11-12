@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Repositorios;
+using PalcoNet.Abm_Cliente;
+using PalcoNet.Modelo;
+using PalcoNet.Registro_de_Usuario;
 
 
 namespace PalcoNet
@@ -38,10 +41,19 @@ namespace PalcoNet
         {                  
             if (IsRegistered())
             {
-                if (user.CantRoles() > 1)
+                if (user.CountRoles() > 1)
+                {
                     FormManager.getInstance().OpenAndClose(new RolSelector(), this);
+                }
                 else
-                    MessageBox.Show("Abrir el menu de funcionalidades....");
+                {
+                    Rol rol = new Rol();
+                    TakeRolFromUser(user, rol);
+                    FormManager.getInstance().OpenAndClose(new HomeMenu(user, rol), this);
+                }
+                  
+                    
+                    //MessageBox.Show("Abrir el menu de funcionalidades....");
                     //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
                   
                 //FormManager.getInstance().open(new Menu());
@@ -53,8 +65,10 @@ namespace PalcoNet
                 ClearTextBox();
 
                 user.ClearRolesList();
-                user.Username = "";
-                user.Password = "";
+                user.username = "";
+                user.SetPassword("");
+                user.isAdmin = false;
+                user.id = 0;
             }
             
         }
@@ -65,9 +79,9 @@ namespace PalcoNet
             //Usuario user = new Usuario();
             //RepoUsuario repo = new RepoUsuario();
 
-            user.Username = txtUsername.Text;
-            user.Password = txtPassword.Text;
-            user.IsAdmin = false;
+            user.username = txtUsername.Text;
+            user.SetPassword(txtPassword.Text);
+            user.isAdmin = false;
 
             if (repo.ExistsUser(user))
             {
@@ -76,13 +90,13 @@ namespace PalcoNet
                     if (repo.ValidPassword(user))
                     {
                         MessageBox.Show("Login Correcto");
-                        if (!user.IsAdmin)
+                        if (!user.isAdmin)
                             repo.CleanFailedAttemps(user);
                         return true;
                     }
                     else
                     {           
-                        if(!user.IsAdmin)
+                        if(!user.isAdmin)
                             repo.AddFailedAttempt(user);
                         MessageBox.Show("Username y/o Password Incorrecto");
                         return false;
@@ -138,6 +152,19 @@ namespace PalcoNet
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             CheckTextBox();
+        }
+
+        private void TakeRolFromUser(Usuario user, Rol rol)
+        {
+            List<Rol> rolList = user.GetRoles();
+            rol.nombre = rolList[0].nombre;
+            rol.id = rolList[0].id;
+            rol.habilitado = rolList[0].habilitado;
+        }
+
+        private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormManager.getInstance().Open(new CreateUsuario());
         }
 
     }

@@ -12,10 +12,11 @@ using PalcoNet.Modelo;
 
 namespace PalcoNet.Repositorios
 {
-    class RepoUsuario
+    public class RepoUsuario
     {
         private String userTable = "PLEASE_HELP.Usuario";
         private String clientTable = "PLEASE_HELP.Cliente";
+        private String empresaTable = "PLEASE_HELP.Empresa";
 
         //Esto era para mostrar un recorrer un datareader pero no funciona con la conexion cerrada... 
         /*
@@ -52,75 +53,90 @@ namespace PalcoNet.Repositorios
             DataTable table = new DataTable();
             table = GetUserRow(user);
 
-            return table.Rows.Count != 0;
+            if (table.Rows.Count != 0)
+            {
+                user.id = (int)table.Rows[0]["Usuario_Id"];
+                return true;
+            }
+            return false;
+
+            //return table.Rows.Count != 0;
         }
 
         //Verifica si la contraseña ingresada es correcta
         public Boolean ValidPassword(Usuario user)
         {
-            byte[] textboxPassword = Hashing.GetSHA256Encrypt(user.Password);
+            byte[] textboxPassword = user.GetPassword();
 
             DataTable table = new DataTable();
             table = GetUserRow(user);
 
             byte[] dbPassword = (byte[])(table.Rows[0]["Usuario_Password"]);
 
-            if (Hashing.EqualPasswords(textboxPassword, dbPassword))
-                return true;
-            return false;
+            return Hashing.EqualPasswords(textboxPassword, dbPassword);
           
         }
 
-        //Verifica si el usuario esta habilitado
+        //Verifica si el usuario esta habilitado y si es cliente, empresa o usuario
         public Boolean EnabledUser(Usuario user)
         {
             DataTable table = new DataTable();
-            table = GetClientRow(user);
 
             if (IsAdmin(user))
             {
-                user.IsAdmin = true;
+                user.isAdmin = true;
                 return true;
             }
             else
             {
-                if (Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]))
-                    return true;
-                return false;
+                if (IsClient(user))
+                {
+                    user.isClient = true;
+                    table = GetClientRow(user);
+                    return Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]);
+                }
+                else
+                {
+                    user.isClient = false;
+                    table = GetEmpresaRow(user);
+                    return Convert.ToBoolean(table.Rows[0]["Emp_Habilitado"]);
+                }
+
             }
-        
+
         }
-
-
-        /*
-        public int GetFailedAttempts(Usuario user)
-        {
-            DataTable table = new DataTable();
-            table = GetClientRow(user);
-
-            return ((int)table.Rows[0]["Cli_Intentos_Fallidos"]);
-        }
-        */
 
 
         //Registra un intento fallido del usuario en la DB
         public void AddFailedAttempt(Usuario user)
         {
-            String updateSQL = "PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS";
-            SqlCommand command = new SqlCommand(updateSQL);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@username", user.Username);
+            if (user.isClient)
+            {
+                String updateSQL = "PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_CLIENTE";
+                SqlCommand command = new SqlCommand(updateSQL);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@USERID", user.id);
 
-            Conexion.ExecuteProcedure(command);
+                Conexion.ExecuteProcedure(command);
+            }
+            else
+            {
+                String updateSQL = "PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_EMPRESA";
+                SqlCommand command = new SqlCommand(updateSQL);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@USERID", user.id);
+
+                Conexion.ExecuteProcedure(command);
+            }
         }
 
 
         //Obtener el row del usuario ingresado en el login
         private DataTable GetUserRow(Usuario user)
         {
-            String query = "select * from " + userTable + " where Usuario_Username = @user";
+            String query = "select * from " + userTable + " where Usuario_Username = @username";
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@user", user.Username);
+            command.Parameters.AddWithValue("@username", user.username);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -131,9 +147,9 @@ namespace PalcoNet.Repositorios
         //Obtener el row del cliente asociado al usuario del login
         private DataTable GetClientRow(Usuario user)
         {
-            String query = "select * from " + clientTable + " inner join " + userTable + " on Cli_Usuario = Usuario_Id and Usuario_Username = @user";
+            String query = "select * from " + clientTable + " where Cli_Usuario = @userId";
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@user", user.Username);
+            command.Parameters.AddWithValue("@userId", user.id);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -141,14 +157,26 @@ namespace PalcoNet.Repositorios
             return table;
         }
 
-        
+        //Obtener el row de la empresa asociado al usuario del login
+        private DataTable GetEmpresaRow(Usuario user)
+        {
+            String query = "select * from " + empresaTable + " where Emp_Usuario = @userId";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@userId", user.id);
+
+            DataTable table = new DataTable();
+            table = Conexion.GetData(command);
+
+            return table;
+        }
+
         //Obtener lista de roles de usuario
         private List<Rol> GetRolesUsuario(Usuario user)
         {
             String query = "PLEASE_HELP.SP_LISTA_ROLES_USUARIO";
             SqlCommand command = new SqlCommand(query);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@USERNAME", user.Username);
+            command.Parameters.AddWithValue("@USERNAME", user.username);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
@@ -167,7 +195,9 @@ namespace PalcoNet.Repositorios
             while (table.Rows.Count > i)
             {
                 Rol rol = new Rol();
-                rol.SetNombre(table.Rows[i][0].ToString());
+                rol.id = (int)table.Rows[i][0];
+                rol.nombre = table.Rows[i][1].ToString();
+                rol.habilitado = (bool)table.Rows[i][2];
                 roles.Add(rol);
                 i++;
             }
@@ -183,7 +213,7 @@ namespace PalcoNet.Repositorios
             int i = 0;
             while (list.Count > i)
             {
-                string nombreRol = list[i].GetNombre();
+                string nombreRol = list[i].nombre;
                 if (nombreRol == "ADMINISTRATIVO")
                     return true;
                 else
@@ -193,17 +223,40 @@ namespace PalcoNet.Repositorios
             return false;
         }
 
+
+        //Verifica si usuario ingresado en el form es cliente
+        private Boolean IsClient(Usuario user)
+        {
+            String query = "select * from " + clientTable + " where Cli_Usuario = @userId";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@userId", user.id);
+            DataTable table = Conexion.GetData(command);
+
+            return table.Rows.Count != 0;
+
+        }
+
         //Resetea los intentos fallidos a cero ante un logueo correcto
         public void CleanFailedAttemps(Usuario user)
         {
-            string username = user.Username;
+            if (user.isClient)
+            {
+                string sp = "PLEASE_HELP.SP_LIMPIAR_INTENTOS_FALLIDOS_CLIENTE";
+                SqlCommand command = new SqlCommand(sp);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@USERID", user.id);
 
-            string sp = "PLEASE_HELP.SP_LIMPIAR_INTENTOS_FALLIDOS";
-            SqlCommand command = new SqlCommand(sp);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@USERNAME", username);
+                Conexion.ExecuteProcedure(command);
+            }
+            else
+            {
+                string sp = "PLEASE_HELP.SP_LIMPIAR_INTENTOS_FALLIDOS_EMPRESA";
+                SqlCommand command = new SqlCommand(sp);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@USERID", user.id);
 
-            Conexion.ExecuteProcedure(command);
+                Conexion.ExecuteProcedure(command);
+            }
         }
 
 

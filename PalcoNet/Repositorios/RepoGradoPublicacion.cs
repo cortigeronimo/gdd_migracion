@@ -18,7 +18,7 @@ namespace PalcoNet.Repositorios
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@comision", grado.GetComision());
             command.Parameters.AddWithValue("@descripcion", grado.GetDescripcion());
-            int result = Conexion.insertData(command);
+            int result = Conexion.insertOrUpdateData(command);
             if(result < 1){
                 throw new Exception("No se ha podido insertar el grado, intentelo nuevamente.");
             }
@@ -36,7 +36,18 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@descripcion", grado.GetDescripcion());
             command.Parameters.AddWithValue("@id", grado.getId());
 
-            return Conexion.insertData(command);
+            return Conexion.insertOrUpdateData(command);
+        }
+
+        public DataTable GetGradosBy(Grado grado){
+            String query = "select g.* from " + table + " g ";
+            query += "where g.Grado_Comision = @comision ";
+            query += "and g.Grado_Descripcion = @descripcion";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@comision", grado.GetComision());
+            command.Parameters.AddWithValue("@descripcion", grado.GetDescripcion());
+            Console.WriteLine(query);
+            return Conexion.GetData(command);
         }
 
         public List<Grado> GetGrados()

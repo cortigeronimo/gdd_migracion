@@ -23,8 +23,9 @@ namespace PalcoNet.Abm_Grado
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
-            Grado grado = new Grado((int)numComisionGrado.Value,
-            txtNombreGrado.Text);
+            Grado grado = new Grado(
+                (int)numComisionGrado.Value,
+                txtNombreGrado.Text);
             repo.InsertGrado(grado);
             MessageBox.Show("Todo ok perro");
         }

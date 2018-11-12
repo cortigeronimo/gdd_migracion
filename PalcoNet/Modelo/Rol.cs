@@ -8,6 +8,7 @@ namespace PalcoNet.Modelo
 {
     public class Rol
     {
+<<<<<<< HEAD
         private int id;
         private string nombre;
         private bool habilitado;
@@ -44,5 +45,16 @@ namespace PalcoNet.Modelo
         {
             this.habilitado = habilitado;
         }
+=======
+        public int id { get; set; }
+        public String nombre { get; set; }
+        public bool habilitado { get; set; }
+
+        //public Rol(string nombre, bool habilitado)
+        //{
+        //    this.nombre = nombre;
+        //    this.habilitado = habilitado;
+        //}
+>>>>>>> 496d760215dc286e030a031e26985c104a37e7ec
     }
 }

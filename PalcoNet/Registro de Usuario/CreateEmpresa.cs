@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Registro_de_Usuario
 {
-    public partial class Form1 : Form
+    public partial class CreateEmpresa : CustomForm
     {
-        public Form1()
+        public CreateEmpresa()
         {
             InitializeComponent();
         }
