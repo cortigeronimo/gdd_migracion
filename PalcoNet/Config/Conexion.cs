@@ -42,7 +42,7 @@ namespace PalcoNet
         }
 
 
-        public static int insertData(SqlCommand command){
+        public static int insertOrUpdateData(SqlCommand command){
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["palconet"].ConnectionString))
             {
                 command.Connection = connection;

@@ -40,6 +40,16 @@ namespace PalcoNet.Abm_Grado
             this.columnId.Width = (int)widthColumn;
         }
 
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            RepoGradoPublicacion repoGrado = new RepoGradoPublicacion();
+            Grado grado = new Grado(
+                (int)numComisionGrado.Value, 
+                txtNombreGrado.Text);
+            DataTable table = repoGrado.GetGradosBy(grado);
+            dataGridView1.DataSource = table.DefaultView;
+        }
+
     }
 }
 
