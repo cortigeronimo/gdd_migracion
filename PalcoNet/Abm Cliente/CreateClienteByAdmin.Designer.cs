@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Abm_Cliente
 {
-    partial class CreateCliente
+    partial class CreateClienteByAdmin
     {
         /// <summary>
         /// Required designer variable.

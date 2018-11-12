@@ -238,8 +238,8 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new CreateCliente(), this);
-            MessageBox.Show("soy el form crear cliente");
+            FormManager.getInstance().OpenAndClose(new CreateClienteByAdmin(), this);
+            
         }
 
         private void listarClientes_Click(object sender, EventArgs e)

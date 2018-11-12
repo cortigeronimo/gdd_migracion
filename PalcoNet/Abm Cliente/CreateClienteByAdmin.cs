@@ -14,13 +14,13 @@ using PalcoNet.Repositorios;
 
 namespace PalcoNet.Abm_Cliente
 {
-    public partial class CreateCliente : CustomForm
+    public partial class CreateClienteByAdmin : CustomForm
     {
         RepoCliente repo = new RepoCliente();
         Cliente cliente;
 
 
-        public CreateCliente()
+        public CreateClienteByAdmin()
         {
             InitializeComponent();
         }
