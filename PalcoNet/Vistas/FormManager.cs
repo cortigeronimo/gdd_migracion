@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Abm_Grado;
+using PalcoNet.Abm_Rol;
 
 namespace PalcoNet
 {
@@ -47,6 +48,7 @@ namespace PalcoNet
             //Open(new CreateGrado());
             //Open(new UpdateGrado());
             Open(new ListGrado());
+            Open(new ListadoRol());
         }
 
         public void Open(Form form)
