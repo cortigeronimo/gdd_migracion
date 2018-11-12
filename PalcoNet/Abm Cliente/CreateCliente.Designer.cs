@@ -29,23 +29,21 @@
         private void InitializeComponent()
         {
             this.groupBoxAltaCliente = new System.Windows.Forms.GroupBox();
+            this.numPiso = new System.Windows.Forms.NumericUpDown();
+            this.numCuil = new System.Windows.Forms.NumericUpDown();
             this.txtDepto = new System.Windows.Forms.TextBox();
-            this.txtNumeroPiso = new System.Windows.Forms.TextBox();
             this.txtCodigoPostal = new System.Windows.Forms.TextBox();
             this.txtLocalidad = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.numTelefono = new System.Windows.Forms.NumericUpDown();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtCuil = new System.Windows.Forms.TextBox();
             this.txtTarjetaCredito = new System.Windows.Forms.TextBox();
-            this.dateTimePickerFechaCreacion = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFechaNac = new System.Windows.Forms.DateTimePicker();
-            this.txtNumeroDoc = new System.Windows.Forms.TextBox();
+            this.numNumeroDocumento = new System.Windows.Forms.NumericUpDown();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.comboBoxTipoDoc = new System.Windows.Forms.ComboBox();
             this.lblTarjetaCredito = new System.Windows.Forms.Label();
-            this.lblFechaCreacion = new System.Windows.Forms.Label();
             this.lblFechaNacimiento = new System.Windows.Forms.Label();
             this.lblCodigoPostal = new System.Windows.Forms.Label();
             this.lblDepto = new System.Windows.Forms.Label();
@@ -64,27 +62,29 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBoxAltaCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxAltaCliente
             // 
+            this.groupBoxAltaCliente.Controls.Add(this.numPiso);
+            this.groupBoxAltaCliente.Controls.Add(this.numCuil);
             this.groupBoxAltaCliente.Controls.Add(this.txtDepto);
-            this.groupBoxAltaCliente.Controls.Add(this.txtNumeroPiso);
             this.groupBoxAltaCliente.Controls.Add(this.txtCodigoPostal);
             this.groupBoxAltaCliente.Controls.Add(this.txtLocalidad);
             this.groupBoxAltaCliente.Controls.Add(this.txtDireccion);
-            this.groupBoxAltaCliente.Controls.Add(this.txtTelefono);
+            this.groupBoxAltaCliente.Controls.Add(this.numTelefono);
             this.groupBoxAltaCliente.Controls.Add(this.txtEmail);
-            this.groupBoxAltaCliente.Controls.Add(this.txtCuil);
             this.groupBoxAltaCliente.Controls.Add(this.txtTarjetaCredito);
-            this.groupBoxAltaCliente.Controls.Add(this.dateTimePickerFechaCreacion);
             this.groupBoxAltaCliente.Controls.Add(this.dateTimePickerFechaNac);
-            this.groupBoxAltaCliente.Controls.Add(this.txtNumeroDoc);
+            this.groupBoxAltaCliente.Controls.Add(this.numNumeroDocumento);
             this.groupBoxAltaCliente.Controls.Add(this.txtApellido);
             this.groupBoxAltaCliente.Controls.Add(this.txtNombre);
             this.groupBoxAltaCliente.Controls.Add(this.comboBoxTipoDoc);
             this.groupBoxAltaCliente.Controls.Add(this.lblTarjetaCredito);
-            this.groupBoxAltaCliente.Controls.Add(this.lblFechaCreacion);
             this.groupBoxAltaCliente.Controls.Add(this.lblFechaNacimiento);
             this.groupBoxAltaCliente.Controls.Add(this.lblCodigoPostal);
             this.groupBoxAltaCliente.Controls.Add(this.lblDepto);
@@ -106,19 +106,41 @@
             this.groupBoxAltaCliente.TabStop = false;
             this.groupBoxAltaCliente.Text = "Alta Cliente";
             // 
+            // numPiso
+            // 
+            this.numPiso.Location = new System.Drawing.Point(56, 379);
+            this.numPiso.Name = "numPiso";
+            this.numPiso.Size = new System.Drawing.Size(62, 20);
+            this.numPiso.TabIndex = 26;
+            // 
+            // numCuil
+            // 
+            this.numCuil.Location = new System.Drawing.Point(60, 254);
+            this.numCuil.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
+            this.numCuil.Minimum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.numCuil.Name = "numCuil";
+            this.numCuil.Size = new System.Drawing.Size(179, 20);
+            this.numCuil.TabIndex = 25;
+            this.numCuil.Value = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            // 
             // txtDepto
             // 
             this.txtDepto.Location = new System.Drawing.Point(168, 379);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(62, 20);
             this.txtDepto.TabIndex = 24;
-            // 
-            // txtNumeroPiso
-            // 
-            this.txtNumeroPiso.Location = new System.Drawing.Point(60, 379);
-            this.txtNumeroPiso.Name = "txtNumeroPiso";
-            this.txtNumeroPiso.Size = new System.Drawing.Size(59, 20);
-            this.txtNumeroPiso.TabIndex = 23;
             // 
             // txtCodigoPostal
             // 
@@ -141,12 +163,27 @@
             this.txtDireccion.Size = new System.Drawing.Size(151, 20);
             this.txtDireccion.TabIndex = 20;
             // 
-            // txtTelefono
+            // numTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(65, 316);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(134, 20);
-            this.txtTelefono.TabIndex = 19;
+            this.numTelefono.Location = new System.Drawing.Point(65, 316);
+            this.numTelefono.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.numTelefono.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numTelefono.Name = "numTelefono";
+            this.numTelefono.Size = new System.Drawing.Size(134, 20);
+            this.numTelefono.TabIndex = 19;
+            this.numTelefono.Value = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
             // 
             // txtEmail
             // 
@@ -155,13 +192,6 @@
             this.txtEmail.Size = new System.Drawing.Size(179, 20);
             this.txtEmail.TabIndex = 18;
             // 
-            // txtCuil
-            // 
-            this.txtCuil.Location = new System.Drawing.Point(64, 253);
-            this.txtCuil.Name = "txtCuil";
-            this.txtCuil.Size = new System.Drawing.Size(134, 20);
-            this.txtCuil.TabIndex = 17;
-            // 
             // txtTarjetaCredito
             // 
             this.txtTarjetaCredito.Location = new System.Drawing.Point(113, 220);
@@ -169,26 +199,36 @@
             this.txtTarjetaCredito.Size = new System.Drawing.Size(179, 20);
             this.txtTarjetaCredito.TabIndex = 16;
             // 
-            // dateTimePickerFechaCreacion
-            // 
-            this.dateTimePickerFechaCreacion.Location = new System.Drawing.Point(113, 186);
-            this.dateTimePickerFechaCreacion.Name = "dateTimePickerFechaCreacion";
-            this.dateTimePickerFechaCreacion.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerFechaCreacion.TabIndex = 15;
-            // 
             // dateTimePickerFechaNac
             // 
             this.dateTimePickerFechaNac.Location = new System.Drawing.Point(124, 153);
+            this.dateTimePickerFechaNac.MaxDate = System.DateTime.Today;
+            this.dateTimePickerFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerFechaNac.Name = "dateTimePickerFechaNac";
             this.dateTimePickerFechaNac.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerFechaNac.TabIndex = 14;
             // 
-            // txtNumeroDoc
+            // numNumeroDocumento
             // 
-            this.txtNumeroDoc.Location = new System.Drawing.Point(336, 123);
-            this.txtNumeroDoc.Name = "txtNumeroDoc";
-            this.txtNumeroDoc.Size = new System.Drawing.Size(134, 20);
-            this.txtNumeroDoc.TabIndex = 13;
+            this.numNumeroDocumento.Location = new System.Drawing.Point(336, 123);
+            this.numNumeroDocumento.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.numNumeroDocumento.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numNumeroDocumento.Name = "numNumeroDocumento";
+            this.numNumeroDocumento.Size = new System.Drawing.Size(134, 20);
+            this.numNumeroDocumento.TabIndex = 13;
+            this.numNumeroDocumento.Value = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             // 
             // txtApellido
             // 
@@ -225,15 +265,6 @@
             this.lblTarjetaCredito.Size = new System.Drawing.Size(94, 13);
             this.lblTarjetaCredito.TabIndex = 1;
             this.lblTarjetaCredito.Text = "Tarjeta de Crédito:";
-            // 
-            // lblFechaCreacion
-            // 
-            this.lblFechaCreacion.AutoSize = true;
-            this.lblFechaCreacion.Location = new System.Drawing.Point(7, 192);
-            this.lblFechaCreacion.Name = "lblFechaCreacion";
-            this.lblFechaCreacion.Size = new System.Drawing.Size(100, 13);
-            this.lblFechaCreacion.TabIndex = 9;
-            this.lblFechaCreacion.Text = "Fecha de Creación:";
             // 
             // lblFechaNacimiento
             // 
@@ -403,6 +434,10 @@
             this.Text = "Alta Cliente";
             this.groupBoxAltaCliente.ResumeLayout(false);
             this.groupBoxAltaCliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -416,18 +451,15 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblNdeDocumento;
         private System.Windows.Forms.TextBox txtDireccion;
-        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.NumericUpDown numTelefono;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtCuil;
         private System.Windows.Forms.TextBox txtTarjetaCredito;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFechaCreacion;
         private System.Windows.Forms.DateTimePicker dateTimePickerFechaNac;
-        private System.Windows.Forms.TextBox txtNumeroDoc;
+        private System.Windows.Forms.NumericUpDown numNumeroDocumento;
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.ComboBox comboBoxTipoDoc;
         private System.Windows.Forms.Label lblTarjetaCredito;
-        private System.Windows.Forms.Label lblFechaCreacion;
         private System.Windows.Forms.Label lblFechaNacimiento;
         private System.Windows.Forms.Label lblCodigoPostal;
         private System.Windows.Forms.Label lblDepto;
@@ -442,7 +474,8 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtLocalidad;
         private System.Windows.Forms.TextBox txtDepto;
-        private System.Windows.Forms.TextBox txtNumeroPiso;
         private System.Windows.Forms.TextBox txtCodigoPostal;
+        private System.Windows.Forms.NumericUpDown numCuil;
+        private System.Windows.Forms.NumericUpDown numPiso;
     }
 }
