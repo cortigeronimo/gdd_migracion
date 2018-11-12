@@ -12,9 +12,9 @@ namespace PalcoNet.Modelo
         public String apellido { get; set; }
         public String tipoDocumento { get; set; }
         public int nroDocumento { get; set; }
-        public String cuil { get; set; }
+        public long cuil { get; set; }
         public String email { get; set; }
-        public int telefono { get; set; }
+        public long telefono { get; set; }
         public String localidad { get; set; }
         public String direccion { get; set; }
         public byte nroPiso { get; set; }
@@ -31,8 +31,17 @@ namespace PalcoNet.Modelo
         {
         }
 
-        public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, string cuil,
-            string email, int telefono, string localidad, string direccion, byte nroPiso, string depto, string codPostal, DateTime fechaNac, DateTime fechaCreacion,
+        public Cliente(Usuario usuario)
+        {
+            id = usuario.id;
+            username = usuario.username;
+            SetPassword(usuario.GetPassword());
+            SetRoles(usuario.GetRoles());
+            isAdmin = usuario.isAdmin;
+        }
+
+        public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, long cuil,
+            string email, long telefono, string localidad, string direccion, byte nroPiso, string depto, string codPostal, DateTime fechaNac,
             string tarjetaCredito)
         {
             this.nombre = nombre;
@@ -48,8 +57,13 @@ namespace PalcoNet.Modelo
             this.depto = depto;
             this.codigoPostal = codPostal;
             this.fechaNacimiento = fechaNac;
-            this.fechaCreacion = fechaCreacion;
+            this.fechaCreacion = DateTime.Today;
             this.tarjetaCredito = tarjetaCredito;
+        }
+
+        public void SetFechaCreacion()
+        {
+            this.fechaCreacion = DateTime.Today;
         }
     }
 }

@@ -134,7 +134,6 @@
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Grado.cs" />
     <Compile Include="Modelo\Rol.cs" />
-    <Compile Include="Modelo\TipoUsuario.cs" />
     <Compile Include="Registro de Usuario\CreateCliente.cs">
       <SubType>Form</SubType>
     </Compile>

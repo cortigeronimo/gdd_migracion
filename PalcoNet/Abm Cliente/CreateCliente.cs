@@ -35,16 +35,16 @@ namespace PalcoNet.Abm_Cliente
         {
             txtApellido.Clear();
             txtCodigoPostal.Clear();
-            txtCuil.Clear();
+            numCuil.Value = numCuil.Minimum;
             txtDepto.Clear();
             txtDireccion.Clear();
             txtEmail.Clear();
             txtLocalidad.Clear();
             txtNombre.Clear();
-            txtNumeroDoc.Clear();
-            txtNumeroPiso.Clear();
+            numNumeroDocumento.Value = numNumeroDocumento.Minimum;
+            numPiso.Value = numPiso.Minimum;
             txtTarjetaCredito.Clear();
-            txtTelefono.Clear();
+            numTelefono.Value = numTelefono.Minimum;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -53,7 +53,7 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ReadAllTextBox();
-                repo.InsertCliente(cliente);
+                repo.InsertClienteCreatedByAdmin(cliente);
                 MessageBox.Show("Cliente registrado correctamente.");
             }
             catch (Exception)
@@ -65,8 +65,8 @@ namespace PalcoNet.Abm_Cliente
 
         private void ReadAllTextBox()
         {
-            cliente = new Cliente(txtNombre.Text, txtApellido.Text, comboBoxTipoDoc.SelectedItem.ToString(), Convert.ToInt32(txtNumeroDoc.Text), txtCuil.Text, txtEmail.Text, Convert.ToInt32(txtTelefono.Text),
-                txtLocalidad.Text, txtDireccion.Text, Convert.ToByte(txtNumeroPiso.Text), txtDepto.Text, txtCodigoPostal.Text, Convert.ToDateTime(dateTimePickerFechaNac.Text), Convert.ToDateTime(dateTimePickerFechaCreacion.Text), txtTarjetaCredito.Text);
+            cliente = new Cliente(txtNombre.Text, txtApellido.Text, comboBoxTipoDoc.SelectedItem.ToString(), (int)numNumeroDocumento.Value, (long)numCuil.Value, txtEmail.Text, (long)numTelefono.Value,
+                txtLocalidad.Text, txtDireccion.Text, Convert.ToByte(numPiso.Value), txtDepto.Text, txtCodigoPostal.Text, Convert.ToDateTime(dateTimePickerFechaNac.Text), txtTarjetaCredito.Text);
 
           
         }
