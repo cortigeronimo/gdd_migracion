@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Repositorios;
+using PalcoNet.Abm_Cliente;
 
 
 namespace PalcoNet
@@ -41,7 +42,8 @@ namespace PalcoNet
                 if (user.CountRoles() > 1)
                     FormManager.getInstance().OpenAndClose(new RolSelector(), this);
                 else
-                    MessageBox.Show("Abrir el menu de funcionalidades....");
+                    FormManager.getInstance().OpenAndClose(new CreateCliente(), this);
+                    //MessageBox.Show("Abrir el menu de funcionalidades....");
                     //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
                   
                 //FormManager.getInstance().open(new Menu());

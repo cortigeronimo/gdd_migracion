@@ -12,7 +12,7 @@ using PalcoNet.Modelo;
 
 namespace PalcoNet.Repositorios
 {
-    class RepoUsuario
+    public class RepoUsuario
     {
         private String userTable = "PLEASE_HELP.Usuario";
         private String clientTable = "PLEASE_HELP.Cliente";

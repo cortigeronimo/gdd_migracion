@@ -49,6 +49,11 @@ namespace PalcoNet
             this.password = Hashing.GetSHA256Encrypt(password);
         }
 
+        public void SetPassword(byte[] password)
+        {
+            this.password = password;
+        }
+
         public byte[] GetPassword()
         {
             return this.password;

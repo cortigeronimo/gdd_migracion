@@ -42,17 +42,18 @@ namespace PalcoNet.Registro_de_Usuario
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Cliente cliente = new Cliente();
-            usuario.tipoUsuario = cliente;
+            cliente.username = usuario.username;
+            cliente.SetPassword(usuario.GetPassword());
             cliente.nombre = txtNombre.Text;
             cliente.apellido = txtApellido.Text;
             cliente.tipoDocumento = txtTipoDocumento.Text;
-            cliente.numeroDocumento = (long)numNumeroDocumento.Value;
-            cliente.cuil = (long)numCuil.Value;
+            cliente.nroDocumento = (byte)numNumeroDocumento.Value;
+            cliente.cuil = numCuil.Value.ToString();
             cliente.email = txtEmail.Text;
-            cliente.telefono = (long)numTelefono.Value;
+            cliente.telefono = (byte)numTelefono.Value;
             cliente.direccion = txtDireccion.Text;
-            cliente.nroPiso = (int)numPiso.Value;
-            cliente.departamento = txtDepartamento.Text;
+            cliente.nroPiso = (byte)numPiso.Value;
+            cliente.depto = txtDepartamento.Text;
             cliente.localidad = txtLocalidad.Text;
             cliente.codigoPostal = txtCodigoPostal.Text;
             cliente.tarjetaCredito = txtTarjetaCredito.Text;
