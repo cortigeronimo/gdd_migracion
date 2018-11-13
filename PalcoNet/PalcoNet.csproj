@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Cliente\CreateClienteByAdmin.cs">
+    <Compile Include="Abm Cliente\ListCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Cliente\CreateClienteByAdmin.Designer.cs">
-      <DependentUpon>CreateClienteByAdmin.cs</DependentUpon>
+    <Compile Include="Abm Cliente\ListCliente.Designer.cs">
+      <DependentUpon>ListCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Grado\CreateGrado.cs">
       <SubType>Form</SubType>
@@ -191,9 +191,6 @@
     <Compile Include="Vistas\RolSelector.Designer.cs">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Abm Cliente\CreateClienteByAdmin.resx">
-      <DependentUpon>CreateClienteByAdmin.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListGrado.resx">
       <DependentUpon>ListGrado.cs</DependentUpon>
     </EmbeddedResource>

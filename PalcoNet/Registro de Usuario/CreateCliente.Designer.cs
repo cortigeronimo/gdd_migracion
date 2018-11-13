@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
-            this.numPiso = new System.Windows.Forms.NumericUpDown();
-            this.numTelefono = new System.Windows.Forms.NumericUpDown();
-            this.numCuil = new System.Windows.Forms.NumericUpDown();
-            this.numNumeroDocumento = new System.Windows.Forms.NumericUpDown();
+            this.txtCuil = new System.Windows.Forms.TextBox();
+            this.txtNumPiso = new System.Windows.Forms.TextBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.txtNumeroDocumento = new System.Windows.Forms.TextBox();
             this.txtTarjetaCredito = new System.Windows.Forms.TextBox();
             this.lblTarjetaCredito = new System.Windows.Forms.Label();
             this.pickerFechaNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -60,18 +60,14 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBoxCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCliente
             // 
-            this.groupBoxCliente.Controls.Add(this.numPiso);
-            this.groupBoxCliente.Controls.Add(this.numTelefono);
-            this.groupBoxCliente.Controls.Add(this.numCuil);
-            this.groupBoxCliente.Controls.Add(this.numNumeroDocumento);
+            this.groupBoxCliente.Controls.Add(this.txtCuil);
+            this.groupBoxCliente.Controls.Add(this.txtNumPiso);
+            this.groupBoxCliente.Controls.Add(this.txtTelefono);
+            this.groupBoxCliente.Controls.Add(this.txtNumeroDocumento);
             this.groupBoxCliente.Controls.Add(this.txtTarjetaCredito);
             this.groupBoxCliente.Controls.Add(this.lblTarjetaCredito);
             this.groupBoxCliente.Controls.Add(this.pickerFechaNacimiento);
@@ -103,85 +99,48 @@
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Cliente";
             // 
-            // numPiso
+            // txtCuil
             // 
-            this.numPiso.Location = new System.Drawing.Point(6, 262);
-            this.numPiso.Name = "numPiso";
-            this.numPiso.Size = new System.Drawing.Size(131, 20);
-            this.numPiso.TabIndex = 30;
+            this.txtCuil.Location = new System.Drawing.Point(7, 151);
+            this.txtCuil.MaxLength = 11;
+            this.txtCuil.Name = "txtCuil";
+            this.txtCuil.Size = new System.Drawing.Size(129, 20);
+            this.txtCuil.TabIndex = 5;
+            this.txtCuil.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCuil_KeyPress);
             // 
-            // numTelefono
+            // txtNumPiso
             // 
-            this.numTelefono.Location = new System.Drawing.Point(6, 207);
-            this.numTelefono.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numTelefono.Minimum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numTelefono.Name = "numTelefono";
-            this.numTelefono.Size = new System.Drawing.Size(131, 20);
-            this.numTelefono.TabIndex = 29;
-            this.numTelefono.Value = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
+            this.txtNumPiso.Location = new System.Drawing.Point(6, 263);
+            this.txtNumPiso.MaxLength = 2;
+            this.txtNumPiso.Name = "txtNumPiso";
+            this.txtNumPiso.Size = new System.Drawing.Size(131, 20);
+            this.txtNumPiso.TabIndex = 9;
+            this.txtNumPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumPiso_KeyPress);
             // 
-            // numCuil
+            // txtTelefono
             // 
-            this.numCuil.Location = new System.Drawing.Point(6, 151);
-            this.numCuil.Maximum = new decimal(new int[] {
-            1215752191,
-            23,
-            0,
-            0});
-            this.numCuil.Minimum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.numCuil.Name = "numCuil";
-            this.numCuil.Size = new System.Drawing.Size(131, 20);
-            this.numCuil.TabIndex = 28;
-            this.numCuil.Value = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
+            this.txtTelefono.Location = new System.Drawing.Point(7, 208);
+            this.txtTelefono.MaxLength = 10;
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(129, 20);
+            this.txtTelefono.TabIndex = 7;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
-            // numNumeroDocumento
+            // txtNumeroDocumento
             // 
-            this.numNumeroDocumento.Location = new System.Drawing.Point(217, 99);
-            this.numNumeroDocumento.Maximum = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            0});
-            this.numNumeroDocumento.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.numNumeroDocumento.Name = "numNumeroDocumento";
-            this.numNumeroDocumento.Size = new System.Drawing.Size(131, 20);
-            this.numNumeroDocumento.TabIndex = 27;
-            this.numNumeroDocumento.Value = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
+            this.txtNumeroDocumento.Location = new System.Drawing.Point(217, 98);
+            this.txtNumeroDocumento.MaxLength = 8;
+            this.txtNumeroDocumento.Name = "txtNumeroDocumento";
+            this.txtNumeroDocumento.Size = new System.Drawing.Size(131, 20);
+            this.txtNumeroDocumento.TabIndex = 4;
+            this.txtNumeroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroDocumento_KeyPress);
             // 
             // txtTarjetaCredito
             // 
             this.txtTarjetaCredito.Location = new System.Drawing.Point(217, 377);
             this.txtTarjetaCredito.Name = "txtTarjetaCredito";
             this.txtTarjetaCredito.Size = new System.Drawing.Size(131, 20);
-            this.txtTarjetaCredito.TabIndex = 26;
+            this.txtTarjetaCredito.TabIndex = 14;
             // 
             // lblTarjetaCredito
             // 
@@ -199,7 +158,7 @@
             this.pickerFechaNacimiento.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.pickerFechaNacimiento.Name = "pickerFechaNacimiento";
             this.pickerFechaNacimiento.Size = new System.Drawing.Size(130, 20);
-            this.pickerFechaNacimiento.TabIndex = 24;
+            this.pickerFechaNacimiento.TabIndex = 13;
             this.pickerFechaNacimiento.Value = new System.DateTime(2018, 11, 11, 0, 0, 0, 0);
             // 
             // lblFechaNacimiento
@@ -216,7 +175,7 @@
             this.txtCodigoPostal.Location = new System.Drawing.Point(217, 321);
             this.txtCodigoPostal.Name = "txtCodigoPostal";
             this.txtCodigoPostal.Size = new System.Drawing.Size(131, 20);
-            this.txtCodigoPostal.TabIndex = 22;
+            this.txtCodigoPostal.TabIndex = 12;
             // 
             // lblCodigoPostal
             // 
@@ -232,7 +191,7 @@
             this.txtLocalidad.Location = new System.Drawing.Point(6, 320);
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(131, 20);
-            this.txtLocalidad.TabIndex = 20;
+            this.txtLocalidad.TabIndex = 11;
             // 
             // lblLocalidad
             // 
@@ -257,7 +216,7 @@
             this.txtDepartamento.Location = new System.Drawing.Point(217, 263);
             this.txtDepartamento.Name = "txtDepartamento";
             this.txtDepartamento.Size = new System.Drawing.Size(131, 20);
-            this.txtDepartamento.TabIndex = 17;
+            this.txtDepartamento.TabIndex = 10;
             // 
             // lblPiso
             // 
@@ -273,7 +232,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(217, 208);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(131, 20);
-            this.txtDireccion.TabIndex = 14;
+            this.txtDireccion.TabIndex = 8;
             // 
             // lblDireccion
             // 
@@ -298,7 +257,7 @@
             this.txtEmail.Location = new System.Drawing.Point(217, 151);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(131, 20);
-            this.txtEmail.TabIndex = 10;
+            this.txtEmail.TabIndex = 6;
             // 
             // lblEmail
             // 
@@ -332,7 +291,7 @@
             this.txtTipoDocumento.Location = new System.Drawing.Point(6, 98);
             this.txtTipoDocumento.Name = "txtTipoDocumento";
             this.txtTipoDocumento.Size = new System.Drawing.Size(131, 20);
-            this.txtTipoDocumento.TabIndex = 4;
+            this.txtTipoDocumento.TabIndex = 3;
             // 
             // lblTipoDocumento
             // 
@@ -348,7 +307,7 @@
             this.txtApellido.Location = new System.Drawing.Point(217, 48);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(131, 20);
-            this.txtApellido.TabIndex = 3;
+            this.txtApellido.TabIndex = 2;
             // 
             // lblApellido
             // 
@@ -380,7 +339,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(36, 448);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 1;
+            this.btnLimpiar.TabIndex = 16;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -390,7 +349,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(315, 448);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 2;
+            this.btnGuardar.TabIndex = 15;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -407,10 +366,6 @@
             this.Text = "CreateCliente";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuil)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumeroDocumento)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -444,9 +399,9 @@
         private System.Windows.Forms.Label lblLocalidad;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.NumericUpDown numPiso;
-        private System.Windows.Forms.NumericUpDown numTelefono;
-        private System.Windows.Forms.NumericUpDown numCuil;
-        private System.Windows.Forms.NumericUpDown numNumeroDocumento;
+        private System.Windows.Forms.TextBox txtNumeroDocumento;
+        private System.Windows.Forms.TextBox txtNumPiso;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.TextBox txtCuil;
     }
 }

@@ -52,3 +52,11 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usu
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.HomeMenu.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.ListGrado.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.UpdateGrado.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ListadoFuncionalidades.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ListadoRol.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateCliente.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.HomeMenu.resources
