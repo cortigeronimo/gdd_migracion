@@ -36,7 +36,7 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
             command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
 
-            int result = Conexion.insertOrUpdateData(command);
+            int result = Conexion.InsertUpdateOrDeleteData(command);
             if (result < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
         }
@@ -65,7 +65,7 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@username", cliente.username);
             command.Parameters.AddWithValue("@password", cliente.GetPassword());
 
-            if (Conexion.insertOrUpdateData(command) < 2)
+            if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
         }
 

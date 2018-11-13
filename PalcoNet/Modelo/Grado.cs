@@ -13,6 +13,10 @@ namespace PalcoNet.Abm_Grado
         private int comision;
         private String descripcion;
 
+        public Grado()
+        {
+        }
+
         public Grado(int id, int comision, String descripcion)
         {
             this.id = id;

@@ -172,7 +172,6 @@ namespace PalcoNet.Vistas
                 case "ABM GRADO PUBLICACION":
                     itemFuncionalidad.DropDownItems["crearGrado"].Click += new EventHandler(crearGrado_Click);
                     itemFuncionalidad.DropDownItems["listarGrados"].Click += new EventHandler(listarGrados_Click);
-                    itemFuncionalidad.DropDownItems["actualizarGrado"].Click += new EventHandler(actualizarGrado_Click);
                     break;
                 case "GENERAR PUBLICACION":
                     itemFuncionalidad.Click += new EventHandler(generarPublicacion_Click);
@@ -211,11 +210,6 @@ namespace PalcoNet.Vistas
         private void listarGrados_Click(object sender, EventArgs e)
         {
             FormManager.getInstance().OpenAndClose(new ListGrado(), this);
-        }
-
-        private void actualizarGrado_Click(object sender, EventArgs e)
-        {
-            FormManager.getInstance().OpenAndClose(new UpdateGrado(), this);
         }
 
 

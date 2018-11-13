@@ -14,8 +14,11 @@ namespace PalcoNet.Abm_Grado
 {
     public partial class UpdateGrado : CustomForm
     {
-        public UpdateGrado()
+        Grado grado;
+
+        public UpdateGrado(Grado grado)
         {
+            this.grado = grado;
             InitializeComponent();
         }
 
@@ -23,7 +26,7 @@ namespace PalcoNet.Abm_Grado
         {
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
             Grado grado = new Grado(
-                (int)numIdGrado.Value,
+                (int)this.grado.getId(),
                 (int)numComisionGrado.Value,
                 txtNombreGrado.Text);
             if(repo.UpdateGrado(grado) > 0){
@@ -40,6 +43,12 @@ namespace PalcoNet.Abm_Grado
         {
             numComisionGrado.Value = 0;
             txtNombreGrado.Text = "";
+        }
+
+        private void UpdateGrado_Load(object sender, EventArgs e)
+        {
+            txtNombreGrado.Text = this.grado.GetDescripcion();
+            numComisionGrado.Value = this.grado.GetComision();
         }
 
 
