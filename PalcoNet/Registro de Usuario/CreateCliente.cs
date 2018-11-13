@@ -29,6 +29,7 @@ namespace PalcoNet.Registro_de_Usuario
         {
             this.usuario = new Usuario();
             this.usuario.username = "";
+            InitializeComponent();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -69,11 +70,11 @@ namespace PalcoNet.Registro_de_Usuario
                     cliente.SetPassword(cliente.nroDocumento.ToString());
                     repoCliente.InsertCliente(cliente);
                     MessageBox.Show("Cliente registrado correctamente.");
+                    ClearAllTextBox();
                 }
                 catch (Exception)
                 {
                     MessageBox.Show("Ingrese todos los datos solicitados.");
-                    ClearAllTextBox();
 
                 }
             }
