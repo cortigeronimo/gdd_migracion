@@ -131,6 +131,7 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Empresa.cs" />
     <Compile Include="Modelo\Funcionalidad.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Grado.cs" />
@@ -154,6 +155,7 @@
       <DependentUpon>CreateUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorios\RepoCliente.cs" />
+    <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Utils\ElementManager.cs" />

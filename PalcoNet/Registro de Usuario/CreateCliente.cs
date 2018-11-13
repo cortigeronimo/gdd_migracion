@@ -60,7 +60,7 @@ namespace PalcoNet.Registro_de_Usuario
             cliente.fechaNacimiento = pickerFechaNacimiento.Value;
             cliente.SetFechaCreacion();
             cliente.tarjetaCredito = txtTarjetaCredito.Text;
-            repoCliente.InsertClienteCreatedByUser(cliente);
+            repoCliente.InsertCliente(cliente);
         }
     }
 }

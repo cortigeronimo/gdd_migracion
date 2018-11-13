@@ -53,7 +53,9 @@ namespace PalcoNet.Abm_Cliente
             try
             {
                 ReadAllTextBox();
-                repo.InsertClienteCreatedByAdmin(cliente);
+                cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
+                cliente.SetPassword(cliente.nroDocumento.ToString());
+                repo.InsertCliente(cliente);
                 MessageBox.Show("Cliente registrado correctamente.");
             }
             catch (Exception)
