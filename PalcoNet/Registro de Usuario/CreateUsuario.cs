@@ -37,9 +37,8 @@ namespace PalcoNet.Registro_de_Usuario
         {
             Form formToRedirect;
             Usuario usuario = new Usuario();
-            Rol rol;
             RepoRol repoRol = new RepoRol();
-            rol = repoRol.FindRolByName(comboBoxRol.SelectedItem.ToString());
+            Rol rol = repoRol.FindRolByName(comboBoxRol.SelectedItem.ToString());
             usuario.username = txtUsuario.Text;
             usuario.SetPassword(txtPassword.Text);
             usuario.AddRol(rol);
@@ -48,7 +47,7 @@ namespace PalcoNet.Registro_de_Usuario
                 formToRedirect = new CreateCliente(usuario);
             }
             else{
-                formToRedirect = new CreateCliente(usuario);
+                formToRedirect = new CreateEmpresa(usuario);
             }
             FormManager.getInstance().OpenAndClose(formToRedirect, this);
         }

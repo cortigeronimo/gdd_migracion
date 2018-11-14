@@ -50,6 +50,7 @@ namespace PalcoNet
             //Open(new UpdateGrado());
             Open(new ListGrado());
             Open(new ListadoRol());
+            Open(new CreateUsuario());
             //Open(new CreateUsuario());
         }
 

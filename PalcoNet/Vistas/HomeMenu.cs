@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Grado;
-using PalcoNet.Abm_Cliente;
+
 using PalcoNet.Abm_Rol;
 using PalcoNet.Abm_Rubro;
 using PalcoNet.Comprar;
@@ -20,6 +20,7 @@ using PalcoNet.Canje_Puntos;
 using PalcoNet.Generar_Rendicion_Comisiones;
 using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
+using PalcoNet.Registro_de_Usuario;
 
 
 namespace PalcoNet.Vistas
@@ -236,8 +237,8 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new CreateClienteByAdmin(), this);
             
+            FormManager.getInstance().OpenAndClose(new CreateCliente(), this);       
         }
 
         private void listarClientes_Click(object sender, EventArgs e)
