@@ -76,7 +76,7 @@
             this.btnSeleccionar.TabIndex = 6;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.button1_Click);
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // txtFuncionalidad
             // 
@@ -85,7 +85,7 @@
             this.txtFuncionalidad.ReadOnly = true;
             this.txtFuncionalidad.Size = new System.Drawing.Size(111, 20);
             this.txtFuncionalidad.TabIndex = 5;
-            this.txtFuncionalidad.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtFuncionalidad.TextChanged += new System.EventHandler(this.txtFuncionalidad_TextChanged);
             // 
             // label3
             // 
@@ -119,7 +119,7 @@
             this.comboBoxHabilitado.Name = "comboBoxHabilitado";
             this.comboBoxHabilitado.Size = new System.Drawing.Size(121, 21);
             this.comboBoxHabilitado.TabIndex = 2;
-            this.comboBoxHabilitado.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxHabilitado.SelectedIndexChanged += new System.EventHandler(this.comboBoxHabiliitado_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -137,7 +137,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 0;
-            this.txtNombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // dataGridRoles
             // 
@@ -161,7 +161,7 @@
             this.dataGridRoles.Name = "dataGridRoles";
             this.dataGridRoles.Size = new System.Drawing.Size(372, 232);
             this.dataGridRoles.TabIndex = 1;
-            this.dataGridRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRoles_CellContentClick);
             // 
             // Id
             // 
@@ -216,7 +216,7 @@
             this.btnBuscar.TabIndex = 3;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.button3_Click);
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // ListadoRol
             // 

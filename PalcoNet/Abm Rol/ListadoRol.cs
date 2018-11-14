@@ -32,7 +32,7 @@ namespace PalcoNet.Abm_Rol
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             //Seleccionar
             using (ListadoFuncionalidades form = new ListadoFuncionalidades())
@@ -46,22 +46,22 @@ namespace PalcoNet.Abm_Rol
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void txtNombre_TextChanged(object sender, EventArgs e)
         {
             Console.WriteLine(txtNombre.Text);
         }
         
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxHabiliitado_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine(comboBoxHabilitado.Text);
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void txtFuncionalidad_TextChanged(object sender, EventArgs e)
         {
             Console.WriteLine(txtFuncionalidad.Text);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
             //Buscar
             bindingSource.Clear();
@@ -70,7 +70,7 @@ namespace PalcoNet.Abm_Rol
             dataGridRoles.DataSource = bindingSource;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridRoles.Columns["Seleccionar"].Index)
             {
