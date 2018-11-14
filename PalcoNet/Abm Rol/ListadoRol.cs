@@ -22,6 +22,7 @@ namespace PalcoNet.Abm_Rol
         public ListadoRol()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
             roles = new RepoRol().GetRoles();
             roles.ForEach(rol => bindingSource.Add(rol));
         }
