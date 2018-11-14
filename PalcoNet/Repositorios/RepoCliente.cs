@@ -42,7 +42,166 @@ namespace PalcoNet.Repositorios
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
         }
 
+        public DataTable GetTable(Cliente cliente)
+        {
+            String query = BuildQuery(cliente);
+
+            SqlCommand command = new SqlCommand(query);
+            DataTable table = Conexion.GetData(command);
+            return table;
+        }
 
 
+        private String BuildQuery(Cliente cliente)
+        {
+            String query = "SELECT * FROM " + clienteTable + " ";
+            Boolean firstWhere = true;
+            Boolean hasWhere = false;
+
+            if (cliente.nombre != String.Empty)
+            {
+                query += "WHERE Cli_Nombre LIKE " + "'%" + cliente.nombre + "%' " + "AND ";
+                firstWhere = false;
+                hasWhere = true;
+            }
+
+            if (cliente.apellido != String.Empty)
+            {
+                if (firstWhere)
+                {
+                    query += "WHERE Cli_Apellido LIKE " + "'%" + cliente.apellido + "%' " + "AND ";
+                    firstWhere = false;
+                }
+                else
+                {
+                    query += "Cli_Apellido LIKE " + "'%" + cliente.apellido + "%' " + "AND ";
+                }
+                hasWhere = true;
+            }
+
+            if (cliente.nroDocumento != 0)
+            {
+                if (firstWhere)
+                {
+                    query += "WHERE Cli_Nro_Documento = " + cliente.nroDocumento + " AND ";
+                    firstWhere = false;
+                }
+                else
+                {
+                    query += "Cli_Nro_Documento = " + cliente.nroDocumento + " AND ";
+                }
+                hasWhere = true;
+            }
+
+            if (cliente.email != String.Empty)
+            {
+                if (firstWhere)
+                {
+                    query += "WHERE Cli_Email LIKE " + "'%" + cliente.email + "%' " + "AND ";
+                    firstWhere = false;
+                }
+                else 
+                {
+                    query += "Cli_Email LIKE " + "'%" + cliente.email + "%' " + "AND ";
+                }
+                hasWhere = true;
+            }
+
+            if (hasWhere)
+                query = query.Substring(0, query.Length - 4);
+            return query;
+        }
+
+        public Boolean ExistsDNIAndCuil(String user, String tipoDoc, String nroDoc, String cuil)
+        {
+            String query = "SELECT * FROM ";
+            query += clienteTable;
+            query += " WHERE Cli_Usuario != @user";
+            query += " AND (Cli_Tipo_Documento = '@tipoDoc'";
+            query += " OR Cli_Nro_Documento = @nroDoc";
+            query += " OR Cli_Cuil = @cuil)";
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@user", user);
+            command.Parameters.AddWithValue("@tipoDoc", tipoDoc);
+            command.Parameters.AddWithValue("@nroDoc", nroDoc);
+            command.Parameters.AddWithValue("@cuil", cuil);
+
+
+            DataTable table = Conexion.GetData(command);
+            return table.Rows.Count != 0; 
+        }
+
+        public int UpdateCliente(Cliente cliente)
+        {
+            String query = "UPDATE " + clienteTable + " SET ";
+            query += "Cli_Tarjeta_Credito = @tarjetaCredito, ";
+            query += "Cli_Nombre = @nombre, ";
+            query += "Cli_Apellido = @apellido, ";
+            query += "Cli_Tipo_Documento = @tipoDoc, ";
+            query += "Cli_Nro_Documento = @nroDoc, ";
+            query += "Cli_Cuil = @cuil, ";
+            query += "Cli_Email = @email, ";
+            query += "Cli_Telefono = @telefono, ";
+            query += "Cli_Localidad = @localidad, ";
+            query += "Cli_Direccion = @direccion, ";
+            query += "Cli_Nro_Piso = @nroPiso, ";
+            query += "Cli_Depto = @depto, ";
+            query += "Cli_Cod_Postal = @codPostal, ";
+            query += "Cli_Fecha_Nac = @fechaNac, ";
+            query += "Cli_Fecha_Creacion = @fechaCreacion ";
+            query += "WHERE Cli_Usuario = @idUsuario";
+
+            SqlCommand cmd = new SqlCommand(query);
+
+            if (String.IsNullOrEmpty(cliente.tarjetaCredito)) cmd.Parameters.AddWithValue("@tarjetaCredito", DBNull.Value); else cmd.Parameters.AddWithValue("@tarjetaCredito", cliente.tarjetaCredito);
+            cmd.Parameters.AddWithValue("@nombre", cliente.nombre);
+            cmd.Parameters.AddWithValue("@apellido", cliente.apellido);
+            cmd.Parameters.AddWithValue("@tipoDoc", cliente.tipoDocumento);
+            cmd.Parameters.AddWithValue("@nroDoc", cliente.nroDocumento);
+            cmd.Parameters.AddWithValue("@cuil", cliente.cuil);
+            cmd.Parameters.AddWithValue("@email", cliente.email);
+            cmd.Parameters.AddWithValue("@telefono", cliente.telefono);
+            cmd.Parameters.AddWithValue("@localidad", cliente.localidad);
+            cmd.Parameters.AddWithValue("@direccion", cliente.direccion);
+            if (cliente.nroPiso == Byte.MinValue) cmd.Parameters.AddWithValue("@nroPiso", DBNull.Value); else cmd.Parameters.AddWithValue("@nroPiso", cliente.nroPiso);
+            if (String.IsNullOrEmpty(cliente.depto)) cmd.Parameters.AddWithValue("@depto", DBNull.Value); else cmd.Parameters.AddWithValue("@depto", cliente.depto);
+            if (String.IsNullOrEmpty(cliente.codigoPostal)) cmd.Parameters.AddWithValue("@codPostal", DBNull.Value); else cmd.Parameters.AddWithValue("@codPostal", cliente.codigoPostal);
+            cmd.Parameters.AddWithValue("@fechaNac", cliente.fechaNacimiento);
+            cmd.Parameters.AddWithValue("@fechaCreacion", cliente.fechaCreacion);
+            cmd.Parameters.AddWithValue("@idUsuario", cliente.id);
+
+            return Conexion.InsertUpdateOrDeleteData(cmd);
+        }
+
+        public int AltaBajaCliente(Cliente cliente)
+        {
+            String query = "UPDATE " + clienteTable + " SET ";
+            query += "Cli_Baja = @baja, ";
+            query += "Cli_Habilitado = @habilitado, ";
+            query += "Cli_Intentos_Fallidos = 0 ";
+            query += "WHERE Cli_Usuario = @id";
+
+            SqlCommand cmd = new SqlCommand(query);
+
+            if (cliente.baja == true)
+            {
+                cmd.Parameters.AddWithValue("@baja", 0);
+                cmd.Parameters.AddWithValue("@habilitado", 1);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@baja", 1);
+                cmd.Parameters.AddWithValue("@habilitado", 0);
+            }
+                
+
+
+            cmd.Parameters.AddWithValue("@id", cliente.id);
+
+            return Conexion.InsertUpdateOrDeleteData(cmd);
+        }
+
+        
     }
 }

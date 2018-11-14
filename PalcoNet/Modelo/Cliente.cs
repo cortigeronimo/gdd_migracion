@@ -40,6 +40,34 @@ namespace PalcoNet.Modelo
             isAdmin = usuario.isAdmin;
         }
 
+        //Para el filtro de busqueda
+        public Cliente(String nombre, String apellido, String nroDocumento, String email)
+        {
+            this.nombre = nombre;
+            this.apellido = apellido;
+
+            try
+            {
+                if (nroDocumento != null)
+                    this.nroDocumento = Int32.Parse(nroDocumento);
+            }
+            catch (FormatException e)
+            {
+                this.nroDocumento = 0;
+            }
+
+            this.email = email;
+        }
+
+        //Para el update de cliente
+        //public Cliente(int id, String nombre, String apellido, int nroDocumento, long cuil, String email, long telefono, String direccion, byte nroPiso, String depto, String localidad, String codigoPostal,
+        //    DateTime fechaNac, DateTime fechaCreacion)
+        //{
+
+        //}
+        
+
+
         public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, long cuil,
             string email, long telefono, string localidad, string direccion, byte nroPiso, string depto, string codPostal, DateTime fechaNac,
             string tarjetaCredito)

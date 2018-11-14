@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Grado;
-
+using PalcoNet.Abm_Cliente;
 using PalcoNet.Abm_Rol;
 using PalcoNet.Abm_Rubro;
 using PalcoNet.Comprar;
@@ -243,8 +243,8 @@ namespace PalcoNet.Vistas
 
         private void listarClientes_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new ListClientes(), this);
-            MessageBox.Show("soy el form listar clientes");
+            FormManager.getInstance().OpenAndClose(new ListCliente(), this);
+            
         }
 
         private void actualizarCliente_Click(object sender, EventArgs e)

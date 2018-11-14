@@ -51,6 +51,12 @@
     <Compile Include="Abm Cliente\ListCliente.Designer.cs">
       <DependentUpon>ListCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Cliente\UpdateCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Cliente\UpdateCliente.Designer.cs">
+      <DependentUpon>UpdateCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Grado\CreateGrado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,12 @@
     <Compile Include="Vistas\RolSelector.Designer.cs">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Cliente\ListCliente.resx">
+      <DependentUpon>ListCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Cliente\UpdateCliente.resx">
+      <DependentUpon>UpdateCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListGrado.resx">
       <DependentUpon>ListGrado.cs</DependentUpon>
     </EmbeddedResource>
