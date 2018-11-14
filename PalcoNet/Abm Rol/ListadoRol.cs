@@ -16,15 +16,15 @@ namespace PalcoNet.Abm_Rol
     public partial class ListadoRol : CustomForm
     {
         private BindingSource bindingSource = new BindingSource();
-        List<Rol> roles = new List<Rol>();
+        List<Rol> rolesFiltrados = new List<Rol>();
         Rol elegido;
 
         public ListadoRol()
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
-            roles = new RepoRol().GetRoles();
-            roles.ForEach(rol => bindingSource.Add(rol));
+            comboBox1.Text = "Sí";
+            Console.WriteLine(textBox1.Text);
         }
 
         private void ListadoRol_Load(object sender, EventArgs e)
@@ -43,11 +43,6 @@ namespace PalcoNet.Abm_Rol
         }
 
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -71,14 +66,27 @@ namespace PalcoNet.Abm_Rol
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(textBox1.Text);
+        }
+        
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(comboBox1.Text);
+        }
+
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            Console.WriteLine(textBox2.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //Buscar
+            bindingSource.Clear();
+            rolesFiltrados = new RepoRol().GetRolesByFilter(textBox1.Text, (comboBox1.Text == "Sí" ? true : false), textBox2.Text);
+            rolesFiltrados.ForEach(rol => bindingSource.Add(rol));
             dataGridView1.DataSource = bindingSource;
         }
 
