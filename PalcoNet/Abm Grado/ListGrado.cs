@@ -97,6 +97,11 @@ namespace PalcoNet.Abm_Grado
             }            
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
     }
 }
 

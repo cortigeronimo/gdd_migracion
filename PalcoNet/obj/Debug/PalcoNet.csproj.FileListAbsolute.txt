@@ -40,12 +40,10 @@ C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Proper
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.RolSelector.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ListadoFuncionalidades.resources
-C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.CreateClienteByAdmin.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateCliente.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.HomeMenu.resources
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.CreateClienteByAdmin.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ListadoFuncionalidades.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ListadoRol.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateCliente.resources
@@ -60,3 +58,5 @@ C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.HomeMenu.resources
+C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ModificarRol.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.ModificarRol.resources

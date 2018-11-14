@@ -31,6 +31,28 @@ namespace PalcoNet.Repositorios
             DataTable result = Conexion.GetData(cmd);
             return FromRowsToRoles(result);
         }
+        
+        public List<Rol> GetRolesByFilter(string nombre, bool habilitado, string funcionalidad)
+        {
+            SqlCommand command;
+            if (funcionalidad != "")
+            {
+                string query = "SELECT distinct r.* FROM PLEASE_HELP.Rol r INNER JOIN PLEASE_HELP.Rol_Funcionalidad rf ON r.Rol_Id = rf.Rol_Id INNER JOIN PLEASE_HELP.Funcionalidad f ON rf.Func_Id = f.Func_Id WHERE f.Func_Desc = @funcionalidad AND r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
+                command = new SqlCommand(query);
+                command.Parameters.AddWithValue("@funcionalidad", funcionalidad);
+            }
+            else
+            {
+                string query = "SELECT * FROM PLEASE_HELP.Rol r WHERE r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
+                command = new SqlCommand(query);
+            }
+            command.Parameters.AddWithValue("@habilitado", habilitado);
+            string nombre2 = "%" + nombre + "%";
+            command.Parameters.AddWithValue("@nombre", nombre2);
+            DataTable result = Conexion.GetData(command);
+            return FromRowsToRoles(result);
+            
+        }
 
         private List<Funcionalidad> FromRowsToFuncionalidades(DataTable table)
         {
