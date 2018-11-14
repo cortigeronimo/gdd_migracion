@@ -73,75 +73,50 @@ namespace PalcoNet.Vistas
 
         }
 
+        private void CreateAndAddSubItem(Dictionary<String, String> dictionary, ToolStripMenuItem itemFuncionalidad) 
+        {
+            foreach (KeyValuePair<String, String> entry in dictionary)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem();
+                item.Text = entry.Key;
+                item.Name = entry.Value;
+                itemFuncionalidad.DropDownItems.Add(item);
+            }
+        }
         
 
         private void AddSubItems(ToolStripMenuItem itemFuncionalidad)
         {
+            Dictionary<String, String> dictionary = new Dictionary<String, String>();
             switch (itemFuncionalidad.Text)
             {
                 case "ABM ROL":
-                    ToolStripMenuItem itemCrearRol = new ToolStripMenuItem();
-                    itemCrearRol.Text = "Crear Rol";
-                    itemCrearRol.Name = "crearRol";
-                    ToolStripMenuItem itemListarRoles = new ToolStripMenuItem();
-                    itemListarRoles.Text = "Listar Roles";
-                    itemListarRoles.Name = "listarRoles";
-                    ToolStripMenuItem itemActualizarRol = new ToolStripMenuItem();
-                    itemActualizarRol.Text = "Actualizar Rol";
-                    itemActualizarRol.Name = "actualizarRol";
-
-                    itemFuncionalidad.DropDownItems.Add(itemCrearRol);
-                    itemFuncionalidad.DropDownItems.Add(itemListarRoles);
-                    itemFuncionalidad.DropDownItems.Add(itemActualizarRol);
-
+                    
+                    dictionary.Add("Crear Rol", "crearRol");
+                    dictionary.Add("Listar Roles", "listarRoles");
+                    dictionary.Add("Actualizar Rol", "actualizarRol");
+                    CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM CLIENTE":
-                    ToolStripMenuItem itemCrearCliente = new ToolStripMenuItem();
-                    itemCrearCliente.Text = "Crear Cliente";
-                    itemCrearCliente.Name = "crearCliente";
-                    ToolStripMenuItem itemListarClientes = new ToolStripMenuItem();
-                    itemListarClientes.Text = "Listar Clientes";
-                    itemListarClientes.Name = "listarClientes";
-                    ToolStripMenuItem itemActualizarCliente = new ToolStripMenuItem();
-                    itemActualizarCliente.Text = "Actualizar Cliente";
-                    itemActualizarCliente.Name = "actualizarCliente";
-
-                    itemFuncionalidad.DropDownItems.Add(itemCrearCliente);
-                    itemFuncionalidad.DropDownItems.Add(itemListarClientes);
-                    itemFuncionalidad.DropDownItems.Add(itemActualizarCliente);
+                    dictionary.Add("Crear Cliente", "crearCliente");
+                    dictionary.Add("Listar Clientes", "listarClientes");
+                    dictionary.Add("Actualizar Cliente", "actualizarCliente");
+                    CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM EMPRESA ESPECTACULO":
-                    ToolStripMenuItem itemCrearEmpresa = new ToolStripMenuItem();
-                    itemCrearEmpresa.Text = "Crear Empresa";
-                    itemCrearEmpresa.Name = "crearEmpresa";
-                    ToolStripMenuItem itemListarEmpresas = new ToolStripMenuItem();
-                    itemListarEmpresas.Text = "Listar Empresas";
-                    itemListarEmpresas.Name = "listarEmpresas";
-                    ToolStripMenuItem itemActualizarEmpresa = new ToolStripMenuItem();
-                    itemActualizarEmpresa.Text = "Actualizar Empresa";
-                    itemActualizarEmpresa.Name = "actualizarEmpresa";
-
-                    itemFuncionalidad.DropDownItems.Add(itemCrearEmpresa);
-                    itemFuncionalidad.DropDownItems.Add(itemListarEmpresas);
-                    itemFuncionalidad.DropDownItems.Add(itemActualizarEmpresa);
+                    dictionary.Add("Crear Empresa", "crearEmpresa");
+                    dictionary.Add("Listar Empresas", "listarEmpresas");
+                    dictionary.Add("Actualizar Empresa", "actualizarEmpresa");
+                    CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM GRADO PUBLICACION":
-                    ToolStripMenuItem itemCrearGrado = new ToolStripMenuItem();
-                    itemCrearGrado.Text = "Crear Grado";
-                    itemCrearGrado.Name = "crearGrado";
-                    ToolStripMenuItem itemListarGrados = new ToolStripMenuItem();
-                    itemListarGrados.Text = "Listar Grados";
-                    itemListarGrados.Name = "listarGrados";
-                    ToolStripMenuItem itemActualizarGrado = new ToolStripMenuItem();
-                    itemActualizarGrado.Text = "Actualizar Grado";
-                    itemActualizarGrado.Name = "actualizarGrado";
-
-                    itemFuncionalidad.DropDownItems.Add(itemCrearGrado);
-                    itemFuncionalidad.DropDownItems.Add(itemListarGrados);
-                    itemFuncionalidad.DropDownItems.Add(itemActualizarGrado);
+                    dictionary.Add("Crear Grado", "crearGrado");
+                    dictionary.Add("Listar Grados", "listarGrados");
+                    dictionary.Add("Actualizar Grado", "actualizarGrado");
+                    CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 default:

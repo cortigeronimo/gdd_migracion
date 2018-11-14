@@ -30,32 +30,34 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.txtFuncionalidad = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxHabilitado = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.dataGridRoles = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RolHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRoles)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox2);
+            this.groupBox1.Controls.Add(this.btnSeleccionar);
+            this.groupBox1.Controls.Add(this.txtFuncionalidad);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.comboBoxHabilitado);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -63,28 +65,27 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // button1
+            // btnSeleccionar
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(225, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Seleccionar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSeleccionar.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnSeleccionar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSeleccionar.Location = new System.Drawing.Point(225, 54);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.TabIndex = 6;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
-            // textBox2
+            // txtFuncionalidad
             // 
-            this.textBox2.Location = new System.Drawing.Point(108, 56);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(111, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtFuncionalidad.Location = new System.Drawing.Point(108, 56);
+            this.txtFuncionalidad.Name = "txtFuncionalidad";
+            this.txtFuncionalidad.ReadOnly = true;
+            this.txtFuncionalidad.Size = new System.Drawing.Size(111, 20);
+            this.txtFuncionalidad.TabIndex = 5;
+            this.txtFuncionalidad.TextChanged += new System.EventHandler(this.txtFuncionalidad_TextChanged);
             // 
             // label3
             // 
@@ -95,7 +96,6 @@
             this.label3.Size = new System.Drawing.Size(73, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Funcionalidad";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
             // 
@@ -106,21 +106,20 @@
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Habilitado";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // comboBox1
+            // comboBoxHabilitado
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxHabilitado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxHabilitado.FormattingEnabled = true;
+            this.comboBoxHabilitado.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBoxHabilitado.Items.AddRange(new object[] {
             "Sí",
             "No"});
-            this.comboBox1.Location = new System.Drawing.Point(244, 29);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBoxHabilitado.Location = new System.Drawing.Point(244, 29);
+            this.comboBoxHabilitado.Name = "comboBoxHabilitado";
+            this.comboBoxHabilitado.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxHabilitado.TabIndex = 2;
+            this.comboBoxHabilitado.SelectedIndexChanged += new System.EventHandler(this.comboBoxHabiliitado_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -131,18 +130,18 @@
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(56, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtNombre.Location = new System.Drawing.Point(56, 29);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 0;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
-            // dataGridView1
+            // dataGridRoles
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridRoles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -150,17 +149,19 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Rol_Nombre,
-            this.RolHabilitado});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 160);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(372, 232);
-            this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.RolHabilitado,
+            this.Seleccionar,
+            this.Eliminar});
+            this.dataGridRoles.Location = new System.Drawing.Point(12, 160);
+            this.dataGridRoles.Name = "dataGridRoles";
+            this.dataGridRoles.Size = new System.Drawing.Size(372, 232);
+            this.dataGridRoles.TabIndex = 1;
+            this.dataGridRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRoles_CellContentClick);
             // 
             // Id
             // 
@@ -183,24 +184,39 @@
             this.RolHabilitado.Name = "RolHabilitado";
             this.RolHabilitado.ReadOnly = true;
             // 
-            // button2
+            // Seleccionar
             // 
-            this.button2.Location = new System.Drawing.Point(21, 109);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Limpiar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Seleccionar.Text = "Seleccionar";
             // 
-            // button3
+            // Eliminar
             // 
-            this.button3.Location = new System.Drawing.Point(309, 109);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Buscar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 109);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 2;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(309, 109);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // ListadoRol
             // 
@@ -208,16 +224,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(395, 402);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.dataGridRoles);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoRol";
             this.Text = "Lista de Roles";
             this.Load += new System.EventHandler(this.ListadoRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridRoles)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,19 +241,21 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBoxHabilitado;
+        private System.Windows.Forms.DataGridView dataGridRoles;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.TextBox txtFuncionalidad;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol_Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn RolHabilitado;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
 
     }
 }

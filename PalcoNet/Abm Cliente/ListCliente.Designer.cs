@@ -61,6 +61,7 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.lblSeleccionarFila = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClientes)).BeginInit();
             this.groupBoxFiltroBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -360,11 +361,21 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // lblSeleccionarFila
+            // 
+            this.lblSeleccionarFila.AutoSize = true;
+            this.lblSeleccionarFila.Location = new System.Drawing.Point(23, 224);
+            this.lblSeleccionarFila.Name = "lblSeleccionarFila";
+            this.lblSeleccionarFila.Size = new System.Drawing.Size(206, 13);
+            this.lblSeleccionarFila.TabIndex = 6;
+            this.lblSeleccionarFila.Text = "Seleccione el registro a Elminar y/o Editar:";
+            // 
             // ListCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 547);
+            this.Controls.Add(this.lblSeleccionarFila);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.dataGridViewClientes);
@@ -378,6 +389,7 @@
             this.groupBoxFiltroBusqueda.ResumeLayout(false);
             this.groupBoxFiltroBusqueda.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -416,5 +428,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnIntentosFallidos;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnBaja;
         private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label lblSeleccionarFila;
     }
 }
