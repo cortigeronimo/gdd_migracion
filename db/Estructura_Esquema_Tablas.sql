@@ -74,6 +74,11 @@ IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIG
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_EMPRESA;
 
+IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE;
+
+IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA;
+
+
 -- CREANDO ESTRUCTURAS DE TABLAS
 
 create table PLEASE_HELP.Funcionalidad
@@ -586,7 +591,7 @@ BEGIN
 		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
 			VALUES (@username, @password)
 		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Direccion, Cli_Localidad, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito)
-			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito)  
+			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito) 
 	COMMIT TRANSACTION
 END
 GO
@@ -632,4 +637,29 @@ END
 GO
 
 
+CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE
+ON PLEASE_HELP.Cliente
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @userId INT
+	SELECT @userId = Cli_Usuario FROM INSERTED
+	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
+		VALUES (@userId, 3)
+END
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA
+ON PLEASE_HELP.Empresa
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @userId INT
+	SELECT @userId = Emp_Usuario FROM INSERTED
+	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
+		VALUES (@userId, 1)
+END
+GO
+ 
 
