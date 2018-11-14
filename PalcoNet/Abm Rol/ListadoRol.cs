@@ -92,7 +92,19 @@ namespace PalcoNet.Abm_Rol
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.ColumnIndex == dataGridView1.Columns["Seleccionar"].Index)
+            {
+                string nombre = (string)dataGridView1.CurrentRow.Cells[1].Value;
+                bool habilitado = (bool)dataGridView1.CurrentRow.Cells[2].Value;
+                using (ModificarRol form = new ModificarRol(nombre,habilitado ? "Sí" : "No"))
+                {
+                    DialogResult result = form.ShowDialog();
+                }
+            }
+            if (e.ColumnIndex == dataGridView1.Columns["Eliminar"].Index)
+            {
+                Console.WriteLine("Eliminaste el registro amiguero");
+            }
         }
     }
 }
