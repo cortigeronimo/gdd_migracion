@@ -36,7 +36,6 @@ namespace PalcoNet.Abm_Grado
                 MessageBox.Show("Hubo un error al realizar la operación, reintentelo");   
             }
             
-            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

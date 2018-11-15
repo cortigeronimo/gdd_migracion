@@ -45,12 +45,11 @@ namespace PalcoNet.Vistas
         {
             DataTable tableFuncionalidad = repo.GetFuncionalidades(this.rol);
 
-            int i = 0;
-            while (tableFuncionalidad.Rows.Count > i)
+            foreach (DataRow row in tableFuncionalidad.Rows)
             {
                 
-                String idFuncionalidad = tableFuncionalidad.Rows[i][0].ToString();
-                String funcionalidad = tableFuncionalidad.Rows[i][1].ToString();
+                String idFuncionalidad = row[0].ToString();
+                String funcionalidad = row[1].ToString();
 
                 if (funcionalidad != "REGISTRO_USUARIO")
                 {
@@ -66,8 +65,6 @@ namespace PalcoNet.Vistas
 
                     AddClickEventsItems(itemFuncionalidad);
                 }
-               
-                i++;
 
             }
 
@@ -93,29 +90,25 @@ namespace PalcoNet.Vistas
                 case "ABM ROL":
                     
                     dictionary.Add("Crear Rol", "crearRol");
-                    dictionary.Add("Listar Roles", "listarRoles");
-                    dictionary.Add("Actualizar Rol", "actualizarRol");
+                    dictionary.Add("Consultar Roles", "listarRoles");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM CLIENTE":
                     dictionary.Add("Crear Cliente", "crearCliente");
-                    dictionary.Add("Listar Clientes", "listarClientes");
-                    dictionary.Add("Actualizar Cliente", "actualizarCliente");
+                    dictionary.Add("Consultar Clientes", "listarClientes");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM EMPRESA ESPECTACULO":
                     dictionary.Add("Crear Empresa", "crearEmpresa");
-                    dictionary.Add("Listar Empresas", "listarEmpresas");
-                    dictionary.Add("Actualizar Empresa", "actualizarEmpresa");
+                    dictionary.Add("Consultar Empresas", "listarEmpresas");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
                 case "ABM GRADO PUBLICACION":
                     dictionary.Add("Crear Grado", "crearGrado");
-                    dictionary.Add("Listar Grados", "listarGrados");
-                    dictionary.Add("Actualizar Grado", "actualizarGrado");
+                    dictionary.Add("Consultar Grados", "listarGrados");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
@@ -133,17 +126,14 @@ namespace PalcoNet.Vistas
                 case "ABM ROL":
                     itemFuncionalidad.DropDownItems["crearRol"].Click += new EventHandler(crearRol_Click);
                     itemFuncionalidad.DropDownItems["listarRoles"].Click += new EventHandler(listarRoles_Click);
-                    itemFuncionalidad.DropDownItems["actualizarRol"].Click += new EventHandler(actualizarRol_Click);
                     break;
                 case "ABM CLIENTE":
                     itemFuncionalidad.DropDownItems["crearCliente"].Click += new EventHandler(crearCliente_Click);
                     itemFuncionalidad.DropDownItems["listarClientes"].Click += new EventHandler(listarClientes_Click);
-                    itemFuncionalidad.DropDownItems["actualizarCliente"].Click += new EventHandler(actualizarCliente_Click);
                     break;
                 case "ABM EMPRESA ESPECTACULO":
                     itemFuncionalidad.DropDownItems["crearEmpresa"].Click += new EventHandler(crearEmpresa_Click);
                     itemFuncionalidad.DropDownItems["listarEmpresas"].Click += new EventHandler(listarEmpresas_Click);
-                    itemFuncionalidad.DropDownItems["actualizarEmpresa"].Click += new EventHandler(actualizarEmpresa_Click);
                     break;
                 case "ABM GRADO PUBLICACION":
                     itemFuncionalidad.DropDownItems["crearGrado"].Click += new EventHandler(crearGrado_Click);
@@ -180,12 +170,12 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Grado
         private void crearGrado_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new CreateGrado(), this);
+            FormManager.getInstance().Open(new CreateGrado());
         }
 
         private void listarGrados_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new ListGrado(), this);
+            FormManager.getInstance().Open(new ListGrado());
         }
 
 
@@ -202,30 +192,16 @@ namespace PalcoNet.Vistas
             MessageBox.Show("soy el form listar empresa");
         }
 
-        private void actualizarEmpresa_Click(object sender, EventArgs e)
-        {
-            //FormManager.getInstance().OpenAndClose(new UpdateEmpresa(), this);
-            MessageBox.Show("soy el form actualizar empresa");
-        }
-
 
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            
-            FormManager.getInstance().OpenAndClose(new CreateCliente(), this);       
+            FormManager.getInstance().Open(new CreateCliente());       
         }
 
         private void listarClientes_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new ListCliente(), this);
-            
-        }
-
-        private void actualizarCliente_Click(object sender, EventArgs e)
-        {
-            //FormManager.getInstance().OpenAndClose(new UpdateCliente(), this);
-            MessageBox.Show("soy el form actualizar cliente");
+            FormManager.getInstance().Open(new ListCliente());
         }
 
 
@@ -240,12 +216,6 @@ namespace PalcoNet.Vistas
         {
             //FormManager.getInstance().OpenAndClose(new ListRoles(), this);
             MessageBox.Show("soy el form listar roles");
-        }
-
-        private void actualizarRol_Click(object sender, EventArgs e)
-        {
-            //FormManager.getInstance().OpenAndClose(new UpdateRol(), this);
-            MessageBox.Show("soy el form actualizar rol");
         }
        
 

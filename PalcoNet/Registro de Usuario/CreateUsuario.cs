@@ -33,8 +33,16 @@ namespace PalcoNet.Registro_de_Usuario
             comboBoxRol.Items.Insert(1, "Empresa");
         }
 
+        private bool validateFields()
+        {
+            return txtPassword.Text != String.Empty &&
+                txtUsuario.Text != String.Empty &&
+                comboBoxRol.SelectedItem.ToString() != String.Empty;
+        }
+
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
+            if (!validateFields()) return;
             Form formToRedirect;
             Usuario usuario = new Usuario();
             RepoRol repoRol = new RepoRol();
