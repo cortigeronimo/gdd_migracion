@@ -590,7 +590,7 @@ BEGIN
 	BEGIN TRANSACTION
 		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
 			VALUES (@username, @password)
-		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Direccion, Cli_Localidad, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito)
+		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito)
 			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito) 
 	COMMIT TRANSACTION
 END
