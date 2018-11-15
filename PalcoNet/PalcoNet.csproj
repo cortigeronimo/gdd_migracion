@@ -171,6 +171,7 @@
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\CustomForm.cs">
       <SubType>Form</SubType>
     </Compile>

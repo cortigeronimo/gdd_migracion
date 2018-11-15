@@ -25,24 +25,5 @@ namespace PalcoNet.Modelo
             this.habilitado = habilitado;
         }
 
-        public string GetNombre()
-        {
-            return this.nombre;
-        }
-
-        public Boolean GetHabilitado()
-        {
-            return this.habilitado;
-        }
-
-        public void SetNombre(string nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public void SetHabilitado(Boolean habilitado)
-        {
-            this.habilitado = habilitado;
-        }
     }
 }

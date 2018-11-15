@@ -31,7 +31,6 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblComisionGrado = new System.Windows.Forms.Label();
-            this.numComisionGrado = new System.Windows.Forms.NumericUpDown();
             this.txtNombreGrado = new System.Windows.Forms.TextBox();
             this.lblNombreGrado = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -39,11 +38,10 @@
             this.columnGradoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGradoDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGradoComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnBorrar = new System.Windows.Forms.Button();
+            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.txtComisionGrado = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,8 +57,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtComisionGrado);
             this.groupBox1.Controls.Add(this.lblComisionGrado);
-            this.groupBox1.Controls.Add(this.numComisionGrado);
             this.groupBox1.Controls.Add(this.txtNombreGrado);
             this.groupBox1.Controls.Add(this.lblNombreGrado);
             this.groupBox1.Location = new System.Drawing.Point(34, 12);
@@ -78,18 +76,6 @@
             this.lblComisionGrado.Size = new System.Drawing.Size(98, 13);
             this.lblComisionGrado.TabIndex = 3;
             this.lblComisionGrado.Text = "Ingrese la Comisión";
-            // 
-            // numComisionGrado
-            // 
-            this.numComisionGrado.Location = new System.Drawing.Point(271, 45);
-            this.numComisionGrado.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numComisionGrado.Name = "numComisionGrado";
-            this.numComisionGrado.Size = new System.Drawing.Size(139, 20);
-            this.numComisionGrado.TabIndex = 4;
             // 
             // txtNombreGrado
             // 
@@ -125,87 +111,76 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.columnGradoId,
             this.columnGradoDescripcion,
-            this.columnGradoComision});
-            this.dataGridView1.Location = new System.Drawing.Point(34, 185);
+            this.columnGradoComision,
+            this.columnEditar,
+            this.columnEliminar});
+            this.dataGridView1.Location = new System.Drawing.Point(34, 149);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(416, 169);
+            this.dataGridView1.Size = new System.Drawing.Size(416, 215);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // columnGradoId
             // 
-            this.columnGradoId.DataPropertyName = "Grado_Id";
+            this.columnGradoId.DataPropertyName = "Id";
             this.columnGradoId.HeaderText = "Id";
             this.columnGradoId.Name = "columnGradoId";
             this.columnGradoId.ReadOnly = true;
+            this.columnGradoId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnGradoId.Visible = false;
             // 
             // columnGradoDescripcion
             // 
-            this.columnGradoDescripcion.DataPropertyName = "Grado_Descripcion";
+            this.columnGradoDescripcion.DataPropertyName = "Descripcion";
             this.columnGradoDescripcion.HeaderText = "Descripcion";
             this.columnGradoDescripcion.Name = "columnGradoDescripcion";
             this.columnGradoDescripcion.ReadOnly = true;
+            this.columnGradoDescripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // columnGradoComision
             // 
-            this.columnGradoComision.DataPropertyName = "Grado_Comision";
+            this.columnGradoComision.DataPropertyName = "Comision";
             this.columnGradoComision.HeaderText = "Comision";
             this.columnGradoComision.Name = "columnGradoComision";
             this.columnGradoComision.ReadOnly = true;
+            this.columnGradoComision.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // label1
+            // columnEditar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 154);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Seleccione una fila a editar o eliminar";
+            this.columnEditar.HeaderText = "Editar";
+            this.columnEditar.Name = "columnEditar";
+            this.columnEditar.ReadOnly = true;
             // 
-            // btnEditar
+            // columnEliminar
             // 
-            this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(375, 365);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 23);
-            this.btnEditar.TabIndex = 9;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Name = "columnEliminar";
+            this.columnEliminar.ReadOnly = true;
             // 
-            // btnBorrar
+            // txtComisionGrado
             // 
-            this.btnBorrar.Enabled = false;
-            this.btnBorrar.Location = new System.Drawing.Point(294, 365);
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(75, 23);
-            this.btnBorrar.TabIndex = 10;
-            this.btnBorrar.Text = "Borrar";
-            this.btnBorrar.UseVisualStyleBackColor = true;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.txtComisionGrado.Location = new System.Drawing.Point(271, 45);
+            this.txtComisionGrado.Name = "txtComisionGrado";
+            this.txtComisionGrado.Size = new System.Drawing.Size(139, 20);
+            this.txtComisionGrado.TabIndex = 4;
             // 
             // ListGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 400);
-            this.Controls.Add(this.btnBorrar);
-            this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(478, 376);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnBuscar);
             this.Name = "ListGrado";
-            this.Text = "Crear Grado";
+            this.Text = "Consulta de Grados";
             this.Load += new System.EventHandler(this.ListGrado_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -215,15 +190,14 @@
         private System.Windows.Forms.TextBox txtNombreGrado;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Label lblComisionGrado;
-        private System.Windows.Forms.NumericUpDown numComisionGrado;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoComision;
-        private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
+        private System.Windows.Forms.TextBox txtComisionGrado;
     }
 }

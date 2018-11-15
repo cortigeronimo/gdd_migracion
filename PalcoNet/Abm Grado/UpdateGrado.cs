@@ -26,14 +26,14 @@ namespace PalcoNet.Abm_Grado
         {
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
             Grado grado = new Grado(
-                (int)this.grado.getId(),
+                (int)this.grado.Id,
                 (int)numComisionGrado.Value,
                 txtNombreGrado.Text);
             if(repo.UpdateGrado(grado) > 0){
-                MessageBox.Show("Todo ok perro");
+                MessageBox.Show("Los Cambios se realizaron con Éxito");
             }
             else{
-                MessageBox.Show("Algo se rompio mono");   
+                MessageBox.Show("Hubo un error al realizar la operación, reintentelo");   
             }
             
             
@@ -47,8 +47,8 @@ namespace PalcoNet.Abm_Grado
 
         private void UpdateGrado_Load(object sender, EventArgs e)
         {
-            txtNombreGrado.Text = this.grado.GetDescripcion();
-            numComisionGrado.Value = this.grado.GetComision();
+            txtNombreGrado.Text = this.grado.Descripcion;
+            numComisionGrado.Value = this.grado.Comision;
         }
 
 

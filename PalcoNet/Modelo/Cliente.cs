@@ -51,7 +51,7 @@ namespace PalcoNet.Modelo
                 if (nroDocumento != null)
                     this.nroDocumento = Int32.Parse(nroDocumento);
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 this.nroDocumento = 0;
             }
