@@ -48,9 +48,9 @@ namespace PalcoNet
             Open(new Login());
             //Open(new CreateGrado());
             //Open(new UpdateGrado());
-            Open(new ListGrado());
-            Open(new ListadoRol());
-            Open(new CreateUsuario());
+            //Open(new ListGrado());
+            //Open(new ListadoRol());
+            //Open(new CreateUsuario());
             //Open(new CreateUsuario());
         }
 

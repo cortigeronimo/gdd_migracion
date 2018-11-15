@@ -81,7 +81,7 @@
             this.txtTelefono.MaxLength = 15;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(138, 20);
-            this.txtTelefono.TabIndex = 1;
+            this.txtTelefono.TabIndex = 8;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtNombre
@@ -99,7 +99,7 @@
             this.txtNroPiso.MaxLength = 2;
             this.txtNroPiso.Name = "txtNroPiso";
             this.txtNroPiso.Size = new System.Drawing.Size(138, 20);
-            this.txtNroPiso.TabIndex = 3;
+            this.txtNroPiso.TabIndex = 10;
             this.txtNroPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroPiso_KeyPress);
             // 
             // txtLocalidad
@@ -108,7 +108,7 @@
             this.txtLocalidad.MaxLength = 255;
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(138, 20);
-            this.txtLocalidad.TabIndex = 5;
+            this.txtLocalidad.TabIndex = 12;
             this.txtLocalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLocalidad_KeyPress);
             // 
             // txtCuil
@@ -118,6 +118,7 @@
             this.txtCuil.Name = "txtCuil";
             this.txtCuil.Size = new System.Drawing.Size(138, 20);
             this.txtCuil.TabIndex = 6;
+            this.txtCuil.TextChanged += new System.EventHandler(this.txtCuil_TextChanged);
             this.txtCuil.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCuil_KeyPress);
             // 
             // groupBoxUpdateCliente
@@ -174,7 +175,7 @@
             this.comboBoxTipoDocumento.Location = new System.Drawing.Point(27, 148);
             this.comboBoxTipoDocumento.Name = "comboBoxTipoDocumento";
             this.comboBoxTipoDocumento.Size = new System.Drawing.Size(138, 21);
-            this.comboBoxTipoDocumento.TabIndex = 34;
+            this.comboBoxTipoDocumento.TabIndex = 4;
             this.comboBoxTipoDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxTipoDocumento_KeyPress);
             // 
             // dateTimePickerFechaNacimiento
@@ -182,14 +183,14 @@
             this.dateTimePickerFechaNacimiento.Location = new System.Drawing.Point(27, 422);
             this.dateTimePickerFechaNacimiento.Name = "dateTimePickerFechaNacimiento";
             this.dateTimePickerFechaNacimiento.Size = new System.Drawing.Size(178, 20);
-            this.dateTimePickerFechaNacimiento.TabIndex = 33;
+            this.dateTimePickerFechaNacimiento.TabIndex = 14;
             // 
             // dateTimePickerFechaCreacion
             // 
             this.dateTimePickerFechaCreacion.Location = new System.Drawing.Point(256, 422);
             this.dateTimePickerFechaCreacion.Name = "dateTimePickerFechaCreacion";
             this.dateTimePickerFechaCreacion.Size = new System.Drawing.Size(178, 20);
-            this.dateTimePickerFechaCreacion.TabIndex = 32;
+            this.dateTimePickerFechaCreacion.TabIndex = 15;
             // 
             // lblTarjetaCredito
             // 
@@ -266,9 +267,10 @@
             // txtTarjetaCredito
             // 
             this.txtTarjetaCredito.Location = new System.Drawing.Point(256, 45);
+            this.txtTarjetaCredito.MaxLength = 255;
             this.txtTarjetaCredito.Name = "txtTarjetaCredito";
             this.txtTarjetaCredito.Size = new System.Drawing.Size(138, 20);
-            this.txtTarjetaCredito.TabIndex = 23;
+            this.txtTarjetaCredito.TabIndex = 1;
             this.txtTarjetaCredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTarjetaCredito_KeyPress);
             // 
             // txtCodigoPostal
@@ -277,7 +279,7 @@
             this.txtCodigoPostal.MaxLength = 255;
             this.txtCodigoPostal.Name = "txtCodigoPostal";
             this.txtCodigoPostal.Size = new System.Drawing.Size(138, 20);
-            this.txtCodigoPostal.TabIndex = 22;
+            this.txtCodigoPostal.TabIndex = 13;
             this.txtCodigoPostal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoPostal_KeyPress);
             // 
             // txtDepto
@@ -286,7 +288,7 @@
             this.txtDepto.MaxLength = 255;
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.Size = new System.Drawing.Size(138, 20);
-            this.txtDepto.TabIndex = 21;
+            this.txtDepto.TabIndex = 11;
             this.txtDepto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDepto_KeyPress);
             // 
             // txtDireccion
@@ -295,7 +297,7 @@
             this.txtDireccion.MaxLength = 255;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(138, 20);
-            this.txtDireccion.TabIndex = 20;
+            this.txtDireccion.TabIndex = 9;
             this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDireccion_KeyPress);
             // 
             // txtEmail
@@ -304,7 +306,7 @@
             this.txtEmail.MaxLength = 255;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(138, 20);
-            this.txtEmail.TabIndex = 19;
+            this.txtEmail.TabIndex = 7;
             this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
             // 
             // txtNroDocumento
@@ -313,7 +315,7 @@
             this.txtNroDocumento.MaxLength = 8;
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(138, 20);
-            this.txtNroDocumento.TabIndex = 18;
+            this.txtNroDocumento.TabIndex = 5;
             this.txtNroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDocumento_KeyPress);
             // 
             // txtApellido
@@ -322,7 +324,7 @@
             this.txtApellido.MaxLength = 255;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(138, 20);
-            this.txtApellido.TabIndex = 17;
+            this.txtApellido.TabIndex = 3;
             this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // lblFechaNacimiento
@@ -402,7 +404,7 @@
             this.btnGuardar.Location = new System.Drawing.Point(409, 518);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 9;
+            this.btnGuardar.TabIndex = 16;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -412,7 +414,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(318, 518);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 10;
+            this.btnCancelar.TabIndex = 17;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -422,7 +424,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(20, 518);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 11;
+            this.btnLimpiar.TabIndex = 18;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             // 

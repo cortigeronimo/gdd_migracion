@@ -111,11 +111,11 @@ namespace PalcoNet.Abm_Cliente
             if (String.IsNullOrEmpty(txtApellido.Text)) { AddErrorToErrorMessage("El campo apellido está vacio."); errorCount++; }
             if (String.IsNullOrEmpty(comboBoxTipoDocumento.Text)) { AddErrorToErrorMessage("El campo tipo de documento está vacio."); errorCount++; };
             if (String.IsNullOrEmpty(txtNroDocumento.Text)) { AddErrorToErrorMessage("El campo número de documento está vacio."); errorCount++; }
-            if (txtNroDocumento.Text.ToString().Length < 7) { AddErrorToErrorMessage("El campo número de documento debe tener 7 dígitos como mínimo."); errorCount++; }
+                else if (txtNroDocumento.Text.ToString().Length < 7) { AddErrorToErrorMessage("El campo número de documento debe tener 7 dígitos como mínimo."); errorCount++; }
             if (String.IsNullOrEmpty(txtCuil.Text)) { AddErrorToErrorMessage("El campo cuil está vacio."); errorCount++; }
-            if (txtCuil.Text.ToString().Length < 10) { AddErrorToErrorMessage("El campo cuil debe tener 10 dígitos como mínimo."); errorCount++; }
+                else if (txtCuil.Text.ToString().Length < 10) { AddErrorToErrorMessage("El campo cuil debe tener 10 dígitos como mínimo."); errorCount++; }
             if (String.IsNullOrEmpty(txtEmail.Text)) { AddErrorToErrorMessage("El campo email está vacio."); errorCount++; }
-            if (!txtEmail.Text.ToString().Contains('@')) { AddErrorToErrorMessage("El email ingresado no es valido."); errorCount++; }
+                else if (!txtEmail.Text.ToString().Contains('@')) { AddErrorToErrorMessage("El email ingresado no es valido."); errorCount++; }
             if (String.IsNullOrEmpty(txtTelefono.Text)) { AddErrorToErrorMessage("El campo teléfono está vacio."); errorCount++; }
             if (String.IsNullOrEmpty(txtDireccion.Text)) { AddErrorToErrorMessage("El campo calle y número está vacio."); errorCount++; }
             if (String.IsNullOrEmpty(txtLocalidad.Text)) { AddErrorToErrorMessage("El campo localidad está vacio."); errorCount++; }
@@ -163,7 +163,7 @@ namespace PalcoNet.Abm_Cliente
 
         private void txtTarjetaCredito_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtTarjetaCredito.Text == String.Empty && Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar)) e.Handled = true;
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -183,7 +183,7 @@ namespace PalcoNet.Abm_Cliente
 
         private void txtEmail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtEmail.Text == String.Empty && Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
+            if (Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
         }
 
         private void txtDireccion_KeyPress(object sender, KeyPressEventArgs e)
@@ -214,6 +214,11 @@ namespace PalcoNet.Abm_Cliente
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             FormManager.getInstance().OpenAndClose(new ListCliente(), this);
+        }
+
+        private void txtCuil_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 
