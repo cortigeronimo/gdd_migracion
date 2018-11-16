@@ -68,6 +68,10 @@ IF OBJECT_ID('PLEASE_HELP.SP_ALTA_EMPRESA') IS NOT NULL DROP PROCEDURE PLEASE_HE
 
 IF OBJECT_ID('PLEASE_HELP.SP_LISTA_FUNCIONALIDADES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_LISTA_FUNCIONALIDADES;
 
+IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION;
+
+IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA;
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -167,7 +171,7 @@ create table PLEASE_HELP.Empresa
 
 create table PLEASE_HELP.Publicacion
 (
-	Pub_Codigo numeric(18,0),
+	Pub_Codigo numeric(18,0) identity(1,1),
 	Pub_Fecha_Inicio datetime,
 	Pub_Fecha_Evento datetime,
 	Pub_Descripcion nvarchar(255),
@@ -226,11 +230,11 @@ create table PLEASE_HELP.Compra
 
 create table PLEASE_HELP.Factura
 (
-	Factura_Nro numeric(18,0),
+	Factura_Nro numeric(18,0) identity(1,1) NOT NULL,
 	Factura_Fecha datetime NOT NULL,
 	Factura_Total numeric(18,2) NOT NULL,
 	Factura_Empresa int,
-	CONSTRAINT PK_FACTURA_NRO PRIMARY KEY (Factura_Nro)
+	CONSTRAINT PK_FACTURA_NRO PRIMARY KEY CLUSTERED (Factura_Nro)
 )
 
 create table PLEASE_HELP.Item
@@ -472,10 +476,25 @@ GO
 INSERT INTO PLEASE_HELP.Rubro SELECT DISTINCT Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
 
 -- CREACION DE PUBLICACION
+GO
 
-INSERT INTO PLEASE_HELP.Publicacion SELECT DISTINCT m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, m.Espectaculo_Descripcion,
-NULL, 1, NULL, e.Emp_Usuario, m.Espectaculo_Estado FROM gd_esquema.Maestra m, PLEASE_HELP.Empresa e WHERE e.Emp_Cuit = m.Espec_Empresa_Cuit
+CREATE PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION AS
+BEGIN
+	SET IDENTITY_INSERT PLEASE_HELP.Publicacion ON
+	INSERT INTO PLEASE_HELP.Publicacion (Pub_Codigo, Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion,
+	Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado)
+	SELECT DISTINCT m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, m.Espectaculo_Descripcion,
+	NULL, 1, NULL, e.Emp_Usuario, m.Espectaculo_Estado 
+	FROM gd_esquema.Maestra m, PLEASE_HELP.Empresa e WHERE e.Emp_Cuit = m.Espec_Empresa_Cuit
+	SET IDENTITY_INSERT PLEASE_HELP.Publicacion OFF
+	DECLARE @maxid int;
+	SELECT @maxid=MAX(Pub_Codigo) FROM PLEASE_HELP.Publicacion;
+	DBCC CHECKIDENT ("PLEASE_HELP.Publicacion", RESEED, @maxid);
+END
 
+GO
+EXEC PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION
+GO
 -- CREACION DE UBICACION
 
 INSERT INTO PLEASE_HELP.Ubicacion SELECT DISTINCT m.Espectaculo_Cod, m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo,
@@ -485,17 +504,29 @@ m.Ubicacion_Tipo_Descripcion, m.Ubicacion_Sin_Numerar FROM gd_esquema.Maestra m
 INSERT INTO PLEASE_HELP.Grado (Grado_Comision, Grado_Descripcion) VALUES (30, 'ALTA'), (20, 'MEDIA'), (10, 'BAJA')
 
 -- CREACION DE FACTURA
+GO
+--inserta las facturas y busca el numero de factura mas alto
+--para ponerlo continuar desde ahi
+CREATE PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA AS
+BEGIN
+	SET IDENTITY_INSERT PLEASE_HELP.Factura ON
+	INSERT INTO PLEASE_HELP.Factura (m.Factura_nro, m.Factura_Fecha, m.Factura_Total, Factura_Empresa)
+	SELECT m.Factura_nro, m.Factura_Fecha, m.Factura_Total, e.Emp_Usuario 
+	FROM (select m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit
+		FROM gd_esquema.Maestra m 
+		WHERE m.Factura_Nro IS NOT NULL 
+		GROUP BY m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit) 
+	m inner join PLEASE_HELP.Empresa e
+	ON m.Espec_Empresa_Cuit = e.Emp_Cuit
+	SET IDENTITY_INSERT PLEASE_HELP.Factura OFF
+	DECLARE @maxid int;
+	SELECT @maxid=MAX(Factura_Nro) FROM PLEASE_HELP.Factura;
+	DBCC CHECKIDENT ("PLEASE_HELP.Factura", RESEED, @maxid);
+END
 
-INSERT INTO PLEASE_HELP.Factura 
-SELECT m.Factura_nro, m.Factura_Fecha, m.Factura_Total, e.Emp_Usuario 
-FROM (select m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit
-	FROM gd_esquema.Maestra m 
-	WHERE m.Factura_Nro IS NOT NULL 
-	GROUP BY m.Factura_nro, m.Factura_Fecha, m.Factura_Total, m.Espec_Empresa_Cuit) 
-m inner join PLEASE_HELP.Empresa e
-ON m.Espec_Empresa_Cuit = e.Emp_Cuit
-
--- CREACION DE COMPRAS
+GO
+EXEC PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA
+GO
 
 INSERT INTO PLEASE_HELP.Compra
 SELECT (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Factura_Fecha, g.Ubicacion_Fila, g.Ubicacion_Asiento, g.Espectaculo_Cod
