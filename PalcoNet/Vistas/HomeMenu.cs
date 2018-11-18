@@ -35,6 +35,12 @@ namespace PalcoNet.Vistas
             
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Application.Exit();
+        } 
+
         private void HomeMenu_Load(object sender, EventArgs e)
         {
             LoadFuncionalidades();
@@ -251,7 +257,8 @@ namespace PalcoNet.Vistas
         //Evento click para "canje administracion puntos"
         private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form canje de ptos..");
+            Form canjeDePuntos = new CanjeForm();
+            FormManager.getInstance().Open(canjeDePuntos);
         }
 
 

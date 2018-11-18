@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Repositorios
 {
-    public class repoUbicacion
+    public class RepoUbicacion
     {
 
     }
