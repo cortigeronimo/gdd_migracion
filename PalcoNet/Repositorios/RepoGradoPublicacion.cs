@@ -83,6 +83,12 @@ namespace PalcoNet.Repositorios
 
         }
 
+        public DataTable GetGradosDataTable()
+        {
+            String query = "SELECT * FROM " + table;
+            SqlCommand command = new SqlCommand(query);
+            return Conexion.GetData(command);
+        }
 
     }
 }

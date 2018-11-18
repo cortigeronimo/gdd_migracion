@@ -119,11 +119,17 @@
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.cs">
+    <Compile Include="Generar Publicacion\AgregarUbicaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\AgregarUbicaciones.Designer.cs">
+      <DependentUpon>AgregarUbicaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\GenerarPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\GenerarPublicacion.Designer.cs">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Rendicion Comisiones\Form1.cs">
       <SubType>Form</SubType>
@@ -144,10 +150,14 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Empresa.cs" />
+    <Compile Include="Modelo\Estado.cs" />
     <Compile Include="Modelo\Funcionalidad.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Grado.cs" />
+    <Compile Include="Modelo\Publicacion.cs" />
     <Compile Include="Modelo\Rol.cs" />
+    <Compile Include="Modelo\Rubro.cs" />
+    <Compile Include="Modelo\Ubicacion.cs" />
     <Compile Include="Registro de Usuario\CreateCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,7 +179,10 @@
     <Compile Include="Repositorios\RepoCliente.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
+    <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
+    <Compile Include="Repositorios\RepoRubro.cs" />
+    <Compile Include="Repositorios\repoUbicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\CustomForm.cs">
@@ -224,6 +237,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\AgregarUbicaciones.resx">
+      <DependentUpon>AgregarUbicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateCliente.resx">
       <DependentUpon>CreateCliente.cs</DependentUpon>

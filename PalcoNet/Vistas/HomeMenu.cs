@@ -223,7 +223,7 @@ namespace PalcoNet.Vistas
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
             //abrir el form de "generar publicacion"
-            MessageBox.Show("soy el form generar publkicacion");
+            FormManager.getInstance().Open(new FormGenerarPublicacion(this.user));
         }
 
 
