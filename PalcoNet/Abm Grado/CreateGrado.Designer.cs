@@ -118,7 +118,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnGuardar);
             this.Name = "CreateGrado";
-            this.Text = "CreateGrado";
+            this.Text = "Crear Grado";
             ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

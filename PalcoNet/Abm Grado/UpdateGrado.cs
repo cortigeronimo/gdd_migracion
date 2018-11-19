@@ -27,7 +27,7 @@ namespace PalcoNet.Abm_Grado
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
             Grado grado = new Grado(
                 (int)this.grado.Id,
-                (int)numComisionGrado.Value,
+                Convert.ToInt32(txtComision.Text),
                 txtNombreGrado.Text);
             if(repo.UpdateGrado(grado) > 0){
                 MessageBox.Show("Los Cambios se realizaron con Éxito");
@@ -40,14 +40,14 @@ namespace PalcoNet.Abm_Grado
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            numComisionGrado.Value = 0;
-            txtNombreGrado.Text = "";
+            txtComision.Clear();
+            txtNombreGrado.Clear();
         }
 
         private void UpdateGrado_Load(object sender, EventArgs e)
         {
             txtNombreGrado.Text = this.grado.Descripcion;
-            numComisionGrado.Value = this.grado.Comision;
+            txtComision.Text = this.grado.Comision.ToString();
         }
 
 

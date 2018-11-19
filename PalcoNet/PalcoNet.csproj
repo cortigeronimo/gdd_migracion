@@ -99,11 +99,11 @@
     <Compile Include="Abm Rubro\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Puntos\Form1.cs">
+    <Compile Include="Canje Puntos\CanjeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Puntos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Canje Puntos\CanjeForm.Designer.cs">
+      <DependentUpon>CanjeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Comprar\Form1.cs">
       <SubType>Form</SubType>
@@ -155,6 +155,7 @@
     <Compile Include="Modelo\Funcionalidad.cs" />
     <Compile Include="Modelo\Cliente.cs" />
     <Compile Include="Modelo\Grado.cs" />
+    <Compile Include="Modelo\Premio.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Rubro.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Registro de Usuario\CreateUsuario.Designer.cs">
       <DependentUpon>CreateUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositorios\RepoCanjePuntos.cs" />
     <Compile Include="Repositorios\RepoCliente.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
@@ -224,6 +226,9 @@
     <EmbeddedResource Include="Abm Cliente\UpdateCliente.resx">
       <DependentUpon>UpdateCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Grado\CreateGrado.resx">
+      <DependentUpon>CreateGrado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListGrado.resx">
       <DependentUpon>ListGrado.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Canje Puntos\CanjeForm.resx">
+      <DependentUpon>CanjeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\AgregarUbicaciones.resx">
       <DependentUpon>AgregarUbicaciones.cs</DependentUpon>
