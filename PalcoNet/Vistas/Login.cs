@@ -12,6 +12,7 @@ using PalcoNet.Repositorios;
 using PalcoNet.Abm_Cliente;
 using PalcoNet.Modelo;
 using PalcoNet.Registro_de_Usuario;
+using PalcoNet.Config;
 
 
 namespace PalcoNet
@@ -49,12 +50,14 @@ namespace PalcoNet
                 {
                     Rol rol = new Rol();
                     TakeRolFromUser(user, rol);
-                    FormManager.getInstance().OpenAndClose(new HomeMenu(user, rol), this);
+
+                    LoggedInUser.ID = user.id;
+                    LoggedInUser.Username = user.username;
+                    LoggedInUser.Rol = rol.Id;
+                    
+                    FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
                 }
                   
-                    
-                    //MessageBox.Show("Abrir el menu de funcionalidades....");
-                    //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
                   
                 //FormManager.getInstance().open(new Menu());
 
@@ -140,7 +143,7 @@ namespace PalcoNet
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            LoggedInUser.Initialize();
         }
 
 

@@ -22,6 +22,7 @@ using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
 using PalcoNet.Registro_de_Usuario;
 
+using PalcoNet.Config;
 
 namespace PalcoNet.Vistas
 {
@@ -29,9 +30,16 @@ namespace PalcoNet.Vistas
     {
         RepoRol repo = new RepoRol();
 
-        public HomeMenu(Usuario _user, Rol _rol)
+        private Usuario user = new Usuario();
+        private Rol rol = new Rol();
+
+
+        public HomeMenu()
         {
-            InitializeComponent(_user, _rol);
+            InitializeComponent();
+
+            this.user.id = (int)LoggedInUser.ID;
+            this.rol.id = (int)LoggedInUser.Rol;
             
         }
 
@@ -223,7 +231,7 @@ namespace PalcoNet.Vistas
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
             //abrir el form de "generar publicacion"
-            FormManager.getInstance().Open(new FormGenerarPublicacion(this.user));
+            FormManager.getInstance().Open(new FormGenerarPublicacion());
         }
 
 

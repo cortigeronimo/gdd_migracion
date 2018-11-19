@@ -27,10 +27,9 @@ namespace PalcoNet.Vistas
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(Usuario _user, Rol _rol)
+        private void InitializeComponent()
         {
-            this.user = _user;
-            this.rol = _rol;
+            
 
             this.lblPalcoNet = new System.Windows.Forms.Label();
             this.menuStripHome = new System.Windows.Forms.MenuStrip();
@@ -105,8 +104,7 @@ namespace PalcoNet.Vistas
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
 
-        private Usuario user;
-        private Rol rol;
+        
 
     }
 }

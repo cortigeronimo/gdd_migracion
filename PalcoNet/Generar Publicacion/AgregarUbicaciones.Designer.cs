@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBoxUbicacionSinNumerar = new System.Windows.Forms.CheckBox();
             this.btnConfirmarSeleccion = new System.Windows.Forms.Button();
             this.dataGridViewUbicaciones = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -44,27 +43,15 @@
             this.columnAsiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnSinNumerar = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUbicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAsiento)).BeginInit();
             this.SuspendLayout();
             // 
-            // checkBoxUbicacionSinNumerar
-            // 
-            this.checkBoxUbicacionSinNumerar.AutoSize = true;
-            this.checkBoxUbicacionSinNumerar.Location = new System.Drawing.Point(174, 52);
-            this.checkBoxUbicacionSinNumerar.Name = "checkBoxUbicacionSinNumerar";
-            this.checkBoxUbicacionSinNumerar.Size = new System.Drawing.Size(135, 17);
-            this.checkBoxUbicacionSinNumerar.TabIndex = 11;
-            this.checkBoxUbicacionSinNumerar.Text = "Ubicación Sin Numerar";
-            this.checkBoxUbicacionSinNumerar.UseVisualStyleBackColor = true;
-            this.checkBoxUbicacionSinNumerar.CheckedChanged += new System.EventHandler(this.checkBoxUbicacionSinNumerar_CheckedChanged);
-            // 
             // btnConfirmarSeleccion
             // 
-            this.btnConfirmarSeleccion.Location = new System.Drawing.Point(325, 277);
+            this.btnConfirmarSeleccion.Location = new System.Drawing.Point(442, 274);
             this.btnConfirmarSeleccion.Name = "btnConfirmarSeleccion";
             this.btnConfirmarSeleccion.Size = new System.Drawing.Size(121, 23);
             this.btnConfirmarSeleccion.TabIndex = 10;
@@ -82,18 +69,17 @@
             this.columnAsiento,
             this.columnPrecio,
             this.columnDescripcion,
-            this.columnSinNumerar,
             this.columnDelete});
             this.dataGridViewUbicaciones.Location = new System.Drawing.Point(18, 92);
             this.dataGridViewUbicaciones.Name = "dataGridViewUbicaciones";
             this.dataGridViewUbicaciones.ReadOnly = true;
-            this.dataGridViewUbicaciones.Size = new System.Drawing.Size(431, 166);
+            this.dataGridViewUbicaciones.Size = new System.Drawing.Size(545, 166);
             this.dataGridViewUbicaciones.TabIndex = 9;
             this.dataGridViewUbicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUbicaciones_CellContentClick);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(372, 49);
+            this.btnAgregar.Location = new System.Drawing.Point(219, 52);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(77, 23);
             this.btnAgregar.TabIndex = 8;
@@ -103,7 +89,7 @@
             // 
             // numericUpDownPrecio
             // 
-            this.numericUpDownPrecio.Location = new System.Drawing.Point(54, 52);
+            this.numericUpDownPrecio.Location = new System.Drawing.Point(57, 55);
             this.numericUpDownPrecio.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -115,6 +101,7 @@
             // 
             // comboBoxTipoUbicacion
             // 
+            this.comboBoxTipoUbicacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipoUbicacion.FormattingEnabled = true;
             this.comboBoxTipoUbicacion.Items.AddRange(new object[] {
             "Platea Baja",
@@ -125,7 +112,7 @@
             "Super PullMan",
             "PullMan",
             "Campo Vip"});
-            this.comboBoxTipoUbicacion.Location = new System.Drawing.Point(369, 11);
+            this.comboBoxTipoUbicacion.Location = new System.Drawing.Point(393, 11);
             this.comboBoxTipoUbicacion.Name = "comboBoxTipoUbicacion";
             this.comboBoxTipoUbicacion.Size = new System.Drawing.Size(77, 21);
             this.comboBoxTipoUbicacion.TabIndex = 6;
@@ -134,12 +121,23 @@
             // numericUpDownAsiento
             // 
             this.numericUpDownAsiento.Location = new System.Drawing.Point(219, 12);
+            this.numericUpDownAsiento.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownAsiento.Name = "numericUpDownAsiento";
             this.numericUpDownAsiento.Size = new System.Drawing.Size(77, 20);
             this.numericUpDownAsiento.TabIndex = 5;
+            this.numericUpDownAsiento.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // comboBoxFila
             // 
+            this.comboBoxFila.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFila.FormattingEnabled = true;
             this.comboBoxFila.Items.AddRange(new object[] {
             "A",
@@ -169,7 +167,7 @@
             "X",
             "Y",
             "Z"});
-            this.comboBoxFila.Location = new System.Drawing.Point(53, 12);
+            this.comboBoxFila.Location = new System.Drawing.Point(57, 12);
             this.comboBoxFila.Name = "comboBoxFila";
             this.comboBoxFila.Size = new System.Drawing.Size(78, 21);
             this.comboBoxFila.TabIndex = 4;
@@ -178,7 +176,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 54);
+            this.label4.Location = new System.Drawing.Point(15, 57);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 3;
@@ -187,7 +185,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 15);
+            this.label3.Location = new System.Drawing.Point(345, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 2;
@@ -239,13 +237,6 @@
             this.columnDescripcion.Name = "columnDescripcion";
             this.columnDescripcion.ReadOnly = true;
             // 
-            // columnSinNumerar
-            // 
-            this.columnSinNumerar.DataPropertyName = "SinNumerar";
-            this.columnSinNumerar.HeaderText = "Sin Numerar";
-            this.columnSinNumerar.Name = "columnSinNumerar";
-            this.columnSinNumerar.ReadOnly = true;
-            // 
             // columnDelete
             // 
             this.columnDelete.DataPropertyName = "Eliminar";
@@ -257,8 +248,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 308);
-            this.Controls.Add(this.checkBoxUbicacionSinNumerar);
+            this.ClientSize = new System.Drawing.Size(580, 309);
             this.Controls.Add(this.btnConfirmarSeleccion);
             this.Controls.Add(this.dataGridViewUbicaciones);
             this.Controls.Add(this.btnAgregar);
@@ -293,12 +283,10 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.DataGridView dataGridViewUbicaciones;
         private System.Windows.Forms.Button btnConfirmarSeleccion;
-        private System.Windows.Forms.CheckBox checkBoxUbicacionSinNumerar;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFila;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnAsiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPrecio;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDescripcion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnSinNumerar;
         private System.Windows.Forms.DataGridViewButtonColumn columnDelete;
     }
 }

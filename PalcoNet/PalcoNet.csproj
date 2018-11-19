@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Config\Conexion.cs" />
     <Compile Include="Config\Hashing.cs" />
+    <Compile Include="Config\LoggedInUser.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,7 +183,7 @@
     <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
-    <Compile Include="Repositorios\repoUbicacion.cs" />
+    <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\CustomForm.cs">

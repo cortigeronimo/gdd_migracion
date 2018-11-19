@@ -74,6 +74,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION') IS NOT NUL
 
 IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_GENERAR_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION;
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -653,6 +655,18 @@ BEGIN
 			VALUES (@username, @password)
 		INSERT INTO PLEASE_HELP.Empresa(Emp_Usuario, Emp_Razon_Social, Emp_Email, Emp_Telefono, Emp_Localidad, Emp_Direccion, Emp_Piso, Emp_Depto, Emp_Cod_Postal, Emp_Ciudad, Emp_Cuit)
 			VALUES (@@IDENTITY, @razonSocial, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @ciudad, @cuit)  
+	COMMIT TRANSACTION
+END
+GO
+
+
+-- STORED PROCEDURES GENERAR PUBLICACION
+
+CREATE PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION(@fechaInicio DATETIME, @fechaEvento DATETIME, @descripcion NVARCHAR(255), @direccion NVARCHAR(255), @rubroId INT, @gradoId INT, @empresaId INT, @estadoId INT)
+AS
+BEGIN
+	BEGIN TRANSACTION
+		INSERT INTO PLEASE_HELP.Publicacion (Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado) VALUES (@fechaInicio, @fechaEvento, @descripcion, @direccion, @rubroId, @gradoId, @empresaId, @estadoId)		
 	COMMIT TRANSACTION
 END
 GO

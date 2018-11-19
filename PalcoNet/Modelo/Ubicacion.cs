@@ -12,6 +12,6 @@ namespace PalcoNet.Modelo
         public int Asiento { get; set; }
         public float Precio { get; set; }
         public String Descripcion { get; set; }
-        public Boolean SinNumerar { get; set; }
+        //public Boolean SinNumerar { get; set; }
     }
 }

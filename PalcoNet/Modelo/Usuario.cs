@@ -19,7 +19,6 @@ namespace PalcoNet
 
         private List<Rol> listaRoles = new List<Rol>();
 
-
         public List<Rol> GetRoles()
         {
             return listaRoles;
