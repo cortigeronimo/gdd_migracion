@@ -110,8 +110,8 @@ namespace PalcoNet.Generar_Publicacion
 
         private void dataGridViewUbicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridViewUbicaciones.Columns["columnDelete"].Index)
-            {             
+            if (e.ColumnIndex == dataGridViewUbicaciones.Columns["columnDelete"].Index && dataGridViewUbicaciones.Rows.Count != 0)
+            {
                 dataGridViewUbicaciones.Rows.RemoveAt(dataGridViewUbicaciones.CurrentRow.Index);
 
 
@@ -124,16 +124,20 @@ namespace PalcoNet.Generar_Publicacion
                     ubicacion.Fila = Convert.ToChar(row.Cells["columnFila"].Value);
                     ubicacion.Precio = Convert.ToInt32(row.Cells["columnPrecio"].Value);
                     ubicacion.Descripcion = Convert.ToString(row.Cells["columnDescripcion"].Value);
-                    
 
-                    Ubicaciones.Add(ubicacion);                 
+
+                    Ubicaciones.Add(ubicacion);
                 }
 
-                
+
 
                 bindingSource = new BindingSource();
                 Ubicaciones.ForEach(u => bindingSource.Add(u));
 
+            }
+            else
+            {
+                MessageBox.Show("No hay ubicaciones a eliminar");
             }
         }
 

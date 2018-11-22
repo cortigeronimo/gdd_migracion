@@ -662,14 +662,25 @@ GO
 
 -- STORED PROCEDURES GENERAR PUBLICACION
 
-CREATE PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION(@fechaInicio DATETIME, @fechaEvento DATETIME, @descripcion NVARCHAR(255), @direccion NVARCHAR(255), @rubroId INT, @gradoId INT, @empresaId INT, @estadoId INT)
+CREATE PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION(@fechaInicio DATETIME, @fechaEvento DATETIME, @descripcion NVARCHAR(255), @direccion NVARCHAR(255), @rubroId INT, @gradoId INT, @empresaId INT, @estadoId INT, @idPublicacion INT output)
 AS
 BEGIN
 	BEGIN TRANSACTION
 		INSERT INTO PLEASE_HELP.Publicacion (Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado) VALUES (@fechaInicio, @fechaEvento, @descripcion, @direccion, @rubroId, @gradoId, @empresaId, @estadoId)		
+		SET @idPublicacion = @@IDENTITY
 	COMMIT TRANSACTION
 END
 GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_INSERTAR_UBICACION(@idPublicacion INT, @fila VARCHAR(3), @asiento NUMERIC(18,0), @precio NUMERIC(18,0), @descripcion NVARCHAR(255))
+AS
+BEGIN
+	INSERT INTO PLEASE_HELP.Ubicacion (Ubicacion_Publicacion, Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Precio, Ubicacion_Descripcion)
+		VALUES (@idPublicacion, @fila, @asiento, @precio, @descripcion)
+END
+GO
+
 
 -- TRIGGERS LOGIN
 

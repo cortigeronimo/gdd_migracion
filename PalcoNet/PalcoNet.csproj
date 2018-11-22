@@ -114,11 +114,18 @@
     <Compile Include="Config\Conexion.cs" />
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\LoggedInUser.cs" />
+    <Compile Include="Config\SystemDate.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Publicacion\AgregarFechas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Publicacion\AgregarFechas.Designer.cs">
+      <DependentUpon>AgregarFechas.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Publicacion\AgregarUbicaciones.cs">
       <SubType>Form</SubType>
@@ -246,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Canje Puntos\CanjeForm.resx">
       <DependentUpon>CanjeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\AgregarFechas.resx">
+      <DependentUpon>AgregarFechas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\AgregarUbicaciones.resx">
       <DependentUpon>AgregarUbicaciones.cs</DependentUpon>

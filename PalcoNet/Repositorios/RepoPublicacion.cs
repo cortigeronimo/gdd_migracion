@@ -15,6 +15,8 @@ namespace PalcoNet.Repositorios
     {
         public void InsertPublicacion(Publicacion publicacion)
         {
+            RepoUbicacion repoUbicacion = new RepoUbicacion();
+
             String sp = "PLEASE_HELP.SP_GENERAR_PUBLICACION";
 
             SqlCommand cmd = new SqlCommand(sp);
@@ -30,8 +32,28 @@ namespace PalcoNet.Repositorios
             cmd.Parameters.AddWithValue("@empresaId", publicacion.Empresa.id);
             cmd.Parameters.AddWithValue("@estadoId", publicacion.Estado.Id);
 
+            SqlParameter publicacionId = new SqlParameter("@idPublicacion", SqlDbType.Int);
+            publicacionId.Direction = ParameterDirection.Output;
+
+            cmd.Parameters.Add(publicacionId);
+
             Conexion.ExecuteProcedure(cmd);
-            
+
+            int ubicacionPublicacionID = Convert.ToInt32(publicacionId.Value);
+
+            //insert de ubicaciones
+            repoUbicacion.InsertUbicaciones(ubicacionPublicacionID, publicacion.Ubicaciones);
         }
+
+        
+        public void InsertPublicacionesList(List<Publicacion> publicacionList)
+        {
+            foreach (Publicacion p in publicacionList)
+            {
+                InsertPublicacion(p);
+            }
+        }
+
+       
     }
 }

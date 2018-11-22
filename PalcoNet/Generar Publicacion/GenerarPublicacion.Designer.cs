@@ -43,11 +43,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnProgramarFechas = new System.Windows.Forms.Button();
+            this.checkBoxVariasFechas = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnPublicar
             // 
-            this.btnPublicar.Location = new System.Drawing.Point(386, 206);
+            this.btnPublicar.Location = new System.Drawing.Point(300, 247);
             this.btnPublicar.Name = "btnPublicar";
             this.btnPublicar.Size = new System.Drawing.Size(114, 23);
             this.btnPublicar.TabIndex = 14;
@@ -57,16 +59,17 @@
             // 
             // btnGuardarBorrador
             // 
-            this.btnGuardarBorrador.Location = new System.Drawing.Point(207, 206);
+            this.btnGuardarBorrador.Location = new System.Drawing.Point(24, 247);
             this.btnGuardarBorrador.Name = "btnGuardarBorrador";
             this.btnGuardarBorrador.Size = new System.Drawing.Size(114, 23);
             this.btnGuardarBorrador.TabIndex = 13;
             this.btnGuardarBorrador.Text = "Guardar Borrador";
             this.btnGuardarBorrador.UseVisualStyleBackColor = true;
+            this.btnGuardarBorrador.Click += new System.EventHandler(this.btnGuardarBorrador_Click);
             // 
             // btnAgregarUbicaciones
             // 
-            this.btnAgregarUbicaciones.Location = new System.Drawing.Point(24, 206);
+            this.btnAgregarUbicaciones.Location = new System.Drawing.Point(299, 195);
             this.btnAgregarUbicaciones.Name = "btnAgregarUbicaciones";
             this.btnAgregarUbicaciones.Size = new System.Drawing.Size(114, 23);
             this.btnAgregarUbicaciones.TabIndex = 12;
@@ -80,7 +83,7 @@
             this.dateTimePickerFechaEvento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerFechaEvento.Location = new System.Drawing.Point(300, 151);
             this.dateTimePickerFechaEvento.Name = "dateTimePickerFechaEvento";
-            this.dateTimePickerFechaEvento.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerFechaEvento.Size = new System.Drawing.Size(211, 20);
             this.dateTimePickerFechaEvento.TabIndex = 11;
             // 
             // dateTimePickerFechaInicio
@@ -89,7 +92,7 @@
             this.dateTimePickerFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerFechaInicio.Location = new System.Drawing.Point(24, 151);
             this.dateTimePickerFechaInicio.Name = "dateTimePickerFechaInicio";
-            this.dateTimePickerFechaInicio.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerFechaInicio.Size = new System.Drawing.Size(213, 20);
             this.dateTimePickerFechaInicio.TabIndex = 10;
             this.dateTimePickerFechaInicio.Value = new System.DateTime(2018, 11, 17, 20, 15, 4, 0);
             // 
@@ -116,7 +119,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(299, 35);
             this.txtDireccion.MaxLength = 255;
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(201, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(212, 20);
             this.txtDireccion.TabIndex = 7;
             this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDireccion_KeyPress);
             // 
@@ -125,7 +128,7 @@
             this.txtNombrePublicacion.Location = new System.Drawing.Point(24, 35);
             this.txtNombrePublicacion.MaxLength = 255;
             this.txtNombrePublicacion.Name = "txtNombrePublicacion";
-            this.txtNombrePublicacion.Size = new System.Drawing.Size(200, 20);
+            this.txtNombrePublicacion.Size = new System.Drawing.Size(213, 20);
             this.txtNombrePublicacion.TabIndex = 6;
             this.txtNombrePublicacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombrePublicacion_KeyPress);
             // 
@@ -183,11 +186,35 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre";
             // 
+            // btnProgramarFechas
+            // 
+            this.btnProgramarFechas.Enabled = false;
+            this.btnProgramarFechas.Location = new System.Drawing.Point(123, 195);
+            this.btnProgramarFechas.Name = "btnProgramarFechas";
+            this.btnProgramarFechas.Size = new System.Drawing.Size(114, 23);
+            this.btnProgramarFechas.TabIndex = 15;
+            this.btnProgramarFechas.Text = "Programar Fechas";
+            this.btnProgramarFechas.UseVisualStyleBackColor = true;
+            this.btnProgramarFechas.Click += new System.EventHandler(this.btnProgramarFechas_Click);
+            // 
+            // checkBoxVariasFechas
+            // 
+            this.checkBoxVariasFechas.AutoSize = true;
+            this.checkBoxVariasFechas.Location = new System.Drawing.Point(24, 199);
+            this.checkBoxVariasFechas.Name = "checkBoxVariasFechas";
+            this.checkBoxVariasFechas.Size = new System.Drawing.Size(93, 17);
+            this.checkBoxVariasFechas.TabIndex = 16;
+            this.checkBoxVariasFechas.Text = "Varias Fechas";
+            this.checkBoxVariasFechas.UseVisualStyleBackColor = true;
+            this.checkBoxVariasFechas.CheckedChanged += new System.EventHandler(this.checkBoxVariasFechas_CheckedChanged);
+            // 
             // FormGenerarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 256);
+            this.ClientSize = new System.Drawing.Size(537, 294);
+            this.Controls.Add(this.checkBoxVariasFechas);
+            this.Controls.Add(this.btnProgramarFechas);
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.btnGuardarBorrador);
             this.Controls.Add(this.btnAgregarUbicaciones);
@@ -227,5 +254,7 @@
         private System.Windows.Forms.Button btnAgregarUbicaciones;
         private System.Windows.Forms.Button btnGuardarBorrador;
         private System.Windows.Forms.Button btnPublicar;
+        private System.Windows.Forms.Button btnProgramarFechas;
+        private System.Windows.Forms.CheckBox checkBoxVariasFechas;
     }
 }

@@ -215,6 +215,7 @@
             this.columnFila.HeaderText = "Fila";
             this.columnFila.Name = "columnFila";
             this.columnFila.ReadOnly = true;
+            this.columnFila.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // columnAsiento
             // 
@@ -222,6 +223,7 @@
             this.columnAsiento.HeaderText = "Asiento";
             this.columnAsiento.Name = "columnAsiento";
             this.columnAsiento.ReadOnly = true;
+            this.columnAsiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // columnPrecio
             // 
@@ -229,6 +231,7 @@
             this.columnPrecio.HeaderText = "Precio";
             this.columnPrecio.Name = "columnPrecio";
             this.columnPrecio.ReadOnly = true;
+            this.columnPrecio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // columnDescripcion
             // 
@@ -236,6 +239,7 @@
             this.columnDescripcion.HeaderText = "Descripción";
             this.columnDescripcion.Name = "columnDescripcion";
             this.columnDescripcion.ReadOnly = true;
+            this.columnDescripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // columnDelete
             // 
@@ -260,6 +264,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(596, 348);
+            this.MinimumSize = new System.Drawing.Size(596, 348);
             this.Name = "FormAgregarUbicaciones";
             this.Text = "Agregar Ubicaciones";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUbicaciones)).EndInit();
