@@ -244,7 +244,7 @@ namespace PalcoNet.Vistas
         //Evento click para "editar publicacion"
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form editar publicacion...");
+            FormManager.getInstance().Open(new FormEditarPublicacion());
         }
 
 

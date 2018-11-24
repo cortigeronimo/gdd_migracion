@@ -19,6 +19,7 @@ namespace PalcoNet.Generar_Publicacion
         String errorMessage = "Error:\n";
         BindingSource bindingSource = new BindingSource();
         public List<Ubicacion> Ubicaciones { get; set; }
+        
         public FormGenerarPublicacion form;
         
 

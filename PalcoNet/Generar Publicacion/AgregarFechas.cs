@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using PalcoNet.Modelo;
+using PalcoNet.Config;
 
 using PalcoNet.Vistas;
 
@@ -28,6 +29,9 @@ namespace PalcoNet.Generar_Publicacion
 
             newPublicacion.FechaInicio = DateTime.MinValue;
             newPublicacion.FechaEvento = DateTime.MinValue;
+
+            dateTimePickerFechaInicio.Value = SystemDate.GetDate();
+            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(1);
 
             this.publicacionList = list;
 
@@ -64,7 +68,8 @@ namespace PalcoNet.Generar_Publicacion
         {
             int errorCount = 0;
 
-            if (dateTimePickerFechaEvento.Value == dateTimePickerFechaInicio.Value) { errorMessage += "La fecha evento debe ser posterior a la fecha inicio.\n"; errorCount++; };
+            if (dateTimePickerFechaInicio.Value <= SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
+            if (dateTimePickerFechaEvento.Value <= dateTimePickerFechaInicio.Value) { errorMessage += "La fecha evento debe ser posterior a la fecha inicio.\n"; errorCount++; };
             if (dateTimePickerFechaInicio.Value <= newPublicacion.FechaInicio || dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las fechas a ingresar deben ser posteriores a las ultimas ingresadas.\n"; errorCount++; };
 
             return errorCount == 0;       
@@ -73,7 +78,7 @@ namespace PalcoNet.Generar_Publicacion
 
         private void dataGridViewFechas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridViewFechas.Columns["columnEliminar"].Index && dataGridViewFechas.Rows.Count != 0)
+            if (e.ColumnIndex == dataGridViewFechas.Columns["columnEliminar"].Index)
             {
                 dataGridViewFechas.Rows.RemoveAt(dataGridViewFechas.CurrentRow.Index);
 
@@ -105,10 +110,7 @@ namespace PalcoNet.Generar_Publicacion
 
 
             }
-            else
-            {
-                MessageBox.Show("No hay filas a eliminar");
-            }
+            
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)

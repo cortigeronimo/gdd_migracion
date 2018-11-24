@@ -26,13 +26,13 @@ namespace PalcoNet.Generar_Publicacion
         List<Publicacion> publicacionesList = new List<Publicacion>();
 
         Publicacion publicacion = new Publicacion();
-        //public List<Ubicacion> Ubicaciones { get; set; }
+        
         
         Usuario loginUser = new Usuario();
 
         String errorMessage = "Error:\n"; 
 
-        //List<Ubicacion> ubicacionesList = new List<Ubicacion>();
+        
 
         public FormGenerarPublicacion()
         {
@@ -44,7 +44,55 @@ namespace PalcoNet.Generar_Publicacion
             publicacion.Ubicaciones = new List<Ubicacion>();
 
             LoadComboBox();
+
+            dateTimePickerFechaInicio.Value = SystemDate.GetDate();
+            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(1);
         }
+
+
+        
+        public FormGenerarPublicacion(Publicacion _publicacion)
+        {
+            InitializeComponent();
+
+            Publicacion publicacionToEdit = _publicacion;
+            publicacion.Codigo = _publicacion.Codigo;
+
+            this.loginUser.id = (int)LoggedInUser.ID;
+            this.loginUser.username = LoggedInUser.Username;
+
+            publicacion.Ubicaciones = new List<Ubicacion>();
+
+            checkBoxVariasFechas.Enabled = false;
+            btnProgramarFechas.Enabled = false;
+
+            LoadComboBox();
+
+            LoadPublicacionDataToForm(publicacionToEdit);
+
+            
+
+        }
+
+
+        //Carga los datos de la publicación a editar
+        private void LoadPublicacionDataToForm(Publicacion publicacionToLoad)
+        {
+            txtNombrePublicacion.Text = publicacionToLoad.Descripcion;
+            txtDireccion.Text = publicacionToLoad.Direccion;
+            comboBoxRubro.SelectedValue = publicacionToLoad.Rubro.Id;
+            comboBoxRubro.Text = publicacionToLoad.Rubro.Descripcíon;
+            comboBoxGrado.SelectedValue = publicacionToLoad.Grado.Id;
+            comboBoxGrado.Text = publicacionToLoad.Grado.Descripcion;
+
+            dateTimePickerFechaInicio.Value = publicacionToLoad.FechaInicio;
+            dateTimePickerFechaEvento.Value = publicacionToLoad.FechaEvento;
+
+            publicacion.Ubicaciones = publicacionToLoad.Ubicaciones;
+        }
+
+        
+
 
         private void LoadComboBox()
         {
@@ -69,6 +117,8 @@ namespace PalcoNet.Generar_Publicacion
                     repoPublicacion.InsertPublicacionesList(publicacionesList);
                     MessageBox.Show("Publicaciones insertadas correctamente.");
                     ClearAll();
+
+                    
                 }
                 else
                 {
@@ -78,13 +128,14 @@ namespace PalcoNet.Generar_Publicacion
             }
             else
             {
-                if (FormDataOK())
+                if (FormDataOK() && !ExistsPublicacionMismaHora(txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
                 {
                     LoadData(publicacion, 2);
-                    repoPublicacion.InsertPublicacion(publicacion);
+                    repoPublicacion.InsertOrUpdatePublicacion(publicacion);
                     MessageBox.Show("Publicación insertada correctamente.");
                     ClearAll();
-                    
+
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
@@ -110,6 +161,8 @@ namespace PalcoNet.Generar_Publicacion
                     repoPublicacion.InsertPublicacionesList(publicacionesList);
                     MessageBox.Show("Las publicaciones se guardaron en el borrador, puede editarlas desde la opción EDITAR PUBLICACIÓN");
                     ClearAll();
+
+                    
                 }
                 else
                 {
@@ -119,13 +172,13 @@ namespace PalcoNet.Generar_Publicacion
             }
             else
             {
-                if (FormDataOK())
+                if (FormDataOK() && !ExistsPublicacionMismaHora(txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
                 {
                     LoadData(publicacion, 1);
-                    repoPublicacion.InsertPublicacion(publicacion);
+                    repoPublicacion.InsertOrUpdatePublicacion(publicacion);
                     MessageBox.Show("La publicación se guardó en el borrador, puede editarla desde la opción EDITAR PUBLICACIÓN");
                     ClearAll();
-
+                    this.DialogResult = DialogResult.OK;
                 }
                 else
                 {
@@ -134,6 +187,19 @@ namespace PalcoNet.Generar_Publicacion
                 }
             }
 
+        }
+
+        private Boolean ExistsPublicacionMismaHora(String descripcionPublicacion, DateTime fechaHoraEvento)
+        {
+            if (repoPublicacion.ExistsPublicacionMismaHora(descripcionPublicacion, fechaHoraEvento))
+            {
+                errorMessage += "Ya existe un espectáculo del mismo nombre en la fecha ingresada.\n";
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void btnProgramarFechas_Click(object sender, EventArgs e)
@@ -240,6 +306,12 @@ namespace PalcoNet.Generar_Publicacion
         private Boolean FormDataOK()
         {
             int errorCount = 0;
+      
+            //if (checkBoxVariasFechas.Enabled == false) //si está desabilitado significa que es una edicion de "una" publicación
+            //{
+            //    if (dateTimePickerFechaInicio.Value <= SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
+            //}
+
             if (!checkBoxVariasFechas.Checked)
             {
                 if (!(dateTimePickerFechaInicio.Value < dateTimePickerFechaEvento.Value)) { errorMessage += "La fecha de evento debe ser posterior a la fecha de inicio.\n"; errorCount++; }
@@ -247,12 +319,17 @@ namespace PalcoNet.Generar_Publicacion
             else
             {
                 if (publicacionesList.Count == 0) { errorMessage += "No hay fechas ingresadas para la publicación."; errorCount++; }
-            }    
+            }
+            if (dateTimePickerFechaInicio.Value <= SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
             if (String.IsNullOrEmpty(txtNombrePublicacion.Text.ToString())) { errorMessage += "El campo Nombre está vacio.\n"; errorCount++; }
             if (String.IsNullOrEmpty(txtDireccion.Text.ToString())) { errorMessage += "El campo Dirección está vacio.\n"; errorCount++; }
+            if (String.IsNullOrEmpty(comboBoxGrado.Text)) { errorMessage += "Seleccione un Grado válido para la publicación"; errorCount++; }
             if (publicacion.Ubicaciones.Count == 0) { errorMessage += "La publicacion no tiene Ubicaciones.\n"; errorCount++; }
+
+
             return errorCount == 0;
         }
+      
 
         private void txtNombrePublicacion_KeyPress(object sender, KeyPressEventArgs e)
         {
