@@ -18,7 +18,7 @@ namespace PalcoNet.Repositorios
         {
             SqlCommand command = new SqlCommand();
             String query = "select p.* from " + table + " p where 1 = 1 ";
-            query += SqlHelper.AddFilter("p", "Premio_puntos", puntos, command);
+            query += SqlHelper.AddFilterLessOrEqualsThan("p", "Premio_Puntos", puntos, command);
             command.CommandText = query;
             return FromRowsToPremios(Conexion.GetData(command));
         }

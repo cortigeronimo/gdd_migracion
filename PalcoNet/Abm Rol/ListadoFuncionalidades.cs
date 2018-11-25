@@ -17,6 +17,7 @@ namespace PalcoNet.Abm_Rol
     {
         List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
         private Funcionalidad elegida;
+        private RepoRol repoRol = new RepoRol();
 
         public Funcionalidad Elegida
         {
@@ -28,40 +29,24 @@ namespace PalcoNet.Abm_Rol
             InitializeComponent();
         }
 
-        private void ListadoFuncionalidades_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         //Botón Buscar
-        private void button2_Click(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            RepoRol repoRol = new RepoRol();
-            string filtro = (textBox1.Text == null) ? "" : textBox1.Text;
+            string filtro = (txtNombre.Text == null) ? "" : txtNombre.Text;
             funcionalidades = repoRol.GetFuncionalidades(filtro);
-            listBox1.DataSource = funcionalidades.Select<Funcionalidad, string>(x => x.Nombre).ToList();
+            listBoxFuncionalidades.DataSource = funcionalidades.Select<Funcionalidad, string>(x => x.Nombre).ToList();
         }
 
         //Botón Seleccionar
-        private void button1_Click(object sender, EventArgs e)
+        private void Seleccionar_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null)
+            if (listBoxFuncionalidades.SelectedItem != null)
             {
-                elegida = funcionalidades.Find(x => x.Nombre == (string)listBox1.SelectedItem);
+                elegida = funcionalidades.Find(x => x.Nombre == (string)listBoxFuncionalidades.SelectedItem);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            else MessageBox.Show("Elegí una funcionalidad amiguero");
+            else MessageBox.Show("Elija una funcionalidad, por favor.");
 
         }
     }

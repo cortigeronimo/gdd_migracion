@@ -12,7 +12,6 @@ namespace PalcoNet.Repositorios
     public class RepoCliente
     {
         private String clienteTable = "PLEASE_HELP.Cliente";
-        private String usuarioTable = "PLEASE_HELP.Usuario";
 
         public void InsertCliente(Cliente cliente)
         {
@@ -63,6 +62,14 @@ namespace PalcoNet.Repositorios
             SqlCommand command = new SqlCommand(query);
             DataTable table = Conexion.GetData(command);
             return table;
+        }
+
+        public int GetPuntosClienteById(int id)
+        {
+            String query = "SELECT Cli_Puntos FROM " + clienteTable + " WHERE Cli_Usuario = @Id";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@Id", id);
+            return (int)Conexion.GetData(command).Rows[0]["Cli_Puntos"];
         }
 
 

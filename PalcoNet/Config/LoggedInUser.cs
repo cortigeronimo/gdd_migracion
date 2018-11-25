@@ -14,9 +14,9 @@ namespace PalcoNet.Config
 
         public static void Initialize()
         {
-            //ID = null;
+
             Username = String.Empty;
-            //Rol = null;
+
         }
     }
 }

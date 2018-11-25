@@ -10,13 +10,25 @@ namespace PalcoNet.Utils
 {
     class SqlHelper
     {
-        public static String AddFilter(String alias, String columnName, String value, SqlCommand command)
+        public static String AddFilterEqualsThan(String alias, String columnName, String value, SqlCommand command)
         {
             String filter = "";
             if (value != "")
             {
 
                 filter += "and " + alias + "." + columnName + " = " + "@" + columnName + " ";
+                command.Parameters.AddWithValue("@" + columnName, value);
+            }
+            return filter;
+        }
+
+        public static String AddFilterLessOrEqualsThan(String alias, String columnName, String value, SqlCommand command)
+        {
+            String filter = "";
+            if (value != "")
+            {
+
+                filter += "and " + alias + "." + columnName + " <= " + "@" + columnName + " ";
                 command.Parameters.AddWithValue("@" + columnName, value);
             }
             return filter;
