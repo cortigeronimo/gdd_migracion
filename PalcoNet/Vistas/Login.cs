@@ -92,7 +92,6 @@ namespace PalcoNet
                 {
                     if (repo.ValidPassword(user))
                     {
-                        MessageBox.Show("Login Correcto");
                         if (!user.isAdmin)
                             repo.CleanFailedAttemps(user);
                         return true;

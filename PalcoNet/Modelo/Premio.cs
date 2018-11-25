@@ -18,5 +18,10 @@ namespace PalcoNet.Modelo
             this.descripcion = descripcion;
             this.puntos = puntos;
         }
+
+        public override string ToString()
+        {
+            return descripcion + " -> " + puntos.ToString() + " puntos";
+        }
     }
 }

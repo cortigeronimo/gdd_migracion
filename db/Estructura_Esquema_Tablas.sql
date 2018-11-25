@@ -162,6 +162,7 @@ create table PLEASE_HELP.Cliente
 	Cli_Fecha_Nac datetime,
 	Cli_Fecha_Creacion datetime,
 	Cli_Tarjeta_Credito nvarchar(255),
+	Cli_Puntos int NOT NULL DEFAULT 0,
 	Cli_Habilitado bit DEFAULT 1,
 	Cli_Intentos_Fallidos smallint DEFAULT 0,
 	Cli_Baja bit DEFAULT 0,
@@ -577,7 +578,21 @@ WHERE G.Factura_Nro IS NOT NULL
 
 GO
 
+INSERT INTO PLEASE_HELP.Premio 
+VALUES ('Heladera', 30000),
+('Bicicleta', 1500),
+('Pava Eléctrica', 300),
+('Juego de Platos', 200),
+('Microondas', 1700),
+('Ventilador de piso', 2300),
+('Pelota de Futbol', 500),
+('Viaje a miami', 35000),
+('Televisor LCD 60 pulgadas', 32000),
+('Plancha', 450),
+('Voucher $999 en Falabella', 900),
+('Cenicero', 70)
 
+GO
 
 -- STORED PROCEDURES LOGIN
 

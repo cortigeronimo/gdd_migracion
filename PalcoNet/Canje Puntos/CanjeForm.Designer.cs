@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtBusquedaPuntos = new System.Windows.Forms.TextBox();
             this.lblPuntosDisponibles = new System.Windows.Forms.Label();
             this.txtPuntosDisponibles = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBoxPremios = new System.Windows.Forms.ListBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnComprar = new System.Windows.Forms.Button();
@@ -43,20 +43,13 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtDescripcion);
+            this.groupBox1.Controls.Add(this.txtBusquedaPuntos);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(228, 82);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Busqueda";
-            // 
-            // txtDescripcion
-            // 
-            this.txtDescripcion.Location = new System.Drawing.Point(6, 45);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(145, 20);
-            this.txtDescripcion.TabIndex = 0;
             // 
             // label1
             // 
@@ -66,6 +59,13 @@
             this.label1.Size = new System.Drawing.Size(107, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Productos menores a";
+            // 
+            // txtBusquedaPuntos
+            // 
+            this.txtBusquedaPuntos.Location = new System.Drawing.Point(6, 45);
+            this.txtBusquedaPuntos.Name = "txtBusquedaPuntos";
+            this.txtBusquedaPuntos.Size = new System.Drawing.Size(145, 20);
+            this.txtBusquedaPuntos.TabIndex = 0;
             // 
             // lblPuntosDisponibles
             // 
@@ -84,13 +84,13 @@
             this.txtPuntosDisponibles.Size = new System.Drawing.Size(151, 20);
             this.txtPuntosDisponibles.TabIndex = 2;
             // 
-            // listBox1
+            // listBoxPremios
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 197);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(228, 121);
-            this.listBox1.TabIndex = 3;
+            this.listBoxPremios.FormattingEnabled = true;
+            this.listBoxPremios.Location = new System.Drawing.Point(12, 197);
+            this.listBoxPremios.Name = "listBoxPremios";
+            this.listBoxPremios.Size = new System.Drawing.Size(228, 121);
+            this.listBoxPremios.TabIndex = 3;
             // 
             // btnBuscar
             // 
@@ -120,6 +120,7 @@
             this.btnComprar.TabIndex = 6;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
             // CanjeForm
             // 
@@ -129,7 +130,7 @@
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBoxPremios);
             this.Controls.Add(this.txtPuntosDisponibles);
             this.Controls.Add(this.lblPuntosDisponibles);
             this.Controls.Add(this.groupBox1);
@@ -146,10 +147,10 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.TextBox txtBusquedaPuntos;
         private System.Windows.Forms.Label lblPuntosDisponibles;
         private System.Windows.Forms.TextBox txtPuntosDisponibles;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxPremios;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnComprar;
