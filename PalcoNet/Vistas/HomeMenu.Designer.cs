@@ -29,8 +29,6 @@ namespace PalcoNet.Vistas
         /// </summary>
         private void InitializeComponent()
         {
-            
-
             this.lblPalcoNet = new System.Windows.Forms.Label();
             this.menuStripHome = new System.Windows.Forms.MenuStrip();
             this.menúToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +70,7 @@ namespace PalcoNet.Vistas
             this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
             this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 

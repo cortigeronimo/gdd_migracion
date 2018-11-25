@@ -8,15 +8,15 @@ namespace PalcoNet.Config
 {
     public static class LoggedInUser
     {
-        public static int? ID { get; set; }
+        public static int ID { get; set; }
         public static String Username { get; set; }
-        public static int? Rol { get; set; }
+        public static int Rol { get; set; }
 
         public static void Initialize()
         {
-            ID = null;
+            //ID = null;
             Username = String.Empty;
-            Rol = null;
+            //Rol = null;
         }
     }
 }

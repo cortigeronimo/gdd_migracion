@@ -53,7 +53,7 @@ namespace PalcoNet
 
                     LoggedInUser.ID = user.id;
                     LoggedInUser.Username = user.username;
-                    LoggedInUser.Rol = rol.Id;
+                    LoggedInUser.Rol = rol.id;
                     
                     FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
                 }
@@ -143,7 +143,7 @@ namespace PalcoNet
 
         private void Login_Load(object sender, EventArgs e)
         {
-            LoggedInUser.Initialize();
+            //LoggedInUser.Initialize();
         }
 
 
@@ -159,10 +159,19 @@ namespace PalcoNet
 
         private void TakeRolFromUser(Usuario user, Rol rol)
         {
-            List<Rol> rolList = user.GetRoles();
-            rol.nombre = rolList[0].nombre;
-            rol.id = rolList[0].id;
-            rol.habilitado = rolList[0].habilitado;
+            if (user.isAdmin)
+            {
+                rol.id = 2;
+                rol.nombre = "ADMINISTRATIVO";
+            }
+            else
+            {
+                List<Rol> rolList = user.GetRoles();
+                rol.nombre = rolList[0].nombre;
+                rol.id = rolList[0].id;
+                rol.habilitado = rolList[0].habilitado;
+            }
+            
         }
 
         private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

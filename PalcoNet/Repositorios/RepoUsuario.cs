@@ -47,6 +47,45 @@ namespace PalcoNet.Repositorios
         }
         */
 
+
+        public void ChangePassword(String password)
+        {
+            String sp = "PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            byte[] hashPassword = Hashing.GetSHA256Encrypt(password);
+
+            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
+            cmd.Parameters.AddWithValue("@password", hashPassword);
+
+            Conexion.ExecuteProcedure(cmd);
+        }
+
+
+
+        public Boolean FirstLogin()
+        {
+            String sp = "PLEASE_HELP.SP_PRIMER_LOGIN";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
+            cmd.Parameters.AddWithValue("@idRol", LoggedInUser.Rol);
+
+            SqlParameter firstLogin = new SqlParameter("@primerLogin", SqlDbType.Bit);
+            firstLogin.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(firstLogin);
+
+            Conexion.ExecuteProcedure(cmd);
+            return Convert.ToBoolean(firstLogin.Value);
+
+        }
+
+        
+
+
+
         //Verifica si el usario existe en la DB
         public Boolean ExistsUser(Usuario user)
         {
@@ -85,6 +124,7 @@ namespace PalcoNet.Repositorios
             if (IsAdmin(user))
             {
                 user.isAdmin = true;
+                
                 return true;
             }
             else

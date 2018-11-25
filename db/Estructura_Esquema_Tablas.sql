@@ -90,6 +90,10 @@ IF OBJECT_ID('PLEASE_HELP.SP_UPDATE_PUBLICACION') IS NOT NULL DROP PROCEDURE PLE
 
 IF OBJECT_ID('PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_PRIMER_LOGIN;
+
+IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA;
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -100,6 +104,7 @@ IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE') IS NOT NULL DROP TRI
 
 IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA;
 
+IF OBJECT_ID('PLEASE_HELP.TR_AFTER_FIRST_LOGIN') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN;
 
 -- CREANDO ESTRUCTURAS DE TABLAS
 
@@ -165,6 +170,7 @@ create table PLEASE_HELP.Cliente
 	Cli_Habilitado bit DEFAULT 1,
 	Cli_Intentos_Fallidos smallint DEFAULT 0,
 	Cli_Baja bit DEFAULT 0,
+	Cli_Primer_Login bit DEFAULT 0,
 	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario)
 )
 
@@ -184,6 +190,7 @@ create table PLEASE_HELP.Empresa
 	Emp_Habilitado bit DEFAULT 1,
 	Emp_Intentos_Fallidos smallint DEFAULT 0,
 	Emp_Baja bit DEFAULT 0,
+	Emp_Primer_Login bit DEFAULT 0,
 	CONSTRAINT PK_EMPRESA_USUARIO PRIMARY KEY (Emp_Usuario)
 )
 
@@ -581,6 +588,13 @@ GO
 
 -- STORED PROCEDURES LOGIN
 
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA(@idUser INT, @password VARBINARY(255))
+AS
+BEGIN
+UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
+END
+GO
+
 CREATE PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_CLIENTE(@userId INT)
 AS
 BEGIN
@@ -638,6 +652,23 @@ BEGIN
 END
 GO
 
+
+CREATE PROCEDURE PLEASE_HELP.SP_PRIMER_LOGIN(@idUser INT, @idRol INT, @primerLogin BIT output)
+AS 
+BEGIN
+	DECLARE @rolName VARCHAR(50)
+	SELECT @rolName = Rol_Nombre FROM PLEASE_HELP.Rol WHERE Rol_Id = @idRol
+
+	IF @rolName = 'ADMINISTRATIVO'
+		SET @primerLogin = 0
+	IF @rolName = 'EMPRESA'
+		SELECT @primerLogin = Emp_Primer_Login FROM PLEASE_HELP.Empresa WHERE Emp_Usuario = @idUser
+	IF @rolName = 'CLIENTE'	
+		SELECT @primerLogin = Cli_Primer_Login FROM PLEASE_HELP.Cliente WHERE Cli_Usuario = @idUser
+	
+END
+GO
+
 -- STORED PROCEDURES ROL
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_FUNCIONALIDADES(@idRol INT) 
@@ -649,14 +680,14 @@ GO
 
 
 -- STORED PROCEDURES ABM CLIENTE
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255))
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
 AS
 BEGIN
 	BEGIN TRANSACTION
 		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
 			VALUES (@username, @password)
-		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito)
-			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito) 
+		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito, Cli_Primer_Login)
+			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito, @firstLogin) 
 	COMMIT TRANSACTION
 END
 GO
@@ -742,9 +773,10 @@ END
 GO
 
 
-CREATE PROCEDURE PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA(@descripcion NVARCHAR(255), @fechaEvento DATETIME)
+CREATE PROCEDURE PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA(@codigoPublicacion NUMERIC(18,0), @descripcion NVARCHAR(255), @fechaEvento DATETIME)
 AS 
 SELECT * FROM PLEASE_HELP.Publicacion WHERE Pub_Descripcion = @descripcion AND CONVERT(DATE,Pub_Fecha_Evento) = CONVERT(DATE,@fechaEvento) AND DATEPART(hour,Pub_Fecha_Evento) = DATEPART(hour,@fechaEvento) AND DATEPART(minute,Pub_Fecha_Evento) = DATEPART(minute,@fechaEvento)
+												AND Pub_Codigo != @codigoPublicacion
 GO
 	
 -- TRIGGERS LOGIN
@@ -800,5 +832,25 @@ BEGIN
 		VALUES (@userId, 1)
 END
 GO
- 
 
+
+CREATE TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN
+ON PLEASE_HELP.Usuario
+AFTER UPDATE
+AS
+BEGIN
+	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Cliente INNER JOIN inserted i ON Cli_Usuario = i.Usuario_Id)
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Cli_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Cliente ON Usuario_Id = Cli_Usuario) = 1
+			UPDATE PLEASE_HELP.Cliente SET Cli_Primer_Login = 0 WHERE Cli_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+	
+	ELSE
+
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Emp_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Empresa ON Usuario_Id = Emp_Usuario) = 1
+			UPDATE PLEASE_HELP.Empresa SET Emp_Primer_Login = 0 WHERE Emp_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+
+END	
+GO

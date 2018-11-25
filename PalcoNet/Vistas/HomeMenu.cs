@@ -29,6 +29,7 @@ namespace PalcoNet.Vistas
     public partial class HomeMenu : CustomForm
     {
         RepoRol repo = new RepoRol();
+        RepoUsuario repoUsuario = new RepoUsuario();
 
         private Usuario user = new Usuario();
         private Rol rol = new Rol();
@@ -40,6 +41,8 @@ namespace PalcoNet.Vistas
 
             this.user.id = (int)LoggedInUser.ID;
             this.rol.id = (int)LoggedInUser.Rol;
+
+            
             
         }
 
@@ -47,11 +50,31 @@ namespace PalcoNet.Vistas
         {
             base.OnFormClosing(e);
             Application.Exit();
-        } 
+        }
+
+        private Boolean FirstLogin()
+        {
+            return repoUsuario.FirstLogin();
+        }
+
 
         private void HomeMenu_Load(object sender, EventArgs e)
         {
             LoadFuncionalidades();
+
+            if (FirstLogin())
+            {
+                using (FormChangePassword form = new FormChangePassword())
+                {
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        form.Close();
+                    }
+                }
+            }
+            
+
         }
 
 
@@ -281,6 +304,18 @@ namespace PalcoNet.Vistas
         private void listadoEstadistico_Click(object sender, EventArgs e)
         {
             MessageBox.Show("soy el form de lsitado estadistico");
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormChangePassword form = new FormChangePassword())
+            {
+                DialogResult result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    form.Close();
+                }
+            }
         }
 
         

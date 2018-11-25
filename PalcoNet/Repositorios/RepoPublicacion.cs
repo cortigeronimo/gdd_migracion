@@ -17,13 +17,31 @@ namespace PalcoNet.Repositorios
     {
         private String publicacionTable = "PLEASE_HELP.Publicacion";
 
-        public Boolean ExistsPublicacionMismaHora(String descripcion, DateTime fechaHora)
+        //public Boolean ExistsPublicacionMismaHora(String descripcion, DateTime fechaHora)
+        //{
+        //    String query = "PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA";
+
+        //    SqlCommand cmd = new SqlCommand(query);
+        //    cmd.CommandType = CommandType.StoredProcedure;
+
+        //    cmd.Parameters.AddWithValue("@descripcion", descripcion);
+        //    cmd.Parameters.AddWithValue("@fechaEvento", fechaHora);
+
+        //    DataTable result = Conexion.GetData(cmd);
+
+        //    return result.Rows.Count != 0;
+
+
+        //}
+
+        public Boolean ExistsPublicacionMismaHora(long codigoPublicacion, String descripcion, DateTime fechaHora)
         {
             String query = "PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA";
 
             SqlCommand cmd = new SqlCommand(query);
             cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.AddWithValue("@codigoPublicacion", codigoPublicacion);
             cmd.Parameters.AddWithValue("@descripcion", descripcion);
             cmd.Parameters.AddWithValue("@fechaEvento", fechaHora);
 
@@ -33,6 +51,7 @@ namespace PalcoNet.Repositorios
 
 
         }
+
 
         public void InsertOrUpdatePublicacion(Publicacion publicacion)
         {

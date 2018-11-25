@@ -128,7 +128,7 @@ namespace PalcoNet.Generar_Publicacion
             }
             else
             {
-                if (FormDataOK() && !ExistsPublicacionMismaHora(txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
+                if (FormDataOK() && !ExistsPublicacionMismaHora(publicacion.Codigo, txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
                 {
                     LoadData(publicacion, 2);
                     repoPublicacion.InsertOrUpdatePublicacion(publicacion);
@@ -172,7 +172,7 @@ namespace PalcoNet.Generar_Publicacion
             }
             else
             {
-                if (FormDataOK() && !ExistsPublicacionMismaHora(txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
+                if (FormDataOK() && !ExistsPublicacionMismaHora(publicacion.Codigo, txtNombrePublicacion.Text, dateTimePickerFechaEvento.Value))
                 {
                     LoadData(publicacion, 1);
                     repoPublicacion.InsertOrUpdatePublicacion(publicacion);
@@ -189,9 +189,9 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
-        private Boolean ExistsPublicacionMismaHora(String descripcionPublicacion, DateTime fechaHoraEvento)
+        private Boolean ExistsPublicacionMismaHora(long publicacionCodigo, String descripcionPublicacion, DateTime fechaHoraEvento)
         {
-            if (repoPublicacion.ExistsPublicacionMismaHora(descripcionPublicacion, fechaHoraEvento))
+            if (repoPublicacion.ExistsPublicacionMismaHora(publicacionCodigo, descripcionPublicacion, fechaHoraEvento))
             {
                 errorMessage += "Ya existe un espectáculo del mismo nombre en la fecha ingresada.\n";
                 return true;
@@ -320,7 +320,7 @@ namespace PalcoNet.Generar_Publicacion
             {
                 if (publicacionesList.Count == 0) { errorMessage += "No hay fechas ingresadas para la publicación."; errorCount++; }
             }
-            if (dateTimePickerFechaInicio.Value <= SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
+            if (dateTimePickerFechaInicio.Value < SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
             if (String.IsNullOrEmpty(txtNombrePublicacion.Text.ToString())) { errorMessage += "El campo Nombre está vacio.\n"; errorCount++; }
             if (String.IsNullOrEmpty(txtDireccion.Text.ToString())) { errorMessage += "El campo Dirección está vacio.\n"; errorCount++; }
             if (String.IsNullOrEmpty(comboBoxGrado.Text)) { errorMessage += "Seleccione un Grado válido para la publicación"; errorCount++; }

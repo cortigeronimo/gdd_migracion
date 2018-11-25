@@ -35,8 +35,22 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
             command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
             if (String.IsNullOrEmpty(cliente.tarjetaCredito)) command.Parameters.AddWithValue("@tarjetacredito", DBNull.Value); else command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
+
+            if (String.IsNullOrEmpty(cliente.username))
+            {
+                cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
+                cliente.SetPassword(cliente.nroDocumento.ToString());
+
+                command.Parameters.AddWithValue("@firstLogin", 1);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@firstLogin", 0);
+            }
+            
             command.Parameters.AddWithValue("@username", cliente.username);
             command.Parameters.AddWithValue("@password", cliente.GetPassword());
+            
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
