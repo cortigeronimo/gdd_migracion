@@ -17,14 +17,12 @@ namespace PalcoNet.Abm_Rol
     {
         private BindingSource bindingSource = new BindingSource();
         List<Rol> rolesFiltrados = new List<Rol>();
-        Rol elegido;
 
         public ListadoRol()
         {
             InitializeComponent();
             dataGridRoles.AutoGenerateColumns = false;
             comboBoxHabilitado.Text = "Sí";
-            Console.WriteLine(txtNombre.Text);
         }
 
         private void ListadoRol_Load(object sender, EventArgs e)
@@ -48,17 +46,14 @@ namespace PalcoNet.Abm_Rol
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(txtNombre.Text);
         }
         
         private void comboBoxHabiliitado_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(comboBoxHabilitado.Text);
         }
 
         private void txtFuncionalidad_TextChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(txtFuncionalidad.Text);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -74,16 +69,25 @@ namespace PalcoNet.Abm_Rol
         {
             if (e.ColumnIndex == dataGridRoles.Columns["Seleccionar"].Index)
             {
-                string nombre = (string)dataGridRoles.CurrentRow.Cells[1].Value;
-                bool habilitado = (bool)dataGridRoles.CurrentRow.Cells[2].Value;
-                using (ModificarRol form = new ModificarRol(nombre,habilitado ? "Sí" : "No"))
+                Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
+                rol.funcionalidades = new RepoRol().GetFuncionalidades(rol.Id);
+                using (ModificarRol form = new ModificarRol(rol))
                 {
                     DialogResult result = form.ShowDialog();
                 }
             }
             if (e.ColumnIndex == dataGridRoles.Columns["Eliminar"].Index)
             {
-                Console.WriteLine("Eliminaste el registro amiguero");
+                Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
+                rol.funcionalidades = new RepoRol().GetFuncionalidades(rol.Id);
+                
+                var confirmResult = MessageBox.Show("Eliminar el rol " + rol.Nombre + " ??",
+                                     "Confirmar eliminación",
+                                     MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    MessageBox.Show("Rol "+ rol.Nombre + " eliminado");
+                }
             }
         }
     }

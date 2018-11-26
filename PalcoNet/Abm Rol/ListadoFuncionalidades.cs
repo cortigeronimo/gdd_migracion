@@ -15,7 +15,8 @@ namespace PalcoNet.Abm_Rol
 {
     public partial class ListadoFuncionalidades : CustomForm
     {
-        List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
+        private List<Funcionalidad> funcionalidades;
+        private Rol rol;
         private Funcionalidad elegida;
 
         public Funcionalidad Elegida
@@ -28,6 +29,11 @@ namespace PalcoNet.Abm_Rol
             InitializeComponent();
         }
 
+        public ListadoFuncionalidades(Rol _rol)
+        {
+            InitializeComponent();
+            rol = _rol;
+        }
         private void ListadoFuncionalidades_Load(object sender, EventArgs e)
         {
 
@@ -57,6 +63,12 @@ namespace PalcoNet.Abm_Rol
         {
             if (listBox1.SelectedItem != null)
             {
+                
+                if (rol != null && rol.funcionalidades != null && rol.funcionalidades.Exists(funcionalidad => funcionalidad.Nombre == (string)listBox1.SelectedItem))
+                {
+                    MessageBox.Show("El rol " + rol.Nombre + " ya tiene esa funcionalidad");
+                    return;
+                }
                 elegida = funcionalidades.Find(x => x.Nombre == (string)listBox1.SelectedItem);
                 this.DialogResult = DialogResult.OK;
                 this.Close();

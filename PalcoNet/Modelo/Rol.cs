@@ -11,16 +11,23 @@ namespace PalcoNet.Modelo
         public int id;
         public string nombre;
         public bool habilitado;
+        public List<Funcionalidad> funcionalidades = new List<Funcionalidad>();
 
         public string Nombre { get { return nombre; } }
         public bool Habilitado { get { return habilitado; } }
-        public int Id { get { return id; } }
+        public int Id { get { return id; } } 
 
         public Rol(){}
 
         public Rol(int id, string nombre, bool habilitado)
         {
             this.id = id;
+            this.nombre = nombre;
+            this.habilitado = habilitado;
+        }
+
+        public Rol(string nombre, bool habilitado)
+        {
             this.nombre = nombre;
             this.habilitado = habilitado;
         }

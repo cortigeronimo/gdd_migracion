@@ -57,6 +57,12 @@
     <Compile Include="Abm Cliente\UpdateCliente.Designer.cs">
       <DependentUpon>UpdateCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Empresa Espectaculo\ListadoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa Espectaculo\ListadoEmpresa.Designer.cs">
+      <DependentUpon>ListadoEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Grado\CreateGrado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,12 @@
     </Compile>
     <Compile Include="Abm Grado\UpdateGrado.Designer.cs">
       <DependentUpon>UpdateGrado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\AltaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\AltaRol.Designer.cs">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\ListadoFuncionalidades.cs">
       <SubType>Form</SubType>
@@ -210,11 +222,17 @@
     <EmbeddedResource Include="Abm Cliente\UpdateCliente.resx">
       <DependentUpon>UpdateCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Empresa Espectaculo\ListadoEmpresa.resx">
+      <DependentUpon>ListadoEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\ListGrado.resx">
       <DependentUpon>ListGrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\UpdateGrado.resx">
       <DependentUpon>UpdateGrado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\ListadoFuncionalidades.resx">
       <DependentUpon>ListadoFuncionalidades.cs</DependentUpon>
@@ -274,9 +292,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abm Empresa Espectaculo\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

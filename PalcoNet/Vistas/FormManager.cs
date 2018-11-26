@@ -11,6 +11,7 @@ using PalcoNet.Vistas;
 using PalcoNet.Abm_Grado;
 using PalcoNet.Abm_Rol;
 using PalcoNet.Registro_de_Usuario;
+using PalcoNet.Abm_Empresa_Espectaculo;
 
 namespace PalcoNet
 {
@@ -50,8 +51,10 @@ namespace PalcoNet
             //Open(new UpdateGrado());
             //Open(new ListGrado());
             //Open(new ListadoRol());
+            //Open(new AltaRol());
             //Open(new CreateUsuario());
             //Open(new CreateUsuario());
+            Open(new ListadoEmpresa());
         }
 
         public void Open(Form form)

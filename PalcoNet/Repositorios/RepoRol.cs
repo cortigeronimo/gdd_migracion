@@ -24,6 +24,15 @@ namespace PalcoNet.Repositorios
             return FromRowsToFuncionalidades(result);
         }
 
+        public List<Funcionalidad> GetFuncionalidades(int rolId)
+        {
+            String query = "SELECT rf.Rol_Id, f.* FROM PLEASE_HELP.Rol_Funcionalidad rf INNER JOIN PLEASE_HELP.Funcionalidad f ON rf.Func_Id = f.Func_Id WHERE rf.Rol_Id = @idRol ORDER BY f.Func_Id;";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@idRol", rolId);
+            DataTable result = Conexion.GetData(command);
+            return FromRowsToFuncionalidades(result);
+        }
+
         public List<Rol> GetRoles()
         {
             String query = "select * from " + table + " ;";
@@ -50,8 +59,8 @@ namespace PalcoNet.Repositorios
             string nombre2 = "%" + nombre + "%";
             command.Parameters.AddWithValue("@nombre", nombre2);
             DataTable result = Conexion.GetData(command);
-            return FromRowsToRoles(result);
-            
+            List<Rol> roles = FromRowsToRoles(result);
+            return roles;
         }
 
         private List<Funcionalidad> FromRowsToFuncionalidades(DataTable table)
@@ -108,6 +117,16 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@idRol", rol.Id);
 
             return Conexion.GetData(command);
+        }
+
+        public void UpdateRol(Rol rol)
+        {
+            //TODO
+        }
+
+        public void CreateRol(Rol rol)
+        {
+            //TODO
         }
     }
 }
