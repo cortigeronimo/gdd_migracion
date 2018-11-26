@@ -30,6 +30,8 @@ IF OBJECT_ID('PLEASE_HELP.PUBLICACION') IS NOT NULL DROP TABLE PLEASE_HELP.PUBLI
 
 IF OBJECT_ID('PLEASE_HELP.RUBRO') IS NOT NULL DROP TABLE PLEASE_HELP.RUBRO;
 
+IF OBJECT_ID('PLEASE_HELP.ESTADO') IS NOT NULL DROP TABLE PLEASE_HELP.ESTADO;
+
 IF OBJECT_ID('PLEASE_HELP.GRADO') IS NOT NULL DROP TABLE PLEASE_HELP.GRADO;
 
 IF OBJECT_ID('PLEASE_HELP.PUNTUACION') IS NOT NULL DROP TABLE PLEASE_HELP.PUNTUACION;
@@ -72,6 +74,28 @@ IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION') IS NOT NUL
 
 IF OBJECT_ID('PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_GENERAR_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION;
+
+IF OBJECT_ID('PLEASE_HELP.SP_LISTA_PUBLICACIONES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_LISTA_PUBLICACIONES;
+
+IF OBJECT_ID('PLEASE_HELP.SP_INSERTAR_UBICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_INSERTAR_UBICACION;
+
+IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_ESTADO_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_ESTADO_PUBLICACION;
+
+IF OBJECT_ID('PLEASE_HELP.SP_GET_UBICACIONES_BY_USER') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_UBICACIONES_BY_USER;
+
+IF OBJECT_ID('PLEASE_HELP.SP_DELETE_PUBLICACION_UBICACIONES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_DELETE_PUBLICACION_UBICACIONES;
+
+IF OBJECT_ID('PLEASE_HELP.SP_UPDATE_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_UPDATE_PUBLICACION;
+
+IF OBJECT_ID('PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA;
+
+IF OBJECT_ID('PLEASE_HELP.SP_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_PRIMER_LOGIN;
+
+IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA;
+
+IF OBJECT_ID('PLEASE_HELP.SP_CANJEAR_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS;
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -82,6 +106,7 @@ IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE') IS NOT NULL DROP TRI
 
 IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA;
 
+IF OBJECT_ID('PLEASE_HELP.TR_AFTER_FIRST_LOGIN') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN;
 
 -- CREANDO ESTRUCTURAS DE TABLAS
 
@@ -144,9 +169,11 @@ create table PLEASE_HELP.Cliente
 	Cli_Fecha_Nac datetime,
 	Cli_Fecha_Creacion datetime,
 	Cli_Tarjeta_Credito nvarchar(255),
+	Cli_Puntos int NOT NULL DEFAULT 0,
 	Cli_Habilitado bit DEFAULT 1,
 	Cli_Intentos_Fallidos smallint DEFAULT 0,
 	Cli_Baja bit DEFAULT 0,
+	Cli_Primer_Login bit DEFAULT 0,
 	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario)
 )
 
@@ -166,6 +193,7 @@ create table PLEASE_HELP.Empresa
 	Emp_Habilitado bit DEFAULT 1,
 	Emp_Intentos_Fallidos smallint DEFAULT 0,
 	Emp_Baja bit DEFAULT 0,
+	Emp_Primer_Login bit DEFAULT 0,
 	CONSTRAINT PK_EMPRESA_USUARIO PRIMARY KEY (Emp_Usuario)
 )
 
@@ -179,7 +207,7 @@ create table PLEASE_HELP.Publicacion
 	Pub_Rubro int,
 	Pub_Grado int,
 	Pub_Empresa int,
-	Pub_Estado nvarchar(255),
+	Pub_Estado int,
 	CONSTRAINT PK_PUBLICACION_CODIGO PRIMARY KEY (Pub_Codigo),
 )
 
@@ -189,6 +217,14 @@ create table PLEASE_HELP.Rubro
 	Rubro_Descripcion nvarchar(255),
 	CONSTRAINT PK_RUBRO_ID PRIMARY KEY (Rubro_Id),
 	CONSTRAINT UQ_RUBRO_DESCRIPCION UNIQUE (Rubro_Descripcion)
+)
+
+create table PLEASE_HELP.Estado
+(
+	Estado_Id int identity(1,1),
+	Estado_Descripcion nvarchar (255),
+	CONSTRAINT PK_ESTADO_ID PRIMARY KEY (Estado_Id),
+	CONSTRAINT UQ_ESTADO_DESCRIPCION UNIQUE (Estado_Descripcion)
 )
 
 create table PLEASE_HELP.Grado
@@ -302,7 +338,8 @@ GO
 ALTER TABLE PLEASE_HELP.Publicacion
 ADD CONSTRAINT FK_PUBLICACION_GRADO FOREIGN KEY (Pub_Grado) REFERENCES PLEASE_HELP.Grado(Grado_Id),
 CONSTRAINT FK_PUBLICACION_EMPRESA FOREIGN KEY (Pub_Empresa) REFERENCES PLEASE_HELP.Empresa(Emp_Usuario),
-CONSTRAINT FK_PUBLICACION_RUBRO FOREIGN KEY (Pub_Rubro) REFERENCES PLEASE_HELP.Rubro(Rubro_Id)
+CONSTRAINT FK_PUBLICACION_RUBRO FOREIGN KEY (Pub_Rubro) REFERENCES PLEASE_HELP.Rubro(Rubro_Id),
+CONSTRAINT FK_PUBLICACION_ESTADO FOREIGN KEY (Pub_Estado) REFERENCES PLEASE_HELP.EStado(Estado_Id)
 
 GO
 
@@ -475,8 +512,15 @@ GO
 
 INSERT INTO PLEASE_HELP.Rubro SELECT DISTINCT Espectaculo_Rubro_Descripcion from gd_esquema.Maestra
 
--- CREACION DE PUBLICACION
 GO
+
+-- CREACION DE ESTADO
+
+INSERT INTO PLEASE_HELP.Estado(Estado_Descripcion) VALUES ('BORRADOR'), ('PUBLICADA'), ('FINALIZADA')
+
+GO
+
+-- CREACION DE PUBLICACION
 
 CREATE PROCEDURE PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION AS
 BEGIN
@@ -484,7 +528,7 @@ BEGIN
 	INSERT INTO PLEASE_HELP.Publicacion (Pub_Codigo, Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion,
 	Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado)
 	SELECT DISTINCT m.Espectaculo_Cod, m.Espectaculo_Fecha, m.Espectaculo_Fecha_Venc, m.Espectaculo_Descripcion,
-	NULL, 1, NULL, e.Emp_Usuario, m.Espectaculo_Estado 
+	NULL, 1, NULL, e.Emp_Usuario, (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = m.Espectaculo_Estado)
 	FROM gd_esquema.Maestra m, PLEASE_HELP.Empresa e WHERE e.Emp_Cuit = m.Espec_Empresa_Cuit
 	SET IDENTITY_INSERT PLEASE_HELP.Publicacion OFF
 	DECLARE @maxid int;
@@ -543,9 +587,30 @@ WHERE G.Factura_Nro IS NOT NULL
 
 GO
 
+INSERT INTO PLEASE_HELP.Premio 
+VALUES ('Heladera', 30000),
+('Bicicleta', 1500),
+('Pava Eléctrica', 300),
+('Juego de Platos', 200),
+('Microondas', 1700),
+('Ventilador de piso', 2300),
+('Pelota de Futbol', 500),
+('Viaje a miami', 35000),
+('Televisor LCD 60 pulgadas', 32000),
+('Plancha', 450),
+('Voucher $999 en Falabella', 900),
+('Cenicero', 70)
 
+GO
 
 -- STORED PROCEDURES LOGIN
+
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA(@idUser INT, @password VARBINARY(255))
+AS
+BEGIN
+UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
+END
+GO
 
 CREATE PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_CLIENTE(@userId INT)
 AS
@@ -604,6 +669,23 @@ BEGIN
 END
 GO
 
+
+CREATE PROCEDURE PLEASE_HELP.SP_PRIMER_LOGIN(@idUser INT, @idRol INT, @primerLogin BIT output)
+AS 
+BEGIN
+	DECLARE @rolName VARCHAR(50)
+	SELECT @rolName = Rol_Nombre FROM PLEASE_HELP.Rol WHERE Rol_Id = @idRol
+
+	IF @rolName = 'ADMINISTRATIVO'
+		SET @primerLogin = 0
+	IF @rolName = 'EMPRESA'
+		SELECT @primerLogin = Emp_Primer_Login FROM PLEASE_HELP.Empresa WHERE Emp_Usuario = @idUser
+	IF @rolName = 'CLIENTE'	
+		SELECT @primerLogin = Cli_Primer_Login FROM PLEASE_HELP.Cliente WHERE Cli_Usuario = @idUser
+	
+END
+GO
+
 -- STORED PROCEDURES ROL
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_FUNCIONALIDADES(@idRol INT) 
@@ -615,14 +697,14 @@ GO
 
 
 -- STORED PROCEDURES ABM CLIENTE
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255))
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
 AS
 BEGIN
 	BEGIN TRANSACTION
 		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
 			VALUES (@username, @password)
-		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito)
-			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito) 
+		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito, Cli_Primer_Login)
+			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito, @firstLogin) 
 	COMMIT TRANSACTION
 END
 GO
@@ -639,6 +721,93 @@ BEGIN
 END
 GO
 
+
+-- STORED PROCEDURES GENERAR PUBLICACION
+
+CREATE PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION(@fechaInicio DATETIME, @fechaEvento DATETIME, @descripcion NVARCHAR(255), @direccion NVARCHAR(255), @rubroId INT, @gradoId INT, @empresaId INT, @estadoId INT, @idPublicacion INT output)
+AS
+BEGIN
+	BEGIN TRANSACTION
+		INSERT INTO PLEASE_HELP.Publicacion (Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado) VALUES (CONVERT(DATETIME,@fechaInicio,121), CONVERT(DATETIME,@fechaEvento,121), @descripcion, @direccion, @rubroId, @gradoId, @empresaId, @estadoId)		
+		SET @idPublicacion = @@IDENTITY
+	COMMIT TRANSACTION
+END
+GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_INSERTAR_UBICACION(@idPublicacion INT, @fila VARCHAR(3), @asiento NUMERIC(18,0), @precio NUMERIC(18,0), @descripcion NVARCHAR(255))
+AS
+BEGIN
+	INSERT INTO PLEASE_HELP.Ubicacion (Ubicacion_Publicacion, Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Precio, Ubicacion_Descripcion)
+		VALUES (@idPublicacion, @fila, @asiento, @precio, @descripcion)
+END
+GO
+
+
+-- STORED PROCEDURES EDITAR PUBLICACION
+
+CREATE PROCEDURE PLEASE_HELP.SP_LISTA_PUBLICACIONES(@idUser INT, @descripcion NVARCHAR(255))
+AS
+SELECT Pub_Codigo, Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, 
+		(SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) AS Pub_Rubro,
+		(SELECT Grado_Descripcion FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) AS Pub_Grado,
+		Pub_Empresa,
+		(SELECT Estado_Descripcion FROM PLEASE_HELP.Estado WHERE Estado_Id = Pub_Estado) AS Pub_Estado
+		
+FROM PLEASE_HELP.Publicacion
+WHERE Pub_Empresa = @idUser AND Pub_Descripcion LIKE CONCAT('%',@descripcion,'%')
+GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_ESTADO_PUBLICACION(@codigoPublicacion NUMERIC(18,0), @estado NVARCHAR(255))
+AS
+BEGIN
+	UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = @estado)
+		WHERE Pub_Codigo = @codigoPublicacion
+END
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_GET_UBICACIONES_BY_USER(@idUser INT)
+AS
+SELECT Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Precio, Ubicacion_Descripcion, Ubicacion_Publicacion
+FROM PLEASE_HELP.Publicacion INNER JOIN PLEASE_HELP.Ubicacion ON Pub_Codigo = Ubicacion_Publicacion
+WHERE Pub_Empresa = @idUser
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_DELETE_PUBLICACION_UBICACIONES(@codigoPublicacion NUMERIC(18,0))
+AS
+BEGIN
+	DELETE FROM PLEASE_HELP.Ubicacion WHERE Ubicacion_Publicacion = @codigoPublicacion
+END
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_UPDATE_PUBLICACION(@codigoPublicacion NUMERIC(18,0), @fechaInicio DATETIME, @fechaEvento DATETIME, @descripcion NVARCHAR(255), @direccion NVARCHAR(255), @rubroId INT, @gradoId INT, @estadoId INT)
+AS
+BEGIN 
+	UPDATE PLEASE_HELP.Publicacion SET Pub_Fecha_Inicio = CONVERT(DATETIME,@fechaInicio,121), Pub_Fecha_Evento = CONVERT(DATETIME,@fechaEvento,121), Pub_Descripcion = @descripcion, Pub_Direccion = @direccion, Pub_Rubro = @rubroId, Pub_Grado = @gradoId, Pub_Estado = @estadoId
+		WHERE Pub_Codigo = @codigoPublicacion
+END
+GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA(@codigoPublicacion NUMERIC(18,0), @descripcion NVARCHAR(255), @fechaEvento DATETIME)
+AS 
+SELECT * FROM PLEASE_HELP.Publicacion WHERE Pub_Descripcion = @descripcion AND CONVERT(DATE,Pub_Fecha_Evento) = CONVERT(DATE,@fechaEvento) AND DATEPART(hour,Pub_Fecha_Evento) = DATEPART(hour,@fechaEvento) AND DATEPART(minute,Pub_Fecha_Evento) = DATEPART(minute,@fechaEvento)
+												AND Pub_Codigo != @codigoPublicacion
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0))
+AS
+	DECLARE @puntosPremio int 
+	INSERT INTO PLEASE_HELP.Usuario_Premio VALUES (@idUser, @idPremio)
+	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
+	UPDATE PLEASE_HELP.Cliente SET Cli_Puntos = Cli_Puntos - @puntosPremio WHERE Cli_Usuario = @idUser
+GO
+
+EXEC PLEASE_HELP.SP_CANJEAR_PUNTOS 1 1
+
+GO
+	
 -- TRIGGERS LOGIN
 
 CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE
@@ -692,5 +861,25 @@ BEGIN
 		VALUES (@userId, 1)
 END
 GO
- 
 
+
+CREATE TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN
+ON PLEASE_HELP.Usuario
+AFTER UPDATE
+AS
+BEGIN
+	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Cliente INNER JOIN inserted i ON Cli_Usuario = i.Usuario_Id)
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Cli_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Cliente ON Usuario_Id = Cli_Usuario) = 1
+			UPDATE PLEASE_HELP.Cliente SET Cli_Primer_Login = 0 WHERE Cli_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+	
+	ELSE
+
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Emp_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Empresa ON Usuario_Id = Emp_Usuario) = 1
+			UPDATE PLEASE_HELP.Empresa SET Emp_Primer_Login = 0 WHERE Emp_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+
+END	
+GO

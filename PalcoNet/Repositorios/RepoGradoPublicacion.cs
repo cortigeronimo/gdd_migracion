@@ -54,8 +54,8 @@ namespace PalcoNet.Repositorios
         public List<Grado> GetGradosBy(String descripcion, String comision){
             SqlCommand command = new SqlCommand();
             String query = "select g.* from " + table + " g where 1 = 1 ";
-            query += SqlHelper.AddFilter("g", "Grado_Descripcion", descripcion, command);
-            query += SqlHelper.AddFilter("g", "Grado_Comision", comision, command);
+            query += SqlHelper.AddFilterEqualsThan("g", "Grado_Descripcion", descripcion, command);
+            query += SqlHelper.AddFilterEqualsThan("g", "Grado_Comision", comision, command);
             command.CommandText = query;
             return FromRowsToGrados(Conexion.GetData(command));
         }
@@ -83,6 +83,12 @@ namespace PalcoNet.Repositorios
 
         }
 
+        public DataTable GetGradosDataTable()
+        {
+            String query = "SELECT * FROM " + table;
+            SqlCommand command = new SqlCommand(query);
+            return Conexion.GetData(command);
+        }
 
     }
 }

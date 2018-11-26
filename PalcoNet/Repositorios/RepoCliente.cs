@@ -12,7 +12,6 @@ namespace PalcoNet.Repositorios
     public class RepoCliente
     {
         private String clienteTable = "PLEASE_HELP.Cliente";
-        private String usuarioTable = "PLEASE_HELP.Usuario";
 
         public void InsertCliente(Cliente cliente)
         {
@@ -35,8 +34,22 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
             command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
             if (String.IsNullOrEmpty(cliente.tarjetaCredito)) command.Parameters.AddWithValue("@tarjetacredito", DBNull.Value); else command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
+
+            if (String.IsNullOrEmpty(cliente.username))
+            {
+                cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
+                cliente.SetPassword(cliente.nroDocumento.ToString());
+
+                command.Parameters.AddWithValue("@firstLogin", 1);
+            }
+            else
+            {
+                command.Parameters.AddWithValue("@firstLogin", 0);
+            }
+            
             command.Parameters.AddWithValue("@username", cliente.username);
             command.Parameters.AddWithValue("@password", cliente.GetPassword());
+            
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
@@ -49,6 +62,14 @@ namespace PalcoNet.Repositorios
             SqlCommand command = new SqlCommand(query);
             DataTable table = Conexion.GetData(command);
             return table;
+        }
+
+        public int GetPuntosClienteById(int id)
+        {
+            String query = "SELECT Cli_Puntos FROM " + clienteTable + " WHERE Cli_Usuario = @Id";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@Id", id);
+            return (int)Conexion.GetData(command).Rows[0]["Cli_Puntos"];
         }
 
 

@@ -12,6 +12,7 @@ using PalcoNet.Repositorios;
 using PalcoNet.Abm_Cliente;
 using PalcoNet.Modelo;
 using PalcoNet.Registro_de_Usuario;
+using PalcoNet.Config;
 
 
 namespace PalcoNet
@@ -49,12 +50,14 @@ namespace PalcoNet
                 {
                     Rol rol = new Rol();
                     TakeRolFromUser(user, rol);
-                    FormManager.getInstance().OpenAndClose(new HomeMenu(user, rol), this);
+
+                    LoggedInUser.ID = user.id;
+                    LoggedInUser.Username = user.username;
+                    LoggedInUser.Rol = rol.id;
+                    
+                    FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
                 }
                   
-                    
-                    //MessageBox.Show("Abrir el menu de funcionalidades....");
-                    //por el momento message box, la idea es abrir directamnte el menu de funcionalidades, abm..etc..
                   
                 //FormManager.getInstance().open(new Menu());
 
@@ -89,7 +92,6 @@ namespace PalcoNet
                 {
                     if (repo.ValidPassword(user))
                     {
-                        MessageBox.Show("Login Correcto");
                         if (!user.isAdmin)
                             repo.CleanFailedAttemps(user);
                         return true;
@@ -140,7 +142,7 @@ namespace PalcoNet
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            //LoggedInUser.Initialize();
         }
 
 
@@ -156,10 +158,19 @@ namespace PalcoNet
 
         private void TakeRolFromUser(Usuario user, Rol rol)
         {
-            List<Rol> rolList = user.GetRoles();
-            rol.nombre = rolList[0].nombre;
-            rol.id = rolList[0].id;
-            rol.habilitado = rolList[0].habilitado;
+            if (user.isAdmin)
+            {
+                rol.id = 2;
+                rol.nombre = "ADMINISTRATIVO";
+            }
+            else
+            {
+                List<Rol> rolList = user.GetRoles();
+                rol.nombre = rolList[0].nombre;
+                rol.id = rolList[0].id;
+                rol.habilitado = rolList[0].habilitado;
+            }
+            
         }
 
         private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -22,22 +22,59 @@ using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
 using PalcoNet.Registro_de_Usuario;
 
+using PalcoNet.Config;
 
 namespace PalcoNet.Vistas
 {
     public partial class HomeMenu : CustomForm
     {
         RepoRol repo = new RepoRol();
+        RepoUsuario repoUsuario = new RepoUsuario();
 
-        public HomeMenu(Usuario _user, Rol _rol)
+        private Usuario user = new Usuario();
+        private Rol rol = new Rol();
+
+
+        public HomeMenu()
         {
-            InitializeComponent(_user, _rol);
+            InitializeComponent();
+
+            this.user.id = (int)LoggedInUser.ID;
+            this.rol.id = (int)LoggedInUser.Rol;
+
+            
             
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Application.Exit();
+        }
+
+        private Boolean FirstLogin()
+        {
+            return repoUsuario.FirstLogin();
+        }
+
 
         private void HomeMenu_Load(object sender, EventArgs e)
         {
             LoadFuncionalidades();
+
+            if (FirstLogin())
+            {
+                using (FormChangePassword form = new FormChangePassword())
+                {
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        form.Close();
+                    }
+                }
+            }
+            
+
         }
 
 
@@ -223,14 +260,14 @@ namespace PalcoNet.Vistas
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
             //abrir el form de "generar publicacion"
-            MessageBox.Show("soy el form generar publkicacion");
+            FormManager.getInstance().Open(new FormGenerarPublicacion());
         }
 
 
         //Evento click para "editar publicacion"
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form editar publicacion...");
+            FormManager.getInstance().Open(new FormEditarPublicacion());
         }
 
 
@@ -251,7 +288,8 @@ namespace PalcoNet.Vistas
         //Evento click para "canje administracion puntos"
         private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form canje de ptos..");
+            Form canjeDePuntos = new CanjeForm();
+            FormManager.getInstance().Open(canjeDePuntos);
         }
 
 
@@ -266,6 +304,18 @@ namespace PalcoNet.Vistas
         private void listadoEstadistico_Click(object sender, EventArgs e)
         {
             MessageBox.Show("soy el form de lsitado estadistico");
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FormChangePassword form = new FormChangePassword())
+            {
+                DialogResult result = form.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    form.Close();
+                }
+            }
         }
 
         

@@ -23,6 +23,7 @@ namespace PalcoNet.Modelo
         public DateTime fechaNacimiento { get; set; }
         public DateTime fechaCreacion { get; set; }
         public String tarjetaCredito { get; set; }
+        public int puntos { get; set; }
         public bool habilitado { get; set; }
         public byte intentosFallidos { get; set; }
         public bool baja { get; set; }
@@ -57,15 +58,7 @@ namespace PalcoNet.Modelo
             }
 
             this.email = email;
-        }
-
-        //Para el update de cliente
-        //public Cliente(int id, String nombre, String apellido, int nroDocumento, long cuil, String email, long telefono, String direccion, byte nroPiso, String depto, String localidad, String codigoPostal,
-        //    DateTime fechaNac, DateTime fechaCreacion)
-        //{
-
-        //}
-        
+        }        
 
 
         public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, long cuil,
@@ -92,6 +85,11 @@ namespace PalcoNet.Modelo
         public void SetFechaCreacion()
         {
             this.fechaCreacion = DateTime.Today;
+        }
+
+        public bool PuedeCanjear(int puntosPremio)
+        {
+            return this.puntos >= puntosPremio;
         }
     }
 }

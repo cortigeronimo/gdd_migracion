@@ -27,11 +27,8 @@ namespace PalcoNet.Vistas
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(Usuario _user, Rol _rol)
+        private void InitializeComponent()
         {
-            this.user = _user;
-            this.rol = _rol;
-
             this.lblPalcoNet = new System.Windows.Forms.Label();
             this.menuStripHome = new System.Windows.Forms.MenuStrip();
             this.menúToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,6 +70,7 @@ namespace PalcoNet.Vistas
             this.cambiarContraseñaToolStripMenuItem.Name = "cambiarContraseñaToolStripMenuItem";
             this.cambiarContraseñaToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
             this.cambiarContraseñaToolStripMenuItem.Text = "Cambiar contraseña";
+            this.cambiarContraseñaToolStripMenuItem.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 
@@ -105,8 +103,7 @@ namespace PalcoNet.Vistas
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
 
-        private Usuario user;
-        private Rol rol;
+        
 
     }
 }

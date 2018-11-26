@@ -74,32 +74,13 @@ namespace PalcoNet.Registro_de_Usuario
                 Cliente cliente = new Cliente();
                 
                 ReadAllTextBox(cliente);
-                cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
-                cliente.SetPassword(cliente.nroDocumento.ToString());
+                //cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
+                //cliente.SetPassword(cliente.nroDocumento.ToString());
                 repoCliente.InsertCliente(cliente);
                 MessageBox.Show("Cliente registrado correctamente.\n" + "Datos de login generados: \nUSERNAME: " + cliente.username + "\nPASSWORD: " + cliente.nroDocumento.ToString());
                 ClearAllTextBox();
             }
                 
-            
-            //else
-            //{
-            //    Cliente cliente = new Cliente();
-            //    try
-            //    {
-            //        ReadAllTextBox(cliente);
-            //        cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
-            //        cliente.SetPassword(cliente.nroDocumento.ToString());
-            //        repoCliente.InsertCliente(cliente);
-            //        MessageBox.Show("Cliente registrado correctamente.");
-            //        ClearAllTextBox();
-            //    }
-            //    catch (Exception)
-            //    {
-            //        MessageBox.Show("Ingrese todos los datos solicitados.");
-
-            //    }
-            //}
             
         }
 
