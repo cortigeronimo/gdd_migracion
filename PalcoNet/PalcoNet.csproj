@@ -338,6 +338,7 @@
     <EmbeddedResource Include="Vistas\RolSelector.resx">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

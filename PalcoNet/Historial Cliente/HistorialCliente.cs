@@ -17,6 +17,7 @@ namespace PalcoNet.Historial_Cliente
     public partial class HistorialCliente : Form
     {
         private Page<DetalleCompra> page;
+        private const int sizePage = 10;
         private RepoCompra repoCompra = new RepoCompra();
 
         public HistorialCliente()
@@ -44,13 +45,13 @@ namespace PalcoNet.Historial_Cliente
             List<DetalleCompra> compras = repoCompra.GetComprasUsuario(LoggedInUser.ID);
 
             int totalCompras = compras.Count;
-            decimal totalPage = Math.Ceiling((decimal)totalCompras / 10);
+            decimal totalPage = Math.Ceiling((decimal)totalCompras / sizePage);
 
             txtActualPage.Text = "1";
             txtTotalPage.Text = totalPage.ToString();
 
 
-            page = new Page<DetalleCompra>((int)totalPage, 1, compras);
+            page = new Page<DetalleCompra>((int)totalPage, 1, compras, sizePage);
         }
 
         private void LoadDataGridViewCompras()
@@ -58,10 +59,12 @@ namespace PalcoNet.Historial_Cliente
             dataGridHistorialCliente.Rows.Clear();
 
             List<DetalleCompra> comprasPage = page.GetComprasPage();
-            foreach (DetalleCompra compra in comprasPage)
+            BindingSource binding = new BindingSource(comprasPage, null);
+            dataGridHistorialCliente.DataSource = binding;
+            /*foreach (DetalleCompra compra in comprasPage)
             {
                 dataGridHistorialCliente.Rows.Add(compra.fechaCompra, compra.precio, compra.metodoDePago, compra.descripcionUbicacion, compra.fila, compra.asiento, compra.fechaEvento, compra.descripcionPublicacion);
-            }
+            }*/
         }
 
 

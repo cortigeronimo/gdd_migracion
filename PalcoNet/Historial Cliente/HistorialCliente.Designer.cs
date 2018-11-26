@@ -28,15 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridHistorialCliente = new System.Windows.Forms.DataGridView();
-            this.FechaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MetodoDePago = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescripcionUbicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fila = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Asiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescripcionEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHistorialCliente = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -45,13 +38,24 @@
             this.txtTotalPage = new System.Windows.Forms.TextBox();
             this.btnFirstPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
+            this.detalleCompraBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.FechaDeCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MetodoDePago = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionUbicacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fila = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Asiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistorialCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detalleCompraBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridHistorialCliente
             // 
             this.dataGridHistorialCliente.AllowUserToAddRows = false;
             this.dataGridHistorialCliente.AllowUserToDeleteRows = false;
+            this.dataGridHistorialCliente.AutoGenerateColumns = false;
             this.dataGridHistorialCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridHistorialCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.FechaDeCompra,
@@ -62,67 +66,12 @@
             this.Asiento,
             this.FechaEvento,
             this.DescripcionEvento});
+            this.dataGridHistorialCliente.DataSource = this.detalleCompraBindingSource;
             this.dataGridHistorialCliente.Location = new System.Drawing.Point(25, 43);
             this.dataGridHistorialCliente.Name = "dataGridHistorialCliente";
             this.dataGridHistorialCliente.ReadOnly = true;
             this.dataGridHistorialCliente.Size = new System.Drawing.Size(889, 273);
             this.dataGridHistorialCliente.TabIndex = 1;
-            // 
-            // FechaDeCompra
-            // 
-            this.FechaDeCompra.HeaderText = "Fecha de Compra";
-            this.FechaDeCompra.Name = "FechaDeCompra";
-            this.FechaDeCompra.ReadOnly = true;
-            this.FechaDeCompra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            this.Precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // MetodoDePago
-            // 
-            this.MetodoDePago.HeaderText = "Metodo de Pago";
-            this.MetodoDePago.Name = "MetodoDePago";
-            this.MetodoDePago.ReadOnly = true;
-            this.MetodoDePago.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // DescripcionUbicacion
-            // 
-            this.DescripcionUbicacion.HeaderText = "Descripcion Ubicación";
-            this.DescripcionUbicacion.Name = "DescripcionUbicacion";
-            this.DescripcionUbicacion.ReadOnly = true;
-            this.DescripcionUbicacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Fila
-            // 
-            this.Fila.HeaderText = "Fila";
-            this.Fila.Name = "Fila";
-            this.Fila.ReadOnly = true;
-            this.Fila.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Asiento
-            // 
-            this.Asiento.HeaderText = "Asiento";
-            this.Asiento.Name = "Asiento";
-            this.Asiento.ReadOnly = true;
-            this.Asiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // FechaEvento
-            // 
-            this.FechaEvento.HeaderText = "Fecha Evento";
-            this.FechaEvento.Name = "FechaEvento";
-            this.FechaEvento.ReadOnly = true;
-            this.FechaEvento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // DescripcionEvento
-            // 
-            this.DescripcionEvento.HeaderText = "Descripción Evento";
-            this.DescripcionEvento.Name = "DescripcionEvento";
-            this.DescripcionEvento.ReadOnly = true;
-            this.DescripcionEvento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // lblHistorialCliente
             // 
@@ -197,6 +146,74 @@
             this.btnLastPage.UseVisualStyleBackColor = true;
             this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
+            // detalleCompraBindingSource
+            // 
+            this.detalleCompraBindingSource.DataSource = typeof(PalcoNet.Modelo.DetalleCompra);
+            // 
+            // FechaDeCompra
+            // 
+            this.FechaDeCompra.DataPropertyName = "FechaCompra";
+            this.FechaDeCompra.HeaderText = "Fecha de Compra";
+            this.FechaDeCompra.Name = "FechaDeCompra";
+            this.FechaDeCompra.ReadOnly = true;
+            this.FechaDeCompra.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Precio
+            // 
+            this.Precio.DataPropertyName = "Precio";
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            this.Precio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // MetodoDePago
+            // 
+            this.MetodoDePago.DataPropertyName = "MetodoDePago";
+            this.MetodoDePago.HeaderText = "Metodo de Pago";
+            this.MetodoDePago.Name = "MetodoDePago";
+            this.MetodoDePago.ReadOnly = true;
+            this.MetodoDePago.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // DescripcionUbicacion
+            // 
+            this.DescripcionUbicacion.DataPropertyName = "DescripcionUbicacion";
+            this.DescripcionUbicacion.HeaderText = "Descripcion Ubicación";
+            this.DescripcionUbicacion.Name = "DescripcionUbicacion";
+            this.DescripcionUbicacion.ReadOnly = true;
+            this.DescripcionUbicacion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Fila
+            // 
+            this.Fila.DataPropertyName = "Fila";
+            this.Fila.HeaderText = "Fila";
+            this.Fila.Name = "Fila";
+            this.Fila.ReadOnly = true;
+            this.Fila.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Asiento
+            // 
+            this.Asiento.DataPropertyName = "Asiento";
+            this.Asiento.HeaderText = "Asiento";
+            this.Asiento.Name = "Asiento";
+            this.Asiento.ReadOnly = true;
+            this.Asiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FechaEvento
+            // 
+            this.FechaEvento.DataPropertyName = "FechaEvento";
+            this.FechaEvento.HeaderText = "Fecha Evento";
+            this.FechaEvento.Name = "FechaEvento";
+            this.FechaEvento.ReadOnly = true;
+            this.FechaEvento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // DescripcionEvento
+            // 
+            this.DescripcionEvento.DataPropertyName = "DescripcionPublicacion";
+            this.DescripcionEvento.HeaderText = "Descripción Evento";
+            this.DescripcionEvento.Name = "DescripcionEvento";
+            this.DescripcionEvento.ReadOnly = true;
+            this.DescripcionEvento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // HistorialCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +232,7 @@
             this.Text = "Historial Cliente";
             this.Load += new System.EventHandler(this.HistorialCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistorialCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.detalleCompraBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,6 +242,14 @@
 
         private System.Windows.Forms.DataGridView dataGridHistorialCliente;
         private System.Windows.Forms.Label lblHistorialCliente;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.TextBox txtActualPage;
+        private System.Windows.Forms.Label lblDe;
+        private System.Windows.Forms.TextBox txtTotalPage;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.Button btnLastPage;
+        private System.Windows.Forms.BindingSource detalleCompraBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaDeCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;
         private System.Windows.Forms.DataGridViewTextBoxColumn MetodoDePago;
@@ -232,13 +258,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Asiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaEvento;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionEvento;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.TextBox txtActualPage;
-        private System.Windows.Forms.Label lblDe;
-        private System.Windows.Forms.TextBox txtTotalPage;
-        private System.Windows.Forms.Button btnFirstPage;
-        private System.Windows.Forms.Button btnLastPage;
 
     }
 }

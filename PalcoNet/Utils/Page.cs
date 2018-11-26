@@ -9,15 +9,17 @@ namespace PalcoNet.Utils
 {
     public class Page<T>
     {
+        private readonly int sizePage;
         public int TotalPage { get; set; }
         public int ActualPage { get; set; }
         public List<T> Listado { get; set; }
 
-        public Page(int totalPage, int actualPage, List<T> listado)
+        public Page(int totalPage, int actualPage, List<T> listado, int sizePage)
         {
             TotalPage = totalPage;
             ActualPage = actualPage;
             Listado = listado;
+            this.sizePage = sizePage;
         }
 
         public int nextPage()

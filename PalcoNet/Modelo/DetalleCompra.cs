@@ -8,13 +8,13 @@ namespace PalcoNet.Modelo
 {
     public class DetalleCompra
     {
-        public DateTime fechaCompra { get; set; }
-        public String metodoDePago { get; set; }
-        public String fila { get; set; }
-        public int asiento { get; set; }
-        public int precio { get; set; }
-        public String descripcionUbicacion { get; set; }
-        public String descripcionPublicacion { get; set; }
-        public DateTime fechaEvento { get; set; }
+        public DateTime FechaCompra { get; set; }
+        public String MetodoDePago { get; set; }
+        public String Fila { get; set; }
+        public int Asiento { get; set; }
+        public int Precio { get; set; }
+        public String DescripcionUbicacion { get; set; }
+        public String DescripcionPublicacion { get; set; }
+        public DateTime FechaEvento { get; set; }
     }
 }

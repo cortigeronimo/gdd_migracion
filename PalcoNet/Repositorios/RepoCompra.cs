@@ -33,14 +33,14 @@ namespace PalcoNet.Repositorios
             foreach (DataRow row in comprasTable.Rows)
             {
                 DetalleCompra compra = new DetalleCompra();
-                compra.fechaCompra = Convert.ToDateTime(row["Compra_Fecha"]);
-                compra.precio = Convert.ToInt32(row["Ubicacion_Precio"]);
-                compra.metodoDePago = row["Compra_Metodo_Pago"].ToString();
-                compra.descripcionUbicacion = row["Ubicacion_Descripcion"].ToString();
-                compra.fila = row["Ubicacion_Fila"].ToString();
-                compra.asiento = Convert.ToInt32(row["Ubicacion_Asiento"]);
-                compra.fechaEvento = Convert.ToDateTime(row["Compra_Fecha_Evento"]);
-                compra.descripcionPublicacion = row["Compra_Publicacion_Descripcion"].ToString();
+                compra.FechaCompra = Convert.ToDateTime(row["Compra_Fecha"]);
+                compra.Precio = Convert.ToInt32(row["Ubicacion_Precio"]);
+                compra.MetodoDePago = row["Compra_Metodo_Pago"].ToString();
+                compra.DescripcionUbicacion = row["Ubicacion_Descripcion"].ToString();
+                compra.Fila = row["Ubicacion_Fila"].ToString();
+                compra.Asiento = Convert.ToInt32(row["Ubicacion_Asiento"]);
+                compra.FechaEvento = Convert.ToDateTime(row["Compra_Fecha_Evento"]);
+                compra.DescripcionPublicacion = row["Compra_Publicacion_Descripcion"].ToString();
 
                 comprasList.Add(compra);
             }
