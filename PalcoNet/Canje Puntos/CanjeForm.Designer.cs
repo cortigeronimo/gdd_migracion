@@ -35,7 +35,7 @@
             this.txtPuntosDisponibles = new System.Windows.Forms.TextBox();
             this.listBoxPremios = new System.Windows.Forms.ListBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnComprar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +91,7 @@
             this.listBoxPremios.Name = "listBoxPremios";
             this.listBoxPremios.Size = new System.Drawing.Size(228, 121);
             this.listBoxPremios.TabIndex = 3;
+            this.listBoxPremios.SelectedIndexChanged += new System.EventHandler(this.listBoxPremios_SelectedIndexChanged);
             // 
             // btnBuscar
             // 
@@ -102,15 +103,15 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // button1
+            // btnLimpiar
             // 
-            this.button1.Location = new System.Drawing.Point(12, 101);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Limpiar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 101);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnComprar
             // 
@@ -128,7 +129,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 360);
             this.Controls.Add(this.btnComprar);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.listBoxPremios);
             this.Controls.Add(this.txtPuntosDisponibles);
@@ -152,7 +153,7 @@
         private System.Windows.Forms.TextBox txtPuntosDisponibles;
         private System.Windows.Forms.ListBox listBoxPremios;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnComprar;
     }
 }

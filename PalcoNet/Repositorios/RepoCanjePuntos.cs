@@ -23,6 +23,18 @@ namespace PalcoNet.Repositorios
             return FromRowsToPremios(Conexion.GetData(command));
         }
 
+        public void ChangePointsToPremio(long idUser, long idPremio)
+        {
+            String sp = "PLEASE_HELP.SP_CANJEAR_PUNTOS";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@idUser", idUser);
+            cmd.Parameters.AddWithValue("@idPremio", idPremio);
+
+            Conexion.ExecuteProcedure(cmd);
+        }
+
         public List<Premio> FromRowsToPremios(DataTable table)
         {
             List<Premio> grados = new List<Premio>();

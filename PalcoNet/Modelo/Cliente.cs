@@ -86,5 +86,10 @@ namespace PalcoNet.Modelo
         {
             this.fechaCreacion = DateTime.Today;
         }
+
+        public bool PuedeCanjear(int puntosPremio)
+        {
+            return this.puntos >= puntosPremio;
+        }
     }
 }

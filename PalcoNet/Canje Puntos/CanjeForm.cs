@@ -25,17 +25,19 @@ namespace PalcoNet.Canje_Puntos
             InitializeComponent();
             puntosClientes = repoCliente.GetPuntosClienteById(LoggedInUser.ID);
             this.txtPuntosDisponibles.Text = puntosClientes.ToString();
+            this.btnComprar.Enabled = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.txtBusquedaPuntos.Clear();
-            this.txtPuntosDisponibles.Clear();
+            this.listBoxPremios.DataSource = null;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             List<Premio> premios = repoCanjePuntos.GetPremiosBy(txtBusquedaPuntos.Text);
+            premios.Sort((p1, p2) => p1.puntos.CompareTo(p2.puntos));
             listBoxPremios.DataSource = premios;
         }
 
@@ -44,8 +46,27 @@ namespace PalcoNet.Canje_Puntos
             Premio selectedPremio = (Premio)listBoxPremios.SelectedItem;
             if (selectedPremio != null && selectedPremio.puntos <= puntosClientes)
             {
-                
+                try
+                {
+                    repoCanjePuntos.ChangePointsToPremio(LoggedInUser.ID, selectedPremio.id);
+                    puntosClientes -= selectedPremio.puntos;
+                    txtPuntosDisponibles.Text = puntosClientes.ToString();
+                    MessageBox.Show("Puntos canjeados correctamente.");
+                }
+                catch(Exception){
+                    MessageBox.Show("Hubo un error al canjear los puntos, intentelo nuevamente.");
+                }
+                 
             }
+            else
+            {
+                MessageBox.Show("No le alcanzan los puntos para comprar el premio que eligió");
+            }
+        }
+
+        private void listBoxPremios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnComprar.Enabled = (listBoxPremios.SelectedItem != null) ? true : false;
         }
     }
 }
