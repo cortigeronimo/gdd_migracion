@@ -24,16 +24,24 @@ namespace PalcoNet.Abm_Grado
         {
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
             Grado grado = new Grado(
-                (int)numComisionGrado.Value,
+                (int)Convert.ToInt32(txtComision.Text),
                 txtNombreGrado.Text);
-            repo.InsertGrado(grado);
-            MessageBox.Show("Todo ok perro");
+            try
+            {
+                repo.InsertGrado(grado);
+                MessageBox.Show("La operación ha sido exitosa");
+            }
+            catch {
+                MessageBox.Show("Hubo un error al guardar la información, reintentelo");
+            }
+            
+            
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            numComisionGrado.Value = 0;
-            txtNombreGrado.Text = "";
+            txtComision.Clear();
+            txtNombreGrado.Clear();
         }
 
     }

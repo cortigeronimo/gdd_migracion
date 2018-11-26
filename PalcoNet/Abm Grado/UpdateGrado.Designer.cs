@@ -30,11 +30,11 @@
         {
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupGrado = new System.Windows.Forms.GroupBox();
+            this.txtComision = new System.Windows.Forms.TextBox();
             this.lblComisionGrado = new System.Windows.Forms.Label();
             this.txtNombreGrado = new System.Windows.Forms.TextBox();
             this.lblNombreGrado = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.txtComision = new System.Windows.Forms.TextBox();
             this.groupGrado.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,10 +56,17 @@
             this.groupGrado.Controls.Add(this.lblNombreGrado);
             this.groupGrado.Location = new System.Drawing.Point(34, 12);
             this.groupGrado.Name = "groupGrado";
-            this.groupGrado.Size = new System.Drawing.Size(340, 135);
+            this.groupGrado.Size = new System.Drawing.Size(237, 135);
             this.groupGrado.TabIndex = 5;
             this.groupGrado.TabStop = false;
             this.groupGrado.Text = "Editar Grado";
+            // 
+            // txtComision
+            // 
+            this.txtComision.Location = new System.Drawing.Point(6, 99);
+            this.txtComision.Name = "txtComision";
+            this.txtComision.Size = new System.Drawing.Size(139, 20);
+            this.txtComision.TabIndex = 4;
             // 
             // lblComisionGrado
             // 
@@ -88,7 +95,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(299, 153);
+            this.btnModificar.Location = new System.Drawing.Point(196, 153);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 2;
@@ -96,18 +103,11 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // txtComision
-            // 
-            this.txtComision.Location = new System.Drawing.Point(6, 99);
-            this.txtComision.Name = "txtComision";
-            this.txtComision.Size = new System.Drawing.Size(139, 20);
-            this.txtComision.TabIndex = 4;
-            // 
             // UpdateGrado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 201);
+            this.ClientSize = new System.Drawing.Size(324, 193);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupGrado);
             this.Controls.Add(this.btnModificar);

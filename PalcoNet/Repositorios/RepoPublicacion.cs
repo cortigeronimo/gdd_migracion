@@ -145,7 +145,7 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("idUser", LoggedInUser.ID);
+            cmd.Parameters.AddWithValue("idUser", UserSession.ID);
             cmd.Parameters.AddWithValue("descripcion", descripcion);
 
             return Conexion.GetData(cmd);

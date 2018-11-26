@@ -90,5 +90,10 @@ namespace PalcoNet.Abm_Rol
                 }
             }
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

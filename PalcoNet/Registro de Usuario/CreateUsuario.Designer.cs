@@ -48,9 +48,9 @@
             this.groupBoxUsuario.Controls.Add(this.lblPassword);
             this.groupBoxUsuario.Controls.Add(this.lblUsuario);
             this.groupBoxUsuario.Controls.Add(this.txtUsuario);
-            this.groupBoxUsuario.Location = new System.Drawing.Point(44, 23);
+            this.groupBoxUsuario.Location = new System.Drawing.Point(12, 12);
             this.groupBoxUsuario.Name = "groupBoxUsuario";
-            this.groupBoxUsuario.Size = new System.Drawing.Size(323, 179);
+            this.groupBoxUsuario.Size = new System.Drawing.Size(240, 179);
             this.groupBoxUsuario.TabIndex = 0;
             this.groupBoxUsuario.TabStop = false;
             this.groupBoxUsuario.Text = "Alta De Usuario";
@@ -107,7 +107,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(44, 209);
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 197);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 1;
@@ -117,7 +117,7 @@
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(292, 209);
+            this.btnSiguiente.Location = new System.Drawing.Point(177, 197);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(75, 23);
             this.btnSiguiente.TabIndex = 2;
@@ -129,12 +129,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 261);
+            this.ClientSize = new System.Drawing.Size(265, 230);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxUsuario);
             this.Name = "CreateUsuario";
-            this.Text = "AltaUsuario";
+            this.Text = "Alta De Usuario";
             this.Load += new System.EventHandler(this.AltaUsuario_Load);
             this.groupBoxUsuario.ResumeLayout(false);
             this.groupBoxUsuario.PerformLayout();

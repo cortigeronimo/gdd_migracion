@@ -33,19 +33,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridViewFechas = new System.Windows.Forms.DataGridView();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnConfirmar = new System.Windows.Forms.Button();
             this.columnFechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnConfirmar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFechas)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePickerFechaInicio
             // 
             this.dateTimePickerFechaInicio.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimePickerFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerFechaInicio.Location = new System.Drawing.Point(23, 34);
+            this.dateTimePickerFechaInicio.Location = new System.Drawing.Point(6, 41);
             this.dateTimePickerFechaInicio.Name = "dateTimePickerFechaInicio";
             this.dateTimePickerFechaInicio.Size = new System.Drawing.Size(156, 20);
             this.dateTimePickerFechaInicio.TabIndex = 0;
@@ -54,7 +56,7 @@
             // 
             this.dateTimePickerFechaEvento.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimePickerFechaEvento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerFechaEvento.Location = new System.Drawing.Point(239, 34);
+            this.dateTimePickerFechaEvento.Location = new System.Drawing.Point(247, 41);
             this.dateTimePickerFechaEvento.Name = "dateTimePickerFechaEvento";
             this.dateTimePickerFechaEvento.Size = new System.Drawing.Size(156, 20);
             this.dateTimePickerFechaEvento.TabIndex = 1;
@@ -62,7 +64,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Location = new System.Drawing.Point(3, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 2;
@@ -71,7 +73,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(236, 18);
+            this.label2.Location = new System.Drawing.Point(244, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 3;
@@ -86,32 +88,12 @@
             this.columnFechaInicio,
             this.columnFechaEvento,
             this.columnEliminar});
-            this.dataGridViewFechas.Location = new System.Drawing.Point(23, 74);
+            this.dataGridViewFechas.Location = new System.Drawing.Point(23, 136);
             this.dataGridViewFechas.Name = "dataGridViewFechas";
             this.dataGridViewFechas.ReadOnly = true;
-            this.dataGridViewFechas.Size = new System.Drawing.Size(409, 176);
+            this.dataGridViewFechas.Size = new System.Drawing.Size(409, 186);
             this.dataGridViewFechas.TabIndex = 4;
             this.dataGridViewFechas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFechas_CellContentClick);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(450, 34);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(119, 23);
-            this.btnAgregar.TabIndex = 5;
-            this.btnAgregar.Text = "Agregar Fecha";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnConfirmar
-            // 
-            this.btnConfirmar.Location = new System.Drawing.Point(450, 130);
-            this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(119, 23);
-            this.btnConfirmar.TabIndex = 6;
-            this.btnConfirmar.Text = "Confirmar Selección";
-            this.btnConfirmar.UseVisualStyleBackColor = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // columnFechaInicio
             // 
@@ -141,23 +123,54 @@
             this.columnEliminar.ReadOnly = true;
             this.columnEliminar.Width = 49;
             // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(313, 91);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(119, 23);
+            this.btnAgregar.TabIndex = 5;
+            this.btnAgregar.Text = "Agregar Fecha";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Location = new System.Drawing.Point(313, 328);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(119, 23);
+            this.btnConfirmar.TabIndex = 6;
+            this.btnConfirmar.Text = "Confirmar Selección";
+            this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.dateTimePickerFechaInicio);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.dateTimePickerFechaEvento);
+            this.groupBox1.Location = new System.Drawing.Point(23, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(409, 73);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Agregar Fecha";
+            // 
             // FormAgregarFechas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 274);
+            this.ClientSize = new System.Drawing.Size(458, 360);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dataGridViewFechas);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePickerFechaEvento);
-            this.Controls.Add(this.dateTimePickerFechaInicio);
             this.Name = "FormAgregarFechas";
-            this.Text = "AgregarFechas";
+            this.Text = "Agregar Fechas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFechas)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -173,5 +186,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaEvento;
         private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

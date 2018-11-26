@@ -39,8 +39,8 @@ namespace PalcoNet.Vistas
         {
             InitializeComponent();
 
-            this.user.id = (int)LoggedInUser.ID;
-            this.rol.id = (int)LoggedInUser.Rol;
+            this.user.id = (int)UserSession.ID;
+            this.rol.id = (int)UserSession.Rol;
             
         }
 

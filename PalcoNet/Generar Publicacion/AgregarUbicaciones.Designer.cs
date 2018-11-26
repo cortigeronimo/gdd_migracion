@@ -30,6 +30,11 @@
         {
             this.btnConfirmarSeleccion = new System.Windows.Forms.Button();
             this.dataGridViewUbicaciones = new System.Windows.Forms.DataGridView();
+            this.columnFila = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnAsiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.numericUpDownPrecio = new System.Windows.Forms.NumericUpDown();
             this.comboBoxTipoUbicacion = new System.Windows.Forms.ComboBox();
@@ -39,11 +44,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.columnFila = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnAsiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUbicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAsiento)).BeginInit();
@@ -76,6 +76,45 @@
             this.dataGridViewUbicaciones.Size = new System.Drawing.Size(545, 166);
             this.dataGridViewUbicaciones.TabIndex = 9;
             this.dataGridViewUbicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUbicaciones_CellContentClick);
+            // 
+            // columnFila
+            // 
+            this.columnFila.DataPropertyName = "Fila";
+            this.columnFila.HeaderText = "Fila";
+            this.columnFila.Name = "columnFila";
+            this.columnFila.ReadOnly = true;
+            this.columnFila.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnAsiento
+            // 
+            this.columnAsiento.DataPropertyName = "Asiento";
+            this.columnAsiento.HeaderText = "Asiento";
+            this.columnAsiento.Name = "columnAsiento";
+            this.columnAsiento.ReadOnly = true;
+            this.columnAsiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnPrecio
+            // 
+            this.columnPrecio.DataPropertyName = "Precio";
+            this.columnPrecio.HeaderText = "Precio";
+            this.columnPrecio.Name = "columnPrecio";
+            this.columnPrecio.ReadOnly = true;
+            this.columnPrecio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnDescripcion
+            // 
+            this.columnDescripcion.DataPropertyName = "Descripcion";
+            this.columnDescripcion.HeaderText = "Descripción";
+            this.columnDescripcion.Name = "columnDescripcion";
+            this.columnDescripcion.ReadOnly = true;
+            this.columnDescripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnDelete
+            // 
+            this.columnDelete.DataPropertyName = "Eliminar";
+            this.columnDelete.HeaderText = "Eliminar";
+            this.columnDelete.Name = "columnDelete";
+            this.columnDelete.ReadOnly = true;
             // 
             // btnAgregar
             // 
@@ -208,45 +247,6 @@
             this.label1.Size = new System.Drawing.Size(23, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Fila";
-            // 
-            // columnFila
-            // 
-            this.columnFila.DataPropertyName = "Fila";
-            this.columnFila.HeaderText = "Fila";
-            this.columnFila.Name = "columnFila";
-            this.columnFila.ReadOnly = true;
-            this.columnFila.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnAsiento
-            // 
-            this.columnAsiento.DataPropertyName = "Asiento";
-            this.columnAsiento.HeaderText = "Asiento";
-            this.columnAsiento.Name = "columnAsiento";
-            this.columnAsiento.ReadOnly = true;
-            this.columnAsiento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnPrecio
-            // 
-            this.columnPrecio.DataPropertyName = "Precio";
-            this.columnPrecio.HeaderText = "Precio";
-            this.columnPrecio.Name = "columnPrecio";
-            this.columnPrecio.ReadOnly = true;
-            this.columnPrecio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnDescripcion
-            // 
-            this.columnDescripcion.DataPropertyName = "Descripcion";
-            this.columnDescripcion.HeaderText = "Descripción";
-            this.columnDescripcion.Name = "columnDescripcion";
-            this.columnDescripcion.ReadOnly = true;
-            this.columnDescripcion.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnDelete
-            // 
-            this.columnDelete.DataPropertyName = "Eliminar";
-            this.columnDelete.HeaderText = "Eliminar";
-            this.columnDelete.Name = "columnDelete";
-            this.columnDelete.ReadOnly = true;
             // 
             // FormAgregarUbicaciones
             // 

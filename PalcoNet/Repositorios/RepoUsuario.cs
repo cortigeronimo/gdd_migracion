@@ -56,7 +56,7 @@ namespace PalcoNet.Repositorios
 
             byte[] hashPassword = Hashing.GetSHA256Encrypt(password);
 
-            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
+            cmd.Parameters.AddWithValue("@idUser", UserSession.ID);
             cmd.Parameters.AddWithValue("@password", hashPassword);
 
             Conexion.ExecuteProcedure(cmd);
@@ -70,8 +70,8 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(sp);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
-            cmd.Parameters.AddWithValue("@idRol", LoggedInUser.Rol);
+            cmd.Parameters.AddWithValue("@idUser", UserSession.ID);
+            cmd.Parameters.AddWithValue("@idRol", UserSession.Rol);
 
             SqlParameter firstLogin = new SqlParameter("@primerLogin", SqlDbType.Bit);
             firstLogin.Direction = ParameterDirection.Output;

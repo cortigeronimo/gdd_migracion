@@ -24,7 +24,7 @@ namespace PalcoNet.Canje_Puntos
         {
             //puntos harcodeados
             InitializeComponent();
-            puntosClientes = repoCliente.GetPuntosClienteById(LoggedInUser.ID);
+            puntosClientes = repoCliente.GetPuntosClienteById(UserSession.ID);
             this.txtPuntosDisponibles.Text = puntosClientes.ToString();
             this.btnComprar.Enabled = false;
         }
@@ -49,7 +49,7 @@ namespace PalcoNet.Canje_Puntos
             {
                 try
                 {
-                    repoCanjePuntos.ChangePointsToPremio(LoggedInUser.ID, selectedPremio.id);
+                    repoCanjePuntos.ChangePointsToPremio(UserSession.ID, selectedPremio.id);
                     puntosClientes -= selectedPremio.puntos;
                     txtPuntosDisponibles.Text = puntosClientes.ToString();
                     MessageBox.Show("Puntos canjeados correctamente.");

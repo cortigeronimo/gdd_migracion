@@ -45,7 +45,9 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewPublicaciones
@@ -63,7 +65,7 @@
             this.columnGrado,
             this.columnEmpresa,
             this.columnEstado});
-            this.dataGridViewPublicaciones.Location = new System.Drawing.Point(26, 104);
+            this.dataGridViewPublicaciones.Location = new System.Drawing.Point(26, 162);
             this.dataGridViewPublicaciones.MultiSelect = false;
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
@@ -136,7 +138,7 @@
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(560, 222);
+            this.btnEditar.Location = new System.Drawing.Point(371, 368);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 5;
@@ -147,7 +149,7 @@
             // btnPublicar
             // 
             this.btnPublicar.Enabled = false;
-            this.btnPublicar.Location = new System.Drawing.Point(560, 162);
+            this.btnPublicar.Location = new System.Drawing.Point(290, 368);
             this.btnPublicar.Name = "btnPublicar";
             this.btnPublicar.Size = new System.Drawing.Size(75, 23);
             this.btnPublicar.TabIndex = 4;
@@ -158,7 +160,7 @@
             // btnFinalizar
             // 
             this.btnFinalizar.Enabled = false;
-            this.btnFinalizar.Location = new System.Drawing.Point(560, 104);
+            this.btnFinalizar.Location = new System.Drawing.Point(452, 368);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 3;
@@ -168,7 +170,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(271, 36);
+            this.btnBuscar.Location = new System.Drawing.Point(408, 104);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(119, 23);
             this.btnBuscar.TabIndex = 2;
@@ -178,7 +180,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(26, 38);
+            this.txtDescripcion.Location = new System.Drawing.Point(6, 44);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(203, 20);
             this.txtDescripcion.TabIndex = 1;
@@ -186,7 +188,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 22);
+            this.label1.Location = new System.Drawing.Point(3, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -195,29 +197,41 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 78);
+            this.label2.Location = new System.Drawing.Point(23, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Seleccione una publicación a editar:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtDescripcion);
+            this.groupBox1.Location = new System.Drawing.Point(26, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(501, 86);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Editar Publicación";
+            // 
             // FormEditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(663, 359);
+            this.ClientSize = new System.Drawing.Size(554, 405);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridViewPublicaciones);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.txtDescripcion);
-            this.Controls.Add(this.label1);
             this.Name = "FormEditarPublicacion";
-            this.Text = "EditarPublicacion";
+            this.Text = "Editar Publicación";
             this.Load += new System.EventHandler(this.FormEditarPublicacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +256,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEstado;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
