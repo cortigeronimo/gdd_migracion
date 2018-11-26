@@ -21,6 +21,7 @@ using PalcoNet.Generar_Rendicion_Comisiones;
 using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
 using PalcoNet.Registro_de_Usuario;
+using PalcoNet.Historial_Cliente;
 
 using PalcoNet.Config;
 
@@ -281,15 +282,14 @@ namespace PalcoNet.Vistas
         //Evento click para "historial cliente"
         private void historialCliente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form historial de cliente");
+            FormManager.getInstance().Open(new HistorialCliente());
         }
 
 
         //Evento click para "canje administracion puntos"
         private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
         {
-            Form canjeDePuntos = new CanjeForm();
-            FormManager.getInstance().Open(canjeDePuntos);
+            FormManager.getInstance().Open(new CanjeForm());
         }
 
 

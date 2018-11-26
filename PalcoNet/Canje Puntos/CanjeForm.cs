@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
 using PalcoNet.Config;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Canje_Puntos
 {
-    public partial class CanjeForm : Form
+    public partial class CanjeForm : CustomForm
     {
         private int puntosClientes;
         private RepoCanjePuntos repoCanjePuntos = new RepoCanjePuntos();

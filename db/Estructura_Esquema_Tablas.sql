@@ -804,8 +804,6 @@ AS
 	UPDATE PLEASE_HELP.Cliente SET Cli_Puntos = Cli_Puntos - @puntosPremio WHERE Cli_Usuario = @idUser
 GO
 
-EXEC PLEASE_HELP.SP_CANJEAR_PUNTOS 1 1
-
 GO
 	
 -- TRIGGERS LOGIN

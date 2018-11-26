@@ -163,11 +163,11 @@
     <Compile Include="Generar Rendicion Comisiones\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.cs">
+    <Compile Include="Historial Cliente\HistorialCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Historial Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Historial Cliente\HistorialCliente.Designer.cs">
+      <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -175,6 +175,7 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\DetalleCompra.cs" />
     <Compile Include="Modelo\Empresa.cs" />
     <Compile Include="Modelo\Estado.cs" />
     <Compile Include="Modelo\Funcionalidad.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Repositorios\RepoRubro.cs" />
     <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\Page.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\ChangePassword.cs">
       <SubType>Form</SubType>
@@ -295,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
+      <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateCliente.resx">
       <DependentUpon>CreateCliente.cs</DependentUpon>
