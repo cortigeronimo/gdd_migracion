@@ -7,17 +7,17 @@ using PalcoNet.Modelo;
 
 namespace PalcoNet.Utils
 {
-    public class Page
+    public class Page<T>
     {
         public int TotalPage { get; set; }
         public int ActualPage { get; set; }
-        public List<DetalleCompra> DetallesCompras { get; set; }
+        public List<T> Listado { get; set; }
 
-        public Page(int totalPage, int actualPage, List<DetalleCompra> detallesCompras)
+        public Page(int totalPage, int actualPage, List<T> listado)
         {
             TotalPage = totalPage;
             ActualPage = actualPage;
-            DetallesCompras = detallesCompras;
+            Listado = listado;
         }
 
         public int nextPage()
@@ -38,17 +38,17 @@ namespace PalcoNet.Utils
         }
 
 
-        public List<DetalleCompra> GetComprasPage()
+        public List<T> GetComprasPage()
         {
-            List<DetalleCompra> pageList = new List<DetalleCompra>();
+            List<T> pageList = new List<T>();
 
             int inicio = (ActualPage - 1) * 10;
 
             int tope = ActualPage * 10;
 
-            for (int i = inicio; i < tope && i < DetallesCompras.Count; i++)
+            for (int i = inicio; i < tope && i < Listado.Count; i++)
             {
-                pageList.Add(DetallesCompras[i]);
+                pageList.Add(Listado[i]);
             }
 
             return pageList;

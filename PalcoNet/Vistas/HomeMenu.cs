@@ -21,7 +21,6 @@ using PalcoNet.Generar_Rendicion_Comisiones;
 using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
 using PalcoNet.Registro_de_Usuario;
-using PalcoNet.Historial_Cliente;
 
 using PalcoNet.Config;
 

@@ -16,7 +16,7 @@ namespace PalcoNet.Historial_Cliente
 {
     public partial class HistorialCliente : Form
     {
-        private Page page;
+        private Page<DetalleCompra> page;
         private RepoCompra repoCompra = new RepoCompra();
 
         public HistorialCliente()
@@ -50,7 +50,7 @@ namespace PalcoNet.Historial_Cliente
             txtTotalPage.Text = totalPage.ToString();
 
 
-            page = new Page((int)totalPage, 1, compras);
+            page = new Page<DetalleCompra>((int)totalPage, 1, compras);
         }
 
         private void LoadDataGridViewCompras()
