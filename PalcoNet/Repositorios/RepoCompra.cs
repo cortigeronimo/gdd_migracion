@@ -13,13 +13,13 @@ namespace PalcoNet.Repositorios
 {
     public class RepoCompra
     {
-        public List<DetalleCompra> GetComprasUsuario()
+        public List<DetalleCompra> GetComprasUsuario(int userId)
         {
             String sp = "PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE";
             SqlCommand command = new SqlCommand(sp);
             command.CommandType = CommandType.StoredProcedure;
 
-            command.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
+            command.Parameters.AddWithValue("@idUser", userId);
 
             DataTable comprasTable = Conexion.GetData(command);
 

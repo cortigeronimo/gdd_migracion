@@ -38,8 +38,6 @@ namespace PalcoNet.Utils
         }
 
 
-
-
         public List<DetalleCompra> GetComprasPage()
         {
             List<DetalleCompra> pageList = new List<DetalleCompra>();

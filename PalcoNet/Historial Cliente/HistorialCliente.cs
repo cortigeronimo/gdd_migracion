@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Utils;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
+using PalcoNet.Config;
 
 namespace PalcoNet.Historial_Cliente
 {
@@ -32,17 +33,15 @@ namespace PalcoNet.Historial_Cliente
             this.dataGridHistorialCliente.RowHeadersVisible = false;
             this.dataGridHistorialCliente.AutoGenerateColumns = false;
 
-           
-
             InitPagination();
 
-            NextPage();       
+            this.btnNext_Click(null, null);       
 
         }
 
         private void InitPagination()
         {
-            List<DetalleCompra> compras = repoCompra.GetComprasUsuario();
+            List<DetalleCompra> compras = repoCompra.GetComprasUsuario(LoggedInUser.ID);
 
             int totalCompras = compras.Count;
             decimal totalPage = Math.Ceiling((decimal)totalCompras / 10);
@@ -59,7 +58,6 @@ namespace PalcoNet.Historial_Cliente
             dataGridHistorialCliente.Rows.Clear();
 
             List<DetalleCompra> comprasPage = page.GetComprasPage();
-
             foreach (DetalleCompra compra in comprasPage)
             {
                 dataGridHistorialCliente.Rows.Add(compra.fechaCompra, compra.precio, compra.metodoDePago, compra.descripcionUbicacion, compra.fila, compra.asiento, compra.fechaEvento, compra.descripcionPublicacion);
@@ -69,48 +67,19 @@ namespace PalcoNet.Historial_Cliente
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            NextPage();
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            BackPage();
-        }
-
-        private void btnFirstPage_Click(object sender, EventArgs e)
-        {
-            FirstPage();
-        }
-
-        private void btnLastPage_Click(object sender, EventArgs e)
-        {
-            LastPage();
-        }
-
-
-        private void NextPage()
-        {
             txtActualPage.Text = page.nextPage().ToString();
 
             LoadDataGridViewCompras();
         }
 
-        private void BackPage()
+        private void btnBack_Click(object sender, EventArgs e)
         {
             txtActualPage.Text = page.backPage().ToString();
 
             LoadDataGridViewCompras();
         }
 
-        private void LastPage()
-        {
-            page.ActualPage = page.TotalPage;
-            txtActualPage.Text = page.ActualPage.ToString();
-
-            LoadDataGridViewCompras();
-        }
-
-        private void FirstPage()
+        private void btnFirstPage_Click(object sender, EventArgs e)
         {
             page.ActualPage = 1;
             txtActualPage.Text = page.ActualPage.ToString();
@@ -118,15 +87,13 @@ namespace PalcoNet.Historial_Cliente
             LoadDataGridViewCompras();
         }
 
-        
+        private void btnLastPage_Click(object sender, EventArgs e)
+        {
+            page.ActualPage = page.TotalPage;
+            txtActualPage.Text = page.ActualPage.ToString();
 
-        
-
-        
-        
-
-
-
+            LoadDataGridViewCompras();
+        }
 
     }
 }
