@@ -125,7 +125,7 @@
     </Compile>
     <Compile Include="Config\Conexion.cs" />
     <Compile Include="Config\Hashing.cs" />
-    <Compile Include="Config\LoggedInUser.cs" />
+    <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
