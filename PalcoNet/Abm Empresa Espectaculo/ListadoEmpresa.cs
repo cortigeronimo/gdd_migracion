@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Abm_Empresa_Espectaculo
 {
-    public partial class ListadoEmpresa : Form
+    public partial class ListadoEmpresa : CustomForm
     {
         private BindingSource bindingSource = new BindingSource();
         List<Empresa> empresasFiltradas = new List<Empresa>(); 

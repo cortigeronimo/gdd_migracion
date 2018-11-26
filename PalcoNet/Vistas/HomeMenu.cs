@@ -28,8 +28,8 @@ namespace PalcoNet.Vistas
 {
     public partial class HomeMenu : CustomForm
     {
-        RepoRol repo = new RepoRol();
-        RepoUsuario repoUsuario = new RepoUsuario();
+        private RepoRol repo = new RepoRol();
+        private RepoUsuario repoUsuario = new RepoUsuario();
 
         private Usuario user = new Usuario();
         private Rol rol = new Rol();
@@ -41,8 +41,6 @@ namespace PalcoNet.Vistas
 
             this.user.id = (int)LoggedInUser.ID;
             this.rol.id = (int)LoggedInUser.Rol;
-
-            
             
         }
 
@@ -315,6 +313,11 @@ namespace PalcoNet.Vistas
                     form.Close();
                 }
             }
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormManager.getInstance().OpenAndClose(new Login(), this);
         }
 
         

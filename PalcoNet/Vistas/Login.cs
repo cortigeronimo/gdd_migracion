@@ -21,21 +21,11 @@ namespace PalcoNet
     {
         Usuario user = new Usuario();
         RepoUsuario repo = new RepoUsuario();
-        
-
-        //public Login() : base()
-        //{
-            
-        //}
 
         public Login()
         {
             InitializeComponent();
-            
-
         }
-
-
 
 
         private void btnLogin_Click(object sender, EventArgs e)
