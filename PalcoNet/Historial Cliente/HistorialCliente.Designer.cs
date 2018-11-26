@@ -38,11 +38,13 @@
             this.FechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescripcionEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblHistorialCliente = new System.Windows.Forms.Label();
-            this.btnBackPage = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.txtActualPage = new System.Windows.Forms.TextBox();
             this.lblDe = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTotalPage = new System.Windows.Forms.TextBox();
+            this.btnFirstPage = new System.Windows.Forms.Button();
+            this.btnLastPage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistorialCliente)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,14 +133,15 @@
             this.lblHistorialCliente.TabIndex = 2;
             this.lblHistorialCliente.Text = "Historial de Compras";
             // 
-            // btnBackPage
+            // btnBack
             // 
-            this.btnBackPage.Location = new System.Drawing.Point(393, 333);
-            this.btnBackPage.Name = "btnBackPage";
-            this.btnBackPage.Size = new System.Drawing.Size(26, 23);
-            this.btnBackPage.TabIndex = 4;
-            this.btnBackPage.Text = "<";
-            this.btnBackPage.UseVisualStyleBackColor = true;
+            this.btnBack.Location = new System.Drawing.Point(393, 333);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(26, 23);
+            this.btnBack.TabIndex = 4;
+            this.btnBack.Text = "<";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -166,24 +169,46 @@
             this.lblDe.TabIndex = 7;
             this.lblDe.Text = "de";
             // 
-            // textBox1
+            // txtTotalPage
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(482, 335);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(26, 20);
-            this.textBox1.TabIndex = 8;
+            this.txtTotalPage.Enabled = false;
+            this.txtTotalPage.Location = new System.Drawing.Point(482, 335);
+            this.txtTotalPage.Name = "txtTotalPage";
+            this.txtTotalPage.Size = new System.Drawing.Size(26, 20);
+            this.txtTotalPage.TabIndex = 8;
+            // 
+            // btnFirstPage
+            // 
+            this.btnFirstPage.Location = new System.Drawing.Point(359, 333);
+            this.btnFirstPage.Name = "btnFirstPage";
+            this.btnFirstPage.Size = new System.Drawing.Size(28, 23);
+            this.btnFirstPage.TabIndex = 9;
+            this.btnFirstPage.Text = "<<";
+            this.btnFirstPage.UseVisualStyleBackColor = true;
+            this.btnFirstPage.Click += new System.EventHandler(this.btnFirstPage_Click);
+            // 
+            // btnLastPage
+            // 
+            this.btnLastPage.Location = new System.Drawing.Point(546, 334);
+            this.btnLastPage.Name = "btnLastPage";
+            this.btnLastPage.Size = new System.Drawing.Size(28, 23);
+            this.btnLastPage.TabIndex = 11;
+            this.btnLastPage.Text = ">>";
+            this.btnLastPage.UseVisualStyleBackColor = true;
+            this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
             // 
             // HistorialCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 381);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnLastPage);
+            this.Controls.Add(this.btnFirstPage);
+            this.Controls.Add(this.txtTotalPage);
             this.Controls.Add(this.lblDe);
             this.Controls.Add(this.txtActualPage);
             this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnBackPage);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblHistorialCliente);
             this.Controls.Add(this.dataGridHistorialCliente);
             this.Name = "HistorialCliente";
@@ -207,11 +232,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Asiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaEvento;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionEvento;
-        private System.Windows.Forms.Button btnBackPage;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.TextBox txtActualPage;
         private System.Windows.Forms.Label lblDe;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTotalPage;
+        private System.Windows.Forms.Button btnFirstPage;
+        private System.Windows.Forms.Button btnLastPage;
 
     }
 }

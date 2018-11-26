@@ -79,3 +79,13 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publica
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormGenerarPublicacion.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.CreateGrado.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.AltaRol.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.CanjeForm.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarFechas.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarUbicaciones.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormEditarPublicacion.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormGenerarPublicacion.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources

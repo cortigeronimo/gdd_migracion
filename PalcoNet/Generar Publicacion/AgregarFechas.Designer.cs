@@ -115,25 +115,31 @@
             // 
             // columnFechaInicio
             // 
+            this.columnFechaInicio.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.columnFechaInicio.DataPropertyName = "FechaInicio";
             this.columnFechaInicio.HeaderText = "Fecha Inicio";
             this.columnFechaInicio.Name = "columnFechaInicio";
             this.columnFechaInicio.ReadOnly = true;
             this.columnFechaInicio.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnFechaInicio.Width = 71;
             // 
             // columnFechaEvento
             // 
+            this.columnFechaEvento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.columnFechaEvento.DataPropertyName = "FechaEvento";
             this.columnFechaEvento.HeaderText = "Fecha Evento";
             this.columnFechaEvento.Name = "columnFechaEvento";
             this.columnFechaEvento.ReadOnly = true;
             this.columnFechaEvento.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnFechaEvento.Width = 80;
             // 
             // columnEliminar
             // 
+            this.columnEliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.columnEliminar.HeaderText = "Eliminar";
             this.columnEliminar.Name = "columnEliminar";
             this.columnEliminar.ReadOnly = true;
+            this.columnEliminar.Width = 49;
             // 
             // FormAgregarFechas
             // 

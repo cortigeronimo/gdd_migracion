@@ -10,9 +10,9 @@ namespace PalcoNet.Modelo
     {
         public DateTime fechaCompra { get; set; }
         public String metodoDePago { get; set; }
-        public int fila { get; set; }
+        public String fila { get; set; }
         public int asiento { get; set; }
-        public float precio { get; set; }
+        public int precio { get; set; }
         public String descripcionUbicacion { get; set; }
         public String descripcionPublicacion { get; set; }
         public DateTime fechaEvento { get; set; }

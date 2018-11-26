@@ -206,6 +206,7 @@
     </Compile>
     <Compile Include="Repositorios\RepoCanjePuntos.cs" />
     <Compile Include="Repositorios\RepoCliente.cs" />
+    <Compile Include="Repositorios\RepoCompra.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
@@ -261,7 +262,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\ListadoEmpresa.resx">
       <DependentUpon>ListadoEmpresa.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Grado\CreateGrado.resx">
       <DependentUpon>CreateGrado.cs</DependentUpon>
     </EmbeddedResource>

@@ -30,11 +30,31 @@ namespace PalcoNet.Utils
 
         public int backPage()
         {
-            if (ActualPage > 0)
+            if (ActualPage > 1)
             {
                 ActualPage--;
             }
             return ActualPage;
         }
+
+
+
+
+        public List<DetalleCompra> GetComprasPage()
+        {
+            List<DetalleCompra> pageList = new List<DetalleCompra>();
+
+            int inicio = (ActualPage - 1) * 10;
+
+            int tope = ActualPage * 10;
+
+            for (int i = inicio; i < tope && i < DetallesCompras.Count; i++)
+            {
+                pageList.Add(DetallesCompras[i]);
+            }
+
+            return pageList;
+        }
+
     }
 }
