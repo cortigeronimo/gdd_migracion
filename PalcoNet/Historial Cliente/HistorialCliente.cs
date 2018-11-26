@@ -35,7 +35,7 @@ namespace PalcoNet.Historial_Cliente
 
             InitPagination();
 
-            this.btnNext_Click(null, null);       
+            LoadDataGridViewCompras();  
 
         }
 
@@ -50,7 +50,7 @@ namespace PalcoNet.Historial_Cliente
             txtTotalPage.Text = totalPage.ToString();
 
 
-            page = new Page((int)totalPage, 0, compras);
+            page = new Page((int)totalPage, 1, compras);
         }
 
         private void LoadDataGridViewCompras()
