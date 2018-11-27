@@ -29,7 +29,7 @@ namespace PalcoNet.Historial_Cliente
         {
             this.dataGridHistorialCliente.AllowUserToResizeColumns = false;
             this.dataGridHistorialCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            //this.dataGridHistorialCliente.SelectionMode = DataGridViewSelectionMode.FullColumnSelect;
+            this.dataGridHistorialCliente.RowHeadersVisible = false;
             this.dataGridHistorialCliente.MultiSelect = false;
             this.dataGridHistorialCliente.RowHeadersVisible = false;
             this.dataGridHistorialCliente.AutoGenerateColumns = false;
@@ -42,7 +42,7 @@ namespace PalcoNet.Historial_Cliente
 
         private void InitPagination()
         {
-            List<DetalleCompra> compras = repoCompra.GetComprasUsuario(UserSession.ID);
+            List<DetalleCompra> compras = repoCompra.GetComprasUsuario(UserSession.UserId);
 
             int totalCompras = compras.Count;
             decimal totalPage = Math.Ceiling((decimal)totalCompras / sizePage);

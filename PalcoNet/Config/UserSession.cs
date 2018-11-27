@@ -8,9 +8,9 @@ namespace PalcoNet.Config
 {
     public static class UserSession
     {
-        public static int ID { get; set; }
+        public static int UserId { get; set; }
         public static String Username { get; set; }
-        public static int Rol { get; set; }
+        public static int RolId { get; set; }
 
     }
 }

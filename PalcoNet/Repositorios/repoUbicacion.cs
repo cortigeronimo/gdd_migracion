@@ -52,7 +52,7 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(sp);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@idUser", UserSession.ID);
+            cmd.Parameters.AddWithValue("@idUser", UserSession.UserId);
 
             return FromRowsToUbicaciones(Conexion.GetData(cmd));
             

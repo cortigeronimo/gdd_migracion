@@ -38,7 +38,7 @@ namespace PalcoNet.Generar_Publicacion
         {
             InitializeComponent();
 
-            this.loginUser.id = (int)UserSession.ID;
+            this.loginUser.id = (int)UserSession.UserId;
             this.loginUser.username = UserSession.Username;
 
             publicacion.Ubicaciones = new List<Ubicacion>();
@@ -58,7 +58,7 @@ namespace PalcoNet.Generar_Publicacion
             Publicacion publicacionToEdit = _publicacion;
             publicacion.Codigo = _publicacion.Codigo;
 
-            this.loginUser.id = (int)UserSession.ID;
+            this.loginUser.id = (int)UserSession.UserId;
             this.loginUser.username = UserSession.Username;
 
             publicacion.Ubicaciones = new List<Ubicacion>();

@@ -41,9 +41,9 @@ namespace PalcoNet
                     Rol rol = new Rol();
                     TakeRolFromUser(user, rol);
 
-                    UserSession.ID = user.id;
+                    UserSession.UserId = user.id;
                     UserSession.Username = user.username;
-                    UserSession.Rol = rol.id;
+                    UserSession.RolId = rol.id;
                     
                     FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
                 }

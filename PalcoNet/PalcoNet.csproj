@@ -117,6 +117,12 @@
     <Compile Include="Canje Puntos\CanjeForm.Designer.cs">
       <DependentUpon>CanjeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Canje Puntos\ViewPremios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Canje Puntos\ViewPremios.Designer.cs">
+      <DependentUpon>ViewPremios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comprar\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,7 @@
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
+    <Compile Include="DTO\PremioDTO.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +216,7 @@
     <Compile Include="Repositorios\RepoCompra.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
+    <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
@@ -287,6 +295,9 @@
     <EmbeddedResource Include="Canje Puntos\CanjeForm.resx">
       <DependentUpon>CanjeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canje Puntos\ViewPremios.resx">
+      <DependentUpon>ViewPremios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\AgregarFechas.resx">
       <DependentUpon>AgregarFechas.cs</DependentUpon>
     </EmbeddedResource>
@@ -338,6 +349,7 @@
     <EmbeddedResource Include="Vistas\RolSelector.resx">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
     <None Include="Properties\Settings.settings">

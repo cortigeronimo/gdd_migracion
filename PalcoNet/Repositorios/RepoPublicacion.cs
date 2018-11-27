@@ -17,23 +17,6 @@ namespace PalcoNet.Repositorios
     {
         private String publicacionTable = "PLEASE_HELP.Publicacion";
 
-        //public Boolean ExistsPublicacionMismaHora(String descripcion, DateTime fechaHora)
-        //{
-        //    String query = "PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA";
-
-        //    SqlCommand cmd = new SqlCommand(query);
-        //    cmd.CommandType = CommandType.StoredProcedure;
-
-        //    cmd.Parameters.AddWithValue("@descripcion", descripcion);
-        //    cmd.Parameters.AddWithValue("@fechaEvento", fechaHora);
-
-        //    DataTable result = Conexion.GetData(cmd);
-
-        //    return result.Rows.Count != 0;
-
-
-        //}
-
         public Boolean ExistsPublicacionMismaHora(long codigoPublicacion, String descripcion, DateTime fechaHora)
         {
             String query = "PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA";
@@ -62,10 +45,6 @@ namespace PalcoNet.Repositorios
                 UpdatePublicacion(publicacion);
 
         }
-
-
-
-
 
         public void UpdatePublicacion(Publicacion publicacion)
         {
@@ -145,7 +124,7 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("idUser", UserSession.ID);
+            cmd.Parameters.AddWithValue("idUser", UserSession.UserId);
             cmd.Parameters.AddWithValue("descripcion", descripcion);
 
             return Conexion.GetData(cmd);
@@ -163,66 +142,6 @@ namespace PalcoNet.Repositorios
 
             Conexion.ExecuteProcedure(cmd);
         }
-
-        //public List<Publicacion> GetPublicacionesByUser()
-        //{
-        //    String query = "SELECT * FROM " + publicacionTable;
-        //    query += " WHERE Pub_Empresa = " + LoggedInUser.ID.ToString();
-
-        //    SqlCommand cmd = new SqlCommand(query);
-
-        //    return FromRowsToPublicaciones(Conexion.GetData(cmd));
-        //}
-
-
-        //private List<Publicacion> FromRowsToPublicaciones(DataTable table)
-        //{
-        //    List<Publicacion> publicaciones = new List<Publicacion>();
-        //    foreach (DataRow row in table.Rows)
-        //    {
-        //        Publicacion publicacion = new Publicacion();
-
-        //        publicacion.Codigo = Convert.ToInt64(row["Pub_Codigo"]);
-        //        publicacion.FechaInicio = Convert.ToDateTime(row["Pub_Fecha_Inicio"]);
-        //        publicacion.FechaEvento = Convert.ToDateTime(row["Pub_Fecha_evento"]);
-        //        publicacion.Descripcion = Convert.ToString(row["Pub_Descripcion"]);
-        //        publicacion.Direccion = Convert.ToString(row["Pub_Direccion"]);
-
-        //        Rubro rubro = new Rubro();
-        //        rubro.Id = Convert.ToInt32(row["Pub_Rubro"]);
-        //        publicacion.Rubro = rubro;
-
-        //        Grado grado = new Grado();
-
-        //        grado.Id = Convert.ToInt32(row["Pub_Grado"]);
-        //        publicacion.Grado = grado;
-
-        //        Empresa empresa = new Empresa();
-        //        empresa.id = Convert.ToInt32(row["Pub_Empresa"]);
-        //        publicacion.Empresa = empresa;
-
-        //        Estado estado = new Estado();
-        //        estado.Id = Convert.ToInt32(row["Pub_Estado"]);
-
-        //        switch (estado.Id)
-        //        {
-        //            case 1:
-        //                estado.Descripcion = "BORRADOR";
-        //                break;
-        //            case 2:
-        //                estado.Descripcion = "PUBLICADA";
-        //                break;
-        //            case 3:
-        //                estado.Descripcion = "FINALIZADA";
-        //                break;
-        //        }
-        //        publicacion.Estado = estado;
-
-        //        publicaciones.Add(publicacion);
-        //    }
-
-        //    return publicaciones;
-        //}
        
     }
 }
