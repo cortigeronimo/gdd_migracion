@@ -56,7 +56,7 @@ namespace PalcoNet.Repositorios
 
             byte[] hashPassword = Hashing.GetSHA256Encrypt(password);
 
-            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
+            cmd.Parameters.AddWithValue("@idUser", UserSession.UserId);
             cmd.Parameters.AddWithValue("@password", hashPassword);
 
             Conexion.ExecuteProcedure(cmd);
@@ -64,14 +64,14 @@ namespace PalcoNet.Repositorios
 
 
 
-        public Boolean FirstLogin()
+        public Boolean FirstLogin(int userId, int rolId)
         {
             String sp = "PLEASE_HELP.SP_PRIMER_LOGIN";
             SqlCommand cmd = new SqlCommand(sp);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@idUser", LoggedInUser.ID);
-            cmd.Parameters.AddWithValue("@idRol", LoggedInUser.Rol);
+            cmd.Parameters.AddWithValue("@idUser", userId);
+            cmd.Parameters.AddWithValue("@idRol", rolId);
 
             SqlParameter firstLogin = new SqlParameter("@primerLogin", SqlDbType.Bit);
             firstLogin.Direction = ParameterDirection.Output;

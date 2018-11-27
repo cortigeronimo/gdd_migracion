@@ -69,6 +69,7 @@ C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.AltaRol.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
+<<<<<<< HEAD
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.CreateGrado.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.CanjeForm.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarFechas.resources
@@ -78,3 +79,26 @@ C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Genera
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.AltaEmpresa.resources
 C:\Users\Manuel\Desktop\UTN\GDD\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ModificarEmpresa.resources
+=======
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.CreateGrado.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.AltaRol.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.CanjeForm.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarFechas.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarUbicaciones.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormEditarPublicacion.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormGenerarPublicacion.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.CreateGrado.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Rol.AltaRol.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.CanjeForm.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarFechas.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormAgregarUbicaciones.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormEditarPublicacion.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormGenerarPublicacion.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.ViewPremios.resources
+>>>>>>> 380459c008ab0c00919b6827cb9ba09969d6dd81

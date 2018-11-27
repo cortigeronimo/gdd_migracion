@@ -33,11 +33,13 @@
             this.txtConfirmarPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBoxChangePassword = new System.Windows.Forms.GroupBox();
+            this.groupBoxChangePassword.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(102, 105);
+            this.btnAceptar.Location = new System.Drawing.Point(191, 152);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -47,24 +49,24 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(137, 26);
+            this.txtPassword.Location = new System.Drawing.Point(6, 45);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(110, 20);
+            this.txtPassword.Size = new System.Drawing.Size(134, 20);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
             // txtConfirmarPassword
             // 
-            this.txtConfirmarPassword.Location = new System.Drawing.Point(137, 64);
+            this.txtConfirmarPassword.Location = new System.Drawing.Point(6, 100);
             this.txtConfirmarPassword.Name = "txtConfirmarPassword";
-            this.txtConfirmarPassword.Size = new System.Drawing.Size(110, 20);
+            this.txtConfirmarPassword.Size = new System.Drawing.Size(134, 20);
             this.txtConfirmarPassword.TabIndex = 2;
             this.txtConfirmarPassword.TextChanged += new System.EventHandler(this.txtConfirmarPassword_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 29);
+            this.label1.Location = new System.Drawing.Point(3, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 3;
@@ -73,26 +75,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 67);
+            this.label2.Location = new System.Drawing.Point(3, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Confirmar Contraseña";
             // 
+            // groupBoxChangePassword
+            // 
+            this.groupBoxChangePassword.Controls.Add(this.label1);
+            this.groupBoxChangePassword.Controls.Add(this.txtConfirmarPassword);
+            this.groupBoxChangePassword.Controls.Add(this.label2);
+            this.groupBoxChangePassword.Controls.Add(this.txtPassword);
+            this.groupBoxChangePassword.Location = new System.Drawing.Point(26, 12);
+            this.groupBoxChangePassword.Name = "groupBoxChangePassword";
+            this.groupBoxChangePassword.Size = new System.Drawing.Size(240, 134);
+            this.groupBoxChangePassword.TabIndex = 5;
+            this.groupBoxChangePassword.TabStop = false;
+            this.groupBoxChangePassword.Text = "Cambiar Contraseña";
+            // 
             // FormChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 140);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtConfirmarPassword);
-            this.Controls.Add(this.txtPassword);
+            this.ClientSize = new System.Drawing.Size(292, 192);
+            this.Controls.Add(this.groupBoxChangePassword);
             this.Controls.Add(this.btnAceptar);
             this.Name = "FormChangePassword";
-            this.Text = "ChangePassword";
+            this.Text = "Cambiar Contraseña";
+            this.groupBoxChangePassword.ResumeLayout(false);
+            this.groupBoxChangePassword.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -103,5 +116,6 @@
         private System.Windows.Forms.TextBox txtConfirmarPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBoxChangePassword;
     }
 }

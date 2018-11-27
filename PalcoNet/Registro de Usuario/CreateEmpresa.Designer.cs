@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
-            this.numPiso = new System.Windows.Forms.NumericUpDown();
-            this.numTelefono = new System.Windows.Forms.NumericUpDown();
-            this.numCuit = new System.Windows.Forms.NumericUpDown();
+            this.txtNumeroPiso = new System.Windows.Forms.TextBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.txtCuit = new System.Windows.Forms.TextBox();
             this.txtCiudad = new System.Windows.Forms.TextBox();
             this.lblCiudad = new System.Windows.Forms.Label();
             this.txtCodigoPostal = new System.Windows.Forms.TextBox();
@@ -52,16 +52,13 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBoxCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuit)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxCliente
             // 
-            this.groupBoxCliente.Controls.Add(this.numPiso);
-            this.groupBoxCliente.Controls.Add(this.numTelefono);
-            this.groupBoxCliente.Controls.Add(this.numCuit);
+            this.groupBoxCliente.Controls.Add(this.txtNumeroPiso);
+            this.groupBoxCliente.Controls.Add(this.txtTelefono);
+            this.groupBoxCliente.Controls.Add(this.txtCuit);
             this.groupBoxCliente.Controls.Add(this.txtCiudad);
             this.groupBoxCliente.Controls.Add(this.lblCiudad);
             this.groupBoxCliente.Controls.Add(this.txtCodigoPostal);
@@ -84,58 +81,28 @@
             this.groupBoxCliente.Size = new System.Drawing.Size(354, 301);
             this.groupBoxCliente.TabIndex = 0;
             this.groupBoxCliente.TabStop = false;
-            this.groupBoxCliente.Text = "Alta De Cliente";
+            this.groupBoxCliente.Text = "Alta De Empresa";
             // 
-            // numPiso
+            // txtNumeroPiso
             // 
-            this.numPiso.Location = new System.Drawing.Point(6, 204);
-            this.numPiso.Name = "numPiso";
-            this.numPiso.Size = new System.Drawing.Size(131, 20);
-            this.numPiso.TabIndex = 30;
+            this.txtNumeroPiso.Location = new System.Drawing.Point(6, 203);
+            this.txtNumeroPiso.Name = "txtNumeroPiso";
+            this.txtNumeroPiso.Size = new System.Drawing.Size(131, 20);
+            this.txtNumeroPiso.TabIndex = 33;
             // 
-            // numTelefono
+            // txtTelefono
             // 
-            this.numTelefono.Location = new System.Drawing.Point(6, 99);
-            this.numTelefono.Maximum = new decimal(new int[] {
-            1000000000,
-            0,
-            0,
-            0});
-            this.numTelefono.Minimum = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
-            this.numTelefono.Name = "numTelefono";
-            this.numTelefono.Size = new System.Drawing.Size(131, 20);
-            this.numTelefono.TabIndex = 29;
-            this.numTelefono.Value = new decimal(new int[] {
-            10000000,
-            0,
-            0,
-            0});
+            this.txtTelefono.Location = new System.Drawing.Point(6, 99);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(131, 20);
+            this.txtTelefono.TabIndex = 32;
             // 
-            // numCuit
+            // txtCuit
             // 
-            this.numCuit.Location = new System.Drawing.Point(217, 48);
-            this.numCuit.Maximum = new decimal(new int[] {
-            1215752191,
-            23,
-            0,
-            0});
-            this.numCuit.Minimum = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
-            this.numCuit.Name = "numCuit";
-            this.numCuit.Size = new System.Drawing.Size(131, 20);
-            this.numCuit.TabIndex = 28;
-            this.numCuit.Value = new decimal(new int[] {
-            1410065408,
-            2,
-            0,
-            0});
+            this.txtCuit.Location = new System.Drawing.Point(215, 49);
+            this.txtCuit.Name = "txtCuit";
+            this.txtCuit.Size = new System.Drawing.Size(131, 20);
+            this.txtCuit.TabIndex = 31;
             // 
             // txtCiudad
             // 
@@ -212,7 +179,7 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(217, 155);
+            this.txtDireccion.Location = new System.Drawing.Point(215, 155);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(131, 20);
             this.txtDireccion.TabIndex = 14;
@@ -237,7 +204,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(217, 99);
+            this.txtEmail.Location = new System.Drawing.Point(215, 99);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(131, 20);
             this.txtEmail.TabIndex = 10;
@@ -305,12 +272,9 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxCliente);
             this.Name = "CreateEmpresa";
-            this.Text = "CreateCliente";
+            this.Text = "Alta De Empresa";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numPiso)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTelefono)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numCuit)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,8 +301,8 @@
         private System.Windows.Forms.Label lblLocalidad;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.NumericUpDown numPiso;
-        private System.Windows.Forms.NumericUpDown numTelefono;
-        private System.Windows.Forms.NumericUpDown numCuit;
+        private System.Windows.Forms.TextBox txtNumeroPiso;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.TextBox txtCuit;
     }
 }

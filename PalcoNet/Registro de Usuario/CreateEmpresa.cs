@@ -27,12 +27,12 @@ namespace PalcoNet.Registro_de_Usuario
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtRazonSocial.Clear();
-            numCuit.Value = numCuit.Minimum;
-            numTelefono.Value = numTelefono.Minimum;
+            txtCuit.Clear();
+            txtTelefono.Clear();
             txtEmail.Clear();
             txtLocalidad.Clear();
             txtDireccion.Clear();
-            numPiso.Value = numTelefono.Minimum;
+            txtNumeroPiso.Clear();
             txtDepartamento.Clear();
             txtCodigoPostal.Clear();
             txtCiudad.Clear();
@@ -42,11 +42,11 @@ namespace PalcoNet.Registro_de_Usuario
         {
             Empresa empresa = new Empresa(usuario);
             empresa.razonSocial = txtRazonSocial.Text;
-            empresa.cuit = (long)numCuit.Value;
+            empresa.cuit = (long)Convert.ToInt64(txtCuit.Text);
             empresa.email = txtEmail.Text;
-            empresa.telefono = (long)numTelefono.Value;
+            empresa.telefono = (long)Convert.ToInt64(txtTelefono.Text);
             empresa.direccion = txtDireccion.Text;
-            empresa.nroPiso = Convert.ToByte(numPiso.Value);
+            empresa.nroPiso = Convert.ToByte(txtNumeroPiso.Text);
             empresa.ciudad = txtCiudad.Text;
             empresa.depto = txtDepartamento.Text;
             empresa.localidad = txtLocalidad.Text;

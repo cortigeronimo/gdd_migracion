@@ -388,7 +388,7 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxCliente);
             this.Name = "CreateCliente";
-            this.Text = "CreateCliente";
+            this.Text = "Alta De Cliente";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();
             this.ResumeLayout(false);

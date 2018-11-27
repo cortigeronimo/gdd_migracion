@@ -21,21 +21,11 @@ namespace PalcoNet
     {
         Usuario user = new Usuario();
         RepoUsuario repo = new RepoUsuario();
-        
-
-        //public Login() : base()
-        //{
-            
-        //}
 
         public Login()
         {
             InitializeComponent();
-            
-
         }
-
-
 
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -51,9 +41,9 @@ namespace PalcoNet
                     Rol rol = new Rol();
                     TakeRolFromUser(user, rol);
 
-                    LoggedInUser.ID = user.id;
-                    LoggedInUser.Username = user.username;
-                    LoggedInUser.Rol = rol.id;
+                    UserSession.UserId = user.id;
+                    UserSession.Username = user.username;
+                    UserSession.RolId = rol.id;
                     
                     FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
                 }

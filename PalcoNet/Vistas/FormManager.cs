@@ -47,14 +47,6 @@ namespace PalcoNet
         {
             Hide();
             Open(new Login());
-            //Open(new CreateGrado());
-            //Open(new UpdateGrado());
-            //Open(new ListGrado());
-            //Open(new ListadoRol());
-            //Open(new AltaRol());
-            //Open(new CreateUsuario());
-            //Open(new CreateUsuario());
-            //Open(new ListadoEmpresa());
         }
 
         public void Open(Form form)
@@ -77,5 +69,6 @@ namespace PalcoNet
             Close(formToClose);
            
         }
+
     }
 }

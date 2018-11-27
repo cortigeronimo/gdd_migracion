@@ -96,6 +96,11 @@ IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA') IS NOT NULL DROP PROCEDURE PLE
 
 IF OBJECT_ID('PLEASE_HELP.SP_CANJEAR_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE;
+
+IF OBJECT_ID('PLEASE_HELP.SP_GET_PREMIOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_PREMIOS;
+
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -306,6 +311,7 @@ create table PLEASE_HELP.Usuario_Premio
 (
 	Cli_Usuario int,
 	Premio_Id int,
+	Premio_Cantidad int DEFAULT 1,
 	CONSTRAINT PK_USUARIOXPREMIO PRIMARY KEY (Cli_Usuario, Premio_Id),
 )
 
@@ -626,6 +632,14 @@ UPDATE PLEASE_HELP.Empresa SET Emp_Intentos_Fallidos = Emp_Intentos_Fallidos + 1
 END
 GO
 
+CREATE PROCEDURE PLEASE_HELP.SP_GET_PREMIOS(@clienteId INT)
+AS
+BEGIN
+SELECT Premio_Cantidad as Cantidad, Premio_Descripcion as Descripcion
+from Premio p inner join Usuario_Premio up
+on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
+END
+GO
 
 --CREATE PROCEDURE PLEASE_HELP.SP_VERIFICAR_ADMIN (@username NVARCHAR(50))
 --AS
@@ -799,13 +813,24 @@ GO
 CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0))
 AS
 	DECLARE @puntosPremio int 
-	INSERT INTO PLEASE_HELP.Usuario_Premio VALUES (@idUser, @idPremio)
+	IF NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Usuario_Premio up WHERE up.Cli_Usuario = @idUser and up.Premio_Id = @idPremio)
+		INSERT INTO PLEASE_HELP.Usuario_Premio (Cli_Usuario, Premio_Id) VALUES (@idUser, @idPremio)
+	ELSE
+		UPDATE PLEASE_HELP.Usuario_Premio SET Premio_Cantidad = (Premio_Cantidad + 1) WHERE Cli_Usuario = @idUser and Premio_Id = @idPremio
 	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
 	UPDATE PLEASE_HELP.Cliente SET Cli_Puntos = Cli_Puntos - @puntosPremio WHERE Cli_Usuario = @idUser
 GO
 
-EXEC PLEASE_HELP.SP_CANJEAR_PUNTOS 1 1
 
+
+
+-- STORED PROCEDURES HISTORIAL CLIENTE
+
+CREATE PROCEDURE PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE(@idUser INT)
+AS
+SELECT Compra_Fecha, Ubicacion_Precio, Compra_Metodo_Pago, Ubicacion_Descripcion, Ubicacion_Fila, Ubicacion_Asiento, (SELECT Pub_Fecha_Evento FROM PLEASE_HELP.Publicacion WHERE Pub_Codigo = Ubicacion_Publicacion) AS Compra_Fecha_Evento, (SELECT Pub_Descripcion FROM PLEASE_HELP.Publicacion WHERE Pub_Codigo = Ubicacion_Publicacion) AS Compra_Publicacion_Descripcion
+FROM PLEASE_HELP.Compra INNER JOIN PLEASE_HELP.Ubicacion ON Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento
+WHERE Compra_Cliente = @idUser
 GO
 	
 -- TRIGGERS LOGIN

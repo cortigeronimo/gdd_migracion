@@ -28,8 +28,8 @@ namespace PalcoNet.Vistas
 {
     public partial class HomeMenu : CustomForm
     {
-        RepoRol repo = new RepoRol();
-        RepoUsuario repoUsuario = new RepoUsuario();
+        private RepoRol repo = new RepoRol();
+        private RepoUsuario repoUsuario = new RepoUsuario();
 
         private Usuario user = new Usuario();
         private Rol rol = new Rol();
@@ -39,10 +39,8 @@ namespace PalcoNet.Vistas
         {
             InitializeComponent();
 
-            this.user.id = (int)LoggedInUser.ID;
-            this.rol.id = (int)LoggedInUser.Rol;
-
-            
+            this.user.id = (int)UserSession.UserId;
+            this.rol.id = (int)UserSession.RolId;
             
         }
 
@@ -54,7 +52,7 @@ namespace PalcoNet.Vistas
 
         private Boolean FirstLogin()
         {
-            return repoUsuario.FirstLogin();
+            return repoUsuario.FirstLogin(UserSession.UserId, UserSession.RolId);
         }
 
 
@@ -125,7 +123,6 @@ namespace PalcoNet.Vistas
             switch (itemFuncionalidad.Text)
             {
                 case "ABM ROL":
-                    
                     dictionary.Add("Crear Rol", "crearRol");
                     dictionary.Add("Consultar Roles", "listarRoles");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
@@ -146,6 +143,12 @@ namespace PalcoNet.Vistas
                 case "ABM GRADO PUBLICACION":
                     dictionary.Add("Crear Grado", "crearGrado");
                     dictionary.Add("Consultar Grados", "listarGrados");
+                    CreateAndAddSubItem(dictionary, itemFuncionalidad);
+                    break;
+
+                case "CANJE ADMINISTRACION PUNTOS":
+                    dictionary.Add("Canjear Puntos", "canjearPuntos");
+                    dictionary.Add("Ver Premios", "verPremios");
                     CreateAndAddSubItem(dictionary, itemFuncionalidad);
                     break;
 
@@ -190,6 +193,8 @@ namespace PalcoNet.Vistas
                     break;
                 case "CANJE ADMINISTRACION PUNTOS":
                     itemFuncionalidad.Click += new EventHandler(canjeAdministracionPuntos_Click);
+                    itemFuncionalidad.DropDownItems["canjearPuntos"].Click += new EventHandler(canjearPuntos_Click);
+                    itemFuncionalidad.DropDownItems["verPremios"].Click += new EventHandler(verPremios_Click);
                     break;
                 case "GENERAR PAGOS COMISIONES":
                     itemFuncionalidad.Click += new EventHandler(generarPagosComisiones_Click);
@@ -201,7 +206,6 @@ namespace PalcoNet.Vistas
                     break;
             }
         }
-
 
 
         //Eventos para el menu de ABM Grado
@@ -245,14 +249,12 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Rol
         private void crearRol_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new CreateRol(), this);
-            MessageBox.Show("soy el form crear rol");
+            FormManager.getInstance().OpenAndClose(new AltaRol(), this);
         }
 
         private void listarRoles_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new ListRoles(), this);
-            MessageBox.Show("soy el form listar roles");
+            FormManager.getInstance().OpenAndClose(new ListadoRol(), this);
         }
        
 
@@ -281,15 +283,14 @@ namespace PalcoNet.Vistas
         //Evento click para "historial cliente"
         private void historialCliente_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form historial de cliente");
+            FormManager.getInstance().Open(new HistorialCliente());
         }
 
 
         //Evento click para "canje administracion puntos"
         private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
         {
-            Form canjeDePuntos = new CanjeForm();
-            FormManager.getInstance().Open(canjeDePuntos);
+            FormManager.getInstance().Open(new CanjeForm());
         }
 
 
@@ -306,6 +307,16 @@ namespace PalcoNet.Vistas
             MessageBox.Show("soy el form de lsitado estadistico");
         }
 
+        private void verPremios_Click(object sender, EventArgs e)
+        {
+            FormManager.getInstance().Open(new ViewPremios());
+        }
+
+        private void canjearPuntos_Click(object sender, EventArgs e)
+        {
+            FormManager.getInstance().Open(new CanjeForm());
+        }
+
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormChangePassword form = new FormChangePassword())
@@ -316,6 +327,11 @@ namespace PalcoNet.Vistas
                     form.Close();
                 }
             }
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormManager.getInstance().OpenAndClose(new Login(), this);
         }
 
         
