@@ -54,7 +54,7 @@ namespace PalcoNet
             //Open(new AltaRol());
             //Open(new CreateUsuario());
             //Open(new CreateUsuario());
-            Open(new ListadoEmpresa());
+            //Open(new ListadoEmpresa());
         }
 
         public void Open(Form form)

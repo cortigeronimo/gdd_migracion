@@ -70,17 +70,28 @@ namespace PalcoNet.Repositorios
             int i = 0;
             while (i < table.Rows.Count)
             {
-                Empresa empresa = 
-                    new Empresa((string)table.Rows[i]["Emp_Razon_Social"], 
-                                (long)table.Rows[i]["Emp_Cuit"],
-                                (String)table.Rows[i]["Emp_Ciudad"],
-                                (string)table.Rows[i]["Emp_Email"],
-                                (long)table.Rows[i]["Emp_Telefono"],
-                                (string)table.Rows[i]["Emp_Localidad"],
-                                (string)table.Rows[i]["Emp_Direccion"],
-                                (byte)table.Rows[i]["Emp_Piso"],
-                                (string)table.Rows[i]["Emp_Depto"],
-                                (string)table.Rows[i]["Emp_Cod_Postal"]);
+                String stringCuit = (String)table.Rows[i]["Emp_Cuit"];
+
+                long cuit = Convert.ToInt64(new String((from c in stringCuit
+                                  where char.IsDigit(c)
+                                  select c
+                    ).ToArray()));
+                string ciudad = table.Rows[i]["Emp_Ciudad"] == System.DBNull.Value ? null : (String)table.Rows[i]["Emp_Ciudad"];
+                long telefono = table.Rows[i]["Emp_Telefono"] == System.DBNull.Value ? 0 : (long)table.Rows[i]["Emp_Telefono"];
+                string localidad = table.Rows[i]["Emp_Localidad"] == System.DBNull.Value ? null : (string)table.Rows[i]["Emp_Localidad"];
+
+                Empresa empresa = new Empresa();
+                empresa.razonSocial = (string)table.Rows[i]["Emp_Razon_Social"];
+                empresa.cuit = cuit;
+                empresa.ciudad = ciudad;
+                empresa.email = (string)table.Rows[i]["Emp_Email"];
+                empresa.telefono = telefono;
+                empresa.localidad = localidad;
+                empresa.direccion = (string)table.Rows[i]["Emp_Direccion"];
+                empresa.nroPiso = Convert.ToByte(table.Rows[i]["Emp_Piso"]);
+                empresa.depto = (string)table.Rows[i]["Emp_Depto"];
+                empresa.codigoPostal = (string)table.Rows[i]["Emp_Cod_Postal"];
+
                 empresas.Add(empresa);
                 i++;
             }

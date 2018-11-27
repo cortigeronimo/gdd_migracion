@@ -22,6 +22,8 @@ namespace PalcoNet.Modelo
         public byte intentosFallidos { get; set; }
         public bool baja { get; set; }
 
+        public String RazonSocial { get { return razonSocial; } }
+
         public Empresa()
         {
         }
