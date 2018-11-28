@@ -276,7 +276,7 @@ namespace PalcoNet.Vistas
         //Evento click para "comprar"
         private void comprar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form comprar");
+            FormManager.getInstance().Open(new FormComprar());
         }
 
 

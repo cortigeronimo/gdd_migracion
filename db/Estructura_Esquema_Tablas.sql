@@ -100,6 +100,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE') IS NOT NULL DROP PROCEDURE 
 
 IF OBJECT_ID('PLEASE_HELP.SP_GET_PREMIOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_PREMIOS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS;
+
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -822,6 +824,21 @@ AS
 GO
 
 
+
+CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null)
+AS
+SELECT Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, (SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) as Pub_Rubro,
+	 COUNT(*) as Pub_Stock	 
+FROM PLEASE_HELP.Publicacion INNER JOIN PLEASE_HELP.Ubicacion ON Pub_Codigo = Ubicacion_Publicacion
+WHERE Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'PUBLICADA') AND NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento)
+	AND Pub_Fecha_Evento > CONVERT(DATETIME, '2018-01-01 00:00:00', 121)        --consideramos fecha actual 2018-01-01 00:00:00, aca debería ir un getdate()
+	--filtros
+	AND (@descripcion is null OR Pub_Descripcion LIKE CONCAT('%',@descripcion,'%'))
+	AND (@fechaDesde is null OR Pub_Fecha_Evento >= CONVERT(DATETIME,@fechaDesde,121))
+	AND (@fechaHasta is null OR Pub_Fecha_Evento <= CONVERT(DATETIME,@fechaHasta,121))
+GROUP BY Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, Pub_Rubro, Pub_Grado
+ORDER BY (SELECT Grado_Comision FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) DESC, Pub_Fecha_Evento ASC
+GO
 
 
 -- STORED PROCEDURES HISTORIAL CLIENTE

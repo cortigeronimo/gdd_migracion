@@ -90,3 +90,6 @@ C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publ
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.ViewPremios.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Canje_Puntos.ViewPremios.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Comprar.FormComprar.resources
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Comprar.FormAddRubros.resources

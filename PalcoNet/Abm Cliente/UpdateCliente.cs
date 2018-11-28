@@ -29,6 +29,7 @@ namespace PalcoNet.Abm_Cliente
         {
             RepoCliente repoCliente = new RepoCliente();
             errorMessage = "";
+
             if (TextBoxOK())
             {
                 if (ExistsDNIAndCuil(txtID.Text.ToString(), comboBoxTipoDocumento.SelectedItem.ToString(), txtNroDocumento.Text.ToString(), txtCuil.Text.ToString()))

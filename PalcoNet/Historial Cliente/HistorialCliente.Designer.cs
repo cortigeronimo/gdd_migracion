@@ -30,6 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridHistorialCliente = new System.Windows.Forms.DataGridView();
+            this.fechaCompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metodoDePagoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.filaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asientoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.precioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionUbicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detalleCompraBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblHistorialCliente = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
@@ -39,14 +47,6 @@
             this.txtTotalPage = new System.Windows.Forms.TextBox();
             this.btnFirstPage = new System.Windows.Forms.Button();
             this.btnLastPage = new System.Windows.Forms.Button();
-            this.fechaCompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.metodoDePagoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.asientoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionUbicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridHistorialCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detalleCompraBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +72,62 @@
             this.dataGridHistorialCliente.ReadOnly = true;
             this.dataGridHistorialCliente.Size = new System.Drawing.Size(889, 233);
             this.dataGridHistorialCliente.TabIndex = 1;
+            // 
+            // fechaCompraDataGridViewTextBoxColumn
+            // 
+            this.fechaCompraDataGridViewTextBoxColumn.DataPropertyName = "FechaCompra";
+            this.fechaCompraDataGridViewTextBoxColumn.HeaderText = "Fecha De Compra";
+            this.fechaCompraDataGridViewTextBoxColumn.Name = "fechaCompraDataGridViewTextBoxColumn";
+            this.fechaCompraDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // metodoDePagoDataGridViewTextBoxColumn
+            // 
+            this.metodoDePagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoDePago";
+            this.metodoDePagoDataGridViewTextBoxColumn.HeaderText = "Metodo De Pago";
+            this.metodoDePagoDataGridViewTextBoxColumn.Name = "metodoDePagoDataGridViewTextBoxColumn";
+            this.metodoDePagoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // filaDataGridViewTextBoxColumn
+            // 
+            this.filaDataGridViewTextBoxColumn.DataPropertyName = "Fila";
+            this.filaDataGridViewTextBoxColumn.HeaderText = "Fila";
+            this.filaDataGridViewTextBoxColumn.Name = "filaDataGridViewTextBoxColumn";
+            this.filaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // asientoDataGridViewTextBoxColumn
+            // 
+            this.asientoDataGridViewTextBoxColumn.DataPropertyName = "Asiento";
+            this.asientoDataGridViewTextBoxColumn.HeaderText = "Asiento";
+            this.asientoDataGridViewTextBoxColumn.Name = "asientoDataGridViewTextBoxColumn";
+            this.asientoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // precioDataGridViewTextBoxColumn
+            // 
+            this.precioDataGridViewTextBoxColumn.DataPropertyName = "Precio";
+            this.precioDataGridViewTextBoxColumn.HeaderText = "Precio";
+            this.precioDataGridViewTextBoxColumn.Name = "precioDataGridViewTextBoxColumn";
+            this.precioDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descripcionUbicacionDataGridViewTextBoxColumn
+            // 
+            this.descripcionUbicacionDataGridViewTextBoxColumn.DataPropertyName = "DescripcionUbicacion";
+            this.descripcionUbicacionDataGridViewTextBoxColumn.HeaderText = "Descripción Ubicacion";
+            this.descripcionUbicacionDataGridViewTextBoxColumn.Name = "descripcionUbicacionDataGridViewTextBoxColumn";
+            this.descripcionUbicacionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descripcionPublicacionDataGridViewTextBoxColumn
+            // 
+            this.descripcionPublicacionDataGridViewTextBoxColumn.DataPropertyName = "DescripcionPublicacion";
+            this.descripcionPublicacionDataGridViewTextBoxColumn.HeaderText = "Descripción Publicación";
+            this.descripcionPublicacionDataGridViewTextBoxColumn.Name = "descripcionPublicacionDataGridViewTextBoxColumn";
+            this.descripcionPublicacionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fechaEventoDataGridViewTextBoxColumn
+            // 
+            this.fechaEventoDataGridViewTextBoxColumn.DataPropertyName = "FechaEvento";
+            this.fechaEventoDataGridViewTextBoxColumn.HeaderText = "Fecha Evento";
+            this.fechaEventoDataGridViewTextBoxColumn.Name = "fechaEventoDataGridViewTextBoxColumn";
+            this.fechaEventoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // detalleCompraBindingSource
             // 
@@ -149,62 +205,6 @@
             this.btnLastPage.Text = ">>";
             this.btnLastPage.UseVisualStyleBackColor = true;
             this.btnLastPage.Click += new System.EventHandler(this.btnLastPage_Click);
-            // 
-            // fechaCompraDataGridViewTextBoxColumn
-            // 
-            this.fechaCompraDataGridViewTextBoxColumn.DataPropertyName = "FechaCompra";
-            this.fechaCompraDataGridViewTextBoxColumn.HeaderText = "Fecha De Compra";
-            this.fechaCompraDataGridViewTextBoxColumn.Name = "fechaCompraDataGridViewTextBoxColumn";
-            this.fechaCompraDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // metodoDePagoDataGridViewTextBoxColumn
-            // 
-            this.metodoDePagoDataGridViewTextBoxColumn.DataPropertyName = "MetodoDePago";
-            this.metodoDePagoDataGridViewTextBoxColumn.HeaderText = "Metodo De Pago";
-            this.metodoDePagoDataGridViewTextBoxColumn.Name = "metodoDePagoDataGridViewTextBoxColumn";
-            this.metodoDePagoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // filaDataGridViewTextBoxColumn
-            // 
-            this.filaDataGridViewTextBoxColumn.DataPropertyName = "Fila";
-            this.filaDataGridViewTextBoxColumn.HeaderText = "Fila";
-            this.filaDataGridViewTextBoxColumn.Name = "filaDataGridViewTextBoxColumn";
-            this.filaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // asientoDataGridViewTextBoxColumn
-            // 
-            this.asientoDataGridViewTextBoxColumn.DataPropertyName = "Asiento";
-            this.asientoDataGridViewTextBoxColumn.HeaderText = "Asiento";
-            this.asientoDataGridViewTextBoxColumn.Name = "asientoDataGridViewTextBoxColumn";
-            this.asientoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // precioDataGridViewTextBoxColumn
-            // 
-            this.precioDataGridViewTextBoxColumn.DataPropertyName = "Precio";
-            this.precioDataGridViewTextBoxColumn.HeaderText = "Precio";
-            this.precioDataGridViewTextBoxColumn.Name = "precioDataGridViewTextBoxColumn";
-            this.precioDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descripcionUbicacionDataGridViewTextBoxColumn
-            // 
-            this.descripcionUbicacionDataGridViewTextBoxColumn.DataPropertyName = "DescripcionUbicacion";
-            this.descripcionUbicacionDataGridViewTextBoxColumn.HeaderText = "Descripción Ubicacion";
-            this.descripcionUbicacionDataGridViewTextBoxColumn.Name = "descripcionUbicacionDataGridViewTextBoxColumn";
-            this.descripcionUbicacionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // descripcionPublicacionDataGridViewTextBoxColumn
-            // 
-            this.descripcionPublicacionDataGridViewTextBoxColumn.DataPropertyName = "DescripcionPublicacion";
-            this.descripcionPublicacionDataGridViewTextBoxColumn.HeaderText = "Descripción Publicación";
-            this.descripcionPublicacionDataGridViewTextBoxColumn.Name = "descripcionPublicacionDataGridViewTextBoxColumn";
-            this.descripcionPublicacionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // fechaEventoDataGridViewTextBoxColumn
-            // 
-            this.fechaEventoDataGridViewTextBoxColumn.DataPropertyName = "FechaEvento";
-            this.fechaEventoDataGridViewTextBoxColumn.HeaderText = "Fecha Evento";
-            this.fechaEventoDataGridViewTextBoxColumn.Name = "fechaEventoDataGridViewTextBoxColumn";
-            this.fechaEventoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // HistorialCliente
             // 
