@@ -35,6 +35,18 @@ namespace PalcoNet.Abm_Rol
             }
         }
 
+        private void AllDataIsCompleted(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtBoxNombre.Text) || listBoxFuncionalidades.Items.Count == 0)
+            {
+                btnGuardar.Enabled = false;
+            }
+            else
+            {
+                btnGuardar.Enabled = true;
+            }
+        }
+
         private void btnQuitar_Click(object sender, EventArgs e)
         {
             Funcionalidad selected = rol.funcionalidades.Find(r => r.Nombre == (string)listBoxFuncionalidades.SelectedItem);
@@ -55,18 +67,13 @@ namespace PalcoNet.Abm_Rol
             nuevoRol.funcionalidades = rol.funcionalidades;
             new RepoRol().CreateRol(rol);
             this.DialogResult = DialogResult.OK;
-            MessageBox.Show("Rol Creado");
+            MessageBox.Show("Se ha realizado la operación con éxito");
             this.Close();
         }
 
         private void CargarListFuncionalidades()
         {
             listBoxFuncionalidades.DataSource = rol.funcionalidades.Select<Funcionalidad, string>(funcionalidad => funcionalidad.Nombre).ToList();
-        }
-
-        private void listBoxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

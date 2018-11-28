@@ -249,12 +249,12 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Rol
         private void crearRol_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new AltaRol(), this);
+            FormManager.getInstance().Open(new AltaRol());
         }
 
         private void listarRoles_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new ListadoRol(), this);
+            FormManager.getInstance().Open(new ListadoRol());
         }
        
 

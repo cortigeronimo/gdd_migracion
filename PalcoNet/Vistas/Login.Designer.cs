@@ -60,7 +60,7 @@
             this.txtUsername.Size = new System.Drawing.Size(156, 23);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.Text = "USUARIO45023700";
-            this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
+            this.txtUsername.TextChanged += new System.EventHandler(this.TxtBoxes_TextChanged);
             // 
             // txtPassword
             // 
@@ -71,7 +71,7 @@
             this.txtPassword.Size = new System.Drawing.Size(156, 23);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.Text = "45023700";
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            this.txtPassword.TextChanged += new System.EventHandler(this.TxtBoxes_TextChanged);
             // 
             // lblUsername
             // 
@@ -128,7 +128,6 @@
             this.Controls.Add(this.btnLogin);
             this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
