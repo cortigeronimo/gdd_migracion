@@ -139,8 +139,8 @@ namespace PalcoNet.Repositorios
             String query = "SELECT * FROM ";
             query += clienteTable;
             query += " WHERE Cli_Usuario != @user";
-            query += " AND (Cli_Tipo_Documento = @tipoDoc";
-            query += " OR Cli_Nro_Documento = @nroDoc";
+            query += " AND Cli_Tipo_Documento = @tipoDoc";
+            query += " AND (Cli_Nro_Documento = @nroDoc";
             query += " OR Cli_Cuil = @cuil)";
 
             SqlCommand command = new SqlCommand(query);

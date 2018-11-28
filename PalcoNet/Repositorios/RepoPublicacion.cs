@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using PalcoNet.Modelo;
 using PalcoNet.Config;
 using PalcoNet.Abm_Grado;
+using PalcoNet.DTO;
 
 namespace PalcoNet.Repositorios
 {
@@ -141,6 +142,81 @@ namespace PalcoNet.Repositorios
             cmd.Parameters.AddWithValue("estado", estado);
 
             Conexion.ExecuteProcedure(cmd);
+        }
+
+        public List<PublicacionDTO> GetPublicacionesActivas()
+        {
+            String sp = "PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            DataTable publicacionesTable = Conexion.GetData(cmd);
+
+            return FromRowsToList(publicacionesTable);
+        }
+
+        private List<PublicacionDTO> FromRowsToList(DataTable publicacionesTable)
+        {
+            List<PublicacionDTO> publicacionesList = new List<PublicacionDTO>();
+
+            foreach (DataRow row in publicacionesTable.Rows)
+            {
+                PublicacionDTO publicacion = new PublicacionDTO();
+
+                publicacion.Codigo = Convert.ToInt64(row["Pub_Codigo"]);
+                publicacion.Descripcion = row["Pub_Descripcion"].ToString();
+                publicacion.FechaEvento = Convert.ToDateTime(row["Pub_Fecha_Evento"]);
+                publicacion.Direccion = row["Pub_Direccion"].ToString();
+
+                //new
+                publicacion.Rubro = row["Pub_Rubro"].ToString();
+
+                
+
+                publicacion.Stock = Convert.ToInt32(row["Pub_Stock"]);
+
+                publicacionesList.Add(publicacion);
+            }
+
+            return publicacionesList;
+        }
+
+        public List<PublicacionDTO> GetPublicacionesByFilter(List<String> rubrosList, DateTime desde, DateTime hasta, String descripcion)
+        {
+            DataTable filteredTable = new DataTable();
+
+            String sp = "PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@fechaDesde", desde);
+            cmd.Parameters.AddWithValue("@fechaHasta", hasta);
+
+
+            if (!String.IsNullOrEmpty(descripcion))
+            {
+                cmd.Parameters.AddWithValue("@descripcion", descripcion);
+            }
+            
+            DataTable table = Conexion.GetData(cmd);
+
+            if (rubrosList.Count == 0)
+            {
+                return FromRowsToList(table);
+            }
+            else
+            {
+                foreach (String rubro in rubrosList)
+                {
+                    DataRow[] results = table.Select("Pub_rubro = " + rubro);
+                    filteredTable.Rows.Add(results);
+                }
+                return FromRowsToList(filteredTable);
+            }
+
+            
+
+            
         }
        
     }

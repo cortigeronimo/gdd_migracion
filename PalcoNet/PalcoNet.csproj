@@ -123,17 +123,24 @@
     <Compile Include="Canje Puntos\ViewPremios.Designer.cs">
       <DependentUpon>ViewPremios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar\Form1.cs">
+    <Compile Include="Comprar\AddRubros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Comprar\AddRubros.Designer.cs">
+      <DependentUpon>AddRubros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\Comprar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\Comprar.Designer.cs">
+      <DependentUpon>Comprar.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Conexion.cs" />
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
     <Compile Include="DTO\PremioDTO.cs" />
+    <Compile Include="DTO\PublicacionDTO.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +305,12 @@
     <EmbeddedResource Include="Canje Puntos\ViewPremios.resx">
       <DependentUpon>ViewPremios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\AddRubros.resx">
+      <DependentUpon>AddRubros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\Comprar.resx">
+      <DependentUpon>Comprar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\AgregarFechas.resx">
       <DependentUpon>AgregarFechas.cs</DependentUpon>
     </EmbeddedResource>
@@ -350,7 +363,9 @@
       <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Publicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
