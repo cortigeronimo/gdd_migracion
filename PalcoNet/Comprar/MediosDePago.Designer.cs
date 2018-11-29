@@ -33,16 +33,20 @@
             this.comboBoxMedioPago = new System.Windows.Forms.ComboBox();
             this.btnAceptarMedioDePago = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtEmailFacturacion = new System.Windows.Forms.TextBox();
             this.groupBoxMedioPago.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxMedioPago
             // 
+            this.groupBoxMedioPago.Controls.Add(this.txtEmailFacturacion);
+            this.groupBoxMedioPago.Controls.Add(this.label2);
             this.groupBoxMedioPago.Controls.Add(this.label1);
             this.groupBoxMedioPago.Controls.Add(this.comboBoxMedioPago);
             this.groupBoxMedioPago.Location = new System.Drawing.Point(12, 12);
             this.groupBoxMedioPago.Name = "groupBoxMedioPago";
-            this.groupBoxMedioPago.Size = new System.Drawing.Size(303, 73);
+            this.groupBoxMedioPago.Size = new System.Drawing.Size(303, 113);
             this.groupBoxMedioPago.TabIndex = 0;
             this.groupBoxMedioPago.TabStop = false;
             this.groupBoxMedioPago.Text = "Medio De Pago";
@@ -69,7 +73,7 @@
             // 
             // btnAceptarMedioDePago
             // 
-            this.btnAceptarMedioDePago.Location = new System.Drawing.Point(240, 103);
+            this.btnAceptarMedioDePago.Location = new System.Drawing.Point(240, 131);
             this.btnAceptarMedioDePago.Name = "btnAceptarMedioDePago";
             this.btnAceptarMedioDePago.Size = new System.Drawing.Size(75, 23);
             this.btnAceptarMedioDePago.TabIndex = 1;
@@ -79,7 +83,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(12, 103);
+            this.btnCancelar.Location = new System.Drawing.Point(12, 131);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 2;
@@ -87,11 +91,27 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Email(Facturación):";
+            // 
+            // txtEmailFacturacion
+            // 
+            this.txtEmailFacturacion.Location = new System.Drawing.Point(109, 71);
+            this.txtEmailFacturacion.Name = "txtEmailFacturacion";
+            this.txtEmailFacturacion.Size = new System.Drawing.Size(188, 20);
+            this.txtEmailFacturacion.TabIndex = 3;
+            // 
             // FormMediosDePago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 142);
+            this.ClientSize = new System.Drawing.Size(327, 167);
             this.ControlBox = false;
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptarMedioDePago);
@@ -112,5 +132,7 @@
         private System.Windows.Forms.ComboBox comboBoxMedioPago;
         private System.Windows.Forms.Button btnAceptarMedioDePago;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox txtEmailFacturacion;
+        private System.Windows.Forms.Label label2;
     }
 }
