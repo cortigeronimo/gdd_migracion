@@ -244,6 +244,28 @@ namespace PalcoNet.Repositorios
             return Conexion.InsertUpdateOrDeleteData(cmd);
         }
 
+        public Boolean TieneNroTarjeta(int userId)
+        {
+            Usuario user = new Usuario();
+            user.id = userId;
+
+            DataTable table = new RepoUsuario().GetClientRow(user);
+
+            return table.Rows[0]["Cli_Tarjeta_Credito"] != DBNull.Value;
+        }
+
+        public void AddNroTarjetaCredito(int idUser, String nroTarjeta)
+        {
+            String sp = "PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@userId", idUser);
+            cmd.Parameters.AddWithValue("@numeroTarjeta", nroTarjeta);
+
+            Conexion.ExecuteProcedure(cmd);
+         
+        }
         
     }
 }

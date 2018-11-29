@@ -20,7 +20,7 @@ namespace PalcoNet.Comprar
     public partial class FormComprar : CustomForm
     {
         private Page<PublicacionDTO> page;
-        private const int sizePage = 10;
+        private const int sizePage = 20;
 
         private RepoPublicacion repoPublicacion = new RepoPublicacion();
         private RepoRubro repoRubro = new RepoRubro();
@@ -35,6 +35,9 @@ namespace PalcoNet.Comprar
 
         private void FormComprar_Load(object sender, EventArgs e)
         {
+            dataGridViewPublicaciones.RowHeadersVisible = false;
+            dataGridViewPublicaciones.AllowUserToResizeRows = false;
+
             InitDateTimePickers();
             SetRubros();
 
@@ -44,7 +47,7 @@ namespace PalcoNet.Comprar
 
         private void InitDateTimePickers()
         {
-
+            checkBoxRangoFecha.Checked = false;
             dateTimePickerFechaDesde.Format = DateTimePickerFormat.Custom;
             dateTimePickerFechaDesde.CustomFormat = " ";
             dateTimePickerFechaDesde.Value = DateTime.Parse("1890-01-01 00:00");
@@ -81,7 +84,7 @@ namespace PalcoNet.Comprar
             BindingSource binding = new BindingSource(publicacionesPage, null);
             dataGridViewPublicaciones.DataSource = binding;
             
-            //o hacer foreach de lista con el datagrid
+            
         }
 
         private void btnFirstPage_Click(object sender, EventArgs e)
@@ -144,8 +147,8 @@ namespace PalcoNet.Comprar
             selectedRubros = new List<String>();
             txtCategorias.Clear();
             txtDescripcion.Clear();
-            dateTimePickerFechaDesde.Value = SystemDate.GetDate();
-            dateTimePickerFechaHasta.Value = SystemDate.GetDate().AddDays(7);
+
+            InitDateTimePickers();
 
             InitPagination();
             LoadDataGridViewPublicaciones();
@@ -190,6 +193,33 @@ namespace PalcoNet.Comprar
                 dateTimePickerFechaHasta.Value = DateTime.Parse("2500-01-01 00:00");
                 
             }
+        }
+
+
+        private void dataGridViewPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridViewPublicaciones.Columns["columnComprar"].Index)
+            {
+                PublicacionDTO publicacion = (PublicacionDTO)dataGridViewPublicaciones.CurrentRow.DataBoundItem;
+
+                List<Ubicacion> ubicacionesDisponibles = new RepoUbicacion().GetUbicacionesDisponibles(publicacion.Codigo);
+
+                using (FormComprarUbicaciones form = new FormComprarUbicaciones(ubicacionesDisponibles))
+                {
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        InitPagination();
+                        LoadDataGridViewPublicaciones();
+                    }
+                }
+
+            }
+        }
+
+        private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtDescripcion.Text == String.Empty && Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
         }
     }
 }

@@ -102,6 +102,12 @@ IF OBJECT_ID('PLEASE_HELP.SP_GET_PREMIOS') IS NOT NULL DROP PROCEDURE PLEASE_HEL
 
 IF OBJECT_ID('PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_GET_UBICACIONES_DISPONIBLES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_UBICACIONES_DISPONIBLES;
+
+IF OBJECT_ID('PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO;
+
+IF OBJECT_ID('PLEASE_HELP.SP_COMPRAR_ENTRADA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA;
+
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -114,6 +120,8 @@ IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE') IS NOT NULL DROP TRI
 IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA;
 
 IF OBJECT_ID('PLEASE_HELP.TR_AFTER_FIRST_LOGIN') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN;
+
+IF OBJECT_ID('PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA;
 
 -- CREANDO ESTRUCTURAS DE TABLAS
 
@@ -824,11 +832,12 @@ AS
 GO
 
 
+-- STORED PROCEDURES COMPRAR
 
 CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null)
 AS
 SELECT Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, (SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) as Pub_Rubro,
-	 COUNT(*) as Pub_Stock	 
+	 COUNT(*) as Pub_Stock, (SELECT Grado_Comision FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) as Pub_Comision	 
 FROM PLEASE_HELP.Publicacion INNER JOIN PLEASE_HELP.Ubicacion ON Pub_Codigo = Ubicacion_Publicacion
 WHERE Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'PUBLICADA') AND NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento)
 	AND Pub_Fecha_Evento > CONVERT(DATETIME, '2018-01-01 00:00:00', 121)        --consideramos fecha actual 2018-01-01 00:00:00, aca debería ir un getdate()
@@ -838,6 +847,31 @@ WHERE Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descri
 	AND (@fechaHasta is null OR Pub_Fecha_Evento <= CONVERT(DATETIME,@fechaHasta,121))
 GROUP BY Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, Pub_Rubro, Pub_Grado
 ORDER BY (SELECT Grado_Comision FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) DESC, Pub_Fecha_Evento ASC
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_GET_UBICACIONES_DISPONIBLES(@codigoPublicacion NUMERIC(18,0))
+AS
+SELECT Ubicacion_Publicacion, Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Descripcion, Ubicacion_Precio
+FROM  PLEASE_HELP.Ubicacion 
+WHERE Ubicacion_Publicacion = @codigoPublicacion 
+	AND NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento) 
+ORDER BY Ubicacion_Fila ASC, Ubicacion_Asiento ASC
+GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO(@userId INT, @numeroTarjeta NVARCHAR(255))
+AS
+BEGIN	
+	UPDATE PLEASE_HELP.Cliente SET Cli_Tarjeta_Credito = @numeroTarjeta WHERE Cli_Usuario = @userId
+END
+GO
+
+
+CREATE PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA(@compraCliente INT, @compraFecha DATETIME, @compraMedioPago NVARCHAR(255), @compraFila VARCHAR(3), @compraAsiento NUMERIC(18,0), @compraPublicacion NUMERIC(18,0))
+AS
+BEGIN
+	INSERT PLEASE_HELP.Compra (Compra_Cliente, Compra_Cantidad, Compra_Fecha, Compra_Metodo_Pago, Compra_Fila, Compra_Asiento, Compra_Publicacion) VALUES (@compraCliente, 1, CONVERT(DATETIME, @compraFecha, 121), @compraMedioPago, @compraFila, @compraAsiento, @compraPublicacion)
+END
 GO
 
 
@@ -924,4 +958,19 @@ BEGIN
 	END
 
 END	
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA
+ON PLEASE_HELP.Compra
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codigoPublicacion NUMERIC(18,0)
+	SELECT @codigoPublicacion = Compra_Publicacion FROM inserted 
+	IF NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Ubicacion 
+					WHERE Ubicacion_Publicacion = @codigoPublicacion 
+						AND NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento))
+		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'FINALIZADA') WHERE Pub_Codigo = @codigoPublicacion
+END
 GO

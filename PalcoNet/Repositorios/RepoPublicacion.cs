@@ -175,6 +175,11 @@ namespace PalcoNet.Repositorios
 
                 publicacion.Stock = Convert.ToInt32(row["Pub_Stock"]);
 
+                if (row["Pub_Comision"] == DBNull.Value)
+                    publicacion.Comision = 0;
+                else
+                    publicacion.Comision = Convert.ToInt32(row["Pub_Comision"]);
+
                 publicacionesList.Add(publicacion);
             }
 
@@ -192,25 +197,45 @@ namespace PalcoNet.Repositorios
             cmd.Parameters.AddWithValue("@fechaDesde", desde);
             cmd.Parameters.AddWithValue("@fechaHasta", hasta);
 
-
             if (!String.IsNullOrEmpty(descripcion))
             {
                 cmd.Parameters.AddWithValue("@descripcion", descripcion);
             }
             
-            DataTable table = Conexion.GetData(cmd);
+
+            DataTable sourceTable = Conexion.GetData(cmd);
+            filteredTable = sourceTable.Clone();
+
 
             if (rubrosList.Count == 0)
             {
-                return FromRowsToList(table);
+                return FromRowsToList(sourceTable);
             }
             else
             {
+                String sqlWhere = String.Empty;
+                
+                String sqlOrder = "Pub_Comision DESC";
+
                 foreach (String rubro in rubrosList)
-                {
-                    DataRow[] results = table.Select("Pub_rubro = " + rubro);
-                    filteredTable.Rows.Add(results);
+                {                   
+                    sqlWhere += "Pub_Rubro = '" + rubro + "' OR ";                   
                 }
+
+                sqlWhere = sqlWhere.Substring(0, sqlWhere.Length - 4);
+
+                DataRow[] filteredRows = sourceTable.Select(sqlWhere, sqlOrder);
+
+                //foreach (DataRow row in filteredRows)
+                //{
+                //    filteredTable.ImportRow(row);
+                //}
+
+                //filteredTable = filteredRows.CopyToDataTable();
+
+                if (filteredRows.Any())
+                    filteredTable = filteredRows.CopyToDataTable();
+
                 return FromRowsToList(filteredTable);
             }
 

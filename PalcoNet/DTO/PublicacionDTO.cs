@@ -20,6 +20,8 @@ namespace PalcoNet.DTO
         public String Estado { get; set; }
         public int Stock { get; set; }
 
+        public int Comision { get; set; }
+
         public List<Ubicacion> Ubicaciones { get; set; }
 
         

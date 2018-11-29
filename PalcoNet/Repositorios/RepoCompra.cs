@@ -47,5 +47,27 @@ namespace PalcoNet.Repositorios
 
             return comprasList;
         }
+
+        public void GenerateCompras(List<Ubicacion> ubicacionesList, int userId, String medioPago)
+        {
+            String sp = "PLEASE_HELP.SP_COMPRAR_ENTRADA";
+
+            foreach (Ubicacion u in ubicacionesList)
+            {
+                SqlCommand cmd = new SqlCommand(sp);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@compraCliente", userId);
+                cmd.Parameters.AddWithValue("@compraFecha", SystemDate.GetDate());
+                cmd.Parameters.AddWithValue("@compraMedioPago", medioPago);
+                cmd.Parameters.AddWithValue("@compraFila", u.Fila);
+                cmd.Parameters.AddWithValue("@compraAsiento", u.Asiento);
+                cmd.Parameters.AddWithValue("@compraPublicacion", u.Publicacion);
+
+                Conexion.ExecuteProcedure(cmd);
+            }
+        }
+
+
     }
 }
