@@ -25,6 +25,7 @@ namespace PalcoNet.Comprar
 
         private int importeTotal = 0;
         private String medioDePago;
+        private String compraEmail;
 
         public FormComprarUbicaciones(List<Ubicacion> ubicaciones)
         {
@@ -109,6 +110,7 @@ namespace PalcoNet.Comprar
                 if (result == DialogResult.OK)
                 {
                     medioDePago = form.medioDePago;
+                    compraEmail = form.compraEmail;
                 }
                 else if (result == DialogResult.Cancel)
                 {
@@ -141,7 +143,7 @@ namespace PalcoNet.Comprar
             {
                 try
                 {
-                    repoCompra.GenerateCompras(ubicacionesAComprar, UserSession.UserId, medioDePago);
+                    repoCompra.GenerateCompras(ubicacionesAComprar, UserSession.UserId, medioDePago, compraEmail);
                     MessageBox.Show("La compra se realizó correctamente.");
                     this.DialogResult = DialogResult.OK;
                 }

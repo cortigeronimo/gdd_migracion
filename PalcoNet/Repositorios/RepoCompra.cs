@@ -48,7 +48,7 @@ namespace PalcoNet.Repositorios
             return comprasList;
         }
 
-        public void GenerateCompras(List<Ubicacion> ubicacionesList, int userId, String medioPago)
+        public void GenerateCompras(List<Ubicacion> ubicacionesList, int userId, String medioPago, String compraEmail)
         {
             String sp = "PLEASE_HELP.SP_COMPRAR_ENTRADA";
 
@@ -60,6 +60,7 @@ namespace PalcoNet.Repositorios
                 cmd.Parameters.AddWithValue("@compraCliente", userId);
                 cmd.Parameters.AddWithValue("@compraFecha", SystemDate.GetDate());
                 cmd.Parameters.AddWithValue("@compraMedioPago", medioPago);
+                cmd.Parameters.AddWithValue("@compraEmail", compraEmail);
                 cmd.Parameters.AddWithValue("@compraFila", u.Fila);
                 cmd.Parameters.AddWithValue("@compraAsiento", u.Asiento);
                 cmd.Parameters.AddWithValue("@compraPublicacion", u.Publicacion);

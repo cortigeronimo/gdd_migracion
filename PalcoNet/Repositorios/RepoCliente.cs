@@ -266,6 +266,16 @@ namespace PalcoNet.Repositorios
             Conexion.ExecuteProcedure(cmd);
          
         }
+
+        public String GetEmailCliente(int idUser)
+        {
+            Usuario user = new Usuario();
+            user.id = idUser;
+
+            DataTable table = new RepoUsuario().GetClientRow(user);
+
+            return table.Rows[0]["Cli_Email"].ToString();
+        }
         
     }
 }

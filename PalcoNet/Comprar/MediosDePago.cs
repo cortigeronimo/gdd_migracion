@@ -11,23 +11,35 @@ using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
+using PalcoNet.Config;
 
 namespace PalcoNet.Comprar
 {
     public partial class FormMediosDePago : CustomForm
     {
         public String medioDePago;
+        public String compraEmail;
+
+        private RepoCliente repoCliente = new RepoCliente();
 
         public FormMediosDePago()
         {
             InitializeComponent();
             comboBoxMedioPago.SelectedItem = "Tarjeta De Credito";
+            txtEmailFacturacion.Text = repoCliente.GetEmailCliente(UserSession.UserId);
         }
 
         private void btnAceptarMedioDePago_Click(object sender, EventArgs e)
         {
             medioDePago = comboBoxMedioPago.SelectedItem.ToString();
-            this.DialogResult = DialogResult.OK;
+            compraEmail = txtEmailFacturacion.Text;
+
+            if (CheckData.Email(compraEmail))
+                this.DialogResult = DialogResult.OK;
+            else
+                MessageBox.Show("Ingrese un email válido para continuar con la compra.", "Error");
+                                 
         }
 
         private void FormMediosDePago_FormClosing(object sender, FormClosingEventArgs e)

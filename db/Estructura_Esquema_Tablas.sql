@@ -272,6 +272,7 @@ create table PLEASE_HELP.Compra
 	Compra_Cantidad numeric(18,0) NOT NULL,
 	Compra_Fecha datetime NOT NULL,
 	Compra_Metodo_Pago nvarchar(255) NOT NULL,
+	Compra_Email nvarchar(255),
 	Compra_Fecha_Rendida datetime,
 	Compra_Fila varchar(3) NOT NULL,
 	Compra_Asiento numeric(18,0) NOT NULL,
@@ -589,7 +590,7 @@ EXEC PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA
 GO
 
 INSERT INTO PLEASE_HELP.Compra
-SELECT (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Factura_Fecha, g.Ubicacion_Fila, g.Ubicacion_Asiento, g.Espectaculo_Cod
+SELECT (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Cli_Mail, g.Factura_Fecha, g.Ubicacion_Fila, g.Ubicacion_Asiento, g.Espectaculo_Cod
 FROM gd_esquema.Maestra g
 WHERE g.Cli_Dni IS NOT NULL AND g.Forma_Pago_Desc IS NOT NULL 
 ORDER BY g.Compra_Fecha ASC
@@ -867,10 +868,10 @@ END
 GO
 
 
-CREATE PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA(@compraCliente INT, @compraFecha DATETIME, @compraMedioPago NVARCHAR(255), @compraFila VARCHAR(3), @compraAsiento NUMERIC(18,0), @compraPublicacion NUMERIC(18,0))
+CREATE PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA(@compraCliente INT, @compraFecha DATETIME, @compraMedioPago NVARCHAR(255), @compraEmail NVARCHAR(255), @compraFila VARCHAR(3), @compraAsiento NUMERIC(18,0), @compraPublicacion NUMERIC(18,0))
 AS
 BEGIN
-	INSERT PLEASE_HELP.Compra (Compra_Cliente, Compra_Cantidad, Compra_Fecha, Compra_Metodo_Pago, Compra_Fila, Compra_Asiento, Compra_Publicacion) VALUES (@compraCliente, 1, CONVERT(DATETIME, @compraFecha, 121), @compraMedioPago, @compraFila, @compraAsiento, @compraPublicacion)
+	INSERT PLEASE_HELP.Compra (Compra_Cliente, Compra_Cantidad, Compra_Fecha, Compra_Metodo_Pago, Compra_Email, Compra_Fila, Compra_Asiento, Compra_Publicacion) VALUES (@compraCliente, 1, CONVERT(DATETIME, @compraFecha, 121), @compraMedioPago, @compraEmail, @compraFila, @compraAsiento, @compraPublicacion)
 END
 GO
 
