@@ -65,12 +65,6 @@
     <Compile Include="Abm Empresa Espectaculo\ListadoEmpresa.Designer.cs">
       <DependentUpon>ListadoEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Empresa Espectaculo\UpdateEmpresa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Empresa Espectaculo\UpdateEmpresa.Designer.cs">
-      <DependentUpon>UpdateEmpresa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Grado\CreateGrado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +251,7 @@
     <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\CheckData.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\ValidatorData.cs" />
     <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\Page.cs" />
     <Compile Include="Utils\SqlHelper.cs" />

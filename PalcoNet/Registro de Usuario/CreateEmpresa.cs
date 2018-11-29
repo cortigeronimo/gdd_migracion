@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Registro_de_Usuario
 {
@@ -19,6 +20,13 @@ namespace PalcoNet.Registro_de_Usuario
         Empresa empresa;
         RepoEmpresa repoEmpresa = new RepoEmpresa();
         bool hasToUpdate = false;
+
+        private ValidatorData ValidateForm()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtEmail.Text, ValidatorData.REGEX_EMAIL);
+            return validator;
+        }
 
         public CreateEmpresa(Usuario usuario)
         {
@@ -65,6 +73,11 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            ValidatorData validator = ValidateForm();
+            if (validator.HasErrors()) {
+                MessageBox.Show(validator.MessagesErrors);
+                return;
+            }
             Empresa empresaToInsert = new Empresa(usuario);
             empresaToInsert.razonSocial = txtRazonSocial.Text;
             empresaToInsert.cuit = txtCuit.Text;
