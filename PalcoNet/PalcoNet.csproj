@@ -229,6 +229,7 @@
     <Compile Include="Repositorios\RepoRubro.cs" />
     <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\Page.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\ChangePassword.cs">

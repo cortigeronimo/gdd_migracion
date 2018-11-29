@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Abm_Rol
 {
     public partial class AltaRol : Form
     {
         Rol rol = new Rol();
+        RepoRol repoRol = new RepoRol();
 
         public AltaRol()
         {
@@ -65,9 +67,16 @@ namespace PalcoNet.Abm_Rol
         {
             Rol nuevoRol = new Rol(txtBoxNombre.Text, true);
             nuevoRol.funcionalidades = rol.funcionalidades;
-            new RepoRol().CreateRol(rol);
-            this.DialogResult = DialogResult.OK;
-            MessageBox.Show("Se ha realizado la operación con éxito");
+            try
+            {
+                repoRol.CreateRol(rol);
+                this.DialogResult = DialogResult.OK;
+                MessageBox.Show(Messagges.OPERACION_EXITOSA);
+            }
+            catch (Exception) {
+                MessageBox.Show(Messagges.ERROR_INESPERADO);
+            }
+            
             this.Close();
         }
 
