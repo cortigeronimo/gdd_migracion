@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtBoxNombre = new System.Windows.Forms.TextBox();
             this.listBoxFuncionalidades = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblFuncionalidades = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnQuitar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -53,6 +53,7 @@
             this.txtBoxNombre.Name = "txtBoxNombre";
             this.txtBoxNombre.Size = new System.Drawing.Size(100, 20);
             this.txtBoxNombre.TabIndex = 1;
+            this.txtBoxNombre.TextChanged += AllDataIsCompleted;
             // 
             // listBoxFuncionalidades
             // 
@@ -61,16 +62,17 @@
             this.listBoxFuncionalidades.Name = "listBoxFuncionalidades";
             this.listBoxFuncionalidades.Size = new System.Drawing.Size(147, 212);
             this.listBoxFuncionalidades.TabIndex = 2;
-            this.listBoxFuncionalidades.SelectedIndexChanged += new System.EventHandler(this.listBoxFuncionalidades_SelectedIndexChanged);
+            this.listBoxFuncionalidades.SelectedValueChanged += AllDataIsCompleted;
+            
             // 
-            // label2
+            // lblFuncionalidades
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Funcionalidades";
+            this.lblFuncionalidades.AutoSize = true;
+            this.lblFuncionalidades.Location = new System.Drawing.Point(16, 55);
+            this.lblFuncionalidades.Name = "lblFuncionalidades";
+            this.lblFuncionalidades.Size = new System.Drawing.Size(84, 13);
+            this.lblFuncionalidades.TabIndex = 3;
+            this.lblFuncionalidades.Text = "Funcionalidades";
             // 
             // btnAgregar
             // 
@@ -94,6 +96,7 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.Enabled = false;
             this.btnGuardar.Location = new System.Drawing.Point(170, 291);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
@@ -121,7 +124,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnQuitar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblFuncionalidades);
             this.Controls.Add(this.listBoxFuncionalidades);
             this.Controls.Add(this.txtBoxNombre);
             this.Controls.Add(this.label1);
@@ -137,7 +140,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtBoxNombre;
         private System.Windows.Forms.ListBox listBoxFuncionalidades;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblFuncionalidades;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnQuitar;
         private System.Windows.Forms.Button btnGuardar;

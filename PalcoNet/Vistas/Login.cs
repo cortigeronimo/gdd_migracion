@@ -110,7 +110,14 @@ namespace PalcoNet
         }
 
 
-        private void CheckTextBox()
+        private void ClearTextBox()
+        {
+            txtUsername.Clear();
+            txtPassword.Clear();
+        }
+
+
+        private void TxtBoxes_TextChanged(object sender, EventArgs e)
         {
             if (txtUsername.Text != string.Empty && txtPassword.Text != string.Empty)
             {
@@ -120,30 +127,6 @@ namespace PalcoNet
             {
                 btnLogin.Enabled = false;
             }
-        }
-
-
-        private void ClearTextBox()
-        {
-            txtUsername.Clear();
-            txtPassword.Clear();
-        }
-
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-            //LoggedInUser.Initialize();
-        }
-
-
-        private void txtUsername_TextChanged(object sender, EventArgs e)
-        {
-            CheckTextBox();
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-            CheckTextBox();
         }
 
         private void TakeRolFromUser(Usuario user, Rol rol)

@@ -114,6 +114,8 @@
             // 
             // dataGridEmpresas
             // 
+            this.dataGridEmpresas.AllowUserToAddRows = false;
+            this.dataGridEmpresas.AllowUserToDeleteRows = false;
             this.dataGridEmpresas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridEmpresas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -122,6 +124,7 @@
             this.Eliminar});
             this.dataGridEmpresas.Location = new System.Drawing.Point(13, 204);
             this.dataGridEmpresas.Name = "dataGridEmpresas";
+            this.dataGridEmpresas.ReadOnly = true;
             this.dataGridEmpresas.Size = new System.Drawing.Size(418, 336);
             this.dataGridEmpresas.TabIndex = 1;
             // 
