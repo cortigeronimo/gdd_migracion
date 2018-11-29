@@ -65,6 +65,12 @@
     <Compile Include="Abm Empresa Espectaculo\ListadoEmpresa.Designer.cs">
       <DependentUpon>ListadoEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Empresa Espectaculo\UpdateEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Empresa Espectaculo\UpdateEmpresa.Designer.cs">
+      <DependentUpon>UpdateEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Grado\CreateGrado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,7 @@
     <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
+    <Compile Include="Repositorios\Repository.cs" />
     <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\ElementManager.cs" />
     <Compile Include="Utils\Messages.cs" />
@@ -395,6 +402,7 @@
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Empresa.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Publicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Ubicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
