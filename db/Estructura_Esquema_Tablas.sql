@@ -108,6 +108,9 @@ IF OBJECT_ID('PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO') IS NOT NULL DROP PROCEDUR
 
 IF OBJECT_ID('PLEASE_HELP.SP_COMPRAR_ENTRADA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_MODIFICACION_EMPRESA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_MODIFICACION_EMPRESA;
+
+
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -673,7 +676,8 @@ GO
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_ROLES_USUARIO(@USERNAME NVARCHAR(50))
 AS
-SELECT UR.Rol_Id, (SELECT R.Rol_Nombre FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id), (SELECT R.Rol_Habilitado FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id) 
+SELECT UR.Rol_Id, (SELECT R.Rol_Nombre FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id), 
+(SELECT R.Rol_Habilitado FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id) 
 FROM PLEASE_HELP.Usuario U INNER JOIN PLEASE_HELP.Usuario_Rol UR ON U.Usuario_Id = UR.Usuario_Id
 WHERE U.Usuario_Username = @USERNAME
 GO
@@ -720,21 +724,20 @@ FROM PLEASE_HELP.Rol R INNER JOIN PLEASE_HELP.Rol_Funcionalidad RF ON R.Rol_Id =
 WHERE R.Rol_Id = @idRol
 GO
 
+-- STORED PROCEDURES ABM EMPRESA
 
--- STORED PROCEDURES ABM CLIENTE
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
+CREATE PROCEDURE PLEASE_HELP.SP_MODIFICACION_EMPRESA(@id int, @razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50))
 AS
 BEGIN
-	BEGIN TRANSACTION
-		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
-			VALUES (@username, @password)
-		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido, Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono, Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito, Cli_Primer_Login)
-			VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, @fechacreacion, @tarjetacredito, @firstLogin) 
-	COMMIT TRANSACTION
+	UPDATE PLEASE_HELP.Empresa SET Emp_Razon_Social = @razonSocial, 
+	Emp_Email = @email, Emp_Telefono = @telefono, Emp_Localidad = @localidad, 
+	Emp_Direccion = @direccion, Emp_Piso = @nropiso, Emp_Depto = @depto, 
+	Emp_Cod_Postal = @codpostal, Emp_Ciudad = @ciudad, Emp_Cuit = @cuit
+	WHERE Emp_Usuario = @id;
 END
 GO
 
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_EMPRESA(@razonSocial NVARCHAR(255), @cuit NUMERIC(11,0), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50), @username NVARCHAR(255), @password VARBINARY(255))
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_EMPRESA(@razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50), @username NVARCHAR(255), @password VARBINARY(255))
 AS
 BEGIN
 	BEGIN TRANSACTION
@@ -746,6 +749,24 @@ BEGIN
 END
 GO
 
+-- STORED PROCEDURES ABM CLIENTE
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
+AS
+BEGIN
+	BEGIN TRANSACTION
+		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
+			VALUES (@username, @password)
+		INSERT INTO PLEASE_HELP.Cliente(Cli_Usuario, Cli_Nombre, Cli_Apellido,
+		Cli_Tipo_Documento, Cli_Nro_Documento, Cli_Cuil, Cli_Email, Cli_Telefono,
+		Cli_Localidad, Cli_Direccion, Cli_Nro_Piso, Cli_Depto, Cli_Cod_Postal, 
+		Cli_Fecha_Nac, Cli_Fecha_Creacion, Cli_Tarjeta_Credito, Cli_Primer_Login)
+		VALUES (@@IDENTITY, @nombre, @apellido, @tipo_doc, @nro_doc, @cuil, @email, 
+		@telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, 
+		@fechacreacion, @tarjetacredito, @firstLogin) 
+	COMMIT TRANSACTION
+END
+GO
+
 
 -- STORED PROCEDURES GENERAR PUBLICACION
 
@@ -753,7 +774,10 @@ CREATE PROCEDURE PLEASE_HELP.SP_GENERAR_PUBLICACION(@fechaInicio DATETIME, @fech
 AS
 BEGIN
 	BEGIN TRANSACTION
-		INSERT INTO PLEASE_HELP.Publicacion (Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado) VALUES (CONVERT(DATETIME,@fechaInicio,121), CONVERT(DATETIME,@fechaEvento,121), @descripcion, @direccion, @rubroId, @gradoId, @empresaId, @estadoId)		
+		INSERT INTO PLEASE_HELP.Publicacion (Pub_Fecha_Inicio, Pub_Fecha_Evento, 
+		Pub_Descripcion, Pub_Direccion, Pub_Rubro, Pub_Grado, Pub_Empresa, Pub_Estado) 
+		VALUES (CONVERT(DATETIME,@fechaInicio,121), CONVERT(DATETIME,@fechaEvento,121), 
+		@descripcion, @direccion, @rubroId, @gradoId, @empresaId, @estadoId)		
 		SET @idPublicacion = @@IDENTITY
 	COMMIT TRANSACTION
 END
@@ -763,8 +787,9 @@ GO
 CREATE PROCEDURE PLEASE_HELP.SP_INSERTAR_UBICACION(@idPublicacion INT, @fila VARCHAR(3), @asiento NUMERIC(18,0), @precio NUMERIC(18,0), @descripcion NVARCHAR(255))
 AS
 BEGIN
-	INSERT INTO PLEASE_HELP.Ubicacion (Ubicacion_Publicacion, Ubicacion_Fila, Ubicacion_Asiento, Ubicacion_Precio, Ubicacion_Descripcion)
-		VALUES (@idPublicacion, @fila, @asiento, @precio, @descripcion)
+	INSERT INTO PLEASE_HELP.Ubicacion (Ubicacion_Publicacion, Ubicacion_Fila, 
+	Ubicacion_Asiento, Ubicacion_Precio, Ubicacion_Descripcion)
+	VALUES (@idPublicacion, @fila, @asiento, @precio, @descripcion)
 END
 GO
 

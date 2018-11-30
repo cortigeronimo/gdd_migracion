@@ -16,18 +16,18 @@ namespace PalcoNet.Abm_Rol
     {
         Rol rolNoModificado;
         Rol rol;
-        public ModificarRol(Rol _rol)
+        public ModificarRol(Rol rol)
         {
-            rolNoModificado = new Rol(_rol.Id, _rol.Nombre, _rol.Habilitado);
-            rol = new Rol(_rol.Id, _rol.Nombre, _rol.Habilitado);
+            rolNoModificado = new Rol(rol.Id, rol.Nombre, rol.Habilitado);
+            this.rol = new Rol(rol.Id, rol.Nombre, rol.Habilitado);
             //Negrada hecha porque la lista sino no se clona
-            _rol.funcionalidades.ForEach(_rolF => {
+            rol.funcionalidades.ForEach(_rolF => {
                 rolNoModificado.funcionalidades.Add(_rolF);
                 rol.funcionalidades.Add(_rolF);
             });
             InitializeComponent();
             textBoxNombre.Text = rol.Nombre;
-            comboBoxHabilitado.Text = rol.Habilitado ? "Sí" : "No";
+            comboBoxHabilitado.Text = this.rol.Habilitado ? "Sí" : "No";
             CargarListFuncionalidades();
         }
 

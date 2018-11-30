@@ -17,7 +17,7 @@ namespace PalcoNet.Modelo
         public long telefono { get; set; }
         public String localidad { get; set; }
         public String direccion { get; set; }
-        public byte nroPiso { get; set; }
+        public Int16 nroPiso { get; set; }
         public String depto { get; set; }
         public String codigoPostal { get; set; }
         public DateTime fechaNacimiento { get; set; }
@@ -25,7 +25,7 @@ namespace PalcoNet.Modelo
         public String tarjetaCredito { get; set; }
         public int puntos { get; set; }
         public bool habilitado { get; set; }
-        public byte intentosFallidos { get; set; }
+        public Int16 intentosFallidos { get; set; }
         public bool baja { get; set; }
 
         public Cliente()

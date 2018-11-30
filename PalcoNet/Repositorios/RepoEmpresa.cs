@@ -19,7 +19,27 @@ namespace PalcoNet.Repositorios
         }
 
         public void UpdateEmpresa(Empresa empresa) {
-            
+
+            String sp = "PLEASE_HELP.SP_MODIFICACION_EMPRESA";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@id", empresa.id);
+            command.Parameters.AddWithValue("@razonSocial", empresa.razonSocial);
+            command.Parameters.AddWithValue("@cuit", empresa.cuit);
+            command.Parameters.AddWithValue("@email", empresa.email);
+            command.Parameters.AddWithValue("@telefono", empresa.telefono);
+            command.Parameters.AddWithValue("@localidad", empresa.localidad);
+            command.Parameters.AddWithValue("@direccion", empresa.direccion);
+            command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
+            command.Parameters.AddWithValue("@depto", empresa.depto);
+            command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
+            command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
+
+            if (Conexion.InsertUpdateOrDeleteData(command) < 1)
+            {
+                throw new Exception("No se ha podido actualizar la información de la empresa");
+            }
         }
 
         public void InsertEmpresa(Empresa empresa)
@@ -76,22 +96,25 @@ namespace PalcoNet.Repositorios
         private List<Empresa> FromRowsToEmpresas(DataTable table)
         {
             List<Empresa> empresas = new List<Empresa>();
-            int i = 0;
-            while (i < table.Rows.Count)
+            foreach (DataRow row in table.Rows)
             {
                 Empresa empresa = new Empresa();
-                empresa.razonSocial = GetValueOrNull < String >(table.Rows[i]["Emp_Razon_Social"]);
-                empresa.cuit = GetValueOrNull < String > (table.Rows[i]["Emp_Cuit"]);
-                empresa.ciudad = GetValueOrNull<String>(table.Rows[i]["Emp_Ciudad"]);
-                empresa.email = GetValueOrNull < String > (table.Rows[i]["Emp_Email"]);
-                empresa.telefono = GetValueOrNull<long?>(table.Rows[i]["Emp_Telefono"]);
-                empresa.localidad = GetValueOrNull <String> (table.Rows[i]["Emp_Localidad"]);
-                empresa.direccion = GetValueOrNull < String > (table.Rows[i]["Emp_Direccion"]);
-                empresa.nroPiso = GetValueOrNull<decimal?>(table.Rows[i]["Emp_Piso"]);
-                empresa.depto = GetValueOrNull < String > (table.Rows[i]["Emp_Depto"]);
-                empresa.codigoPostal = GetValueOrNull < String > (table.Rows[i]["Emp_Cod_Postal"]);
+                empresa.id = GetValueOrNull<int?>(row["Emp_Usuario"]);
+                empresa.razonSocial = GetValueOrNull<String>(row["Emp_Razon_Social"]);
+                empresa.cuit = GetValueOrNull<String>(row["Emp_Cuit"]);
+                empresa.ciudad = GetValueOrNull<String>(row["Emp_Ciudad"]);
+                empresa.email = GetValueOrNull<String>(row["Emp_Email"]);
+                empresa.telefono = GetValueOrNull<decimal?>(row["Emp_Telefono"]);
+                empresa.localidad = GetValueOrNull<String>(row["Emp_Localidad"]);
+                empresa.direccion = GetValueOrNull<String>(row["Emp_Direccion"]);
+                empresa.nroPiso = GetValueOrNull<decimal?>(row["Emp_Piso"]);
+                empresa.depto = GetValueOrNull<String>(row["Emp_Depto"]);
+                empresa.codigoPostal = GetValueOrNull < String > (row["Emp_Cod_Postal"]);
+                empresa.habilitado = GetValueOrNull<bool?>(row["Emp_Habilitado"]);
+                empresa.intentosFallidos = GetValueOrNull<Int16>(row["Emp_Intentos_Fallidos"]);
+                empresa.baja = GetValueOrNull<bool?>(row["Emp_Baja"]);
+                empresa.primerLogin = GetValueOrNull<bool?>(row["Emp_Primer_Login"]);
                 empresas.Add(empresa);
-                i++;
             }
             return empresas;
         }

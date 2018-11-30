@@ -13,7 +13,7 @@ namespace PalcoNet.Repositorios
 {
     public class RepoCompra
     {
-        public List<DetalleCompra> GetComprasUsuario(int userId)
+        public List<DetalleCompra> GetComprasUsuario(int? userId)
         {
             String sp = "PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE";
             SqlCommand command = new SqlCommand(sp);
@@ -48,7 +48,7 @@ namespace PalcoNet.Repositorios
             return comprasList;
         }
 
-        public void GenerateCompras(List<Ubicacion> ubicacionesList, int userId, String medioPago, String compraEmail)
+        public void GenerateCompras(List<Ubicacion> ubicacionesList, int? userId, String medioPago, String compraEmail)
         {
             String sp = "PLEASE_HELP.SP_COMPRAR_ENTRADA";
 

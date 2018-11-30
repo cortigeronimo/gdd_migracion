@@ -64,7 +64,7 @@ namespace PalcoNet.Repositorios
 
 
 
-        public Boolean FirstLogin(int userId, int rolId)
+        public Boolean FirstLogin(int? userId, int rolId)
         {
             String sp = "PLEASE_HELP.SP_PRIMER_LOGIN";
             SqlCommand cmd = new SqlCommand(sp);

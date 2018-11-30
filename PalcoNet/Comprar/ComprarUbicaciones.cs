@@ -20,6 +20,7 @@ namespace PalcoNet.Comprar
     {
         private List<Ubicacion> ubicacionesDisponibles;
         private List<Ubicacion> ubicacionesAComprar = new List<Ubicacion>();
+        private RepoCliente repoCliente = new RepoCliente();
 
         private RepoCompra repoCompra = new RepoCompra();
 
@@ -118,7 +119,7 @@ namespace PalcoNet.Comprar
                 }
             }
 
-            if (!TieneNroTarjeta())
+            if (!HasCreditCard())
             {              
                 using (FormAgregarTarjetaCredito form = new FormAgregarTarjetaCredito())
                 {
@@ -156,9 +157,9 @@ namespace PalcoNet.Comprar
         }
 
 
-        private Boolean TieneNroTarjeta()
+        private Boolean HasCreditCard()
         {
-            return new RepoCliente().TieneNroTarjeta(UserSession.UserId);
+            return repoCliente.HasCreditCard(UserSession.UserId);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

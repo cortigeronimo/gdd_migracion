@@ -12,15 +12,16 @@ namespace PalcoNet.Modelo
         public String cuit { get; set; }
         public String ciudad { get; set; }
         public String email { get; set; }
-        public long? telefono { get; set; }
+        public decimal? telefono { get; set; }
         public String localidad { get; set; }
         public String direccion { get; set; }
         public decimal? nroPiso { get; set; }
         public String depto { get; set; }
         public String codigoPostal { get; set; }
         public bool? habilitado { get; set; }
-        public byte? intentosFallidos { get; set; }
+        public Int16 intentosFallidos { get; set; }
         public bool? baja { get; set; }
+        public bool? primerLogin { get; set; }
 
         public Empresa()
         {
@@ -36,7 +37,8 @@ namespace PalcoNet.Modelo
         }
 
         public Empresa(string razonSocial, String cuit, String ciudad,
-            string email, long? telefono, string localidad, string direccion, byte nroPiso, string depto, string codPostal)
+            string email, long? telefono, string localidad, string direccion,
+            byte nroPiso, string depto, string codPostal, bool primerLogin)
         {
             this.razonSocial = razonSocial;
             this.cuit = cuit;
@@ -48,6 +50,7 @@ namespace PalcoNet.Modelo
             this.nroPiso = nroPiso;
             this.depto = depto;
             this.codigoPostal = codPostal;
+            this.primerLogin = primerLogin;
         }
     }
 }
