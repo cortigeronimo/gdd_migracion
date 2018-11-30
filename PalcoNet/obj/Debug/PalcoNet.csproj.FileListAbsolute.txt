@@ -75,3 +75,4 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.RolSelec
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.pdb
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
