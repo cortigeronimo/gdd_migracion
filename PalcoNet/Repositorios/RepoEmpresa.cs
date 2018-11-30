@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 using PalcoNet.Modelo;
 using System.Data;
 using System.Data.SqlClient;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Repositorios
 {
-    class RepoEmpresa
+    class RepoEmpresa : Repository
     {
         private String table = "PLEASE_HELP.Empresa";
+
+        public void DeleteEmpresa(Empresa empresa) { 
+            
+        }
+
+        public void UpdateEmpresa(Empresa empresa) {
+            
+        }
 
         public void InsertEmpresa(Empresa empresa)
         {
@@ -70,17 +79,17 @@ namespace PalcoNet.Repositorios
             int i = 0;
             while (i < table.Rows.Count)
             {
-                Empresa empresa = 
-                    new Empresa((string)table.Rows[i]["Emp_Razon_Social"], 
-                                (long)table.Rows[i]["Emp_Cuit"],
-                                (String)table.Rows[i]["Emp_Ciudad"],
-                                (string)table.Rows[i]["Emp_Email"],
-                                (long)table.Rows[i]["Emp_Telefono"],
-                                (string)table.Rows[i]["Emp_Localidad"],
-                                (string)table.Rows[i]["Emp_Direccion"],
-                                (byte)table.Rows[i]["Emp_Piso"],
-                                (string)table.Rows[i]["Emp_Depto"],
-                                (string)table.Rows[i]["Emp_Cod_Postal"]);
+                Empresa empresa = new Empresa();
+                empresa.razonSocial = GetValueOrNull < String >(table.Rows[i]["Emp_Razon_Social"]);
+                empresa.cuit = GetValueOrNull < String > (table.Rows[i]["Emp_Cuit"]);
+                empresa.ciudad = GetValueOrNull<String>(table.Rows[i]["Emp_Ciudad"]);
+                empresa.email = GetValueOrNull < String > (table.Rows[i]["Emp_Email"]);
+                empresa.telefono = GetValueOrNull<long?>(table.Rows[i]["Emp_Telefono"]);
+                empresa.localidad = GetValueOrNull <String> (table.Rows[i]["Emp_Localidad"]);
+                empresa.direccion = GetValueOrNull < String > (table.Rows[i]["Emp_Direccion"]);
+                empresa.nroPiso = GetValueOrNull<decimal?>(table.Rows[i]["Emp_Piso"]);
+                empresa.depto = GetValueOrNull < String > (table.Rows[i]["Emp_Depto"]);
+                empresa.codigoPostal = GetValueOrNull < String > (table.Rows[i]["Emp_Cod_Postal"]);
                 empresas.Add(empresa);
                 i++;
             }

@@ -12,8 +12,9 @@ namespace PalcoNet.Utils
     {
         public static String AddFilterEqualsThan(String alias, String columnName, String value, SqlCommand command)
         {
-            String filter = "";
-            if (value != "")
+            String filter = String.Empty;
+            alias = (alias == String.Empty)? String.Empty : alias + ".";
+            if (value != String.Empty)
             {
 
                 filter += "and " + alias + "." + columnName + " = " + "@" + columnName + " ";

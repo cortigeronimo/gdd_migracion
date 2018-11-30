@@ -247,9 +247,11 @@
     <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
+    <Compile Include="Repositorios\Repository.cs" />
     <Compile Include="Repositorios\RepoUbicacion.cs" />
     <Compile Include="Utils\CheckData.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\ValidatorData.cs" />
     <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\Page.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
@@ -396,6 +398,7 @@
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Empresa.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Publicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Ubicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
