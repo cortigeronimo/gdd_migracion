@@ -30,7 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtBoxCuit = new System.Windows.Forms.TextBox();
+            this.txtBoxCuit1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtBoxCiudad = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -53,13 +53,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtBoxCuit2 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtBoxCuit3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtBoxCuit3);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.txtBoxCuit2);
+            this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.txtBoxCuit);
+            this.groupBox1.Controls.Add(this.txtBoxCuit1);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.txtBoxCiudad);
             this.groupBox1.Controls.Add(this.label9);
@@ -96,13 +104,13 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "CUIT";
             // 
-            // txtBoxCuit
+            // txtBoxCuit1
             // 
-            this.txtBoxCuit.Location = new System.Drawing.Point(82, 213);
-            this.txtBoxCuit.MaxLength = 255;
-            this.txtBoxCuit.Name = "txtBoxCuit";
-            this.txtBoxCuit.Size = new System.Drawing.Size(433, 20);
-            this.txtBoxCuit.TabIndex = 20;
+            this.txtBoxCuit1.Location = new System.Drawing.Point(82, 213);
+            this.txtBoxCuit1.MaxLength = 2;
+            this.txtBoxCuit1.Name = "txtBoxCuit1";
+            this.txtBoxCuit1.Size = new System.Drawing.Size(59, 20);
+            this.txtBoxCuit1.TabIndex = 20;
             // 
             // label10
             // 
@@ -294,6 +302,40 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(147, 216);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "-";
+            // 
+            // txtBoxCuit2
+            // 
+            this.txtBoxCuit2.Location = new System.Drawing.Point(163, 213);
+            this.txtBoxCuit2.MaxLength = 8;
+            this.txtBoxCuit2.Name = "txtBoxCuit2";
+            this.txtBoxCuit2.Size = new System.Drawing.Size(225, 20);
+            this.txtBoxCuit2.TabIndex = 23;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(394, 216);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(10, 13);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "-";
+            // 
+            // txtBoxCuit3
+            // 
+            this.txtBoxCuit3.Location = new System.Drawing.Point(413, 213);
+            this.txtBoxCuit3.MaxLength = 2;
+            this.txtBoxCuit3.Name = "txtBoxCuit3";
+            this.txtBoxCuit3.Size = new System.Drawing.Size(103, 20);
+            this.txtBoxCuit3.TabIndex = 25;
+            // 
             // AltaEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,7 +371,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtBoxTelefono;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtBoxCuit;
+        private System.Windows.Forms.TextBox txtBoxCuit1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtBoxCiudad;
         private System.Windows.Forms.Label label9;
@@ -338,6 +380,10 @@
         private System.Windows.Forms.TextBox txtBoxLocalidad;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.TextBox txtBoxCuit3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtBoxCuit2;
+        private System.Windows.Forms.Label label12;
 
     }
 }

@@ -24,7 +24,19 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-
+            txtBoxRazonSocial.Clear();
+            txtBoxMail1.Clear();
+            txtBoxMail2.Clear();
+            txtBoxTelefono.Clear();
+            txtBoxCalle.Clear();
+            txtBoxPiso.Clear();
+            txtBoxDepto.Clear();
+            txtBoxLocalidad.Clear();
+            txtBoxCodPostal.Clear();
+            txtBoxCiudad.Clear();
+            txtBoxCuit1.Clear();
+            txtBoxCuit2.Clear();
+            txtBoxCuit3.Clear();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
