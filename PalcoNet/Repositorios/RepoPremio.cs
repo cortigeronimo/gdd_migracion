@@ -12,7 +12,7 @@ namespace PalcoNet.Repositorios
 {
     class RepoPremio
     {
-        public List<PremioDTO> GetPremios(int clientId)
+        public List<PremioDTO> GetPremios(int? clientId)
         {
             String sp = "PLEASE_HELP.SP_GET_PREMIOS";
             SqlCommand command = new SqlCommand(sp);

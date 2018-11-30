@@ -36,13 +36,10 @@ C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.RolSe
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.pdb
-<<<<<<< HEAD
+C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.exe.config
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.exe
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.pdb
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.exe
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.pdb
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.ListCliente.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.UpdateCliente.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
@@ -76,6 +73,5 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.FormManager.res
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Properties.Resources.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.RolSelector.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.GenerateResource.Cache
-=======
-C:\Users\RodrigoM\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
->>>>>>> d9c0ddc32ff7749f2643341802f8092fd2a9a19c
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.exe
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.pdb
