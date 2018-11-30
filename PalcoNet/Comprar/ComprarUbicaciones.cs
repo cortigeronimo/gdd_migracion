@@ -125,14 +125,10 @@ namespace PalcoNet.Comprar
                 {
                     DialogResult result = form.ShowDialog();
                     if (result == DialogResult.Cancel) return;
-                }
+                }                       
+            }
 
-                ExecuteCompra();              
-            }
-            else
-            {
-                ExecuteCompra();
-            }
+            ExecuteCompra();
            
 
         }

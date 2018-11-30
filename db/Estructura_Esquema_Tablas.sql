@@ -306,7 +306,7 @@ create table PLEASE_HELP.Item
 
 create table PLEASE_HELP.Puntuacion
 (
-	Puntuacion_Id int,
+	Puntuacion_Id int identity(1,1),
 	Puntuacion_Cantidad int DEFAULT 0,
 	Puntuacion_Fecha_Vencimiento datetime,
 	Puntuacion_Cliente int,
@@ -900,10 +900,14 @@ END
 GO
 
 
-CREATE PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA(@compraCliente INT, @compraFecha DATETIME, @compraMedioPago NVARCHAR(255), @compraEmail NVARCHAR(255), @compraFila VARCHAR(3), @compraAsiento NUMERIC(18,0), @compraPublicacion NUMERIC(18,0))
+CREATE PROCEDURE PLEASE_HELP.SP_COMPRAR_ENTRADA(@compraCliente INT, @compraFecha DATETIME, @compraMedioPago NVARCHAR(255), @compraEmail NVARCHAR(255), @compraFila VARCHAR(3), @compraAsiento NUMERIC(18,0), @compraPublicacion NUMERIC(18,0), @compraPrecio NUMERIC(18,0))
 AS
 BEGIN
 	INSERT PLEASE_HELP.Compra (Compra_Cliente, Compra_Cantidad, Compra_Fecha, Compra_Metodo_Pago, Compra_Email, Compra_Fila, Compra_Asiento, Compra_Publicacion) VALUES (@compraCliente, 1, CONVERT(DATETIME, @compraFecha, 121), @compraMedioPago, @compraEmail, @compraFila, @compraAsiento, @compraPublicacion)
+
+	DECLARE @puntos INT = @compraPrecio/10 
+	DECLARE @fechaVencimiento DATETIME = CONVERT(DATETIME, DATEADD(YEAR, 1, @compraFecha), 121)
+	INSERT PLEASE_HELP.Puntuacion (Puntuacion_Cantidad, Puntuacion_Fecha_Vencimiento, Puntuacion_Cliente) VALUES (@puntos, @fechaVencimiento, @compraCliente)
 END
 GO
 

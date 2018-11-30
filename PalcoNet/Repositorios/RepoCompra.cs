@@ -64,6 +64,7 @@ namespace PalcoNet.Repositorios
                 cmd.Parameters.AddWithValue("@compraFila", u.Fila);
                 cmd.Parameters.AddWithValue("@compraAsiento", u.Asiento);
                 cmd.Parameters.AddWithValue("@compraPublicacion", u.Publicacion);
+                cmd.Parameters.AddWithValue("@compraPrecio", u.Precio);
 
                 Conexion.ExecuteProcedure(cmd);
             }
