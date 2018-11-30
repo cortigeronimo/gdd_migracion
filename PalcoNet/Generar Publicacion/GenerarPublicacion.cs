@@ -25,6 +25,7 @@ namespace PalcoNet.Generar_Publicacion
         //Lista de publicaciones para el boton "varias fechas"
         List<Publicacion> publicacionesList = new List<Publicacion>();
 
+
         Publicacion publicacion = new Publicacion();
         
         
@@ -46,7 +47,7 @@ namespace PalcoNet.Generar_Publicacion
             LoadComboBox();
 
             dateTimePickerFechaInicio.Value = SystemDate.GetDate();
-            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(1);
+            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(7);
         }
 
 
@@ -242,9 +243,9 @@ namespace PalcoNet.Generar_Publicacion
         {
             txtNombrePublicacion.Clear();
             txtDireccion.Clear();
-            dateTimePickerFechaInicio.Value = DateTime.Today;
-            dateTimePickerFechaEvento.Value = DateTime.Today;
-
+            dateTimePickerFechaInicio.Value = SystemDate.GetDate();
+            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(7);
+            
             checkBoxVariasFechas.Checked = false;
 
             publicacionesList = new List<Publicacion>();
