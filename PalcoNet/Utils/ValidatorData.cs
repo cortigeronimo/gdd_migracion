@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace PalcoNet.Utils
 {
@@ -16,22 +17,6 @@ namespace PalcoNet.Utils
             = new PairData("El número de cuit debe contar con una longitud de 11 cifras.", "REGEX");
         public static readonly PairData REGEX_EMAIL 
             = new PairData("El email no es correcto.", "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
-
-        public String MessagesErrors
-        {
-            get
-            {
-                return messagesErrors;
-            }
-        }
-
-        public int CountErros 
-        {
-            get 
-            {
-                return countErrors;
-            }
-        }
 
         public void ValidateTextWithRegex(String text, PairData pair)
         {
@@ -68,9 +53,20 @@ namespace PalcoNet.Utils
             this.messagesErrors += Message + "\n";
         }
 
-        public bool HasErrors()
+        private bool HasErrors()
         {
             return countErrors > 0;
+        }
+
+        public bool ShowIfThereAreErrors()
+        {
+            if (HasErrors()) {
+                String messaggeToShow = "Se han detectado " + this.countErrors + " errores: \n";
+                messaggeToShow += messagesErrors;
+                MessageBox.Show(messaggeToShow);
+                return true;
+            }
+            return false;
         }
 
         public class PairData
@@ -82,6 +78,25 @@ namespace PalcoNet.Utils
                 this.errorMessagge = errorMessagge;
                 this.regex = regex;
             }
+        }
+
+        public static bool validateEmptyFields(GroupBox groupBox)
+        {
+            var textBoxes = groupBox.Controls.Cast<Control>()
+                                     .OfType<TextBox>()
+                                     .OrderBy(control => control.TabIndex);
+
+            foreach (var textBox in textBoxes)
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    MessageBox.Show("Los campos no pueden estar vacíos");
+                    return true;
+                }
+            }
+
+            return false;
+
         }
 
     }

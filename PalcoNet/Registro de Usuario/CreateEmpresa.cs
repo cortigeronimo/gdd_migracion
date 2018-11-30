@@ -56,7 +56,6 @@ namespace PalcoNet.Registro_de_Usuario
             this.txtCiudad.Text = empresa.ciudad;
         }
 
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtRazonSocial.Clear();
@@ -73,11 +72,9 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            ValidatorData validator = ValidateForm();
-            if (validator.HasErrors()) {
-                MessageBox.Show(validator.MessagesErrors);
-                return;
-            }
+            if (ValidatorData.validateEmptyFields(this.groupBoxCliente)) return;
+            if (ValidateForm().ShowIfThereAreErrors()) return;
+
             Empresa empresaToInsert = new Empresa(usuario);
             empresaToInsert.razonSocial = txtRazonSocial.Text;
             empresaToInsert.cuit = txtCuit.Text;
