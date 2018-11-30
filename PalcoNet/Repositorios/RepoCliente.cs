@@ -64,7 +64,7 @@ namespace PalcoNet.Repositorios
             return table;
         }
 
-        public int GetPuntosClienteById(int id)
+        public int GetPuntosClienteById(int? id)
         {
             String query = "SELECT Cli_Puntos FROM " + clienteTable + " WHERE Cli_Usuario = @Id";
             SqlCommand command = new SqlCommand(query);
@@ -139,8 +139,8 @@ namespace PalcoNet.Repositorios
             String query = "SELECT * FROM ";
             query += clienteTable;
             query += " WHERE Cli_Usuario != @user";
-            query += " AND (Cli_Tipo_Documento = @tipoDoc";
-            query += " OR Cli_Nro_Documento = @nroDoc";
+            query += " AND Cli_Tipo_Documento = @tipoDoc";
+            query += " AND (Cli_Nro_Documento = @nroDoc";
             query += " OR Cli_Cuil = @cuil)";
 
             SqlCommand command = new SqlCommand(query);
@@ -244,6 +244,38 @@ namespace PalcoNet.Repositorios
             return Conexion.InsertUpdateOrDeleteData(cmd);
         }
 
+        public Boolean HasCreditCard(int? userId)
+        {
+            Usuario user = new Usuario();
+            user.id = userId;
+
+            DataTable table = new RepoUsuario().GetClientRow(user);
+
+            return table.Rows[0]["Cli_Tarjeta_Credito"] != DBNull.Value;
+        }
+
+        public void AddNroTarjetaCredito(int? idUser, String nroTarjeta)
+        {
+            String sp = "PLEASE_HELP.SP_ADD_NRO_TARJETA_CREDITO";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@userId", idUser);
+            cmd.Parameters.AddWithValue("@numeroTarjeta", nroTarjeta);
+
+            Conexion.ExecuteProcedure(cmd);
+         
+        }
+
+        public String GetEmailCliente(int? idUser)
+        {
+            Usuario user = new Usuario();
+            user.id = idUser;
+
+            DataTable table = new RepoUsuario().GetClientRow(user);
+
+            return table.Rows[0]["Cli_Email"].ToString();
+        }
         
     }
 }

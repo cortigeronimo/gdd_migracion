@@ -21,6 +21,7 @@ using PalcoNet.Generar_Rendicion_Comisiones;
 using PalcoNet.Historial_Cliente;
 using PalcoNet.Listado_Estadistico;
 using PalcoNet.Registro_de_Usuario;
+using PalcoNet.Abm_Empresa_Espectaculo;
 
 using PalcoNet.Config;
 
@@ -223,14 +224,12 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Empresa
         private void crearEmpresa_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new CreateEmpresa(), this);
-            MessageBox.Show("soy el form crear empresa");
+            MessageBox.Show("soy el form alta empresa");
         }
 
         private void listarEmpresas_Click(object sender, EventArgs e)
         {
-            //FormManager.getInstance().OpenAndClose(new ListEmpresa(), this);
-            MessageBox.Show("soy el form listar empresa");
+            FormManager.getInstance().Open(new ListadoEmpresa());
         }
 
 
@@ -249,12 +248,12 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Rol
         private void crearRol_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new AltaRol(), this);
+            FormManager.getInstance().Open(new AltaRol());
         }
 
         private void listarRoles_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new ListadoRol(), this);
+            FormManager.getInstance().Open(new ListadoRol());
         }
        
 
@@ -276,7 +275,7 @@ namespace PalcoNet.Vistas
         //Evento click para "comprar"
         private void comprar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form comprar");
+            FormManager.getInstance().Open(new FormComprar());
         }
 
 

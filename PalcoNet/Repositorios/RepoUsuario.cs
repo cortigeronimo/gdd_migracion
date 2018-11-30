@@ -64,7 +64,7 @@ namespace PalcoNet.Repositorios
 
 
 
-        public Boolean FirstLogin(int userId, int rolId)
+        public Boolean FirstLogin(int? userId, int rolId)
         {
             String sp = "PLEASE_HELP.SP_PRIMER_LOGIN";
             SqlCommand cmd = new SqlCommand(sp);
@@ -185,7 +185,7 @@ namespace PalcoNet.Repositorios
         }
 
         //Obtener el row del cliente asociado al usuario del login
-        private DataTable GetClientRow(Usuario user)
+        public DataTable GetClientRow(Usuario user)
         {
             String query = "select * from " + clientTable + " where Cli_Usuario = @userId";
             SqlCommand command = new SqlCommand(query);

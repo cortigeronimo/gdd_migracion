@@ -10,18 +10,56 @@ using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Registro_de_Usuario
 {
     public partial class CreateEmpresa : CustomForm
     {
-        Usuario usuario;
+        Empresa empresa;
         RepoEmpresa repoEmpresa = new RepoEmpresa();
+        bool hasToUpdate = false;
+
+        private ValidatorData ValidateForm()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtRazonSocial.Text, ValidatorData.REGEX_RAZON_SOCIAL);
+            validator.ValidateTextWithRegex(txtCuit.Text, ValidatorData.REGEX_CUIT);
+            validator.ValidateTextWithRegex(txtTelefono.Text, ValidatorData.REGEX_TELEFONO);
+            validator.ValidateTextWithRegex(txtEmail.Text, ValidatorData.REGEX_EMAIL);
+            validator.ValidateTextWithRegex(txtLocalidad.Text, ValidatorData.REGEX_LOCALIDAD);
+            validator.ValidateTextWithRegex(txtDireccion.Text, ValidatorData.REGEX_DIRECCION);
+            validator.ValidateTextWithRegex(txtNumeroPiso.Text, ValidatorData.REGEX_PISO);
+            validator.ValidateTextWithRegex(txtCodigoPostal.Text, ValidatorData.REGEX_CODIGO_POSTAL);
+            validator.ValidateTextWithRegex(txtCiudad.Text, ValidatorData.REGEX_CIUDAD);
+            return validator;
+        }
 
         public CreateEmpresa(Usuario usuario)
         {
-            this.usuario = usuario;
+            empresa = new Empresa(usuario);
             InitializeComponent();
+        }
+
+        public CreateEmpresa(Empresa empresa)
+        {
+            hasToUpdate = true;
+            this.empresa = empresa;
+            InitializeComponent();
+            InitializeEmpresa();
+        }
+
+        private void InitializeEmpresa() {
+            this.txtRazonSocial.Text = empresa.razonSocial;
+            this.txtCuit.Text = empresa.cuit;
+            this.txtTelefono.Text = empresa.telefono.ToString();
+            this.txtEmail.Text = empresa.email;
+            this.txtLocalidad.Text = empresa.localidad;
+            this.txtDireccion.Text = empresa.direccion;
+            this.txtNumeroPiso.Text = empresa.nroPiso.ToString();
+            this.txtDepartamento.Text = empresa.depto;
+            this.txtCodigoPostal.Text = empresa.codigoPostal;
+            this.txtCiudad.Text = empresa.ciudad;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -40,9 +78,11 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            Empresa empresa = new Empresa(usuario);
+            if (ValidatorData.validateEmptyFields(this.groupBoxCliente)) return;
+            if (ValidateForm().ShowIfThereAreErrors()) return;
+
             empresa.razonSocial = txtRazonSocial.Text;
-            empresa.cuit = (long)Convert.ToInt64(txtCuit.Text);
+            empresa.cuit = txtCuit.Text;
             empresa.email = txtEmail.Text;
             empresa.telefono = (long)Convert.ToInt64(txtTelefono.Text);
             empresa.direccion = txtDireccion.Text;
@@ -51,7 +91,15 @@ namespace PalcoNet.Registro_de_Usuario
             empresa.depto = txtDepartamento.Text;
             empresa.localidad = txtLocalidad.Text;
             empresa.codigoPostal = txtCodigoPostal.Text;
-            repoEmpresa.InsertEmpresa(empresa);
+            if (hasToUpdate)
+            {
+                repoEmpresa.UpdateEmpresa(empresa);
+                MessageBox.Show(Messagges.DATOS_ACTUALIZADOS);
+            }
+            else {
+                repoEmpresa.InsertEmpresa(empresa);
+            }
+            
         }
     }
 }

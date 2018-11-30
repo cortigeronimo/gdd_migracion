@@ -38,13 +38,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.dataGridRoles = new System.Windows.Forms.DataGridView();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RolHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRoles)).BeginInit();
             this.SuspendLayout();
@@ -141,6 +141,8 @@
             // 
             // dataGridRoles
             // 
+            this.dataGridRoles.AllowUserToAddRows = false;
+            this.dataGridRoles.AllowUserToDeleteRows = false;
             this.dataGridRoles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -159,46 +161,10 @@
             this.Eliminar});
             this.dataGridRoles.Location = new System.Drawing.Point(12, 160);
             this.dataGridRoles.Name = "dataGridRoles";
+            this.dataGridRoles.ReadOnly = true;
             this.dataGridRoles.Size = new System.Drawing.Size(372, 232);
             this.dataGridRoles.TabIndex = 1;
             this.dataGridRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRoles_CellContentClick);
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            // 
-            // Rol_Nombre
-            // 
-            this.Rol_Nombre.DataPropertyName = "Nombre";
-            this.Rol_Nombre.HeaderText = "Nombre";
-            this.Rol_Nombre.Name = "Rol_Nombre";
-            this.Rol_Nombre.ReadOnly = true;
-            // 
-            // RolHabilitado
-            // 
-            this.RolHabilitado.DataPropertyName = "Habilitado";
-            this.RolHabilitado.HeaderText = "Habilitado";
-            this.RolHabilitado.Name = "RolHabilitado";
-            this.RolHabilitado.ReadOnly = true;
-            this.RolHabilitado.Visible = false;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
-            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Seleccionar.Text = "Seleccionar";
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.ReadOnly = true;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // btnLimpiar
             // 
@@ -219,6 +185,44 @@
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
+            // 
+            // Rol_Nombre
+            // 
+            this.Rol_Nombre.DataPropertyName = "Nombre";
+            this.Rol_Nombre.HeaderText = "Nombre";
+            this.Rol_Nombre.Name = "Rol_Nombre";
+            this.Rol_Nombre.ReadOnly = true;
+            // 
+            // RolHabilitado
+            // 
+            this.RolHabilitado.DataPropertyName = "Habilitado";
+            this.RolHabilitado.HeaderText = "Habilitado";
+            this.RolHabilitado.Name = "RolHabilitado";
+            this.RolHabilitado.ReadOnly = true;
+            this.RolHabilitado.Visible = false;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Editar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Seleccionar.Text = "Seleccionar";
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.ReadOnly = true;
+            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ListadoRol
             // 

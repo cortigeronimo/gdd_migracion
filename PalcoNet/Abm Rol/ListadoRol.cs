@@ -17,6 +17,7 @@ namespace PalcoNet.Abm_Rol
     {
         private BindingSource bindingSource = new BindingSource();
         List<Rol> rolesFiltrados = new List<Rol>();
+        RepoRol repoRol = new RepoRol();
 
         public ListadoRol()
         {
@@ -70,7 +71,7 @@ namespace PalcoNet.Abm_Rol
             if (e.ColumnIndex == dataGridRoles.Columns["Seleccionar"].Index)
             {
                 Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
-                rol.funcionalidades = new RepoRol().GetFuncionalidades(rol.Id);
+                rol.funcionalidades = repoRol.GetFuncionalidades(rol.Id);
                 using (ModificarRol form = new ModificarRol(rol))
                 {
                     DialogResult result = form.ShowDialog();
@@ -79,7 +80,7 @@ namespace PalcoNet.Abm_Rol
             if (e.ColumnIndex == dataGridRoles.Columns["Eliminar"].Index)
             {
                 Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
-                rol.funcionalidades = new RepoRol().GetFuncionalidades(rol.Id);
+                rol.funcionalidades = repoRol.GetFuncionalidades(rol.Id);
                 
                 var confirmResult = MessageBox.Show("Eliminar el rol " + rol.Nombre + " ??",
                                      "Confirmar eliminación",

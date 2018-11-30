@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -135,17 +137,42 @@
     <Compile Include="Canje Puntos\ViewPremios.Designer.cs">
       <DependentUpon>ViewPremios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comprar\Form1.cs">
+    <Compile Include="Comprar\AddRubros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Comprar\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Comprar\AddRubros.Designer.cs">
+      <DependentUpon>AddRubros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\AgregarTarjetaCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\AgregarTarjetaCredito.Designer.cs">
+      <DependentUpon>AgregarTarjetaCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\Comprar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\Comprar.Designer.cs">
+      <DependentUpon>Comprar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\ComprarUbicaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\ComprarUbicaciones.Designer.cs">
+      <DependentUpon>ComprarUbicaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comprar\MediosDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprar\MediosDePago.Designer.cs">
+      <DependentUpon>MediosDePago.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\Conexion.cs" />
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
     <Compile Include="DTO\PremioDTO.cs" />
+    <Compile Include="DTO\PublicacionDTO.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,8 +259,12 @@
     <Compile Include="Repositorios\RepoPublicacion.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
+    <Compile Include="Repositorios\Repository.cs" />
     <Compile Include="Repositorios\RepoUbicacion.cs" />
+    <Compile Include="Utils\CheckData.cs" />
     <Compile Include="Utils\ElementManager.cs" />
+    <Compile Include="Utils\ValidatorData.cs" />
+    <Compile Include="Utils\Messages.cs" />
     <Compile Include="Utils\Page.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
     <Compile Include="Vistas\ChangePassword.cs">
@@ -316,6 +347,21 @@
     <EmbeddedResource Include="Canje Puntos\ViewPremios.resx">
       <DependentUpon>ViewPremios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\AddRubros.resx">
+      <DependentUpon>AddRubros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\AgregarTarjetaCredito.resx">
+      <DependentUpon>AgregarTarjetaCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\Comprar.resx">
+      <DependentUpon>Comprar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\ComprarUbicaciones.resx">
+      <DependentUpon>ComprarUbicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprar\MediosDePago.resx">
+      <DependentUpon>MediosDePago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\AgregarFechas.resx">
       <DependentUpon>AgregarFechas.cs</DependentUpon>
     </EmbeddedResource>
@@ -368,7 +414,11 @@
       <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Empresa.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Publicacion.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Ubicacion.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Repositorios.RepoRol.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

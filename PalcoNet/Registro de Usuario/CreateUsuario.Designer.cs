@@ -62,6 +62,7 @@
             this.comboBoxRol.Name = "comboBoxRol";
             this.comboBoxRol.Size = new System.Drawing.Size(134, 21);
             this.comboBoxRol.TabIndex = 6;
+            this.comboBoxRol.SelectedValueChanged += AllDataIsCompleted;
             // 
             // lblRol
             // 
@@ -79,6 +80,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(134, 20);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.TextChanged += AllDataIsCompleted;
             // 
             // lblPassword
             // 
@@ -104,6 +106,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(134, 20);
             this.txtUsuario.TabIndex = 0;
+            this.txtUsuario.TextChanged += AllDataIsCompleted;
             // 
             // btnLimpiar
             // 
@@ -117,6 +120,7 @@
             // 
             // btnSiguiente
             // 
+            this.btnSiguiente.Enabled = false;
             this.btnSiguiente.Location = new System.Drawing.Point(177, 197);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(75, 23);

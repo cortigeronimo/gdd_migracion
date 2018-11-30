@@ -6,12 +6,50 @@ using System.Threading.Tasks;
 using PalcoNet.Modelo;
 using System.Data;
 using System.Data.SqlClient;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Repositorios
 {
-    class RepoEmpresa
+    class RepoEmpresa : Repository
     {
         private String table = "PLEASE_HELP.Empresa";
+
+        public void DeleteEmpresa(Empresa empresa) {
+            String sp = "PLEASE_HELP.SP_BAJA_EMPRESA";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@id", empresa.id);
+
+            if (Conexion.InsertUpdateOrDeleteData(command) < 1)
+            {
+                throw new Exception("No se ha podido eliminar la información de la empresa");
+            }
+        }
+
+        public void UpdateEmpresa(Empresa empresa) {
+
+            String sp = "PLEASE_HELP.SP_MODIFICACION_EMPRESA";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@id", empresa.id);
+            command.Parameters.AddWithValue("@razonSocial", empresa.razonSocial);
+            command.Parameters.AddWithValue("@cuit", empresa.cuit);
+            command.Parameters.AddWithValue("@email", empresa.email);
+            command.Parameters.AddWithValue("@telefono", empresa.telefono);
+            command.Parameters.AddWithValue("@localidad", empresa.localidad);
+            command.Parameters.AddWithValue("@direccion", empresa.direccion);
+            command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
+            command.Parameters.AddWithValue("@depto", empresa.depto);
+            command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
+            command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
+
+            if (Conexion.InsertUpdateOrDeleteData(command) < 1)
+            {
+                throw new Exception("No se ha podido actualizar la información de la empresa");
+            }
+        }
 
         public void InsertEmpresa(Empresa empresa)
         {
@@ -44,22 +82,22 @@ namespace PalcoNet.Repositorios
             if (razonSocial != "")
             {
                 query += " AND Emp_Razon_Social LIKE @razonSocial";
-                cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
             }
             if (cuit != "")
             {
                 query += " AND Emp_Cuit = @cuit";
-                cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@cuit", cuit);
             }
             if (email != "")
             {
                 query += " AND Emp_Email LIKE @email";
-                cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@email", email);
             }
 
+            query += " AND Emp_Baja != 1";
+
+            cmd.CommandText = query;
             result = Conexion.GetData(cmd);
             return FromRowsToEmpresas(result);
         }
@@ -67,33 +105,25 @@ namespace PalcoNet.Repositorios
         private List<Empresa> FromRowsToEmpresas(DataTable table)
         {
             List<Empresa> empresas = new List<Empresa>();
-            int i = 0;
-            while (i < table.Rows.Count)
+            foreach (DataRow row in table.Rows)
             {
-                String stringCuit = (String)table.Rows[i]["Emp_Cuit"];
-
-                long cuit = Convert.ToInt64(new String((from c in stringCuit
-                                  where char.IsDigit(c)
-                                  select c
-                    ).ToArray()));
-                string ciudad = table.Rows[i]["Emp_Ciudad"] == System.DBNull.Value ? null : (String)table.Rows[i]["Emp_Ciudad"];
-                long telefono = table.Rows[i]["Emp_Telefono"] == System.DBNull.Value ? 0 : (long)table.Rows[i]["Emp_Telefono"];
-                string localidad = table.Rows[i]["Emp_Localidad"] == System.DBNull.Value ? null : (string)table.Rows[i]["Emp_Localidad"];
-
                 Empresa empresa = new Empresa();
-                empresa.razonSocial = (string)table.Rows[i]["Emp_Razon_Social"];
-                empresa.cuit = cuit;
-                empresa.ciudad = ciudad;
-                empresa.email = (string)table.Rows[i]["Emp_Email"];
-                empresa.telefono = telefono;
-                empresa.localidad = localidad;
-                empresa.direccion = (string)table.Rows[i]["Emp_Direccion"];
-                empresa.nroPiso = Convert.ToByte(table.Rows[i]["Emp_Piso"]);
-                empresa.depto = (string)table.Rows[i]["Emp_Depto"];
-                empresa.codigoPostal = (string)table.Rows[i]["Emp_Cod_Postal"];
-
+                empresa.id = GetValueOrNull<int?>(row["Emp_Usuario"]);
+                empresa.razonSocial = GetValueOrNull<String>(row["Emp_Razon_Social"]);
+                empresa.cuit = GetValueOrNull<String>(row["Emp_Cuit"]);
+                empresa.ciudad = GetValueOrNull<String>(row["Emp_Ciudad"]);
+                empresa.email = GetValueOrNull<String>(row["Emp_Email"]);
+                empresa.telefono = GetValueOrNull<decimal?>(row["Emp_Telefono"]);
+                empresa.localidad = GetValueOrNull<String>(row["Emp_Localidad"]);
+                empresa.direccion = GetValueOrNull<String>(row["Emp_Direccion"]);
+                empresa.nroPiso = GetValueOrNull<decimal?>(row["Emp_Piso"]);
+                empresa.depto = GetValueOrNull<String>(row["Emp_Depto"]);
+                empresa.codigoPostal = GetValueOrNull < String > (row["Emp_Cod_Postal"]);
+                empresa.habilitado = GetValueOrNull<bool>(row["Emp_Habilitado"]);
+                empresa.intentosFallidos = GetValueOrNull<Int16>(row["Emp_Intentos_Fallidos"]);
+                empresa.baja = GetValueOrNull<bool>(row["Emp_Baja"]);
+                empresa.primerLogin = GetValueOrNull<bool>(row["Emp_Primer_Login"]);
                 empresas.Add(empresa);
-                i++;
             }
             return empresas;
         }

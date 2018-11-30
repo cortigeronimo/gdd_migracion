@@ -21,6 +21,17 @@ namespace PalcoNet.Registro_de_Usuario
             InitializeComponent();
         }
 
+        private void AllDataIsCompleted(object sender, EventArgs e)
+        { 
+            if(String.IsNullOrEmpty(txtUsuario.Text) || String.IsNullOrEmpty(txtPassword.Text) 
+                || comboBoxRol.SelectedItem == null){
+                    btnSiguiente.Enabled = false;
+            }
+            else {
+                btnSiguiente.Enabled = true;
+            }
+        }
+
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "";

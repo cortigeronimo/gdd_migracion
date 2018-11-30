@@ -11,7 +11,7 @@ namespace PalcoNet
 {
     public class Usuario
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public String username { get; set; }
         private byte[] password;
         public bool isAdmin { get; set; }

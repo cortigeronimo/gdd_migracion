@@ -58,6 +58,21 @@ namespace PalcoNet.Repositorios
             
         }
 
+
+        public List<Ubicacion> GetUbicacionesDisponibles(long publicacionCodigo)
+        {
+            String sp = "PLEASE_HELP.SP_GET_UBICACIONES_DISPONIBLES";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@codigoPublicacion", publicacionCodigo);
+
+            DataTable ubicacionesTable = Conexion.GetData(cmd);
+
+            return FromRowsToUbicaciones(ubicacionesTable);
+        }
+
+
         private List<Ubicacion> FromRowsToUbicaciones(DataTable table)
         {
             List<Ubicacion> ubicaciones = new List<Ubicacion>();

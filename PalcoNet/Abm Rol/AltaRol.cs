@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Abm_Rol
 {
     public partial class AltaRol : Form
     {
         Rol rol = new Rol();
+        RepoRol repoRol = new RepoRol();
 
         public AltaRol()
         {
@@ -32,6 +34,18 @@ namespace PalcoNet.Abm_Rol
                     rol.funcionalidades.Add(val);
                     CargarListFuncionalidades();
                 }
+            }
+        }
+
+        private void AllDataIsCompleted(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtBoxNombre.Text) || listBoxFuncionalidades.Items.Count == 0)
+            {
+                btnGuardar.Enabled = false;
+            }
+            else
+            {
+                btnGuardar.Enabled = true;
             }
         }
 
@@ -53,20 +67,22 @@ namespace PalcoNet.Abm_Rol
         {
             Rol nuevoRol = new Rol(txtBoxNombre.Text, true);
             nuevoRol.funcionalidades = rol.funcionalidades;
-            new RepoRol().CreateRol(rol);
-            this.DialogResult = DialogResult.OK;
-            MessageBox.Show("Rol Creado");
+            try
+            {
+                repoRol.CreateRol(rol);
+                this.DialogResult = DialogResult.OK;
+                MessageBox.Show(Messagges.OPERACION_EXITOSA);
+            }
+            catch (Exception) {
+                MessageBox.Show(Messagges.ERROR_INESPERADO);
+            }
+            
             this.Close();
         }
 
         private void CargarListFuncionalidades()
         {
             listBoxFuncionalidades.DataSource = rol.funcionalidades.Select<Funcionalidad, string>(funcionalidad => funcionalidad.Nombre).ToList();
-        }
-
-        private void listBoxFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

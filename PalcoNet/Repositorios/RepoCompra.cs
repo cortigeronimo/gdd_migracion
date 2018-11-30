@@ -13,7 +13,7 @@ namespace PalcoNet.Repositorios
 {
     public class RepoCompra
     {
-        public List<DetalleCompra> GetComprasUsuario(int userId)
+        public List<DetalleCompra> GetComprasUsuario(int? userId)
         {
             String sp = "PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE";
             SqlCommand command = new SqlCommand(sp);
@@ -47,5 +47,29 @@ namespace PalcoNet.Repositorios
 
             return comprasList;
         }
+
+        public void GenerateCompras(List<Ubicacion> ubicacionesList, int? userId, String medioPago, String compraEmail)
+        {
+            String sp = "PLEASE_HELP.SP_COMPRAR_ENTRADA";
+
+            foreach (Ubicacion u in ubicacionesList)
+            {
+                SqlCommand cmd = new SqlCommand(sp);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@compraCliente", userId);
+                cmd.Parameters.AddWithValue("@compraFecha", SystemDate.GetDate());
+                cmd.Parameters.AddWithValue("@compraMedioPago", medioPago);
+                cmd.Parameters.AddWithValue("@compraEmail", compraEmail);
+                cmd.Parameters.AddWithValue("@compraFila", u.Fila);
+                cmd.Parameters.AddWithValue("@compraAsiento", u.Asiento);
+                cmd.Parameters.AddWithValue("@compraPublicacion", u.Publicacion);
+                cmd.Parameters.AddWithValue("@compraPrecio", u.Precio);
+
+                Conexion.ExecuteProcedure(cmd);
+            }
+        }
+
+
     }
 }

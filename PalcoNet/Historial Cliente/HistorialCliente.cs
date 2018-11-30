@@ -58,7 +58,7 @@ namespace PalcoNet.Historial_Cliente
         {
             dataGridHistorialCliente.Rows.Clear();
 
-            List<DetalleCompra> comprasPage = page.GetComprasPage();
+            List<DetalleCompra> comprasPage = page.GetDataPage();
             BindingSource binding = new BindingSource(comprasPage, null);
             dataGridHistorialCliente.DataSource = binding;
             /*foreach (DetalleCompra compra in comprasPage)

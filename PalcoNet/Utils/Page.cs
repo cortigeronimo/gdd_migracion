@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PalcoNet.Modelo;
+using PalcoNet.DTO;
 
 namespace PalcoNet.Utils
 {
@@ -40,13 +41,13 @@ namespace PalcoNet.Utils
         }
 
 
-        public List<T> GetComprasPage()
+        public List<T> GetDataPage()
         {
             List<T> pageList = new List<T>();
 
-            int inicio = (ActualPage - 1) * 10;
+            int inicio = (ActualPage - 1) * sizePage;
 
-            int tope = ActualPage * 10;
+            int tope = ActualPage * sizePage;
 
             for (int i = inicio; i < tope && i < Listado.Count; i++)
             {
