@@ -50,10 +50,11 @@
             // txtBoxNombre
             // 
             this.txtBoxNombre.Location = new System.Drawing.Point(63, 10);
+            this.txtBoxNombre.MaxLength = 20;
             this.txtBoxNombre.Name = "txtBoxNombre";
             this.txtBoxNombre.Size = new System.Drawing.Size(100, 20);
             this.txtBoxNombre.TabIndex = 1;
-            this.txtBoxNombre.TextChanged += AllDataIsCompleted;
+            this.txtBoxNombre.TextChanged += new System.EventHandler(this.txtBoxNombre_TextChanged);
             // 
             // listBoxFuncionalidades
             // 
@@ -62,8 +63,6 @@
             this.listBoxFuncionalidades.Name = "listBoxFuncionalidades";
             this.listBoxFuncionalidades.Size = new System.Drawing.Size(147, 212);
             this.listBoxFuncionalidades.TabIndex = 2;
-            this.listBoxFuncionalidades.SelectedValueChanged += AllDataIsCompleted;
-            
             // 
             // lblFuncionalidades
             // 

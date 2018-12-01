@@ -18,10 +18,12 @@ namespace PalcoNet.Modelo
         public decimal? nroPiso { get; set; }
         public String depto { get; set; }
         public String codigoPostal { get; set; }
-        public bool? habilitado { get; set; }
+        public bool habilitado { get; set; }
         public Int16 intentosFallidos { get; set; }
-        public bool? baja { get; set; }
-        public bool? primerLogin { get; set; }
+        public bool baja { get; set; }
+        public bool primerLogin { get; set; }
+
+        public String RazonSocial { get { return razonSocial; } }
 
         public Empresa()
         {

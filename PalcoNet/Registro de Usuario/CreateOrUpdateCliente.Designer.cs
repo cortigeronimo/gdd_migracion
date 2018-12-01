@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Registro_de_Usuario
 {
-    partial class CreateCliente
+    partial class CreateOrUpdateCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
+            this.checkBoxTipoDocumento = new System.Windows.Forms.CheckBox();
             this.comboBoxTipoDoc = new System.Windows.Forms.ComboBox();
             this.txtCuil = new System.Windows.Forms.TextBox();
             this.txtNumPiso = new System.Windows.Forms.TextBox();
@@ -64,6 +65,7 @@
             // 
             // groupBoxCliente
             // 
+            this.groupBoxCliente.Controls.Add(this.checkBoxTipoDocumento);
             this.groupBoxCliente.Controls.Add(this.comboBoxTipoDoc);
             this.groupBoxCliente.Controls.Add(this.txtCuil);
             this.groupBoxCliente.Controls.Add(this.txtNumPiso);
@@ -94,10 +96,20 @@
             this.groupBoxCliente.Controls.Add(this.lblNombre);
             this.groupBoxCliente.Location = new System.Drawing.Point(36, 22);
             this.groupBoxCliente.Name = "groupBoxCliente";
-            this.groupBoxCliente.Size = new System.Drawing.Size(365, 420);
+            this.groupBoxCliente.Size = new System.Drawing.Size(365, 441);
             this.groupBoxCliente.TabIndex = 0;
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Cliente";
+            // 
+            // checkBoxTipoDocumento
+            // 
+            this.checkBoxTipoDocumento.AutoSize = true;
+            this.checkBoxTipoDocumento.Location = new System.Drawing.Point(20, 409);
+            this.checkBoxTipoDocumento.Name = "checkBoxTipoDocumento";
+            this.checkBoxTipoDocumento.Size = new System.Drawing.Size(82, 17);
+            this.checkBoxTipoDocumento.TabIndex = 26;
+            this.checkBoxTipoDocumento.Text = "Dar de Baja";
+            this.checkBoxTipoDocumento.UseVisualStyleBackColor = true;
             // 
             // comboBoxTipoDoc
             // 
@@ -112,7 +124,6 @@
             this.comboBoxTipoDoc.Name = "comboBoxTipoDoc";
             this.comboBoxTipoDoc.Size = new System.Drawing.Size(131, 21);
             this.comboBoxTipoDoc.TabIndex = 3;
-            this.comboBoxTipoDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxTipoDoc_KeyPress);
             // 
             // txtCuil
             // 
@@ -121,7 +132,6 @@
             this.txtCuil.Name = "txtCuil";
             this.txtCuil.Size = new System.Drawing.Size(129, 20);
             this.txtCuil.TabIndex = 5;
-            this.txtCuil.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCuil_KeyPress);
             // 
             // txtNumPiso
             // 
@@ -130,7 +140,6 @@
             this.txtNumPiso.Name = "txtNumPiso";
             this.txtNumPiso.Size = new System.Drawing.Size(131, 20);
             this.txtNumPiso.TabIndex = 9;
-            this.txtNumPiso.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumPiso_KeyPress);
             // 
             // txtTelefono
             // 
@@ -139,7 +148,6 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(129, 20);
             this.txtTelefono.TabIndex = 7;
-            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtNumeroDocumento
             // 
@@ -148,7 +156,6 @@
             this.txtNumeroDocumento.Name = "txtNumeroDocumento";
             this.txtNumeroDocumento.Size = new System.Drawing.Size(131, 20);
             this.txtNumeroDocumento.TabIndex = 4;
-            this.txtNumeroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroDocumento_KeyPress);
             // 
             // txtTarjetaCredito
             // 
@@ -157,16 +164,15 @@
             this.txtTarjetaCredito.Name = "txtTarjetaCredito";
             this.txtTarjetaCredito.Size = new System.Drawing.Size(131, 20);
             this.txtTarjetaCredito.TabIndex = 14;
-            this.txtTarjetaCredito.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTarjetaCredito_KeyPress);
             // 
             // lblTarjetaCredito
             // 
             this.lblTarjetaCredito.AutoSize = true;
             this.lblTarjetaCredito.Location = new System.Drawing.Point(212, 360);
             this.lblTarjetaCredito.Name = "lblTarjetaCredito";
-            this.lblTarjetaCredito.Size = new System.Drawing.Size(120, 13);
+            this.lblTarjetaCredito.Size = new System.Drawing.Size(93, 13);
             this.lblTarjetaCredito.TabIndex = 25;
-            this.lblTarjetaCredito.Text = "Tarjeta De Crédito  (0-9)";
+            this.lblTarjetaCredito.Text = "Tarjeta De Crédito";
             // 
             // pickerFechaNacimiento
             // 
@@ -194,16 +200,15 @@
             this.txtCodigoPostal.Name = "txtCodigoPostal";
             this.txtCodigoPostal.Size = new System.Drawing.Size(131, 20);
             this.txtCodigoPostal.TabIndex = 12;
-            this.txtCodigoPostal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoPostal_KeyPress);
             // 
             // lblCodigoPostal
             // 
             this.lblCodigoPostal.AutoSize = true;
             this.lblCodigoPostal.Location = new System.Drawing.Point(212, 304);
             this.lblCodigoPostal.Name = "lblCodigoPostal";
-            this.lblCodigoPostal.Size = new System.Drawing.Size(72, 13);
+            this.lblCodigoPostal.Size = new System.Drawing.Size(76, 13);
             this.lblCodigoPostal.TabIndex = 21;
-            this.lblCodigoPostal.Text = "Codigo Postal";
+            this.lblCodigoPostal.Text = "Codigo Postal*";
             // 
             // txtLocalidad
             // 
@@ -212,7 +217,6 @@
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(131, 20);
             this.txtLocalidad.TabIndex = 11;
-            this.txtLocalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLocalidad_KeyPress);
             // 
             // lblLocalidad
             // 
@@ -239,17 +243,15 @@
             this.txtDepartamento.Name = "txtDepartamento";
             this.txtDepartamento.Size = new System.Drawing.Size(131, 20);
             this.txtDepartamento.TabIndex = 10;
-            this.txtDepartamento.TextChanged += new System.EventHandler(this.txtDepartamento_TextChanged);
-            this.txtDepartamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDepartamento_KeyPress);
             // 
             // lblPiso
             // 
             this.lblPiso.AutoSize = true;
             this.lblPiso.Location = new System.Drawing.Point(19, 246);
             this.lblPiso.Name = "lblPiso";
-            this.lblPiso.Size = new System.Drawing.Size(94, 13);
+            this.lblPiso.Size = new System.Drawing.Size(70, 13);
             this.lblPiso.TabIndex = 15;
-            this.lblPiso.Text = "Número Piso  (0-9)";
+            this.lblPiso.Text = "Número Piso ";
             // 
             // txtDireccion
             // 
@@ -258,7 +260,6 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(131, 20);
             this.txtDireccion.TabIndex = 8;
-            this.txtDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDireccion_KeyPress);
             // 
             // lblDireccion
             // 
@@ -274,9 +275,9 @@
             this.lblTelefono.AutoSize = true;
             this.lblTelefono.Location = new System.Drawing.Point(16, 192);
             this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(80, 13);
+            this.lblTelefono.Size = new System.Drawing.Size(56, 13);
             this.lblTelefono.TabIndex = 11;
-            this.lblTelefono.Text = "Telefono*  (0-9)";
+            this.lblTelefono.Text = "Telefono* ";
             // 
             // txtEmail
             // 
@@ -285,7 +286,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(131, 20);
             this.txtEmail.TabIndex = 6;
-            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
             // 
             // lblEmail
             // 
@@ -301,18 +301,18 @@
             this.lblCuil.AutoSize = true;
             this.lblCuil.Location = new System.Drawing.Point(19, 135);
             this.lblCuil.Name = "lblCuil";
-            this.lblCuil.Size = new System.Drawing.Size(55, 13);
+            this.lblCuil.Size = new System.Drawing.Size(28, 13);
             this.lblCuil.TabIndex = 7;
-            this.lblCuil.Text = "Cuil*  (0-9)";
+            this.lblCuil.Text = "Cuil*";
             // 
             // lblNumeroDocumento
             // 
             this.lblNumeroDocumento.AutoSize = true;
             this.lblNumeroDocumento.Location = new System.Drawing.Point(212, 82);
             this.lblNumeroDocumento.Name = "lblNumeroDocumento";
-            this.lblNumeroDocumento.Size = new System.Drawing.Size(150, 13);
+            this.lblNumeroDocumento.Size = new System.Drawing.Size(126, 13);
             this.lblNumeroDocumento.TabIndex = 5;
-            this.lblNumeroDocumento.Text = "Numero De Documento*  (0-9)";
+            this.lblNumeroDocumento.Text = "Numero De Documento* ";
             // 
             // lblTipoDocumento
             // 
@@ -330,7 +330,6 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(131, 20);
             this.txtApellido.TabIndex = 2;
-            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // lblApellido
             // 
@@ -348,7 +347,6 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(131, 20);
             this.txtNombre.TabIndex = 1;
-            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
             // lblNombre
             // 
@@ -361,7 +359,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(36, 448);
+            this.btnLimpiar.Location = new System.Drawing.Point(36, 469);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 16;
@@ -371,7 +369,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(326, 448);
+            this.btnGuardar.Location = new System.Drawing.Point(326, 469);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 15;
@@ -379,15 +377,15 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // CreateCliente
+            // CreateOrUpdateCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 493);
+            this.ClientSize = new System.Drawing.Size(440, 500);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxCliente);
-            this.Name = "CreateCliente";
+            this.Name = "CreateOrUpdateCliente";
             this.Text = "Alta De Cliente";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();
@@ -428,5 +426,6 @@
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtCuil;
         private System.Windows.Forms.ComboBox comboBoxTipoDoc;
+        private System.Windows.Forms.CheckBox checkBoxTipoDocumento;
     }
 }

@@ -18,35 +18,6 @@ namespace PalcoNet.Repositorios
         private String clientTable = "PLEASE_HELP.Cliente";
         private String empresaTable = "PLEASE_HELP.Empresa";
 
-        //Esto era para mostrar un recorrer un datareader pero no funciona con la conexion cerrada... 
-        /*
-        public List<Usuario> GetUsuarios()
-        {
-            String query = "select * from " + userTable;
-            SqlCommand command = new SqlCommand(query);
-            SqlDataReader reader = Conexion.GetData(command);
-            return this.RowsToUsers(reader);
-        }
-
-        public List<Usuario> RowsToUsers(SqlDataReader reader)
-        {
-            List<Usuario> usuarios = new List<Usuario>();
-            try
-            {
-                while (reader.Read())
-                {
-                    //lee un row, lo mapea y lo mete en la lista
-                }
-                return usuarios;
-            }
-            finally
-            {
-                reader.Close();
-            }
-
-        }
-        */
-
 
         public void ChangePassword(String password)
         {
@@ -81,10 +52,6 @@ namespace PalcoNet.Repositorios
             return Convert.ToBoolean(firstLogin.Value);
 
         }
-
-        
-
-
 
         //Verifica si el usario existe en la DB
         public Boolean ExistsUser(Usuario user)

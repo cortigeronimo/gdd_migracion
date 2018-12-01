@@ -10,6 +10,7 @@ namespace PalcoNet.DTO
     {
         public int Amount { get; set; }
         public String Descripcion { get; set; }
+        public int Puntos { get; set; } 
         
     }
 }

@@ -14,8 +14,17 @@ namespace PalcoNet.Repositorios
     {
         private String table = "PLEASE_HELP.Empresa";
 
-        public void DeleteEmpresa(Empresa empresa) { 
-            
+        public void DeleteEmpresa(Empresa empresa) {
+            String sp = "PLEASE_HELP.SP_BAJA_EMPRESA";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@id", empresa.id);
+
+            if (Conexion.InsertUpdateOrDeleteData(command) < 1)
+            {
+                throw new Exception("No se ha podido eliminar la información de la empresa");
+            }
         }
 
         public void UpdateEmpresa(Empresa empresa) {
@@ -35,6 +44,7 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@depto", empresa.depto);
             command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
             command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
+            command.Parameters.AddWithValue("@baja", empresa.baja);
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 1)
             {
@@ -72,23 +82,23 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             if (razonSocial != "")
             {
-                query += " AND Emp_Razon_Social LIKE @razonSocial";
-                cmd.CommandText = query;
+                query += " AND Emp_Razon_Social LIKE '%' + @razonSocial + '%'";
                 cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
             }
             if (cuit != "")
             {
-                query += " AND Emp_Cuit = @cuit";
-                cmd.CommandText = query;
+                query += " AND Emp_Cuit LIKE '%' + @cuit + '%'";
                 cmd.Parameters.AddWithValue("@cuit", cuit);
             }
             if (email != "")
             {
-                query += " AND Emp_Email LIKE @email";
-                cmd.CommandText = query;
+                query += " AND Emp_Email LIKE '%' + @email + '%'";
                 cmd.Parameters.AddWithValue("@email", email);
             }
 
+            query += " AND Emp_Baja != 1";
+
+            cmd.CommandText = query;
             result = Conexion.GetData(cmd);
             return FromRowsToEmpresas(result);
         }
@@ -110,13 +120,24 @@ namespace PalcoNet.Repositorios
                 empresa.nroPiso = GetValueOrNull<decimal?>(row["Emp_Piso"]);
                 empresa.depto = GetValueOrNull<String>(row["Emp_Depto"]);
                 empresa.codigoPostal = GetValueOrNull < String > (row["Emp_Cod_Postal"]);
-                empresa.habilitado = GetValueOrNull<bool?>(row["Emp_Habilitado"]);
+                empresa.habilitado = GetValueOrNull<bool>(row["Emp_Habilitado"]);
                 empresa.intentosFallidos = GetValueOrNull<Int16>(row["Emp_Intentos_Fallidos"]);
-                empresa.baja = GetValueOrNull<bool?>(row["Emp_Baja"]);
-                empresa.primerLogin = GetValueOrNull<bool?>(row["Emp_Primer_Login"]);
+                empresa.baja = GetValueOrNull<bool>(row["Emp_Baja"]);
+                empresa.primerLogin = GetValueOrNull<bool>(row["Emp_Primer_Login"]);
                 empresas.Add(empresa);
             }
             return empresas;
+        }
+
+        public bool RepiteCUIToRazonSocial(string cuit, string razonSocial)
+        {
+            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit OR Emp_Razon_Social = @razonSocial";
+            var cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@cuit", cuit);
+            cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
+
+            var result = Conexion.GetData(cmd);
+            return (int)result.Rows[0]["Total"] > 0;
         }
     }
 }

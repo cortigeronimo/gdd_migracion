@@ -25,7 +25,7 @@ namespace PalcoNet.Abm_Rol
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            using (ListadoFuncionalidades form = new ListadoFuncionalidades())
+            using (ListadoFuncionalidades form = new ListadoFuncionalidades(rol))
             {
                 DialogResult result = form.ShowDialog();
                 if (result == DialogResult.OK)
@@ -33,13 +33,14 @@ namespace PalcoNet.Abm_Rol
                     Funcionalidad val = form.Elegida;
                     rol.funcionalidades.Add(val);
                     CargarListFuncionalidades();
+                    AllDataIsCompleted(sender, e);
                 }
             }
         }
 
         private void AllDataIsCompleted(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtBoxNombre.Text) || listBoxFuncionalidades.Items.Count == 0)
+            if (String.IsNullOrEmpty(txtBoxNombre.Text) || rol.funcionalidades.Count == 0)
             {
                 btnGuardar.Enabled = false;
             }
@@ -54,6 +55,7 @@ namespace PalcoNet.Abm_Rol
             Funcionalidad selected = rol.funcionalidades.Find(r => r.Nombre == (string)listBoxFuncionalidades.SelectedItem);
             rol.funcionalidades.Remove(selected);
             CargarListFuncionalidades();
+            AllDataIsCompleted(sender, e);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -61,15 +63,21 @@ namespace PalcoNet.Abm_Rol
             rol = new Rol();
             txtBoxNombre.Clear();
             listBoxFuncionalidades.DataSource = null;
+            AllDataIsCompleted(sender, e);
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Rol nuevoRol = new Rol(txtBoxNombre.Text, true);
             nuevoRol.funcionalidades = rol.funcionalidades;
+            if (repoRol.ExisteRol(nuevoRol.Nombre))
+            {
+                MessageBox.Show("Ya existe un rol con ese nombre");
+                return;
+            }
             try
             {
-                repoRol.CreateRol(rol);
+                repoRol.CreateRol(nuevoRol);
                 this.DialogResult = DialogResult.OK;
                 MessageBox.Show(Messagges.OPERACION_EXITOSA);
             }
@@ -83,6 +91,11 @@ namespace PalcoNet.Abm_Rol
         private void CargarListFuncionalidades()
         {
             listBoxFuncionalidades.DataSource = rol.funcionalidades.Select<Funcionalidad, string>(funcionalidad => funcionalidad.Nombre).ToList();
+        }
+
+        private void txtBoxNombre_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -28,7 +28,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            List<Empresa> empresas = new RepoEmpresa().GetEmpresasByFilter(txtBoxRazonSocial.Text, txtBoxCUIT.Text, txtBoxEmail.Text);
+            List<Empresa> empresas = repoEmpresa.GetEmpresasByFilter(txtBoxRazonSocial.Text, txtBoxCUIT.Text, txtBoxEmail.Text);
             empresas.Sort((e1, e2) => e1.razonSocial.CompareTo(e1.razonSocial));
             bindingSource = new BindingSource(empresas, String.Empty);
             dataGridEmpresas.DataSource = bindingSource;
@@ -45,7 +45,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
             if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEditar))
             {
-                Form EditForm = new CreateEmpresa(empresa);
+                Form EditForm = new CreateOrUpdateEmpresa(empresa);
                 EditForm.ShowDialog();
             }
             if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEliminar))
