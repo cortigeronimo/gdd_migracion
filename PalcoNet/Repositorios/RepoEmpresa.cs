@@ -128,5 +128,16 @@ namespace PalcoNet.Repositorios
             }
             return empresas;
         }
+
+        public bool RepiteCUIToRazonSocial(string cuit, string razonSocial)
+        {
+            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit OR Emp_Razon_Social = @razonSocial";
+            var cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@cuit", cuit);
+            cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
+
+            var result = Conexion.GetData(cmd);
+            return (int)result.Rows[0]["Total"] > 0;
+        }
     }
 }

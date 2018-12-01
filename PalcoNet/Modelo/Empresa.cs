@@ -23,6 +23,8 @@ namespace PalcoNet.Modelo
         public bool baja { get; set; }
         public bool primerLogin { get; set; }
 
+        public String RazonSocial { get { return razonSocial; } }
+
         public Empresa()
         {
         }

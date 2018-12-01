@@ -63,8 +63,13 @@ namespace PalcoNet.Abm_Rol
         {
             if (listBoxFuncionalidades.SelectedItem != null)
             {
+                if (rol != null && rol.funcionalidades != null && rol.funcionalidades.Exists(funcionalidad => funcionalidad.Nombre == (string)listBoxFuncionalidades.SelectedItem))
+                {
+                    MessageBox.Show("El rol " + rol.Nombre + " ya tiene esa funcionalidad");
+                    return;
+                }
                 elegida = funcionalidades.Find(x => x.Nombre == (string)listBoxFuncionalidades.SelectedItem);
-                this.DialogResult = DialogResult.OK;
+                this.DialogResult = DialogResult.OK; this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else MessageBox.Show("Elija una funcionalidad, por favor.");
