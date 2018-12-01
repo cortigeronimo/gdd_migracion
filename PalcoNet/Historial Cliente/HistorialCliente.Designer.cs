@@ -164,6 +164,7 @@
             // 
             // txtActualPage
             // 
+            this.txtActualPage.Enabled = false;
             this.txtActualPage.Location = new System.Drawing.Point(424, 297);
             this.txtActualPage.Name = "txtActualPage";
             this.txtActualPage.Size = new System.Drawing.Size(26, 20);

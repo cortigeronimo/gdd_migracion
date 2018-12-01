@@ -17,11 +17,11 @@ namespace PalcoNet.Abm_Cliente
     public partial class ListCliente : CustomForm
     {
         RepoCliente repoCliente = new RepoCliente();
-        Cliente cliente;
 
         public ListCliente()
         {
             InitializeComponent();
+            dataGridViewClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewClientes.RowHeadersVisible = false;
         }
 

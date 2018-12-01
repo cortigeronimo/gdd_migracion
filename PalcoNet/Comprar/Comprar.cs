@@ -24,6 +24,7 @@ namespace PalcoNet.Comprar
 
         private RepoPublicacion repoPublicacion = new RepoPublicacion();
         private RepoRubro repoRubro = new RepoRubro();
+        private RepoUbicacion repoUbicacion = new RepoUbicacion();
 
         private List<String> allRubros;
         public List<String> selectedRubros = new List<String>();
@@ -35,6 +36,7 @@ namespace PalcoNet.Comprar
 
         private void FormComprar_Load(object sender, EventArgs e)
         {
+            dataGridViewPublicaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewPublicaciones.RowHeadersVisible = false;
             dataGridViewPublicaciones.AllowUserToResizeRows = false;
 
@@ -198,11 +200,11 @@ namespace PalcoNet.Comprar
 
         private void dataGridViewPublicaciones_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridViewPublicaciones.Columns["columnComprar"].Index)
+            if (e.ColumnIndex == dataGridViewPublicaciones.Columns.IndexOf(columnComprar))
             {
                 PublicacionDTO publicacion = (PublicacionDTO)dataGridViewPublicaciones.CurrentRow.DataBoundItem;
 
-                List<Ubicacion> ubicacionesDisponibles = new RepoUbicacion().GetUbicacionesDisponibles(publicacion.Codigo);
+                List<Ubicacion> ubicacionesDisponibles = repoUbicacion.GetUbicacionesDisponibles(publicacion.Codigo);
 
                 using (FormComprarUbicaciones form = new FormComprarUbicaciones(ubicacionesDisponibles))
                 {
@@ -219,7 +221,7 @@ namespace PalcoNet.Comprar
 
         private void txtDescripcion_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtDescripcion.Text == String.Empty && Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
+            if (String.IsNullOrEmpty(txtDescripcion.Text) && Char.IsWhiteSpace(e.KeyChar)) e.Handled = true;
         }
     }
 }

@@ -11,19 +11,21 @@ using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
 using PalcoNet.Config;
 using PalcoNet.Vistas;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Canje_Puntos
 {
     public partial class CanjeForm : CustomForm
     {
         private int puntosClientes;
+        private RepoPuntos repoPuntos = new RepoPuntos();
         private RepoCanjePuntos repoCanjePuntos = new RepoCanjePuntos();
         private RepoCliente repoCliente = new RepoCliente();
 
         public CanjeForm()
         {
             InitializeComponent();
-            puntosClientes = repoCliente.GetPuntosClienteById(UserSession.UserId);
+            puntosClientes = repoPuntos.GetPuntosClienteById(UserSession.UserId);
             this.txtPuntosDisponibles.Text = puntosClientes.ToString();
             this.btnComprar.Enabled = false;
         }
@@ -54,7 +56,7 @@ namespace PalcoNet.Canje_Puntos
                     MessageBox.Show("Puntos canjeados correctamente.");
                 }
                 catch(Exception){
-                    MessageBox.Show("Hubo un error al canjear los puntos, intentelo nuevamente.");
+                    MessageBox.Show(Messagges.ERROR_INESPERADO);
                 }
                  
             }

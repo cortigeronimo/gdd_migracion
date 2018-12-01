@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using PalcoNet.Modelo;
 using PalcoNet.Utils;
+using PalcoNet.Config;
 
 namespace PalcoNet.Repositorios
 {

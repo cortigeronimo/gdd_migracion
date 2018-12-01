@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PalcoNet.Modelo;
 using System.Data;
 using System.Data.SqlClient;
+using PalcoNet.Config;
 
 namespace PalcoNet.Repositorios
 {
@@ -69,18 +70,7 @@ namespace PalcoNet.Repositorios
 
             SqlCommand command = new SqlCommand(query);
             return FromRowsToClientes(Conexion.GetData(command));
-        }
-
-        public int GetPuntosClienteById(int? id)
-        {
-            String query = "SELECT Cli_Puntos FROM " + clienteTable + " WHERE Cli_Usuario = @Id";
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@Id", id);
-            return (int)Conexion.GetData(command).Rows[0]["Cli_Puntos"];
-        }
-            
-
-         
+        }         
 
         //Verifica DNI y cuil para Update
         public Boolean ExistsDNIAndCuil(String user, String tipoDoc, String nroDoc, String cuil)
@@ -248,7 +238,6 @@ namespace PalcoNet.Repositorios
                 cliente.fechaNacimiento = GetValueOrNull<DateTime>(row["Cli_Fecha_Nac"]);
                 cliente.fechaCreacion = GetValueOrNull<DateTime>(row["Cli_Fecha_Creacion"]);
                 cliente.tarjetaCredito = GetValueOrNull<String>(row["Cli_Tarjeta_Credito"]);
-                cliente.puntos = GetValueOrNull<int>(row["Cli_Puntos"]);
                 cliente.habilitado = GetValueOrNull<bool>(row["Cli_Habilitado"]);
                 cliente.intentosFallidos = GetValueOrNull<Int16>(row["Cli_Intentos_Fallidos"]);
                 cliente.baja = GetValueOrNull<bool>(row["Cli_Baja"]);

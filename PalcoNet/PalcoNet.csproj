@@ -255,6 +255,7 @@
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
+    <Compile Include="Repositorios\RepoPuntos.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
     <Compile Include="Repositorios\Repository.cs" />

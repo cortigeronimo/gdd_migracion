@@ -23,7 +23,6 @@ namespace PalcoNet.Modelo
         public DateTime fechaNacimiento { get; set; }
         public DateTime fechaCreacion { get; set; }
         public String tarjetaCredito { get; set; }
-        public int puntos { get; set; }
         public bool habilitado { get; set; }
         public Int16 intentosFallidos { get; set; }
         public bool baja { get; set; }
@@ -67,11 +66,6 @@ namespace PalcoNet.Modelo
         public void SetFechaCreacion()
         {
             this.fechaCreacion = DateTime.Today;
-        }
-
-        public bool PuedeCanjear(int puntosPremio)
-        {
-            return this.puntos >= puntosPremio;
         }
     }
 }

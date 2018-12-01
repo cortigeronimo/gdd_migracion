@@ -112,6 +112,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_MODIFICACION_EMPRESA') IS NOT NULL DROP PROCEDURE P
 
 IF OBJECT_ID('PLEASE_HELP.SP_BAJA_EMPRESA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BAJA_EMPRESA;
 
+
+
 -- CREANDO TRIGGERS SI NO EXISTEN
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
@@ -125,6 +127,9 @@ IF OBJECT_ID('PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA') IS NOT NULL DROP TRI
 IF OBJECT_ID('PLEASE_HELP.TR_AFTER_FIRST_LOGIN') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN;
 
 IF OBJECT_ID('PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA;
+
+IF OBJECT_ID('PLEASE_HELP.TR_ELIMINAR_PUNTOS_CON_CERO') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ELIMINAR_PUNTOS_CON_CERO;
+
 
 -- CREANDO ESTRUCTURAS DE TABLAS
 
@@ -187,7 +192,6 @@ create table PLEASE_HELP.Cliente
 	Cli_Fecha_Nac datetime,
 	Cli_Fecha_Creacion datetime,
 	Cli_Tarjeta_Credito nvarchar(255),
-	Cli_Puntos int NOT NULL DEFAULT 0,
 	Cli_Habilitado bit DEFAULT 1,
 	Cli_Intentos_Fallidos smallint DEFAULT 0,
 	Cli_Baja bit DEFAULT 0,
@@ -651,7 +655,7 @@ GO
 CREATE PROCEDURE PLEASE_HELP.SP_GET_PREMIOS(@clienteId INT)
 AS
 BEGIN
-SELECT Premio_Cantidad as Cantidad, Premio_Descripcion as Descripcion
+SELECT up.Premio_Cantidad as Cantidad, p.Premio_Descripcion as Descripcion, p.Premio_Puntos as Puntos
 from Premio p inner join Usuario_Premio up
 on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
 END
@@ -857,13 +861,47 @@ GO
 
 CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0))
 AS
-	DECLARE @puntosPremio int 
+	DECLARE @puntosPremio int, @puntosAVencer int, @idPuntosAVencer int
+	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
+
 	IF NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Usuario_Premio up WHERE up.Cli_Usuario = @idUser and up.Premio_Id = @idPremio)
 		INSERT INTO PLEASE_HELP.Usuario_Premio (Cli_Usuario, Premio_Id) VALUES (@idUser, @idPremio)
 	ELSE
 		UPDATE PLEASE_HELP.Usuario_Premio SET Premio_Cantidad = (Premio_Cantidad + 1) WHERE Cli_Usuario = @idUser and Premio_Id = @idPremio
-	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
-	UPDATE PLEASE_HELP.Cliente SET Cli_Puntos = Cli_Puntos - @puntosPremio WHERE Cli_Usuario = @idUser
+	
+	WHILE @puntosPremio > 0
+	BEGIN
+		SELECT TOP 1 @idPuntosAVencer = Puntuacion_Id, @puntosAVencer = Puntuacion_Cantidad 
+		FROM PLEASE_HELP.Puntuacion 
+		WHERE Puntuacion_Cliente = @idUser AND GETDATE() < Puntuacion_Fecha_Vencimiento AND Puntuacion_Cantidad > 0
+		ORDER BY Puntuacion_Fecha_Vencimiento ASC
+		IF @puntosAVencer >= @puntosPremio
+		BEGIN
+			UPDATE PLEASE_HELP.Puntuacion SET Puntuacion_Cantidad = Puntuacion_Cantidad - @puntosPremio 
+			WHERE Puntuacion_Id = @idPuntosAVencer
+			SET @puntosPremio = 0
+			CONTINUE
+		END
+		ELSE
+		BEGIN
+			UPDATE PLEASE_HELP.Puntuacion SET Puntuacion_Cantidad = 0 
+			WHERE Puntuacion_Id = @idPuntosAVencer
+			SET @puntosPremio = @puntosPremio - @puntosAVencer
+			CONTINUE
+		END
+	END
+	
+GO
+
+CREATE TRIGGER PLEASE_HELP.TR_ELIMINAR_PUNTOS_CON_CERO
+ON PLEASE_HELP.Puntuacion
+AFTER UPDATE
+AS
+BEGIN
+	DELETE FROM PLEASE_HELP.Puntuacion 
+	WHERE Puntuacion_Id IN (SELECT Puntuacion_Id FROM inserted WHERE Puntuacion_Cantidad = 0) 
+END
+
 GO
 
 

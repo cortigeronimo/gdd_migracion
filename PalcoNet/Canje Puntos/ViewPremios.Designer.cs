@@ -30,12 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblPremios = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.premioDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridPremios = new System.Windows.Forms.DataGridView();
             this.btnActualizar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.premioDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Puntos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPremios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.premioDTOBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,37 +51,20 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridPremios.AllowUserToAddRows = false;
+            this.dataGridPremios.AllowUserToDeleteRows = false;
+            this.dataGridPremios.AutoGenerateColumns = false;
+            this.dataGridPremios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPremios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.descripcionDataGridViewTextBoxColumn,
+            this.Puntos,
             this.amountDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.premioDTOBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 26);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // descripcionDataGridViewTextBoxColumn
-            // 
-            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
-            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion Premio";
-            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
-            this.descripcionDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // amountDataGridViewTextBoxColumn
-            // 
-            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-            this.amountDataGridViewTextBoxColumn.HeaderText = "Cantidad";
-            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // premioDTOBindingSource
-            // 
-            this.premioDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PremioDTO);
+            this.dataGridPremios.DataSource = this.premioDTOBindingSource;
+            this.dataGridPremios.Location = new System.Drawing.Point(13, 26);
+            this.dataGridPremios.Name = "dataGridView1";
+            this.dataGridPremios.ReadOnly = true;
+            this.dataGridPremios.Size = new System.Drawing.Size(240, 150);
+            this.dataGridPremios.TabIndex = 1;
             // 
             // btnActualizar
             // 
@@ -92,18 +76,43 @@
             this.btnActualizar.UseVisualStyleBackColor = true;
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // premioDTOBindingSource
+            // 
+            this.premioDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PremioDTO);
+            // 
+            // descripcionDataGridViewTextBoxColumn
+            // 
+            this.descripcionDataGridViewTextBoxColumn.DataPropertyName = "Descripcion";
+            this.descripcionDataGridViewTextBoxColumn.HeaderText = "Descripcion Premio";
+            this.descripcionDataGridViewTextBoxColumn.Name = "descripcionDataGridViewTextBoxColumn";
+            this.descripcionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Puntos
+            // 
+            this.Puntos.DataPropertyName = "Puntos";
+            this.Puntos.HeaderText = "Puntos";
+            this.Puntos.Name = "Puntos";
+            this.Puntos.ReadOnly = true;
+            // 
+            // amountDataGridViewTextBoxColumn
+            // 
+            this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+            this.amountDataGridViewTextBoxColumn.HeaderText = "Cantidad Canjeada";
+            this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+            this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // ViewPremios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 224);
             this.Controls.Add(this.btnActualizar);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridPremios);
             this.Controls.Add(this.lblPremios);
             this.Name = "ViewPremios";
             this.Text = "Visualización De Premios";
             this.Load += new System.EventHandler(this.ViewPremios_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPremios)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.premioDTOBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -113,10 +122,11 @@
         #endregion
 
         private System.Windows.Forms.Label lblPremios;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridPremios;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.BindingSource premioDTOBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Puntos;
         private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
     }
 }

@@ -33,7 +33,7 @@ namespace PalcoNet.Repositorios
                 PremioDTO premioDTO = new PremioDTO();
                 premioDTO.Amount = Convert.ToInt32(row["Cantidad"]);
                 premioDTO.Descripcion = Convert.ToString(row["Descripcion"]);
-
+                premioDTO.Puntos = Convert.ToInt32(row["Puntos"]);
                 premiosDTO.Add(premioDTO);
             }
 
