@@ -351,7 +351,9 @@ ADD CONSTRAINT FK_CLIENTE_USUARIO FOREIGN KEY (Cli_Usuario) REFERENCES PLEASE_HE
 GO
 
 ALTER TABLE PLEASE_HELP.Empresa
-ADD CONSTRAINT FK_EMPRESA_USUARIO FOREIGN KEY (Emp_Usuario) REFERENCES PLEASE_HELP.Usuario(Usuario_Id)
+ADD CONSTRAINT FK_EMPRESA_USUARIO FOREIGN KEY (Emp_Usuario) REFERENCES PLEASE_HELP.Usuario(Usuario_Id),
+CONSTRAINT UQ_EMPRESA_RAZON_SOCIAL UNIQUE (Emp_Razon_Social),
+CONSTRAINT UQ_EMPRESA_CUIT UNIQUE (Emp_Cuit)
 
 GO
 
@@ -726,13 +728,13 @@ GO
 
 -- STORED PROCEDURES ABM EMPRESA
 
-CREATE PROCEDURE PLEASE_HELP.SP_MODIFICACION_EMPRESA(@id int, @razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50))
+CREATE PROCEDURE PLEASE_HELP.SP_MODIFICACION_EMPRESA(@id int, @razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50), @baja bit)
 AS
 BEGIN
 	UPDATE PLEASE_HELP.Empresa SET Emp_Razon_Social = @razonSocial, 
 	Emp_Email = @email, Emp_Telefono = @telefono, Emp_Localidad = @localidad, 
 	Emp_Direccion = @direccion, Emp_Piso = @nropiso, Emp_Depto = @depto, 
-	Emp_Cod_Postal = @codpostal, Emp_Ciudad = @ciudad, Emp_Cuit = @cuit
+	Emp_Cod_Postal = @codpostal, Emp_Ciudad = @ciudad, Emp_Cuit = @cuit, Emp_Baja = @baja
 	WHERE Emp_Usuario = @id;
 END
 GO

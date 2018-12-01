@@ -44,6 +44,7 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@depto", empresa.depto);
             command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
             command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
+            command.Parameters.AddWithValue("@baja", empresa.baja);
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 1)
             {
@@ -81,17 +82,17 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             if (razonSocial != "")
             {
-                query += " AND Emp_Razon_Social LIKE @razonSocial";
+                query += " AND Emp_Razon_Social LIKE '%' + @razonSocial + '%'";
                 cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
             }
             if (cuit != "")
             {
-                query += " AND Emp_Cuit = @cuit";
+                query += " AND Emp_Cuit LIKE '%' + @cuit + '%'";
                 cmd.Parameters.AddWithValue("@cuit", cuit);
             }
             if (email != "")
             {
-                query += " AND Emp_Email LIKE @email";
+                query += " AND Emp_Email LIKE '%' + @email + '%'";
                 cmd.Parameters.AddWithValue("@email", email);
             }
 

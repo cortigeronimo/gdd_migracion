@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Repositorios
 {
-    abstract class Repository
+    public abstract class Repository
     {
         protected T GetValueOrNull<T>(Object posibleNullable)
         {

@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.dataGridEmpresas = new System.Windows.Forms.DataGridView();
+            this.razonSocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtBoxEmail = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,17 +45,90 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxRazonSocial = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridEmpresas = new System.Windows.Forms.DataGridView();
-            this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.columnRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEmpresas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(421, 145);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(76, 23);
+            this.btnBuscar.TabIndex = 3;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(13, 145);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 2;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // dataGridEmpresas
+            // 
+            this.dataGridEmpresas.AllowUserToAddRows = false;
+            this.dataGridEmpresas.AllowUserToDeleteRows = false;
+            this.dataGridEmpresas.AutoGenerateColumns = false;
+            this.dataGridEmpresas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridEmpresas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.razonSocialDataGridViewTextBoxColumn,
+            this.email,
+            this.cuit,
+            this.columnEditar,
+            this.columnEliminar});
+            this.dataGridEmpresas.DataSource = this.empresaBindingSource;
+            this.dataGridEmpresas.Location = new System.Drawing.Point(13, 191);
+            this.dataGridEmpresas.Name = "dataGridEmpresas";
+            this.dataGridEmpresas.ReadOnly = true;
+            this.dataGridEmpresas.Size = new System.Drawing.Size(484, 324);
+            this.dataGridEmpresas.TabIndex = 1;
+            this.dataGridEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEmpresas_CellContentClick);
+            // 
+            // razonSocialDataGridViewTextBoxColumn
+            // 
+            this.razonSocialDataGridViewTextBoxColumn.DataPropertyName = "razonSocial";
+            this.razonSocialDataGridViewTextBoxColumn.HeaderText = "Razón Social";
+            this.razonSocialDataGridViewTextBoxColumn.Name = "razonSocialDataGridViewTextBoxColumn";
+            this.razonSocialDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // email
+            // 
+            this.email.DataPropertyName = "email";
+            this.email.HeaderText = "Email";
+            this.email.Name = "email";
+            this.email.ReadOnly = true;
+            // 
+            // cuit
+            // 
+            this.cuit.DataPropertyName = "cuit";
+            this.cuit.HeaderText = "Cuit";
+            this.cuit.Name = "cuit";
+            this.cuit.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.columnEditar.HeaderText = "Editar";
+            this.columnEditar.Name = "Seleccionar";
+            this.columnEditar.ReadOnly = true;
+            this.columnEditar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Eliminar
+            // 
+            this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Name = "Eliminar";
+            this.columnEliminar.ReadOnly = true;
+            this.columnEliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // empresaBindingSource
+            // 
+            this.empresaBindingSource.DataSource = typeof(PalcoNet.Modelo.Empresa);
             // 
             // groupBox1
             // 
@@ -59,14 +141,14 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 126);
+            this.groupBox1.Size = new System.Drawing.Size(484, 126);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
             // txtBoxEmail
             // 
-            this.txtBoxEmail.Location = new System.Drawing.Point(273, 43);
+            this.txtBoxEmail.Location = new System.Drawing.Point(339, 43);
             this.txtBoxEmail.Name = "txtBoxEmail";
             this.txtBoxEmail.Size = new System.Drawing.Size(139, 20);
             this.txtBoxEmail.TabIndex = 5;
@@ -75,7 +157,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label3.Location = new System.Drawing.Point(270, 27);
+            this.label3.Location = new System.Drawing.Point(336, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 4;
@@ -115,85 +197,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Razón Social";
             // 
-            // dataGridEmpresas
-            // 
-            this.dataGridEmpresas.AllowUserToAddRows = false;
-            this.dataGridEmpresas.AllowUserToDeleteRows = false;
-            this.dataGridEmpresas.AutoGenerateColumns = false;
-            this.dataGridEmpresas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridEmpresas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridEmpresas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnRazonSocial,
-            this.columnEditar,
-            this.columnEliminar});
-            this.dataGridEmpresas.DataSource = this.empresaBindingSource;
-            this.dataGridEmpresas.Location = new System.Drawing.Point(13, 191);
-            this.dataGridEmpresas.Name = "dataGridEmpresas";
-            this.dataGridEmpresas.ReadOnly = true;
-            this.dataGridEmpresas.Size = new System.Drawing.Size(418, 324);
-            this.dataGridEmpresas.TabIndex = 1;
-            this.dataGridEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEmpresas_CellContentClick);
-            // 
-            // empresaBindingSource
-            // 
-            this.empresaBindingSource.DataSource = typeof(PalcoNet.Modelo.Empresa);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(13, 145);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 2;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(355, 145);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(76, 23);
-            this.btnBuscar.TabIndex = 3;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // razonSocialDataGridViewTextBoxColumn
-            // 
-            this.columnRazonSocial.DataPropertyName = "razonSocial";
-            this.columnRazonSocial.HeaderText = "Razón Social";
-            this.columnRazonSocial.Name = "razonSocialDataGridViewTextBoxColumn";
-            this.columnRazonSocial.ReadOnly = true;
-            // 
-            // Seleccionar
-            // 
-            this.columnEditar.HeaderText = "Editar";
-            this.columnEditar.Name = "Seleccionar";
-            this.columnEditar.ReadOnly = true;
-            this.columnEditar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Eliminar
-            // 
-            this.columnEliminar.HeaderText = "Eliminar";
-            this.columnEliminar.Name = "Eliminar";
-            this.columnEliminar.ReadOnly = true;
-            this.columnEliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // ListadoEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 526);
+            this.ClientSize = new System.Drawing.Size(509, 526);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.dataGridEmpresas);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoEmpresa";
             this.Text = "ListadoEmpresa";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEmpresas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -212,6 +230,9 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.BindingSource empresaBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRazonSocial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn email;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
         private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
         private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
     }

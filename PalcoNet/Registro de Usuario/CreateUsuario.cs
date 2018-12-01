@@ -63,10 +63,10 @@ namespace PalcoNet.Registro_de_Usuario
             usuario.AddRol(rol);
             
             if(((String)comboBoxRol.SelectedItem).Equals("Cliente")){
-                formToRedirect = new CreateCliente(usuario);
+                formToRedirect = new CreateOrUpdateCliente(usuario);
             }
             else{
-                formToRedirect = new CreateEmpresa(usuario);
+                formToRedirect = new CreateOrUpdateEmpresa(usuario);
             }
             FormManager.getInstance().OpenAndClose(formToRedirect, this);
         }

@@ -28,27 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnEditar = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.dataGridViewClientes = new System.Windows.Forms.DataGridView();
-            this.columnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNroDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCuil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnLocalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnNroPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCodigoPostal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTarjetaCredito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnIntentosFallidos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnBaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clienteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBoxFiltroBusqueda = new System.Windows.Forms.GroupBox();
@@ -60,190 +42,47 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.lblSeleccionarFila = new System.Windows.Forms.Label();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nroDocumentoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.baja = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClientes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).BeginInit();
             this.groupBoxFiltroBusqueda.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(500, 491);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 23);
-            this.btnEditar.TabIndex = 4;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // dataGridViewClientes
             // 
             this.dataGridViewClientes.AllowUserToAddRows = false;
             this.dataGridViewClientes.AllowUserToDeleteRows = false;
+            this.dataGridViewClientes.AutoGenerateColumns = false;
             this.dataGridViewClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnID,
-            this.columnNombre,
-            this.columnApellido,
-            this.columnTipoDocumento,
-            this.columnNroDocumento,
-            this.columnCuil,
-            this.columnEmail,
-            this.columnTelefono,
-            this.columnLocalidad,
-            this.columnDireccion,
-            this.columnNroPiso,
-            this.columnDepto,
-            this.columnCodigoPostal,
-            this.columnFechaNacimiento,
-            this.columnFechaCreacion,
-            this.columnTarjetaCredito,
-            this.columnHabilitado,
-            this.columnIntentosFallidos,
-            this.columnBaja});
-            this.dataGridViewClientes.Location = new System.Drawing.Point(26, 249);
+            this.nombreDataGridViewTextBoxColumn,
+            this.apellidoDataGridViewTextBoxColumn,
+            this.nroDocumentoDataGridViewTextBoxColumn,
+            this.emailDataGridViewTextBoxColumn,
+            this.baja,
+            this.columnEditar,
+            this.columnEliminar});
+            this.dataGridViewClientes.DataSource = this.clienteBindingSource;
+            this.dataGridViewClientes.Location = new System.Drawing.Point(26, 195);
             this.dataGridViewClientes.Name = "dataGridViewClientes";
             this.dataGridViewClientes.ReadOnly = true;
-            this.dataGridViewClientes.Size = new System.Drawing.Size(549, 220);
+            this.dataGridViewClientes.Size = new System.Drawing.Size(549, 233);
             this.dataGridViewClientes.TabIndex = 3;
+            this.dataGridViewClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClientes_CellContentClick);
             // 
-            // columnID
+            // clienteBindingSource
             // 
-            this.columnID.DataPropertyName = "Cli_Usuario";
-            this.columnID.HeaderText = "ID";
-            this.columnID.Name = "columnID";
-            this.columnID.ReadOnly = true;
-            // 
-            // columnNombre
-            // 
-            this.columnNombre.DataPropertyName = "Cli_Nombre";
-            this.columnNombre.HeaderText = "Nombre";
-            this.columnNombre.Name = "columnNombre";
-            this.columnNombre.ReadOnly = true;
-            // 
-            // columnApellido
-            // 
-            this.columnApellido.DataPropertyName = "Cli_Apellido";
-            this.columnApellido.HeaderText = "Apellido";
-            this.columnApellido.Name = "columnApellido";
-            this.columnApellido.ReadOnly = true;
-            // 
-            // columnTipoDocumento
-            // 
-            this.columnTipoDocumento.DataPropertyName = "Cli_Tipo_Documento";
-            this.columnTipoDocumento.HeaderText = "Tipo De Documento";
-            this.columnTipoDocumento.Name = "columnTipoDocumento";
-            this.columnTipoDocumento.ReadOnly = true;
-            // 
-            // columnNroDocumento
-            // 
-            this.columnNroDocumento.DataPropertyName = "Cli_Nro_Documento";
-            this.columnNroDocumento.HeaderText = "Nro De Documento";
-            this.columnNroDocumento.Name = "columnNroDocumento";
-            this.columnNroDocumento.ReadOnly = true;
-            // 
-            // columnCuil
-            // 
-            this.columnCuil.DataPropertyName = "Cli_Cuil";
-            this.columnCuil.HeaderText = "CUIL";
-            this.columnCuil.Name = "columnCuil";
-            this.columnCuil.ReadOnly = true;
-            // 
-            // columnEmail
-            // 
-            this.columnEmail.DataPropertyName = "Cli_Email";
-            this.columnEmail.HeaderText = "Email";
-            this.columnEmail.Name = "columnEmail";
-            this.columnEmail.ReadOnly = true;
-            // 
-            // columnTelefono
-            // 
-            this.columnTelefono.DataPropertyName = "Cli_Telefono";
-            this.columnTelefono.HeaderText = "Teléfono";
-            this.columnTelefono.Name = "columnTelefono";
-            this.columnTelefono.ReadOnly = true;
-            // 
-            // columnLocalidad
-            // 
-            this.columnLocalidad.DataPropertyName = "Cli_Localidad";
-            this.columnLocalidad.HeaderText = "Localidad";
-            this.columnLocalidad.Name = "columnLocalidad";
-            this.columnLocalidad.ReadOnly = true;
-            // 
-            // columnDireccion
-            // 
-            this.columnDireccion.DataPropertyName = "Cli_Direccion";
-            this.columnDireccion.HeaderText = "Dirección";
-            this.columnDireccion.Name = "columnDireccion";
-            this.columnDireccion.ReadOnly = true;
-            // 
-            // columnNroPiso
-            // 
-            this.columnNroPiso.DataPropertyName = "Cli_Nro_Piso";
-            this.columnNroPiso.HeaderText = "Nro De Piso";
-            this.columnNroPiso.Name = "columnNroPiso";
-            this.columnNroPiso.ReadOnly = true;
-            // 
-            // columnDepto
-            // 
-            this.columnDepto.DataPropertyName = "Cli_Depto";
-            this.columnDepto.HeaderText = "Departamento";
-            this.columnDepto.Name = "columnDepto";
-            this.columnDepto.ReadOnly = true;
-            // 
-            // columnCodigoPostal
-            // 
-            this.columnCodigoPostal.DataPropertyName = "Cli_Cod_Postal";
-            this.columnCodigoPostal.HeaderText = "Código Postal";
-            this.columnCodigoPostal.Name = "columnCodigoPostal";
-            this.columnCodigoPostal.ReadOnly = true;
-            // 
-            // columnFechaNacimiento
-            // 
-            this.columnFechaNacimiento.DataPropertyName = "Cli_Fecha_Nac";
-            this.columnFechaNacimiento.HeaderText = "Fecha De Nacimiento";
-            this.columnFechaNacimiento.Name = "columnFechaNacimiento";
-            this.columnFechaNacimiento.ReadOnly = true;
-            // 
-            // columnFechaCreacion
-            // 
-            this.columnFechaCreacion.DataPropertyName = "Cli_Fecha_Creacion";
-            this.columnFechaCreacion.HeaderText = "Fecha Creación";
-            this.columnFechaCreacion.Name = "columnFechaCreacion";
-            this.columnFechaCreacion.ReadOnly = true;
-            // 
-            // columnTarjetaCredito
-            // 
-            this.columnTarjetaCredito.DataPropertyName = "Cli_Tarjeta_Credito";
-            this.columnTarjetaCredito.HeaderText = "Tarjeta De Crédito";
-            this.columnTarjetaCredito.Name = "columnTarjetaCredito";
-            this.columnTarjetaCredito.ReadOnly = true;
-            // 
-            // columnHabilitado
-            // 
-            this.columnHabilitado.DataPropertyName = "Cli_Habilitado";
-            this.columnHabilitado.HeaderText = "Habilitado";
-            this.columnHabilitado.Name = "columnHabilitado";
-            this.columnHabilitado.ReadOnly = true;
-            // 
-            // columnIntentosFallidos
-            // 
-            this.columnIntentosFallidos.DataPropertyName = "Cli_Intentos_Fallidos";
-            this.columnIntentosFallidos.HeaderText = "Intentos Fallidos";
-            this.columnIntentosFallidos.Name = "columnIntentosFallidos";
-            this.columnIntentosFallidos.ReadOnly = true;
-            // 
-            // columnBaja
-            // 
-            this.columnBaja.DataPropertyName = "Cli_Baja";
-            this.columnBaja.HeaderText = "Baja";
-            this.columnBaja.Name = "columnBaja";
-            this.columnBaja.ReadOnly = true;
+            this.clienteBindingSource.DataSource = typeof(PalcoNet.Modelo.Cliente);
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(500, 179);
+            this.btnBuscar.Location = new System.Drawing.Point(500, 166);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 2;
@@ -253,7 +92,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(26, 179);
+            this.btnLimpiar.Location = new System.Drawing.Point(26, 166);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 1;
@@ -285,7 +124,6 @@
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(163, 20);
             this.txtNroDocumento.TabIndex = 9;
-            this.txtNroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDocumento_KeyPress);
             // 
             // lblEmail
             // 
@@ -330,7 +168,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(163, 20);
             this.txtEmail.TabIndex = 1;
-            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEmail_KeyPress);
             // 
             // txtApellido
             // 
@@ -339,7 +176,6 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(163, 20);
             this.txtApellido.TabIndex = 3;
-            this.txtApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtApellido_KeyPress);
             // 
             // txtNombre
             // 
@@ -348,48 +184,74 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(163, 20);
             this.txtNombre.TabIndex = 4;
-            this.txtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNombre_KeyPress);
             // 
-            // btnEliminar
+            // nombreDataGridViewTextBoxColumn
             // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(390, 491);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 5;
-            this.btnEliminar.Text = "Alta/Baja";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // lblSeleccionarFila
+            // apellidoDataGridViewTextBoxColumn
             // 
-            this.lblSeleccionarFila.AutoSize = true;
-            this.lblSeleccionarFila.Location = new System.Drawing.Point(23, 224);
-            this.lblSeleccionarFila.Name = "lblSeleccionarFila";
-            this.lblSeleccionarFila.Size = new System.Drawing.Size(206, 13);
-            this.lblSeleccionarFila.TabIndex = 6;
-            this.lblSeleccionarFila.Text = "Seleccione el registro a Elminar y/o Editar:";
+            this.apellidoDataGridViewTextBoxColumn.DataPropertyName = "apellido";
+            this.apellidoDataGridViewTextBoxColumn.HeaderText = "Apellido";
+            this.apellidoDataGridViewTextBoxColumn.Name = "apellidoDataGridViewTextBoxColumn";
+            this.apellidoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nroDocumentoDataGridViewTextBoxColumn
+            // 
+            this.nroDocumentoDataGridViewTextBoxColumn.DataPropertyName = "nroDocumento";
+            this.nroDocumentoDataGridViewTextBoxColumn.HeaderText = "Número Documento";
+            this.nroDocumentoDataGridViewTextBoxColumn.Name = "nroDocumentoDataGridViewTextBoxColumn";
+            this.nroDocumentoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // baja
+            // 
+            this.baja.DataPropertyName = "baja";
+            this.baja.HeaderText = "Baja";
+            this.baja.Name = "baja";
+            this.baja.ReadOnly = true;
+            // 
+            // columnEditar
+            // 
+            this.columnEditar.HeaderText = "Editar";
+            this.columnEditar.Name = "columnEditar";
+            this.columnEditar.ReadOnly = true;
+            this.columnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnEditar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // columnEliminar
+            // 
+            this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Name = "columnEliminar";
+            this.columnEliminar.ReadOnly = true;
+            this.columnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnEliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ListCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 547);
-            this.Controls.Add(this.lblSeleccionarFila);
-            this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnEditar);
+            this.ClientSize = new System.Drawing.Size(602, 440);
             this.Controls.Add(this.dataGridViewClientes);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxFiltroBusqueda);
             this.Name = "ListCliente";
             this.Text = "ListCliente";
-            this.Load += new System.EventHandler(this.ListCliente_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClientes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
             this.groupBoxFiltroBusqueda.ResumeLayout(false);
             this.groupBoxFiltroBusqueda.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -407,27 +269,13 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dataGridViewClientes;
         private System.Windows.Forms.TextBox txtNroDocumento;
-        private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnApellido;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnTipoDocumento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnNroDocumento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCuil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnTelefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLocalidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDireccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnNroPiso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnDepto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCodigoPostal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaNacimiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaCreacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnTarjetaCredito;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnHabilitado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnIntentosFallidos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnBaja;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Label lblSeleccionarFila;
+        private System.Windows.Forms.BindingSource clienteBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nroDocumentoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn baja;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
     }
 }

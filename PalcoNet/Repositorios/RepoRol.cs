@@ -13,6 +13,9 @@ namespace PalcoNet.Repositorios
     class RepoRol
     {
         private string table = "PLEASE_HELP.Rol";
+        public static readonly String ROL_CLIENTE = "CLIENTE";
+        public static readonly String ROL_ADMINISTRATIVO = "ADMINISTRATIVO";
+        public static readonly String ROL_EMPRESA = "EMPRESA";
 
         public List<Funcionalidad> GetFuncionalidades(string filter)
         {

@@ -41,7 +41,6 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.exe.config
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.exe
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\bin\Debug\PalcoNet.pdb
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.ListCliente.resources
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Cliente.UpdateCliente.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Empresa_Espectaculo.ListadoEmpresa.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.CreateGrado.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Abm_Grado.ListGrado.resources
@@ -62,8 +61,6 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publica
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormEditarPublicacion.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Generar_Publicacion.FormGenerarPublicacion.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Historial_Cliente.HistorialCliente.resources
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateCliente.resources
-C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateEmpresa.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateUsuario.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.FormChangePassword.resources
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Vistas.CustomForm.resources
@@ -76,3 +73,5 @@ C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csproj.Generate
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.exe
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.pdb
 C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.csprojResolveAssemblyReference.cache
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateOrUpdateCliente.resources
+C:\Users\corti\Desktop\gdd_migracion\PalcoNet\obj\Debug\PalcoNet.Registro_de_Usuario.CreateOrUpdateEmpresa.resources

@@ -45,7 +45,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
             if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEditar))
             {
-                Form EditForm = new CreateEmpresa(empresa);
+                Form EditForm = new CreateOrUpdateEmpresa(empresa);
                 EditForm.ShowDialog();
             }
             if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEliminar))
