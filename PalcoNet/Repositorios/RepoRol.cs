@@ -129,7 +129,42 @@ namespace PalcoNet.Repositorios
 
         public void CreateRol(Rol rol)
         {
-            //TODO
+
+            string query = "INSERT INTO " + table + "(Rol_Nombre, Rol_Habilitado) VALUES (@nombre, 1)";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@nombre", rol.nombre);
+            int result = Conexion.InsertUpdateOrDeleteData(cmd);
+            if (result < 1)
+            {
+                throw new Exception("No se pudo crear el rol");
+            }
+
+            string query2 = "SELECT Rol_Id FROM " + table + " WHERE Rol_Nombre = @nombre";
+            SqlCommand cmd2 = new SqlCommand(query2);
+            cmd2.Parameters.AddWithValue("@nombre", rol.nombre);
+            rol.id = (int)Conexion.GetData(cmd2).Rows[0]["Rol_Id"];
+
+            rol.funcionalidades.ForEach(f => InsertFuncionalidad(f.Id, rol.Id));
+        }
+
+        public void InsertFuncionalidad(int funcId, int rolId)
+        {
+            string query = "INSERT INTO PLEASE_HELP.Rol_Funcionalidad(Rol_Id, Func_Id) VALUES (@rolId, @funcId);";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@rolId", rolId);
+            cmd.Parameters.AddWithValue("@funcId", funcId);
+            int result = Conexion.InsertUpdateOrDeleteData(cmd);
+            //TODO Validar posibles fallas.
+        }
+
+        public bool ExisteRol(string nombre)
+        {
+            string query = "SELECT COUNT(*) cantidad FROM " + table + " where Rol_Nombre = @nombre";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@nombre", nombre);
+            DataTable result = Conexion.GetData(command);
+            return (int)result.Rows[0]["cantidad"] > 0;
+
         }
     }
 }
