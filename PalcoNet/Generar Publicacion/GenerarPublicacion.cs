@@ -31,7 +31,7 @@ namespace PalcoNet.Generar_Publicacion
         
         Usuario loginUser = new Usuario();
 
-        String errorMessage = "Error:\n"; 
+        String errorMessage; 
 
         
 
@@ -46,6 +46,7 @@ namespace PalcoNet.Generar_Publicacion
 
             LoadComboBox();
 
+            //init fechas 
             dateTimePickerFechaInicio.Value = SystemDate.GetDate();
             dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(7);
         }
@@ -106,8 +107,10 @@ namespace PalcoNet.Generar_Publicacion
             comboBoxGrado.DataSource = repoGrado.GetGradosDataTable();
         }
 
+
         private void btnPublicar_Click(object sender, EventArgs e)
         {
+            
             if (checkBoxVariasFechas.Checked)
             {
                 if (FormDataOK())
@@ -119,12 +122,12 @@ namespace PalcoNet.Generar_Publicacion
                     MessageBox.Show("Publicaciones insertadas correctamente.");
                     ClearAll();
 
-                    
+
                 }
                 else
                 {
-                    MessageBox.Show(errorMessage);
-                    errorMessage = "Error:\n";
+                    MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                 }
             }
             else
@@ -140,12 +143,16 @@ namespace PalcoNet.Generar_Publicacion
                 }
                 else
                 {
-                    MessageBox.Show(errorMessage);
-                    errorMessage = "Error:\n";
+                    MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                 }
             }        
 
+
+
         }
+
+
 
 
         private void btnGuardarBorrador_Click(object sender, EventArgs e)
@@ -167,8 +174,8 @@ namespace PalcoNet.Generar_Publicacion
                 }
                 else
                 {
-                    MessageBox.Show(errorMessage);
-                    errorMessage = "Error:\n";
+                    MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                 }
             }
             else
@@ -183,8 +190,8 @@ namespace PalcoNet.Generar_Publicacion
                 }
                 else
                 {
-                    MessageBox.Show(errorMessage);
-                    errorMessage = "Error:\n";
+                    MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                 }
             }
 

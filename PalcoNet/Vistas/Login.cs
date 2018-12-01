@@ -32,26 +32,21 @@ namespace PalcoNet
         {                  
             if (IsRegistered())
             {
+                UserSession.UserId = user.id;
+                UserSession.Username = user.username;
+
                 if (user.CountRoles() > 1)
-                {
-                    FormManager.getInstance().OpenAndClose(new RolSelector(), this);
+                {                  
+                    FormManager.getInstance().OpenAndClose(new RolSelector(user.GetRoles()), this);
                 }
                 else
                 {
                     Rol rol = new Rol();
-                    TakeRolFromUser(user, rol);
-
-                    UserSession.UserId = user.id;
-                    UserSession.Username = user.username;
+                    TakeRolFromUser(rol);                  
                     UserSession.RolId = rol.id;
                     
                     FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
-                }
-                  
-                  
-                //FormManager.getInstance().open(new Menu());
-
-                //FormManager.getInstance().OpenAndClose(new UserHome(), this);
+                }                                              
             }
             else
             {
@@ -61,7 +56,7 @@ namespace PalcoNet
                 user.username = "";
                 user.SetPassword("");
                 user.isAdmin = false;
-                user.id = 0;
+                user.id = null;
             }
             
         }
@@ -69,8 +64,7 @@ namespace PalcoNet
 
         private Boolean IsRegistered()
         {
-            //Usuario user = new Usuario();
-            //RepoUsuario repo = new RepoUsuario();
+            
 
             user.username = txtUsername.Text;
             user.SetPassword(txtPassword.Text);
@@ -129,7 +123,7 @@ namespace PalcoNet
             }
         }
 
-        private void TakeRolFromUser(Usuario user, Rol rol)
+        private void TakeRolFromUser(Rol rol)
         {
             if (user.isAdmin)
             {
@@ -145,6 +139,7 @@ namespace PalcoNet
             }
             
         }
+
 
         private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

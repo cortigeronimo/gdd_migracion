@@ -21,7 +21,7 @@ namespace PalcoNet.Generar_Publicacion
 
         private Publicacion newPublicacion = new Publicacion();
 
-        String errorMessage = "Error:\n";
+        String errorMessage;
 
         public FormAgregarFechas(List<Publicacion> list)
         {
@@ -31,7 +31,7 @@ namespace PalcoNet.Generar_Publicacion
             newPublicacion.FechaEvento = DateTime.MinValue;
 
             dateTimePickerFechaInicio.Value = SystemDate.GetDate();
-            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(1);
+            dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(7);
 
             this.publicacionList = list;
 
@@ -57,8 +57,8 @@ namespace PalcoNet.Generar_Publicacion
             }
             else
             {
-                MessageBox.Show(errorMessage);
-                errorMessage = "Error:\n";
+                MessageBox.Show(errorMessage, "Error");
+                errorMessage = String.Empty;
             }
                              
 
@@ -68,7 +68,7 @@ namespace PalcoNet.Generar_Publicacion
         {
             int errorCount = 0;
 
-            if (dateTimePickerFechaInicio.Value <= SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
+            if (dateTimePickerFechaInicio.Value < SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
             if (dateTimePickerFechaEvento.Value <= dateTimePickerFechaInicio.Value) { errorMessage += "La fecha evento debe ser posterior a la fecha inicio.\n"; errorCount++; };
             if (dateTimePickerFechaInicio.Value <= newPublicacion.FechaInicio || dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las fechas a ingresar deben ser posteriores a las ultimas ingresadas.\n"; errorCount++; };
 
@@ -78,11 +78,17 @@ namespace PalcoNet.Generar_Publicacion
 
         private void dataGridViewFechas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridViewFechas.Columns["columnEliminar"].Index)
-            {
-                dataGridViewFechas.Rows.RemoveAt(dataGridViewFechas.CurrentRow.Index);
-
-
+            if (e.ColumnIndex == dataGridViewFechas.Columns.IndexOf(this.columnEliminar))
+            {             
+                try
+                {
+                    dataGridViewFechas.Rows.Remove(this.dataGridViewFechas.CurrentRow);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+                
                 publicacionList = new List<Publicacion>();
 
                 foreach (DataGridViewRow row in dataGridViewFechas.Rows)
@@ -110,6 +116,7 @@ namespace PalcoNet.Generar_Publicacion
 
 
             }
+            
             
         }
 

@@ -1004,3 +1004,4 @@ BEGIN
 		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'FINALIZADA') WHERE Pub_Codigo = @codigoPublicacion
 END
 GO
+
