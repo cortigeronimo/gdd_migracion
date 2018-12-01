@@ -1,6 +1,6 @@
 ﻿namespace PalcoNet.Registro_de_Usuario
 {
-    partial class CreateEmpresa
+    partial class CreateOrUpdateEmpresa
     {
         /// <summary>
         /// Required designer variable.
@@ -51,11 +51,13 @@
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.checkBoxBaja = new System.Windows.Forms.CheckBox();
             this.groupBoxCliente.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxCliente
             // 
+            this.groupBoxCliente.Controls.Add(this.checkBoxBaja);
             this.groupBoxCliente.Controls.Add(this.txtNumeroPiso);
             this.groupBoxCliente.Controls.Add(this.txtTelefono);
             this.groupBoxCliente.Controls.Add(this.txtCuit);
@@ -78,7 +80,7 @@
             this.groupBoxCliente.Controls.Add(this.lblRazonSocial);
             this.groupBoxCliente.Location = new System.Drawing.Point(36, 22);
             this.groupBoxCliente.Name = "groupBoxCliente";
-            this.groupBoxCliente.Size = new System.Drawing.Size(354, 301);
+            this.groupBoxCliente.Size = new System.Drawing.Size(354, 314);
             this.groupBoxCliente.TabIndex = 0;
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Empresa";
@@ -245,7 +247,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(36, 329);
+            this.btnLimpiar.Location = new System.Drawing.Point(36, 342);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 1;
@@ -255,7 +257,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(315, 329);
+            this.btnGuardar.Location = new System.Drawing.Point(315, 342);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 2;
@@ -263,11 +265,21 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBoxBaja.AutoSize = true;
+            this.checkBoxBaja.Location = new System.Drawing.Point(6, 291);
+            this.checkBoxBaja.Name = "checkBox1";
+            this.checkBoxBaja.Size = new System.Drawing.Size(82, 17);
+            this.checkBoxBaja.TabIndex = 34;
+            this.checkBoxBaja.Text = "Dar de Baja";
+            this.checkBoxBaja.UseVisualStyleBackColor = true;
+            // 
             // CreateEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 363);
+            this.ClientSize = new System.Drawing.Size(428, 379);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxCliente);
@@ -304,5 +316,6 @@
         private System.Windows.Forms.TextBox txtNumeroPiso;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtCuit;
+        private System.Windows.Forms.CheckBox checkBoxBaja;
     }
 }

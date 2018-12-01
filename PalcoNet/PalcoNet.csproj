@@ -53,12 +53,6 @@
     <Compile Include="Abm Cliente\ListCliente.Designer.cs">
       <DependentUpon>ListCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Cliente\UpdateCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Cliente\UpdateCliente.Designer.cs">
-      <DependentUpon>UpdateCliente.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Empresa Espectaculo\AltaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,17 +226,21 @@
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\Ubicacion.cs" />
-    <Compile Include="Registro de Usuario\CreateCliente.cs">
+    <Compile Include="Registro de Usuario\ClienteStrategy\AdminUpdateCliente.cs" />
+    <Compile Include="Registro de Usuario\ClienteStrategy\AdminCreaCliente.cs" />
+    <Compile Include="Registro de Usuario\ClienteStrategy\ClienteSignUp.cs" />
+    <Compile Include="Registro de Usuario\ClienteStrategy\ClienteStrategy.cs" />
+    <Compile Include="Registro de Usuario\CreateOrUpdateCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\CreateCliente.Designer.cs">
-      <DependentUpon>CreateCliente.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\CreateOrUpdateCliente.Designer.cs">
+      <DependentUpon>CreateOrUpdateCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro de Usuario\CreateEmpresa.cs">
+    <Compile Include="Registro de Usuario\CreateOrUpdateEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\CreateEmpresa.Designer.cs">
-      <DependentUpon>CreateEmpresa.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\CreateOrUpdateEmpresa.Designer.cs">
+      <DependentUpon>CreateOrUpdateEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro de Usuario\CreateUsuario.cs">
       <SubType>Form</SubType>
@@ -257,6 +255,7 @@
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
+    <Compile Include="Repositorios\RepoPuntos.cs" />
     <Compile Include="Repositorios\RepoRol.cs" />
     <Compile Include="Repositorios\RepoRubro.cs" />
     <Compile Include="Repositorios\Repository.cs" />
@@ -307,9 +306,6 @@
     </Compile>
     <EmbeddedResource Include="Abm Cliente\ListCliente.resx">
       <DependentUpon>ListCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Cliente\UpdateCliente.resx">
-      <DependentUpon>UpdateCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Empresa Espectaculo\AltaEmpresa.resx">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
@@ -377,11 +373,11 @@
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Usuario\CreateCliente.resx">
-      <DependentUpon>CreateCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Registro de Usuario\CreateOrUpdateCliente.resx">
+      <DependentUpon>CreateOrUpdateCliente.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Usuario\CreateEmpresa.resx">
-      <DependentUpon>CreateEmpresa.cs</DependentUpon>
+    <EmbeddedResource Include="Registro de Usuario\CreateOrUpdateEmpresa.resx">
+      <DependentUpon>CreateOrUpdateEmpresa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateUsuario.resx">
       <DependentUpon>CreateUsuario.cs</DependentUpon>
@@ -415,6 +411,7 @@
     </EmbeddedResource>
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.Modelo.Cliente.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Empresa.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Publicacion.datasource" />

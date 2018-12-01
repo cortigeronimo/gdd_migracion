@@ -11,22 +11,22 @@ namespace PalcoNet.Modelo
         public String nombre { get; set; }
         public String apellido { get; set; }
         public String tipoDocumento { get; set; }
-        public int nroDocumento { get; set; }
-        public long cuil { get; set; }
+        public decimal nroDocumento { get; set; }
+        public decimal cuil { get; set; }
         public String email { get; set; }
         public long telefono { get; set; }
         public String localidad { get; set; }
         public String direccion { get; set; }
-        public Int16 nroPiso { get; set; }
+        public decimal? nroPiso { get; set; }
         public String depto { get; set; }
         public String codigoPostal { get; set; }
         public DateTime fechaNacimiento { get; set; }
         public DateTime fechaCreacion { get; set; }
         public String tarjetaCredito { get; set; }
-        public int puntos { get; set; }
         public bool habilitado { get; set; }
         public Int16 intentosFallidos { get; set; }
         public bool baja { get; set; }
+        public bool primerLogin { get; set; }
 
         public Cliente()
         {
@@ -40,25 +40,6 @@ namespace PalcoNet.Modelo
             SetRoles(usuario.GetRoles());
             isAdmin = usuario.isAdmin;
         }
-
-        //Para el filtro de busqueda
-        public Cliente(String nombre, String apellido, String nroDocumento, String email)
-        {
-            this.nombre = nombre;
-            this.apellido = apellido;
-
-            try
-            {
-                if (nroDocumento != null)
-                    this.nroDocumento = Int32.Parse(nroDocumento);
-            }
-            catch (FormatException)
-            {
-                this.nroDocumento = 0;
-            }
-
-            this.email = email;
-        }        
 
 
         public Cliente(string nombre, string apellido, string tipoDocumento, int nroDocumento, long cuil,
@@ -85,11 +66,6 @@ namespace PalcoNet.Modelo
         public void SetFechaCreacion()
         {
             this.fechaCreacion = DateTime.Today;
-        }
-
-        public bool PuedeCanjear(int puntosPremio)
-        {
-            return this.puntos >= puntosPremio;
         }
     }
 }

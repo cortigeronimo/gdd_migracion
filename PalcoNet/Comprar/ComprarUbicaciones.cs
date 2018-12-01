@@ -31,6 +31,8 @@ namespace PalcoNet.Comprar
         public FormComprarUbicaciones(List<Ubicacion> ubicaciones)
         {
             InitializeComponent();
+            dataGridViewUbicacionesDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewUbicacionesAComprar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewUbicacionesDisponibles.MultiSelect = false;
             dataGridViewUbicacionesDisponibles.AllowUserToResizeRows = false;
             
@@ -146,13 +148,9 @@ namespace PalcoNet.Comprar
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Ha ocurrido un error, inténtelo nuevamente.");
+                    MessageBox.Show(Messagges.ERROR_INESPERADO);
                 }
 
-            }
-            else
-            {
-                return;
             }
         }
 

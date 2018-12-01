@@ -19,17 +19,18 @@ namespace PalcoNet.Canje_Puntos
         public ViewPremios()
         {
             InitializeComponent();
+            dataGridPremios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             btnActualizar_Click(null, null);
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            this.dataGridView1.DataSource = repoPremio.GetPremios(UserSession.UserId);
+            this.dataGridPremios.DataSource = repoPremio.GetPremios(UserSession.UserId);
         }
 
         private void ViewPremios_Load(object sender, EventArgs e)
         {
-            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridPremios.RowHeadersVisible = false;
         }
     }
 }

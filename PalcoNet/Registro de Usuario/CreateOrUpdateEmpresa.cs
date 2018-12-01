@@ -14,10 +14,11 @@ using PalcoNet.Utils;
 
 namespace PalcoNet.Registro_de_Usuario
 {
-    public partial class CreateEmpresa : CustomForm
+    public partial class CreateOrUpdateEmpresa : CustomForm
     {
         Empresa empresa;
         RepoEmpresa repoEmpresa = new RepoEmpresa();
+        RepoRol repoRol = new RepoRol();
         bool hasToUpdate = false;
 
         private ValidatorData ValidateForm()
@@ -35,18 +36,32 @@ namespace PalcoNet.Registro_de_Usuario
             return validator;
         }
 
-        public CreateEmpresa(Usuario usuario)
+        //el usuario crea una empresa
+        public CreateOrUpdateEmpresa(Usuario usuario)
         {
             empresa = new Empresa(usuario);
+            this.checkBoxBaja.Visible = false;
             InitializeComponent();
         }
 
-        public CreateEmpresa(Empresa empresa)
+        //el admin modifica una empresa
+        public CreateOrUpdateEmpresa(Empresa empresa)
         {
             hasToUpdate = true;
             this.empresa = empresa;
             InitializeComponent();
             InitializeEmpresa();
+        }
+
+        //el admin crea una empresa
+        public CreateOrUpdateEmpresa() {
+            InitializeComponent();
+            this.checkBoxBaja.Visible = false;
+            Rol rol = repoRol.FindRolByName(RepoRol.ROL_CLIENTE);
+            Usuario usuario = new Usuario();
+            usuario.AddRol(rol);
+            usuario.isAdmin = false;
+            usuario.isClient = true;
         }
 
         private void InitializeEmpresa() {
@@ -91,12 +106,18 @@ namespace PalcoNet.Registro_de_Usuario
             empresa.depto = txtDepartamento.Text;
             empresa.localidad = txtLocalidad.Text;
             empresa.codigoPostal = txtCodigoPostal.Text;
+
             if (hasToUpdate)
             {
+                empresa.baja = this.checkBoxBaja.Checked;
                 repoEmpresa.UpdateEmpresa(empresa);
                 MessageBox.Show(Messagges.DATOS_ACTUALIZADOS);
             }
             else {
+                if(String.IsNullOrEmpty(empresa.username)){
+                    empresa.username = "EMPRESA" + empresa.cuit;
+                    empresa.SetPassword(empresa.cuit);
+                }
                 repoEmpresa.InsertEmpresa(empresa);
             }
             

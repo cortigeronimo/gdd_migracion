@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using PalcoNet.Modelo;
 using System.Data;
 using System.Data.SqlClient;
+using PalcoNet.Config;
 
 namespace PalcoNet.Repositorios
 {
-    public class RepoCliente
+    public class RepoCliente : Repository
     {
         private String clienteTable = "PLEASE_HELP.Cliente";
 
@@ -28,110 +29,48 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", cliente.telefono);
             command.Parameters.AddWithValue("@localidad", cliente.localidad);
             command.Parameters.AddWithValue("@direccion", cliente.direccion);
-            if (cliente.nroPiso == Byte.MinValue) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);
-            if (String.IsNullOrEmpty(cliente.depto)) command.Parameters.AddWithValue("@depto", DBNull.Value); else command.Parameters.AddWithValue("@depto", cliente.depto);
-            if (String.IsNullOrEmpty(cliente.codigoPostal)) command.Parameters.AddWithValue("@codpostal", DBNull.Value); else command.Parameters.AddWithValue("@codpostal", cliente.codigoPostal);
+            command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);
+            command.Parameters.AddWithValue("@depto", cliente.depto);
+            command.Parameters.AddWithValue("@codpostal", cliente.codigoPostal);
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
             command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
-            if (String.IsNullOrEmpty(cliente.tarjetaCredito)) command.Parameters.AddWithValue("@tarjetacredito", DBNull.Value); else command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
-
-            if (String.IsNullOrEmpty(cliente.username))
-            {
-                cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
-                cliente.SetPassword(cliente.nroDocumento.ToString());
-
-                command.Parameters.AddWithValue("@firstLogin", 1);
-            }
-            else
-            {
-                command.Parameters.AddWithValue("@firstLogin", 0);
-            }
-            
+            command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
+            command.Parameters.AddWithValue("@firstLogin", cliente.primerLogin);            
             command.Parameters.AddWithValue("@username", cliente.username);
             command.Parameters.AddWithValue("@password", cliente.GetPassword());
-            
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
         }
 
-        public DataTable GetTable(Cliente cliente)
+        public List<Cliente> GetClientesByFilter(String nombre, String apellido, String documento, String email)
         {
-            String query = BuildQuery(cliente);
+            String query = "SELECT * FROM " + clienteTable + " WHERE 1 = 1 ";
+
+            if (nombre != String.Empty)
+            {
+                query += "AND Cli_Nombre LIKE " + "'%" + nombre + "%' ";
+            }
+
+            if (apellido != String.Empty)
+            {
+                query += "AND Cli_Apellido LIKE " + "'%" + apellido + "%' ";
+            }
+
+            if (documento != String.Empty)
+            {
+                query += "AND Cli_Nro_Documento = " + documento + " ";
+
+            }
+
+            if (email != String.Empty)
+            {
+                query += "AND Cli_Email LIKE " + "'%" + email + "%' ";
+            }
 
             SqlCommand command = new SqlCommand(query);
-            DataTable table = Conexion.GetData(command);
-            return table;
-        }
-
-        public int GetPuntosClienteById(int? id)
-        {
-            String query = "SELECT Cli_Puntos FROM " + clienteTable + " WHERE Cli_Usuario = @Id";
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@Id", id);
-            return (int)Conexion.GetData(command).Rows[0]["Cli_Puntos"];
-        }
-
-
-        private String BuildQuery(Cliente cliente)
-        {
-            String query = "SELECT * FROM " + clienteTable + " ";
-            Boolean firstWhere = true;
-            Boolean hasWhere = false;
-
-            if (cliente.nombre != String.Empty)
-            {
-                query += "WHERE Cli_Nombre LIKE " + "'%" + cliente.nombre + "%' " + "AND ";
-                firstWhere = false;
-                hasWhere = true;
-            }
-
-            if (cliente.apellido != String.Empty)
-            {
-                if (firstWhere)
-                {
-                    query += "WHERE Cli_Apellido LIKE " + "'%" + cliente.apellido + "%' " + "AND ";
-                    firstWhere = false;
-                }
-                else
-                {
-                    query += "Cli_Apellido LIKE " + "'%" + cliente.apellido + "%' " + "AND ";
-                }
-                hasWhere = true;
-            }
-
-            if (cliente.nroDocumento != 0)
-            {
-                if (firstWhere)
-                {
-                    query += "WHERE Cli_Nro_Documento = " + cliente.nroDocumento + " AND ";
-                    firstWhere = false;
-                }
-                else
-                {
-                    query += "Cli_Nro_Documento = " + cliente.nroDocumento + " AND ";
-                }
-                hasWhere = true;
-            }
-
-            if (cliente.email != String.Empty)
-            {
-                if (firstWhere)
-                {
-                    query += "WHERE Cli_Email LIKE " + "'%" + cliente.email + "%' " + "AND ";
-                    firstWhere = false;
-                }
-                else 
-                {
-                    query += "Cli_Email LIKE " + "'%" + cliente.email + "%' " + "AND ";
-                }
-                hasWhere = true;
-            }
-
-            if (hasWhere)
-                query = query.Substring(0, query.Length - 4);
-            return query;
-        }
+            return FromRowsToClientes(Conexion.GetData(command));
+        }         
 
         //Verifica DNI y cuil para Update
         public Boolean ExistsDNIAndCuil(String user, String tipoDoc, String nroDoc, String cuil)
@@ -216,7 +155,7 @@ namespace PalcoNet.Repositorios
             return Conexion.InsertUpdateOrDeleteData(cmd);
         }
 
-        public int AltaBajaCliente(Cliente cliente)
+        public int AltaBajaCliente(int? id, bool baja)
         {
             String query = "UPDATE " + clienteTable + " SET ";
             query += "Cli_Baja = @baja, ";
@@ -226,7 +165,7 @@ namespace PalcoNet.Repositorios
 
             SqlCommand cmd = new SqlCommand(query);
 
-            if (cliente.baja == true)
+            if (baja)
             {
                 cmd.Parameters.AddWithValue("@baja", 0);
                 cmd.Parameters.AddWithValue("@habilitado", 1);
@@ -239,7 +178,7 @@ namespace PalcoNet.Repositorios
                 
 
 
-            cmd.Parameters.AddWithValue("@id", cliente.id);
+            cmd.Parameters.AddWithValue("@id", id);
 
             return Conexion.InsertUpdateOrDeleteData(cmd);
         }
@@ -275,6 +214,37 @@ namespace PalcoNet.Repositorios
             DataTable table = new RepoUsuario().GetClientRow(user);
 
             return table.Rows[0]["Cli_Email"].ToString();
+        }
+
+        private List<Cliente> FromRowsToClientes(DataTable table)
+        {
+            List<Cliente> clientes = new List<Cliente>();
+            foreach (DataRow row in table.Rows)
+            {
+                Cliente cliente = new Cliente();
+                cliente.id = GetValueOrNull<int?>(row["Cli_Usuario"]);
+                cliente.nombre = GetValueOrNull<String>(row["Cli_Nombre"]);
+                cliente.apellido = GetValueOrNull<String>(row["Cli_Apellido"]);
+                cliente.tipoDocumento = GetValueOrNull<String>(row["Cli_Tipo_Documento"]);
+                cliente.nroDocumento = GetValueOrNull<decimal>(row["Cli_Nro_Documento"]);
+                cliente.cuil = GetValueOrNull<decimal>(row["Cli_Cuil"]);
+                cliente.email = GetValueOrNull<String>(row["Cli_Email"]);
+                cliente.telefono = GetValueOrNull<int>(row["Cli_Telefono"]);
+                cliente.localidad = GetValueOrNull<String>(row["Cli_Localidad"]);
+                cliente.direccion = GetValueOrNull<String>(row["Cli_Direccion"]);
+                cliente.nroPiso = GetValueOrNull<decimal>(row["Cli_Nro_Piso"]);
+                cliente.depto = GetValueOrNull<String>(row["Cli_Depto"]);
+                cliente.codigoPostal = GetValueOrNull<String>(row["Cli_Cod_Postal"]);
+                cliente.fechaNacimiento = GetValueOrNull<DateTime>(row["Cli_Fecha_Nac"]);
+                cliente.fechaCreacion = GetValueOrNull<DateTime>(row["Cli_Fecha_Creacion"]);
+                cliente.tarjetaCredito = GetValueOrNull<String>(row["Cli_Tarjeta_Credito"]);
+                cliente.habilitado = GetValueOrNull<bool>(row["Cli_Habilitado"]);
+                cliente.intentosFallidos = GetValueOrNull<Int16>(row["Cli_Intentos_Fallidos"]);
+                cliente.baja = GetValueOrNull<bool>(row["Cli_Baja"]);
+                cliente.primerLogin = GetValueOrNull<bool>(row["Cli_Primer_Login"]);
+                clientes.Add(cliente);
+            }
+            return clientes;
         }
         
     }

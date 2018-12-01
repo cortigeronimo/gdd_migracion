@@ -224,7 +224,7 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Empresa
         private void crearEmpresa_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form alta empresa");
+            FormManager.getInstance().Open(new CreateOrUpdateEmpresa());
         }
 
         private void listarEmpresas_Click(object sender, EventArgs e)
@@ -236,7 +236,7 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CreateCliente());       
+            FormManager.getInstance().Open(new CreateOrUpdateCliente());       
         }
 
         private void listarClientes_Click(object sender, EventArgs e)

@@ -44,8 +44,20 @@ namespace PalcoNet.Utils
              = new PairData("La Localidad debe tener una longitud mínima de 3 y una máxima de 255 caracteres.",
                  "[\\w\\dáéíóú]{3,255}");
         public static readonly PairData REGEX_DIRECCION
-             = new PairData("La Direcciòn debe tener una longitud mínima de 3 y una máxima de 255 caracteres.",
+             = new PairData("La Dirección debe tener una longitud mínima de 3 y una máxima de 255 caracteres.",
                  "[\\w\\dáéíóú]{3,255}");
+        public static readonly PairData REGEX_NOMBRE
+             = new PairData("El nombre debe tener una longitud mínima de 3 y una máxima de 255 caracteres.",
+                 "[\\wáéíóú]{3,255}");
+        public static readonly PairData REGEX_APELLIDO
+             = new PairData("La contraseña debe tener una longitud mínima de 3 y una máxima de 255 letras.",
+                 "[\\wáéíóú]{3,255}");
+        public static readonly PairData REGEX_NUMERO_DOCUMENTO
+             = new PairData("El número de documento debe tener una longitud mínima de 3 y una máxima de 10 números.",
+                 "[\\d]{3,10}");
+        public static readonly PairData REGEX_TARJETA_CREDITO
+             = new PairData("La tarjeta de crédito debe tener una longitud mínima de 13 y una máxima de 19 números.",
+                 "[\\d]{13,19}");
 
         public void ValidateTextWithRegex(String text, PairData pair)
         {
