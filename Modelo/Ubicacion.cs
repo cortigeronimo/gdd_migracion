@@ -9,10 +9,10 @@ namespace PalcoNet.Modelo
     public class Ubicacion
     {
         public Char Fila { get; set; }
-        public int Asiento { get; set; }
-        public float Precio { get; set; }
+        public Decimal Asiento { get; set; }
+        public Decimal Precio { get; set; }
         public String Descripcion { get; set; }
-        public long Publicacion { get; set; }
+        public Decimal Publicacion { get; set; }
         //public Boolean SinNumerar { get; set; }
     }
 }

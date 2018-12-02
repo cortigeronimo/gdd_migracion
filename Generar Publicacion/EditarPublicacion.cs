@@ -42,6 +42,7 @@ namespace PalcoNet.Generar_Publicacion
             comboBoxEstado.DisplayMember = "Estado_Descripcion";
             comboBoxEstado.DataSource = repoEstado.GetAllEstados();
 
+            comboBoxEstado.SelectedValue = 0;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

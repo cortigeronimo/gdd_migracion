@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.lblIndicacion = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridPublicacionesPorFacturar = new System.Windows.Forms.DataGridView();
             this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaInicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,8 +40,10 @@
             this.rubroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gradoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comisionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnFacturar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.publicacionPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPublicacionesPorFacturar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionPorFacturarDTOBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,13 +66,13 @@
             this.lblEmpresa.TabIndex = 1;
             this.lblEmpresa.Text = "Empresa";
             // 
-            // dataGridView1
+            // dataGridPublicacionesPorFacturar
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridPublicacionesPorFacturar.AllowUserToAddRows = false;
+            this.dataGridPublicacionesPorFacturar.AllowUserToDeleteRows = false;
+            this.dataGridPublicacionesPorFacturar.AutoGenerateColumns = false;
+            this.dataGridPublicacionesPorFacturar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPublicacionesPorFacturar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.codigoDataGridViewTextBoxColumn,
             this.fechaInicioDataGridViewTextBoxColumn,
             this.fechaEventoDataGridViewTextBoxColumn,
@@ -78,14 +80,15 @@
             this.direccionDataGridViewTextBoxColumn,
             this.rubroDataGridViewTextBoxColumn,
             this.gradoDataGridViewTextBoxColumn,
-            this.comisionDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.publicacionPorFacturarDTOBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 81);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(561, 261);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.comisionDataGridViewTextBoxColumn,
+            this.columnFacturar});
+            this.dataGridPublicacionesPorFacturar.DataSource = this.publicacionPorFacturarDTOBindingSource;
+            this.dataGridPublicacionesPorFacturar.Location = new System.Drawing.Point(20, 81);
+            this.dataGridPublicacionesPorFacturar.Name = "dataGridPublicacionesPorFacturar";
+            this.dataGridPublicacionesPorFacturar.ReadOnly = true;
+            this.dataGridPublicacionesPorFacturar.Size = new System.Drawing.Size(858, 273);
+            this.dataGridPublicacionesPorFacturar.TabIndex = 2;
+            this.dataGridPublicacionesPorFacturar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // codigoDataGridViewTextBoxColumn
             // 
@@ -143,21 +146,40 @@
             this.comisionDataGridViewTextBoxColumn.Name = "comisionDataGridViewTextBoxColumn";
             this.comisionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // columnFacturar
+            // 
+            this.columnFacturar.HeaderText = "Facturar";
+            this.columnFacturar.Name = "columnFacturar";
+            this.columnFacturar.ReadOnly = true;
+            this.columnFacturar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnFacturar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // publicacionPorFacturarDTOBindingSource
             // 
             this.publicacionPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionPorFacturarDTO);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(803, 360);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // PublicacionesDeEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 354);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(890, 391);
+            this.Controls.Add(this.btnActualizar);
+            this.Controls.Add(this.dataGridPublicacionesPorFacturar);
             this.Controls.Add(this.lblEmpresa);
             this.Controls.Add(this.lblIndicacion);
             this.Name = "PublicacionesDeEmpresa";
             this.Text = "PublicacionesDeEmpresa";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPublicacionesPorFacturar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionPorFacturarDTOBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -168,7 +190,8 @@
 
         private System.Windows.Forms.Label lblIndicacion;
         private System.Windows.Forms.Label lblEmpresa;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridPublicacionesPorFacturar;
+        private System.Windows.Forms.BindingSource publicacionPorFacturarDTOBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn codigoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaInicioDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaEventoDataGridViewTextBoxColumn;
@@ -177,6 +200,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rubroDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gradoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn comisionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource publicacionPorFacturarDTOBindingSource;
+        private System.Windows.Forms.DataGridViewButtonColumn columnFacturar;
+        private System.Windows.Forms.Button btnActualizar;
     }
 }

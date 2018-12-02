@@ -167,7 +167,7 @@ namespace PalcoNet.Generar_Publicacion
         }
 
 
-        private Boolean ExistsPublicacionMismaHora(long publicacionCodigo, String descripcionPublicacion, DateTime fechaHoraEvento)
+        private Boolean ExistsPublicacionMismaHora(decimal publicacionCodigo, String descripcionPublicacion, DateTime fechaHoraEvento)
         {
             if (repoPublicacion.ExistsPublicacionMismaHora(publicacionCodigo, descripcionPublicacion, fechaHoraEvento))
             {

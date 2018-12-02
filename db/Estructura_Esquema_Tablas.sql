@@ -112,14 +112,16 @@ IF OBJECT_ID('PLEASE_HELP.SP_MODIFICACION_EMPRESA') IS NOT NULL DROP PROCEDURE P
 
 IF OBJECT_ID('PLEASE_HELP.SP_BAJA_EMPRESA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BAJA_EMPRESA;
 
-
 IF OBJECT_ID('PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION;
-
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR;
 
+IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR;
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR;
+
+IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
+
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -136,7 +138,6 @@ IF OBJECT_ID('PLEASE_HELP.TR_AFTER_FIRST_LOGIN') IS NOT NULL DROP TRIGGER PLEASE
 IF OBJECT_ID('PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA;
 
 IF OBJECT_ID('PLEASE_HELP.TR_ELIMINAR_PUNTOS_CON_CERO') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ELIMINAR_PUNTOS_CON_CERO;
-
 
 -- CREANDO ESTRUCTURAS DE TABLAS
 
@@ -160,6 +161,7 @@ create table PLEASE_HELP.Rol
 	Rol_Id int identity(1,1), 
 	Rol_Nombre nvarchar(20) NOT NULL, 
 	Rol_Habilitado bit DEFAULT 1,
+	Rol_Baja bit DEFAULT 0,
 	CONSTRAINT UQ_ROL_NOMBRE UNIQUE (Rol_Nombre),
 	CONSTRAINT PK_ROL_ID PRIMARY KEY (Rol_Id)
 )
@@ -813,6 +815,7 @@ BEGIN
 END
 GO
 
+
 CREATE PROCEDURE PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION
 AS
 SELECT *
@@ -823,6 +826,7 @@ GO
 
 
 -- STORED PROCEDURES RENDICION DE COMISIONES
+
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
 AS
 BEGIN
@@ -835,9 +839,9 @@ BEGIN
 	FROM PLEASE_HELP.Empresa e
 	LEFT JOIN PLEASE_HELP.Publicacion p
 	ON p.Pub_Empresa = e.Emp_Usuario
+	AND p.Pub_Estado = @estadoId
 	LEFT JOIN PLEASE_HELP.Ubicacion u
 	ON u.Ubicacion_Publicacion = p.Pub_Codigo
-	WHERE p.Pub_Estado = @estadoId
 	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END
@@ -859,15 +863,35 @@ BEGIN
 	(SELECT g.Grado_Comision FROM PLEASE_HELP.Grado g WHERE g.Grado_Id = p.Pub_Grado) as Comision,
 	COUNT(c.Compra_Id) as [Cantidad Compras],
 	(SELECT SUM(ISNULL(u.Ubicacion_Precio, 0)) FROM PLEASE_HELP.Ubicacion u 
-	WHERE u.Ubicacion_Asiento = c.Compra_Asiento and u.Ubicacion_Fila = c.Compra_Fila and u.Ubicacion_Publicacion = c.Compra_Publicacion) as [Monto Por Facturar]
+	WHERE u.Ubicacion_Asiento = c.Compra_Asiento 
+	and u.Ubicacion_Fila = c.Compra_Fila 
+	and u.Ubicacion_Publicacion = c.Compra_Publicacion) as [Monto Por Facturar]
 	FROM PLEASE_HELP.Publicacion p
 	LEFT JOIN PLEASE_HELP.Compra c
 	ON c.Compra_Publicacion = p.Pub_Codigo
-	WHERE p.Pub_Empresa = @idEmpresa AND p.Pub_Estado = @estadoId
+	WHERE p.Pub_Empresa = @idEmpresa AND p.Pub_Estado = @estadoId AND c.Compra_Fecha_Rendida IS NULL
 	GROUP BY p.Pub_Codigo, p.Pub_Fecha_Inicio, p.Pub_Fecha_Evento,
 	p.Pub_Descripcion, p.Pub_Direccion, 
 	p.Pub_Rubro, p.Pub_Grado,
 	c.Compra_Asiento, c.Compra_Fila, c.Compra_Publicacion
+	HAVING COUNT(c.Compra_Id) > 0
+END
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR(@idPublicacion NUMERIC(18,0))
+AS
+BEGIN
+	SELECT c.Compra_Fecha, u.Ubicacion_Precio, c.Compra_Metodo_Pago, 
+	u.Ubicacion_Descripcion, u.Ubicacion_Fila, u.Ubicacion_Asiento,
+	(SELECT p.Pub_Fecha_Evento FROM PLEASE_HELP.Publicacion p WHERE p.Pub_Codigo = u.Ubicacion_Publicacion) AS Compra_Fecha_Evento, 
+	(SELECT p.Pub_Descripcion FROM PLEASE_HELP.Publicacion p WHERE p.Pub_Codigo = u.Ubicacion_Publicacion) AS Compra_Publicacion_Descripcion
+	FROM PLEASE_HELP.Compra c
+	INNER JOIN PLEASE_HELP.Ubicacion u
+	ON c.Compra_Publicacion = u.Ubicacion_Publicacion 
+	AND c.Compra_Fila = u.Ubicacion_Fila 
+	AND c.Compra_Asiento = u.Ubicacion_Asiento
+	WHERE c.Compra_Publicacion = @idPublicacion
+	ORDER BY c.Compra_Fecha ASC
 END
 GO
 

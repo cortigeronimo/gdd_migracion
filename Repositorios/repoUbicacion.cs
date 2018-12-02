@@ -13,7 +13,7 @@ namespace PalcoNet.Repositorios
 {
     public class RepoUbicacion
     {
-        public void InsertUbicaciones(long publicacionId, List<Ubicacion> ubicacionesList)
+        public void InsertUbicaciones(decimal publicacionId, List<Ubicacion> ubicacionesList)
         {
             foreach (Ubicacion u in ubicacionesList)
             {
@@ -32,7 +32,7 @@ namespace PalcoNet.Repositorios
             }
         }
 
-        public void DeleteAndAddNewUbicaciones(long publicacionId, List<Ubicacion> ubicacionesList)
+        public void DeleteAndAddNewUbicaciones(decimal publicacionId, List<Ubicacion> ubicacionesList)
         {
             String sp = "PLEASE_HELP.SP_DELETE_PUBLICACION_UBICACIONES";
             SqlCommand cmd = new SqlCommand(sp);
