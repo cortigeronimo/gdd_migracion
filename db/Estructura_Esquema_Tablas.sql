@@ -159,6 +159,7 @@ create table PLEASE_HELP.Rol
 	Rol_Id int identity(1,1), 
 	Rol_Nombre nvarchar(20) NOT NULL, 
 	Rol_Habilitado bit DEFAULT 1,
+	Rol_Baja bit DEFAULT 0,
 	CONSTRAINT UQ_ROL_NOMBRE UNIQUE (Rol_Nombre),
 	CONSTRAINT PK_ROL_ID PRIMARY KEY (Rol_Id)
 )

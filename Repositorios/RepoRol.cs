@@ -38,7 +38,7 @@ namespace PalcoNet.Repositorios
 
         public List<Rol> GetRoles()
         {
-            String query = "select * from " + table + " ;";
+            String query = "select * from " + table + " WHERE Rol_Baja = 0;";
             SqlCommand cmd = new SqlCommand(query);
             DataTable result = Conexion.GetData(cmd);
             return FromRowsToRoles(result);
@@ -49,13 +49,13 @@ namespace PalcoNet.Repositorios
             SqlCommand command;
             if (funcionalidad != "")
             {
-                string query = "SELECT distinct r.* FROM PLEASE_HELP.Rol r INNER JOIN PLEASE_HELP.Rol_Funcionalidad rf ON r.Rol_Id = rf.Rol_Id INNER JOIN PLEASE_HELP.Funcionalidad f ON rf.Func_Id = f.Func_Id WHERE f.Func_Desc = @funcionalidad AND r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
+                string query = "SELECT distinct r.* FROM PLEASE_HELP.Rol r INNER JOIN PLEASE_HELP.Rol_Funcionalidad rf ON r.Rol_Id = rf.Rol_Id INNER JOIN PLEASE_HELP.Funcionalidad f ON rf.Func_Id = f.Func_Id WHERE r.Rol_Baja = 0 AND f.Func_Desc = @funcionalidad AND r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
                 command = new SqlCommand(query);
                 command.Parameters.AddWithValue("@funcionalidad", funcionalidad);
             }
             else
             {
-                string query = "SELECT * FROM PLEASE_HELP.Rol r WHERE r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
+                string query = "SELECT * FROM PLEASE_HELP.Rol r WHERE r.Rol_Baja = 0 AND r.Rol_Habilitado = @habilitado AND r.Rol_Nombre LIKE @nombre ;";
                 command = new SqlCommand(query);
             }
             command.Parameters.AddWithValue("@habilitado", habilitado);
@@ -94,7 +94,7 @@ namespace PalcoNet.Repositorios
 
         public Rol FindRolByName(String name)
         {
-            String query = "select * from " + table + " where Rol_Nombre = @name";
+            String query = "select * from " + table + " where Rol_Baja = 0 AND Rol_Nombre = @name";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@name", name);
             DataTable result = Conexion.GetData(command);
@@ -124,7 +124,41 @@ namespace PalcoNet.Repositorios
 
         public void UpdateRol(Rol rol)
         {
-            //TODO
+            string query = "UPDATE " + table + " SET Rol_Nombre = @nombre , Rol_Habilitado = @habilitado WHERE Rol_Id = @id";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@nombre", rol.Nombre);
+            cmd.Parameters.AddWithValue("@habilitado", rol.Habilitado);
+            cmd.Parameters.AddWithValue("@id", rol.Id);
+            int result = (int)Conexion.InsertUpdateOrDeleteData(cmd);
+            if (result < 1)
+            {
+                throw new Exception("No se pudo modificar el rol");
+            }
+            if (!rol.Habilitado)
+            {
+                DeleteRolFromUsers(rol);
+            }
+            UpdateFuncionalidades(rol);
+
+        }
+
+        public void DeleteRolFromUsers(Rol rol)
+        {
+            string query = "DELETE PLEASE_HELP.Usuario_Rol WHERE Rol_Id = @id";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@id", rol.Id);
+            //TODO validar posibles fallas
+            int result2 = (int)Conexion.InsertUpdateOrDeleteData(cmd);
+        }
+
+        public void UpdateFuncionalidades(Rol rol)
+        {
+            string query = "DELETE PLEASE_HELP.Rol_Funcionalidad WHERE Rol_Id = @id";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@id", rol.id);
+            //TODO Validar posibles fallas
+            int result = (int)Conexion.InsertUpdateOrDeleteData(cmd);
+            rol.funcionalidades.ForEach(f => InsertFuncionalidad(f.Id, rol.Id));
         }
 
         public void CreateRol(Rol rol)
@@ -139,7 +173,7 @@ namespace PalcoNet.Repositorios
                 throw new Exception("No se pudo crear el rol");
             }
 
-            string query2 = "SELECT Rol_Id FROM " + table + " WHERE Rol_Nombre = @nombre";
+            string query2 = "SELECT Rol_Id FROM " + table + " WHERE Rol_Baja = 0 AND Rol_Nombre = @nombre";
             SqlCommand cmd2 = new SqlCommand(query2);
             cmd2.Parameters.AddWithValue("@nombre", rol.nombre);
             rol.id = (int)Conexion.GetData(cmd2).Rows[0]["Rol_Id"];
@@ -153,18 +187,31 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@rolId", rolId);
             cmd.Parameters.AddWithValue("@funcId", funcId);
-            int result = Conexion.InsertUpdateOrDeleteData(cmd);
+            int result = (int)Conexion.InsertUpdateOrDeleteData(cmd);
             //TODO Validar posibles fallas.
         }
 
         public bool ExisteRol(string nombre)
         {
-            string query = "SELECT COUNT(*) cantidad FROM " + table + " where Rol_Nombre = @nombre";
+            string query = "SELECT COUNT(*) cantidad FROM " + table + " where Rol_Baja = 0 AND Rol_Nombre = @nombre";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@nombre", nombre);
             DataTable result = Conexion.GetData(command);
             return (int)result.Rows[0]["cantidad"] > 0;
 
+        }
+
+        public void DeleteRol(Rol rol)
+        {
+            string query = "UPDATE " + table + " SET Rol_Habilitado = 0 , Rol_Baja = 1 WHERE Rol_Id = @id";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@id", rol.Id);
+            int result = (int)Conexion.InsertUpdateOrDeleteData(cmd);
+            if (result < 1)
+            {
+                throw new Exception("Error al eliminar el rol");
+            }
+            DeleteRolFromUsers(rol);
         }
     }
 }
