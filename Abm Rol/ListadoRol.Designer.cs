@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListadoRol));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.txtFuncionalidad = new System.Windows.Forms.TextBox();
@@ -43,7 +44,7 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RolHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRoles)).BeginInit();
@@ -212,10 +213,12 @@
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Editar";
+            this.Seleccionar.Image = ((System.Drawing.Image)(resources.GetObject("Seleccionar.Image")));
+            this.Seleccionar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
+            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Seleccionar.Text = "Seleccionar";
             // 
             // Eliminar
             // 
@@ -260,7 +263,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol_Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn RolHabilitado;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.DataGridViewImageColumn Seleccionar;
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
 
     }

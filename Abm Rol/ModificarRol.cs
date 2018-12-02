@@ -23,7 +23,7 @@ namespace PalcoNet.Abm_Rol
             //Negrada hecha porque la lista sino no se clona
             rol.funcionalidades.ForEach(_rolF => {
                 rolNoModificado.funcionalidades.Add(_rolF);
-                rol.funcionalidades.Add(_rolF);
+                this.rol.funcionalidades.Add(_rolF);
             });
             InitializeComponent();
             textBoxNombre.Text = rol.Nombre;

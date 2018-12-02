@@ -87,6 +87,7 @@ namespace PalcoNet.Abm_Rol
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
+                    repoRol.DeleteRol(rol);
                     MessageBox.Show("Rol "+ rol.Nombre + " eliminado");
                 }
             }
