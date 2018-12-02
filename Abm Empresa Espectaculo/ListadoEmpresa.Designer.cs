@@ -43,8 +43,8 @@
             this.razonSocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEmpresas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,8 +81,8 @@
             this.razonSocialDataGridViewTextBoxColumn,
             this.email,
             this.cuit,
-            this.Seleccionar,
-            this.Eliminar});
+            this.columnEditar,
+            this.columnEliminar});
             this.dataGridEmpresas.DataSource = this.empresaBindingSource;
             this.dataGridEmpresas.Location = new System.Drawing.Point(13, 191);
             this.dataGridEmpresas.Name = "dataGridEmpresas";
@@ -185,17 +185,17 @@
             // 
             // Seleccionar
             // 
-            this.Seleccionar.HeaderText = "Editar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
-            this.Seleccionar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnEditar.HeaderText = "Editar";
+            this.columnEditar.Name = "Seleccionar";
+            this.columnEditar.ReadOnly = true;
+            this.columnEditar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Eliminar
             // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.ReadOnly = true;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Name = "Eliminar";
+            this.columnEliminar.ReadOnly = true;
+            this.columnEliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ListadoEmpresa
             // 
@@ -229,12 +229,10 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.BindingSource empresaBindingSource;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
-        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
-        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
+        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
     }
 }

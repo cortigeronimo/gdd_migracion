@@ -212,91 +212,90 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Grado
         private void crearGrado_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CreateGrado());
+            FormManager.GetInstance().Open(new CreateGrado());
         }
 
         private void listarGrados_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new ListGrado());
+            FormManager.GetInstance().Open(new ListGrado());
         }
 
 
         //Eventos para el menu de ABM Empresa
         private void crearEmpresa_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CreateOrUpdateEmpresa());
+            FormManager.GetInstance().Open(new CreateOrUpdateEmpresa());
         }
 
         private void listarEmpresas_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new ListadoEmpresa());
+            FormManager.GetInstance().Open(new ListadoEmpresa());
         }
 
 
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CreateOrUpdateCliente());       
+            FormManager.GetInstance().Open(new CreateOrUpdateCliente());       
         }
 
         private void listarClientes_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new ListCliente());
+            FormManager.GetInstance().Open(new ListCliente());
         }
 
 
         //Eventos para el menu de ABM Rol
         private void crearRol_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new AltaRol());
+            FormManager.GetInstance().Open(new AltaRol());
         }
 
         private void listarRoles_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new ListadoRol());
+            FormManager.GetInstance().Open(new ListadoRol());
         }
        
 
         //Evento click para "generar publicacion"
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
-            //abrir el form de "generar publicacion"
-            FormManager.getInstance().Open(new FormGenerarPublicacion());
+            FormManager.GetInstance().Open(new FormGenerarPublicacion());
         }
 
 
         //Evento click para "editar publicacion"
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new FormEditarPublicacion());
+            FormManager.GetInstance().Open(new FormEditarPublicacion());
         }
 
 
         //Evento click para "comprar"
         private void comprar_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new FormComprar());
+            FormManager.GetInstance().Open(new FormComprar());
         }
 
 
         //Evento click para "historial cliente"
         private void historialCliente_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new HistorialCliente());
+            FormManager.GetInstance().Open(new HistorialCliente());
         }
 
 
         //Evento click para "canje administracion puntos"
         private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CanjeForm());
+            FormManager.GetInstance().Open(new CanjeForm());
         }
 
 
         //Evento click para "generar comisiones"
         private void generarPagosComisiones_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form comisiones..");
+            FormManager.GetInstance().Open(new SelectEmpresa());
         }
 
 
@@ -308,12 +307,12 @@ namespace PalcoNet.Vistas
 
         private void verPremios_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new ViewPremios());
+            FormManager.GetInstance().Open(new ViewPremios());
         }
 
         private void canjearPuntos_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().Open(new CanjeForm());
+            FormManager.GetInstance().Open(new CanjeForm());
         }
 
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,7 +329,7 @@ namespace PalcoNet.Vistas
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormManager.getInstance().OpenAndClose(new Login(), this);
+            FormManager.GetInstance().OpenAndClose(new Login(), this);
         }
 
         

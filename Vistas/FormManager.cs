@@ -35,7 +35,7 @@ namespace PalcoNet
             }
         }
 
-        public static FormManager getInstance(){
+        public static FormManager GetInstance(){
             if(principal == null){
                 principal = new FormManager();
             }

@@ -14,9 +14,10 @@ using PalcoNet.DTO;
 
 namespace PalcoNet.Repositorios
 {
-    public class RepoPublicacion
+    public class RepoPublicacion : Repository
     {
         private String publicacionTable = "PLEASE_HELP.Publicacion";
+
 
         public Boolean ExistsPublicacionMismaHora(long codigoPublicacion, String descripcion, DateTime fechaHora)
         {
@@ -33,9 +34,40 @@ namespace PalcoNet.Repositorios
 
             return result.Rows.Count != 0;
 
-
         }
 
+        public List<PublicacionPorFacturarDTO> FindPublicacionesAFacturar(int? idEmpresa)
+        {
+            String query = "PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR";
+
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@idEmpresa", idEmpresa);
+
+            return FromRowsToPublicacionPorFacturar(Conexion.GetData(cmd));
+        }
+
+        private List<PublicacionPorFacturarDTO> FromRowsToPublicacionPorFacturar(DataTable table)
+        {
+            List<PublicacionPorFacturarDTO> publicacionesAFacturar = new List<PublicacionPorFacturarDTO>();
+            foreach (DataRow row in table.Rows)
+            {
+                PublicacionPorFacturarDTO publicacionAFacturar = new PublicacionPorFacturarDTO();
+                publicacionAFacturar.Codigo = GetValueOrNull<long>(row["Pub_Codigo"]);
+                publicacionAFacturar.FechaInicio = GetValueOrNull<DateTime>(row["Pub_Fecha_Inicio"]);
+                publicacionAFacturar.FechaEvento = GetValueOrNull<DateTime>(row["Pub_Fecha_Evento"]);
+                publicacionAFacturar.Descripcion = GetValueOrNull<String>(row["Pub_Descripcion"]);
+                publicacionAFacturar.Direccion = GetValueOrNull<String>(row["Pub_Direccion"]);
+                publicacionAFacturar.Rubro = GetValueOrNull<String>(row["Rubro"]);
+                publicacionAFacturar.Grado = GetValueOrNull<String>(row["Grado"]);
+                publicacionAFacturar.Comision = GetValueOrNull<int>(row["Comision"]);
+                publicacionAFacturar.CantidadCompras = GetValueOrNull<int>(row["Cantidad Compras"]);
+                publicacionAFacturar.MontoTotal = GetValueOrNull<float>(row["Monto Por Facturar"]);
+                publicacionesAFacturar.Add(publicacionAFacturar);
+            }
+            return publicacionesAFacturar;
+        }
 
         public void InsertOrUpdatePublicacion(Publicacion publicacion)
         {
@@ -57,13 +89,17 @@ namespace PalcoNet.Repositorios
 
             cmd.Parameters.AddWithValue("@codigoPublicacion", publicacion.Codigo);
 
-            cmd.Parameters.AddWithValue("@fechaInicio", publicacion.FechaInicio);
+            if (publicacion.Estado.Descripcion == "PUBLICADA")
+                cmd.Parameters.AddWithValue("@fechaInicio", SystemDate.GetDate());
+            else
+                cmd.Parameters.AddWithValue("@fechaInicio", DBNull.Value);
+
             cmd.Parameters.AddWithValue("@fechaEvento", publicacion.FechaEvento);
             cmd.Parameters.AddWithValue("@descripcion", publicacion.Descripcion);
             cmd.Parameters.AddWithValue("@direccion", publicacion.Direccion);
             cmd.Parameters.AddWithValue("@rubroId", publicacion.Rubro.Id);
             cmd.Parameters.AddWithValue("@gradoId", publicacion.Grado.Id);
-            //cmd.Parameters.AddWithValue("@empresaId", publicacion.Empresa.id);
+            
             cmd.Parameters.AddWithValue("@estadoId", publicacion.Estado.Id);
 
             Conexion.ExecuteProcedure(cmd);
@@ -85,7 +121,12 @@ namespace PalcoNet.Repositorios
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@fechaInicio", publicacion.FechaInicio);
+
+            if(publicacion.Estado.Descripcion == "PUBLICADA")
+                cmd.Parameters.AddWithValue("@fechaInicio", SystemDate.GetDate());
+            else
+                cmd.Parameters.AddWithValue("@fechaInicio", DBNull.Value);
+            
             cmd.Parameters.AddWithValue("@fechaEvento", publicacion.FechaEvento);
             cmd.Parameters.AddWithValue("@descripcion", publicacion.Descripcion);
             cmd.Parameters.AddWithValue("@direccion", publicacion.Direccion);
@@ -103,7 +144,7 @@ namespace PalcoNet.Repositorios
 
             long ubicacionPublicacionID = Convert.ToInt64(publicacionId.Value);
 
-            //insert de ubicaciones
+            //Insert de Ubicaciones
             repoUbicacion.InsertUbicaciones(ubicacionPublicacionID, publicacion.Ubicaciones);
 
 
@@ -125,8 +166,8 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("idUser", UserSession.UserId);
-            cmd.Parameters.AddWithValue("descripcion", descripcion);
+            cmd.Parameters.AddWithValue("@idUser", UserSession.UserId);
+            cmd.Parameters.AddWithValue("@descripcion", descripcion);
 
             return Conexion.GetData(cmd);
         }
@@ -138,8 +179,14 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(query);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("codigoPublicacion", publicacion.Codigo);
-            cmd.Parameters.AddWithValue("estado", estado);
+            if(estado == "PUBLICADA")
+                cmd.Parameters.AddWithValue("@fechaPublicacion", SystemDate.GetDate());
+            else
+                cmd.Parameters.AddWithValue("@fechaPublicacion", DBNull.Value);
+
+            cmd.Parameters.AddWithValue("@codigoPublicacion", publicacion.Codigo);
+            cmd.Parameters.AddWithValue("@estado", estado);
+             
 
             Conexion.ExecuteProcedure(cmd);
         }

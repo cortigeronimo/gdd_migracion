@@ -165,14 +165,17 @@
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
+    <Compile Include="DTO\EmpresaPorFacturarDTO.cs" />
     <Compile Include="DTO\PremioDTO.cs" />
     <Compile Include="DTO\PublicacionDTO.cs" />
+    <Compile Include="DTO\PublicacionPorFacturarDTO.cs" />
     <Compile Include="Editar Publicacion\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editar Publicacion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\EstadoPublicacion.cs" />
     <Compile Include="Generar Publicacion\AgregarFechas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,11 +200,17 @@
     <Compile Include="Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Rendicion Comisiones\Form1.cs">
+    <Compile Include="Generar Rendicion Comisiones\PublicacionesDeEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Rendicion Comisiones\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Rendicion Comisiones\PublicacionesDeEmpresa.Designer.cs">
+      <DependentUpon>PublicacionesDeEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Rendicion Comisiones\SelectEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Rendicion Comisiones\SelectEmpresa.Designer.cs">
+      <DependentUpon>SelectEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial Cliente\HistorialCliente.cs">
       <SubType>Form</SubType>
@@ -252,6 +261,7 @@
     <Compile Include="Repositorios\RepoCliente.cs" />
     <Compile Include="Repositorios\RepoCompra.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
+    <Compile Include="Repositorios\RepoEstado.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
@@ -370,6 +380,12 @@
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Generar Rendicion Comisiones\PublicacionesDeEmpresa.resx">
+      <DependentUpon>PublicacionesDeEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Rendicion Comisiones\SelectEmpresa.resx">
+      <DependentUpon>SelectEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -409,8 +425,10 @@
     <EmbeddedResource Include="Vistas\RolSelector.resx">
       <DependentUpon>RolSelector.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\PalcoNet.DTO.EmpresaPorFacturarDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.DTO.PremioDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionDTO.datasource" />
+    <None Include="Properties\DataSources\PalcoNet.DTO.PublicacionPorFacturarDTO.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Cliente.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.DetalleCompra.datasource" />
     <None Include="Properties\DataSources\PalcoNet.Modelo.Empresa.datasource" />

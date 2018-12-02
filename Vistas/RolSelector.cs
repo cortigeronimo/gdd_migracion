@@ -40,7 +40,7 @@ namespace PalcoNet.Vistas
         private void btnContinuar_Click(object sender, EventArgs e)
         {
             UserSession.RolId = (int)comboBoxRol.SelectedValue;
-            FormManager.getInstance().OpenAndClose(new HomeMenu(), this);
+            FormManager.GetInstance().OpenAndClose(new HomeMenu(), this);
         }
 
 

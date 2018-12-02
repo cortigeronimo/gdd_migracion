@@ -7,6 +7,7 @@ using PalcoNet.Modelo;
 using System.Data;
 using System.Data.SqlClient;
 using PalcoNet.Utils;
+using PalcoNet.DTO;
 
 namespace PalcoNet.Repositorios
 {
@@ -50,6 +51,15 @@ namespace PalcoNet.Repositorios
             {
                 throw new Exception("No se ha podido actualizar la información de la empresa");
             }
+        }
+
+        public Empresa FindEmpresaById(long idEmpresa)
+        {
+            string query = "SELECT * FROM " + table + " WHERE Emp_Usuario = @idEmpresa";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("@idEmpresa", idEmpresa);
+            return FromRowsToEmpresas(Conexion.GetData(cmd))[0];
         }
 
         public void InsertEmpresa(Empresa empresa)
@@ -138,6 +148,36 @@ namespace PalcoNet.Repositorios
 
             var result = Conexion.GetData(cmd);
             return (int)result.Rows[0]["Total"] > 0;
+        }
+
+        public List<EmpresaPorFacturarDTO> FindAllEmpresasToCheckIn()
+        {
+            String sp = "PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
+
+            return FromRowsToEmpresasToCheckIn(Conexion.GetData(command));
+        }
+
+        private List<EmpresaPorFacturarDTO> FromRowsToEmpresasToCheckIn(DataTable table)
+        {
+            List<EmpresaPorFacturarDTO> empresasToCheckIn = new List<EmpresaPorFacturarDTO>();
+            foreach (DataRow row in table.Rows)
+            {
+                EmpresaPorFacturarDTO empresaToCheckIn = new EmpresaPorFacturarDTO();
+                empresaToCheckIn.Id = GetValueOrNull<int>(row["Emp_Usuario"]);
+                empresaToCheckIn.RazonSocial = GetValueOrNull<String>(row["Emp_Razon_Social"]);
+                empresaToCheckIn.Cuit = GetValueOrNull<String>(row["Emp_Cuit"]);
+                empresaToCheckIn.Ciudad = GetValueOrNull<String>(row["Emp_Ciudad"]);
+                empresaToCheckIn.Localidad = GetValueOrNull<String>(row["Emp_Localidad"]);
+                empresaToCheckIn.Direccion = GetValueOrNull<String>(row["Emp_Direccion"]);
+                empresaToCheckIn.NroPiso = GetValueOrNull<decimal?>(row["Emp_Piso"]);
+                empresaToCheckIn.Depto = GetValueOrNull<String>(row["Emp_Depto"]);
+                empresaToCheckIn.MontoPorFacturar = GetValueOrNull<decimal?>(row["Monto Total Por Facturar"]);
+                empresaToCheckIn.CantidadPublicaciones = GetValueOrNull<int>(row["Cantidad Publicaciones"]);
+                empresasToCheckIn.Add(empresaToCheckIn);
+            }
+            return empresasToCheckIn;
         }
     }
 }
