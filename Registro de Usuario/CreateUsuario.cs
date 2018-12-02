@@ -68,7 +68,7 @@ namespace PalcoNet.Registro_de_Usuario
             else{
                 formToRedirect = new CreateOrUpdateEmpresa(usuario);
             }
-            FormManager.getInstance().OpenAndClose(formToRedirect, this);
+            FormManager.GetInstance().OpenAndClose(formToRedirect, this);
         }
 
     }
