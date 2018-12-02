@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBoxMedioPago = new System.Windows.Forms.GroupBox();
+            this.txtEmailFacturacion = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxMedioPago = new System.Windows.Forms.ComboBox();
             this.btnAceptarMedioDePago = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtEmailFacturacion = new System.Windows.Forms.TextBox();
             this.groupBoxMedioPago.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +50,22 @@
             this.groupBoxMedioPago.TabIndex = 0;
             this.groupBoxMedioPago.TabStop = false;
             this.groupBoxMedioPago.Text = "Medio De Pago";
+            // 
+            // txtEmailFacturacion
+            // 
+            this.txtEmailFacturacion.Location = new System.Drawing.Point(109, 71);
+            this.txtEmailFacturacion.Name = "txtEmailFacturacion";
+            this.txtEmailFacturacion.Size = new System.Drawing.Size(188, 20);
+            this.txtEmailFacturacion.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Email(Facturación):";
             // 
             // label1
             // 
@@ -91,22 +107,6 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Email(Facturación):";
-            // 
-            // txtEmailFacturacion
-            // 
-            this.txtEmailFacturacion.Location = new System.Drawing.Point(109, 71);
-            this.txtEmailFacturacion.Name = "txtEmailFacturacion";
-            this.txtEmailFacturacion.Size = new System.Drawing.Size(188, 20);
-            this.txtEmailFacturacion.TabIndex = 3;
-            // 
             // FormMediosDePago
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,7 +118,6 @@
             this.Controls.Add(this.groupBoxMedioPago);
             this.Name = "FormMediosDePago";
             this.Text = "MediosDePago";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMediosDePago_FormClosing);
             this.groupBoxMedioPago.ResumeLayout(false);
             this.groupBoxMedioPago.PerformLayout();
             this.ResumeLayout(false);

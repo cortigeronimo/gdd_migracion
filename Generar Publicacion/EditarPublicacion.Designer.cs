@@ -45,9 +45,11 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxFiltrosBusqueda = new System.Windows.Forms.GroupBox();
+            this.checkBoxEstado = new System.Windows.Forms.CheckBox();
+            this.comboBoxEstado = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxFiltrosBusqueda.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewPublicaciones
@@ -65,11 +67,11 @@
             this.columnGrado,
             this.columnEmpresa,
             this.columnEstado});
-            this.dataGridViewPublicaciones.Location = new System.Drawing.Point(26, 162);
+            this.dataGridViewPublicaciones.Location = new System.Drawing.Point(26, 137);
             this.dataGridViewPublicaciones.MultiSelect = false;
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
-            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(501, 200);
+            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(644, 266);
             this.dataGridViewPublicaciones.TabIndex = 6;
             // 
             // columnCodigo
@@ -138,7 +140,7 @@
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(371, 368);
+            this.btnEditar.Location = new System.Drawing.Point(514, 419);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 5;
@@ -149,7 +151,7 @@
             // btnPublicar
             // 
             this.btnPublicar.Enabled = false;
-            this.btnPublicar.Location = new System.Drawing.Point(290, 368);
+            this.btnPublicar.Location = new System.Drawing.Point(433, 419);
             this.btnPublicar.Name = "btnPublicar";
             this.btnPublicar.Size = new System.Drawing.Size(75, 23);
             this.btnPublicar.TabIndex = 4;
@@ -160,7 +162,7 @@
             // btnFinalizar
             // 
             this.btnFinalizar.Enabled = false;
-            this.btnFinalizar.Location = new System.Drawing.Point(452, 368);
+            this.btnFinalizar.Location = new System.Drawing.Point(595, 419);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 3;
@@ -170,7 +172,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(408, 104);
+            this.btnBuscar.Location = new System.Drawing.Point(551, 75);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(119, 23);
             this.btnBuscar.TabIndex = 2;
@@ -188,7 +190,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 28);
+            this.label1.Location = new System.Drawing.Point(6, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 0;
@@ -197,41 +199,66 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 133);
+            this.label2.Location = new System.Drawing.Point(23, 112);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Seleccione una publicación a editar:";
             // 
-            // groupBox1
+            // groupBoxFiltrosBusqueda
             // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtDescripcion);
-            this.groupBox1.Location = new System.Drawing.Point(26, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(501, 86);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Editar Publicación";
+            this.groupBoxFiltrosBusqueda.Controls.Add(this.checkBoxEstado);
+            this.groupBoxFiltrosBusqueda.Controls.Add(this.comboBoxEstado);
+            this.groupBoxFiltrosBusqueda.Controls.Add(this.label1);
+            this.groupBoxFiltrosBusqueda.Controls.Add(this.txtDescripcion);
+            this.groupBoxFiltrosBusqueda.Location = new System.Drawing.Point(26, 12);
+            this.groupBoxFiltrosBusqueda.Name = "groupBoxFiltrosBusqueda";
+            this.groupBoxFiltrosBusqueda.Size = new System.Drawing.Size(482, 86);
+            this.groupBoxFiltrosBusqueda.TabIndex = 8;
+            this.groupBoxFiltrosBusqueda.TabStop = false;
+            this.groupBoxFiltrosBusqueda.Text = "Filtros de Búsqueda";
+            // 
+            // checkBoxEstado
+            // 
+            this.checkBoxEstado.AutoSize = true;
+            this.checkBoxEstado.Location = new System.Drawing.Point(330, 24);
+            this.checkBoxEstado.Name = "checkBoxEstado";
+            this.checkBoxEstado.Size = new System.Drawing.Size(59, 17);
+            this.checkBoxEstado.TabIndex = 4;
+            this.checkBoxEstado.Text = "Estado";
+            this.checkBoxEstado.UseVisualStyleBackColor = true;
+            this.checkBoxEstado.CheckedChanged += new System.EventHandler(this.checkBoxEstado_CheckedChanged);
+            // 
+            // comboBoxEstado
+            // 
+            this.comboBoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEstado.Enabled = false;
+            this.comboBoxEstado.FormattingEnabled = true;
+            this.comboBoxEstado.Location = new System.Drawing.Point(330, 44);
+            this.comboBoxEstado.Name = "comboBoxEstado";
+            this.comboBoxEstado.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxEstado.TabIndex = 2;
             // 
             // FormEditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 405);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(699, 454);
+            this.Controls.Add(this.groupBoxFiltrosBusqueda);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridViewPublicaciones);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.btnBuscar);
+            this.MaximumSize = new System.Drawing.Size(715, 493);
+            this.MinimumSize = new System.Drawing.Size(715, 493);
             this.Name = "FormEditarPublicacion";
             this.Text = "Editar Publicación";
             this.Load += new System.EventHandler(this.FormEditarPublicacion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxFiltrosBusqueda.ResumeLayout(false);
+            this.groupBoxFiltrosBusqueda.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,6 +283,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEstado;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxFiltrosBusqueda;
+        private System.Windows.Forms.ComboBox comboBoxEstado;
+        private System.Windows.Forms.CheckBox checkBoxEstado;
     }
 }

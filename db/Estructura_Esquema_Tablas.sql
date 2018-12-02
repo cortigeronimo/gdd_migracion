@@ -813,6 +813,15 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION
+AS
+SELECT *
+FROM PLEASE_HELP.Estado 
+WHERE Estado_Descripcion != 'FINALIZADA'
+GO
+
+
+
 -- STORED PROCEDURES RENDICION DE COMISIONES
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
 AS
@@ -833,15 +842,6 @@ BEGIN
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END
 GO
-
-
-CREATE PROCEDURE PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION
-AS
-SELECT *
-FROM PLEASE_HELP.Estado 
-WHERE Estado_Descripcion != 'FINALIZADA'
-GO
-
 
 
 
@@ -874,7 +874,7 @@ GO
 
 -- STORED PROCEDURES EDITAR PUBLICACION
 
-CREATE PROCEDURE PLEASE_HELP.SP_LISTA_PUBLICACIONES(@idUser INT, @descripcion NVARCHAR(255))
+CREATE PROCEDURE PLEASE_HELP.SP_LISTA_PUBLICACIONES(@idUser INT, @descripcion NVARCHAR(255), @estadoId INT = NULL)
 AS
 SELECT Pub_Codigo, Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Direccion, 
 		(SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) AS Pub_Rubro,
@@ -884,14 +884,17 @@ SELECT Pub_Codigo, Pub_Fecha_Inicio, Pub_Fecha_Evento, Pub_Descripcion, Pub_Dire
 		
 FROM PLEASE_HELP.Publicacion
 WHERE Pub_Empresa = @idUser AND Pub_Descripcion LIKE CONCAT('%',@descripcion,'%')
+							AND (@estadoId IS NULL OR Pub_Estado = @estadoId)
 GO
 
 
-CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_ESTADO_PUBLICACION(@codigoPublicacion NUMERIC(18,0), @estado NVARCHAR(255), @fechaPublicacion DATETIME)
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_ESTADO_PUBLICACION(@codigoPublicacion NUMERIC(18,0), @estado NVARCHAR(255), @fechaPublicacion DATETIME = null)
 AS
 BEGIN
-	UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = @estado), Pub_Fecha_Inicio = @fechaPublicacion
-		WHERE Pub_Codigo = @codigoPublicacion
+	IF(@estado = 'PUBLICADA')
+		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = @estado), Pub_Fecha_Inicio = @fechaPublicacion WHERE Pub_Codigo = @codigoPublicacion
+	ELSE
+		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = @estado) WHERE Pub_Codigo = @codigoPublicacion
 END
 GO
 

@@ -116,11 +116,10 @@
             // 
             // columnEliminar
             // 
-            this.columnEliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.columnEliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnEliminar.HeaderText = "Eliminar";
             this.columnEliminar.Name = "columnEliminar";
             this.columnEliminar.ReadOnly = true;
-            this.columnEliminar.Width = 49;
             // 
             // FormAgregarFechas
             // 
@@ -131,6 +130,8 @@
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dataGridViewFechas);
+            this.MaximumSize = new System.Drawing.Size(251, 432);
+            this.MinimumSize = new System.Drawing.Size(251, 432);
             this.Name = "FormAgregarFechas";
             this.Text = "Agregar Fechas";
             this.groupBox1.ResumeLayout(false);

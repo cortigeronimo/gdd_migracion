@@ -13,6 +13,7 @@ using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Grado;
 using PalcoNet.Config;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Generar_Publicacion
 {
@@ -127,9 +128,17 @@ namespace PalcoNet.Generar_Publicacion
                     return;
                 }
 
-                repoPublicacion.InsertPublicacionesList(publicacionesList);
-                MessageBox.Show("Publicaciones insertadas correctamente.", "Message");
-                ClearAll();
+                try
+                {
+                    repoPublicacion.InsertPublicacionesList(publicacionesList);
+                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
+                    ClearAll();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
+                }
+                
             }
             else
             {
@@ -141,9 +150,16 @@ namespace PalcoNet.Generar_Publicacion
                     return;
                 }
 
-                repoPublicacion.InsertOrUpdatePublicacion(publicacion);
-                MessageBox.Show("Publicación insertada correctamente.", "Message");
-                ClearAll();
+                try
+                {
+                    repoPublicacion.InsertOrUpdatePublicacion(publicacion);
+                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
+                    ClearAll();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
+                }
 
                 this.DialogResult = DialogResult.OK;
             }
@@ -155,7 +171,7 @@ namespace PalcoNet.Generar_Publicacion
         {
             if (repoPublicacion.ExistsPublicacionMismaHora(publicacionCodigo, descripcionPublicacion, fechaHoraEvento))
             {
-                errorMessage += "Ya existe un espectáculo del mismo nombre en la fecha ingresada.\n";
+                errorMessage += "Ya existe un Espectáculo del mismo nombre en la Fecha de Evento ingresada.\n";
                 return true;
             }
             else
@@ -179,7 +195,7 @@ namespace PalcoNet.Generar_Publicacion
 
             if (countPublicacionesMismaFechaHora != 0)
             {
-                errorMessage = "Ya existen espectaculos del mismo nombre en la/s siguientes fechas ingresadas: \n" + repeatDates;
+                errorMessage = "Ya existen Espectáculos del mismo Nombre en la/s siguientes Fechas de Evento ingresadas: \n" + repeatDates;
                 return true;
             }
             else
@@ -210,7 +226,7 @@ namespace PalcoNet.Generar_Publicacion
                 if (result == DialogResult.OK)
                 {
                     publicacion.Ubicaciones = form.Ubicaciones;
-                    txtStock.Text = form.Ubicaciones.Count.ToString();
+                    txtStock.Text = publicacion.Ubicaciones.Count.ToString();
                 }
             }       
 
@@ -292,16 +308,16 @@ namespace PalcoNet.Generar_Publicacion
       
             if (!checkBoxVariasFechas.Checked)
             {
-                if (!(SystemDate.GetDate() < dateTimePickerFechaEvento.Value)) { errorMessage += "La fecha de evento debe ser posterior a la fecha actual.\n"; errorCount++; }
+                if (!(SystemDate.GetDate() < dateTimePickerFechaEvento.Value)) { errorMessage += "La Fecha de Evento debe ser posterior a la fecha actual.\n"; errorCount++; }
             }
             else
             {
-                if (publicacionesList.Count == 0) { errorMessage += "No hay fechas ingresadas para la publicación."; errorCount++; }
+                if (publicacionesList.Count == 0) { errorMessage += "No hay Fechas de Evento ingresadas para la Publicación.\n"; errorCount++; }
             }
 
             if (String.IsNullOrEmpty(txtNombrePublicacion.Text.ToString())) { errorMessage += "El campo Nombre está vacio.\n"; errorCount++; }
             if (String.IsNullOrEmpty(txtDireccion.Text.ToString())) { errorMessage += "El campo Dirección está vacio.\n"; errorCount++; }
-            if (publicacion.Ubicaciones.Count == 0) { errorMessage += "La publicacion no tiene Ubicaciones.\n"; errorCount++; }
+            if (publicacion.Ubicaciones.Count == 0) { errorMessage += "La Publicación no tiene Ubicaciones.\n"; errorCount++; }
 
             return errorCount == 0;
         }

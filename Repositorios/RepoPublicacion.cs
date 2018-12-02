@@ -159,7 +159,7 @@ namespace PalcoNet.Repositorios
             }
         }
 
-        public DataTable GetPublicacionesToEditForm(String descripcion)
+        public DataTable GetPublicacionesToEditForm(String descripcion, int estadoId)
         {
             String query = "PLEASE_HELP.SP_LISTA_PUBLICACIONES";
 
@@ -168,6 +168,7 @@ namespace PalcoNet.Repositorios
 
             cmd.Parameters.AddWithValue("@idUser", UserSession.UserId);
             cmd.Parameters.AddWithValue("@descripcion", descripcion);
+            if (estadoId != 0) cmd.Parameters.AddWithValue("@estadoId", estadoId);
 
             return Conexion.GetData(cmd);
         }
@@ -181,8 +182,6 @@ namespace PalcoNet.Repositorios
 
             if(estado == "PUBLICADA")
                 cmd.Parameters.AddWithValue("@fechaPublicacion", SystemDate.GetDate());
-            else
-                cmd.Parameters.AddWithValue("@fechaPublicacion", DBNull.Value);
 
             cmd.Parameters.AddWithValue("@codigoPublicacion", publicacion.Codigo);
             cmd.Parameters.AddWithValue("@estado", estado);

@@ -68,8 +68,16 @@ namespace PalcoNet.Comprar
         {
             if (e.ColumnIndex == dataGridViewUbicacionesDisponibles.Columns["columnAgregarItem"].Index)
             {
-                Ubicacion ubicacion = (Ubicacion)dataGridViewUbicacionesDisponibles.CurrentRow.DataBoundItem;
-
+                Ubicacion ubicacion = new Ubicacion();
+                try
+                {
+                    ubicacion = (Ubicacion)dataGridViewUbicacionesDisponibles.CurrentRow.DataBoundItem;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+                
                 importeTotal += Convert.ToInt32(ubicacion.Precio);
                 labelImporteTotal.Text = "IMPORTE TOTAL: $ " + importeTotal.ToString();
 
@@ -87,7 +95,16 @@ namespace PalcoNet.Comprar
         {
             if (e.ColumnIndex == dataGridViewUbicacionesAComprar.Columns["columnEliminarItem"].Index)
             {
-                Ubicacion ubicacion = (Ubicacion)dataGridViewUbicacionesAComprar.CurrentRow.DataBoundItem;
+                Ubicacion ubicacion = new Ubicacion();
+
+                try
+                {
+                    ubicacion = (Ubicacion)dataGridViewUbicacionesAComprar.CurrentRow.DataBoundItem;
+                }
+                catch (Exception)
+                {
+                    return;
+                }
 
                 importeTotal -= Convert.ToInt32(ubicacion.Precio);
                 labelImporteTotal.Text = "IMPORTE TOTAL: $ " + importeTotal.ToString(); 
@@ -143,12 +160,12 @@ namespace PalcoNet.Comprar
                 try
                 {
                     repoCompra.GenerateCompras(ubicacionesAComprar, UserSession.UserId, medioDePago, compraEmail);
-                    MessageBox.Show("La compra se realizó correctamente.");
+                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
                     this.DialogResult = DialogResult.OK;
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO);
+                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
                 }
 
             }

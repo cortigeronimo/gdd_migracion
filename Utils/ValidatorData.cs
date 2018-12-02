@@ -72,7 +72,7 @@ namespace PalcoNet.Utils
             {
                 String messaggeError = "El campo "
                     + fieldName + " debe tener una longitud maxima de " 
-                    + lengthMax + " caracteres";
+                    + lengthMax + " caracteres.";
                 AddMessaggeError(messaggeError);
             }
         }
@@ -83,7 +83,7 @@ namespace PalcoNet.Utils
             {
                 String messaggeError = "El campo "
                     + fieldName + " debe tener una longitud minima de "
-                    + lengthMin + " y una maxima de " + lengthMax + " caracteres";
+                    + lengthMin + " y una maxima de " + lengthMax + " caracteres.";
                 AddMessaggeError(messaggeError);
             }
         }
@@ -104,7 +104,7 @@ namespace PalcoNet.Utils
             if (HasErrors()) {
                 String messaggeToShow = "Se han detectado " + this.countErrors + " errores: \n";
                 messaggeToShow += messagesErrors;
-                MessageBox.Show(messaggeToShow);
+                MessageBox.Show(messaggeToShow, "Error");
                 return true;
             }
             return false;
@@ -131,7 +131,7 @@ namespace PalcoNet.Utils
             {
                 if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    MessageBox.Show("Los campos no pueden estar vacíos");
+                    MessageBox.Show("Los campos no pueden estar vacíos.", "Error");
                     return true;
                 }
             }

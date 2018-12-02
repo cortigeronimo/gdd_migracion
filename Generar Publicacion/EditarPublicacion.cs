@@ -13,6 +13,7 @@ using PalcoNet.Modelo;
 using PalcoNet.Config;
 using PalcoNet.Repositorios;
 using PalcoNet.Abm_Grado;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Generar_Publicacion
 {
@@ -21,6 +22,7 @@ namespace PalcoNet.Generar_Publicacion
     {
         RepoPublicacion repoPublicacion = new RepoPublicacion();
         RepoUbicacion repoUbicacion = new RepoUbicacion();
+        RepoEstado repoEstado = new RepoEstado();
 
         //Ubicaciones de las publicaciones del usuario
         List<Ubicacion> pubUbicaciones = new List<Ubicacion>();
@@ -30,16 +32,21 @@ namespace PalcoNet.Generar_Publicacion
         public FormEditarPublicacion()
         {
             InitializeComponent();
+            
 
-            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(String.Empty);
+            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(String.Empty, Convert.ToInt32(comboBoxEstado.SelectedValue));
 
             pubUbicaciones = repoUbicacion.GetUbicacionesByUser();
+
+            comboBoxEstado.ValueMember = "Estado_Id";
+            comboBoxEstado.DisplayMember = "Estado_Descripcion";
+            comboBoxEstado.DataSource = repoEstado.GetAllEstados();
 
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(txtDescripcion.Text);
+            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(txtDescripcion.Text, Convert.ToInt32(comboBoxEstado.SelectedValue));
         }
 
         private void btnFinalizar_Click(object sender, EventArgs e)
@@ -47,9 +54,16 @@ namespace PalcoNet.Generar_Publicacion
             DialogResult dialogResult = MessageBox.Show("¿Desea dar por finalizada la publicación?", "Finalizar Publicación", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                repoPublicacion.CambiarEstadoPublicacion(publicacionToEdit, "FINALIZADA");
-                MessageBox.Show("La publicación ha finalizado.");
-                RefreshDataGridViewPublicacion();
+                try
+                {
+                    repoPublicacion.CambiarEstadoPublicacion(publicacionToEdit, "FINALIZADA");
+                    MessageBox.Show("La publicación ha finalizado.", "Message");
+                    RefreshDataGridViewPublicacion();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+                }
 
             }
         }
@@ -58,16 +72,24 @@ namespace PalcoNet.Generar_Publicacion
         {
             if (publicacionToEdit.FechaEvento <= SystemDate.GetDate())
             {
-                MessageBox.Show("La fecha del evento a publicar es anterior a la fecha actual.", "Error");
+                MessageBox.Show("La Fecha del Evento a publicar es anterior a la fecha actual.", "Error");
                 return;
             }
 
             DialogResult dialogResult = MessageBox.Show("¿Desea publicar el evento seleccionado?", "Publicar Evento", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                repoPublicacion.CambiarEstadoPublicacion(publicacionToEdit, "PUBLICADA");
-                MessageBox.Show("El evento ha sido publicado.");
-                RefreshDataGridViewPublicacion();
+                try
+                {
+                    repoPublicacion.CambiarEstadoPublicacion(publicacionToEdit, "PUBLICADA");
+                    MessageBox.Show("El Evento ha sido publicado.", "Message");
+                    RefreshDataGridViewPublicacion();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+                }
+                
 
             }
         }
@@ -91,7 +113,7 @@ namespace PalcoNet.Generar_Publicacion
 
         private void RefreshDataGridViewPublicacion()
         {
-            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(txtDescripcion.Text);
+            dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(txtDescripcion.Text, Convert.ToInt32(comboBoxEstado.SelectedValue));
             pubUbicaciones = repoUbicacion.GetUbicacionesByUser();
         }
 
@@ -184,6 +206,20 @@ namespace PalcoNet.Generar_Publicacion
         {
             this.dataGridViewPublicaciones.RowHeaderMouseClick += SelectedRowsButton_Click;
             this.dataGridViewPublicaciones.SelectionChanged += OnSelectionChanged;
+        }
+
+        private void checkBoxEstado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxEstado.Checked)
+            {
+                comboBoxEstado.Enabled = true;
+                comboBoxEstado.SelectedIndex = 0;
+            }
+            else
+            {
+                comboBoxEstado.Enabled = false;
+                comboBoxEstado.SelectedValue = 0;
+            }
         }
 
         

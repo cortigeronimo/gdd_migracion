@@ -16,7 +16,7 @@ namespace PalcoNet.Generar_Publicacion
 {
     public partial class FormAgregarUbicaciones : CustomForm
     {
-        String errorMessage = "Error:\n";
+        String errorMessage = String.Empty;
         BindingSource bindingSource = new BindingSource();
         public List<Ubicacion> Ubicaciones { get; set; }
         
@@ -27,6 +27,9 @@ namespace PalcoNet.Generar_Publicacion
         {
             InitializeComponent();
             dataGridViewUbicaciones.AutoGenerateColumns = false;
+            dataGridViewUbicaciones.RowHeadersVisible = false;
+            dataGridViewUbicaciones.AllowUserToResizeRows = false;
+
             this.Ubicaciones = _ubicaciones;
             
             comboBoxTipoUbicacion.SelectedIndex = 0;
@@ -58,16 +61,18 @@ namespace PalcoNet.Generar_Publicacion
                     bindingSource.Add(ubicacion);
                     
                     dataGridViewUbicaciones.DataSource = bindingSource;
+
+                    numericUpDownAsiento.Value++;
                 }
                 else{
-                    MessageBox.Show("Error, la ubicación ya existe en la lista.");
+                    MessageBox.Show("La Ubicación ya existe en la lista.", "Error");
                 }
 
 
             }
             else{
                 MessageBox.Show(errorMessage);
-                errorMessage = "Error:\n";        
+                errorMessage = String.Empty;        
             }
         }
 
@@ -83,7 +88,7 @@ namespace PalcoNet.Generar_Publicacion
         {
             int errorCount = 0;
             
-            if (numericUpDownPrecio.Value == 0) { errorMessage += "Complete el campo precio, debe ser distinto de 0.\n"; errorCount++; } 
+            if (numericUpDownPrecio.Value == 0) { errorMessage += "Complete el campo Precio, debe ser distinto de 0.\n"; errorCount++; } 
                    
             return errorCount == 0;
         }
@@ -113,33 +118,57 @@ namespace PalcoNet.Generar_Publicacion
         {
             if (e.ColumnIndex == dataGridViewUbicaciones.Columns["columnDelete"].Index && dataGridViewUbicaciones.Rows.Count != 0)
             {
-                dataGridViewUbicaciones.Rows.RemoveAt(dataGridViewUbicaciones.CurrentRow.Index);
-
-
-                Ubicaciones = new List<Ubicacion>();
-
-                foreach (DataGridViewRow row in dataGridViewUbicaciones.Rows)
+                try
                 {
-                    Ubicacion ubicacion = new Ubicacion();
-                    ubicacion.Asiento = Convert.ToInt32(row.Cells["columnAsiento"].Value);
-                    ubicacion.Fila = Convert.ToChar(row.Cells["columnFila"].Value);
-                    ubicacion.Precio = Convert.ToInt32(row.Cells["columnPrecio"].Value);
-                    ubicacion.Descripcion = Convert.ToString(row.Cells["columnDescripcion"].Value);
-
-
-                    Ubicaciones.Add(ubicacion);
+                    dataGridViewUbicaciones.Rows.RemoveAt(dataGridViewUbicaciones.CurrentRow.Index);
+                }
+                catch (Exception)
+                {
+                    return;
                 }
 
-
-
-                bindingSource = new BindingSource();
-                Ubicaciones.ForEach(u => bindingSource.Add(u));
+                FromDataGridToList();        
 
             }
-            else
+           
+        }
+
+        private void comboBoxFila_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numericUpDownAsiento.Value = 1;
+        }
+
+
+        private void FromDataGridToList()
+        {
+            Ubicaciones = new List<Ubicacion>();
+
+            foreach (DataGridViewRow row in dataGridViewUbicaciones.Rows)
             {
-                MessageBox.Show("No hay ubicaciones a eliminar");
+                Ubicacion ubicacion = new Ubicacion();
+                ubicacion.Asiento = Convert.ToInt32(row.Cells["columnAsiento"].Value);
+                ubicacion.Fila = Convert.ToChar(row.Cells["columnFila"].Value);
+                ubicacion.Precio = Convert.ToInt32(row.Cells["columnPrecio"].Value);
+                ubicacion.Descripcion = Convert.ToString(row.Cells["columnDescripcion"].Value);
+
+
+                Ubicaciones.Add(ubicacion);
             }
+
+            bindingSource = new BindingSource();
+            Ubicaciones.ForEach(u => bindingSource.Add(u));
+        }
+
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("¿Desea eliminar las Ubicaciones actuales del evento?", "Confirmar Eliminación", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                dataGridViewUbicaciones.Rows.Clear();
+                FromDataGridToList();
+            }
+                
         }
 
         

@@ -25,8 +25,18 @@ namespace PalcoNet.Comprar
             InitializeComponent();
         }
 
+        private ValidatorData ValidateForm()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtTarjetaCredito.Text, ValidatorData.REGEX_TARJETA_CREDITO);
+            return validator;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (ValidatorData.validateEmptyFields(this.groupBoxTarjetaCredito)) return;
+            if (ValidateForm().ShowIfThereAreErrors()) return;
+
             repoCliente.AddNroTarjetaCredito(UserSession.UserId, txtTarjetaCredito.Text);
             this.DialogResult = DialogResult.OK;        
                  
