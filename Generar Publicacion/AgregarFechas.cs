@@ -23,21 +23,20 @@ namespace PalcoNet.Generar_Publicacion
 
         String errorMessage;
 
+
         public FormAgregarFechas(List<Publicacion> list)
         {
             InitializeComponent();
 
-            newPublicacion.FechaInicio = DateTime.MinValue;
             newPublicacion.FechaEvento = DateTime.MinValue;
 
-            dateTimePickerFechaInicio.Value = SystemDate.GetDate();
             dateTimePickerFechaEvento.Value = SystemDate.GetDate().AddDays(7);
 
             this.publicacionList = list;
 
             foreach (Publicacion p in publicacionList)
             {
-                dataGridViewFechas.Rows.Add(p.FechaInicio, p.FechaEvento);
+                dataGridViewFechas.Rows.Add(p.FechaEvento);
             }
 
 
@@ -48,12 +47,11 @@ namespace PalcoNet.Generar_Publicacion
             if (CheckDatesOK())
             {
                 newPublicacion = new Publicacion();
-                newPublicacion.FechaInicio = dateTimePickerFechaInicio.Value;
                 newPublicacion.FechaEvento = dateTimePickerFechaEvento.Value;
 
                 publicacionList.Add(newPublicacion);
 
-                dataGridViewFechas.Rows.Add(newPublicacion.FechaInicio, newPublicacion.FechaEvento);
+                dataGridViewFechas.Rows.Add(newPublicacion.FechaEvento);
             }
             else
             {
@@ -68,9 +66,8 @@ namespace PalcoNet.Generar_Publicacion
         {
             int errorCount = 0;
 
-            if (dateTimePickerFechaInicio.Value < SystemDate.GetDate()) { errorMessage += "La fecha de inicio no puede ser anterior a la fecha actual.\n"; errorCount++; }
-            if (dateTimePickerFechaEvento.Value <= dateTimePickerFechaInicio.Value) { errorMessage += "La fecha evento debe ser posterior a la fecha inicio.\n"; errorCount++; };
-            if (dateTimePickerFechaInicio.Value <= newPublicacion.FechaInicio || dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las fechas a ingresar deben ser posteriores a las ultimas ingresadas.\n"; errorCount++; };
+            if (dateTimePickerFechaEvento.Value <= SystemDate.GetDate()) { errorMessage += "La Fecha de Evento no puede igual o menor a la fecha actual.\n"; errorCount++; }
+            if (dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las fechas a ingresar deben ser posteriores a las últimas ingresadas.\n"; errorCount++; };
 
             return errorCount == 0;       
         }
@@ -94,26 +91,19 @@ namespace PalcoNet.Generar_Publicacion
                 foreach (DataGridViewRow row in dataGridViewFechas.Rows)
                 {
                     Publicacion publicacion = new Publicacion();
-                    publicacion.FechaInicio = Convert.ToDateTime(row.Cells["columnFechaInicio"].Value);
                     publicacion.FechaEvento = Convert.ToDateTime(row.Cells["columnFechaEvento"].Value);
 
                     publicacionList.Add(publicacion);
                 }
 
 
-                //setear el ultimo par de fechas de la lista para compararlos con el proximo ingreso
+                //Setear el ultimo par de fechas de la lista para compararlos con el proximo ingreso
                 int lastIndex = publicacionList.Count - 1;
 
                 if (lastIndex == -1)
-                {
-                    newPublicacion.FechaInicio = DateTime.MinValue;
                     newPublicacion.FechaEvento = DateTime.MinValue;
-                }
                 else
-                {
                     newPublicacion = publicacionList[lastIndex];
-                }
-
 
             }
             

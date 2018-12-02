@@ -56,6 +56,12 @@ namespace PalcoNet.Generar_Publicacion
 
         private void btnPublicar_Click(object sender, EventArgs e)
         {
+            if (publicacionToEdit.FechaEvento <= SystemDate.GetDate())
+            {
+                MessageBox.Show("La fecha del evento a publicar es anterior a la fecha actual.", "Error");
+                return;
+            }
+
             DialogResult dialogResult = MessageBox.Show("¿Desea publicar el evento seleccionado?", "Publicar Evento", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
@@ -77,8 +83,7 @@ namespace PalcoNet.Generar_Publicacion
                 if (result == DialogResult.OK)
                 {
                     form.Close();
-                    RefreshDataGridViewPublicacion();
-                    
+                    RefreshDataGridViewPublicacion();             
                 }
 
             }
@@ -98,8 +103,7 @@ namespace PalcoNet.Generar_Publicacion
         }
 
         private void OnSelectionChanged(object sender, EventArgs e)
-        {
-            //hacer case para habilitar los botones, segun los estados de las publicaciones.....
+        {           
             if (this.dataGridViewPublicaciones.SelectedRows.Count == 1)
             {
                 DataGridViewRow row = dataGridViewPublicaciones.SelectedRows[0];
@@ -153,7 +157,6 @@ namespace PalcoNet.Generar_Publicacion
 
             publicacion.Codigo = Convert.ToInt64(row.Cells[columnCodigo.Name].Value);
             publicacion.Descripcion = row.Cells[columnDescripcion.Name].Value.ToString();
-            publicacion.FechaInicio = Convert.ToDateTime(row.Cells[columnFechaInicio.Name].Value);
             publicacion.FechaEvento = Convert.ToDateTime(row.Cells[columnFechaEvento.Name].Value);
             publicacion.Direccion = row.Cells[columnDireccion.Name].Value.ToString();
             
@@ -172,8 +175,6 @@ namespace PalcoNet.Generar_Publicacion
             Estado estado = new Estado();
             estado.Descripcion = row.Cells[columnEstado.Name].Value.ToString();
             publicacion.Estado = estado;
-
-
 
             return publicacion;
 
