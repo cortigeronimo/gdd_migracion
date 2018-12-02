@@ -23,18 +23,30 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
         public PublicacionesDeEmpresa(int idEmpresa)
         {
             InitializeComponent();
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridPublicacionesPorFacturar.RowHeadersVisible = false;
+            this.dataGridPublicacionesPorFacturar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.empresa = repoEmpresa.FindEmpresaById(idEmpresa);
-            List<PublicacionPorFacturarDTO> publicacionesPorFacturar
-                = repoPublicacion.FindPublicacionesAFacturar(idEmpresa);
-            dataGridView1.DataSource = new BindingSource();
+            btnActualizar_Click(null, null);
             lblEmpresa.Text = empresa.razonSocial;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            PublicacionPorFacturarDTO publicacionPorFacturar 
+                = (PublicacionPorFacturarDTO)dataGridPublicacionesPorFacturar.CurrentRow.DataBoundItem;
 
+            if (e.ColumnIndex == dataGridPublicacionesPorFacturar.Columns.IndexOf(this.columnFacturar))
+            {
+                Form publicacionesEmpresa = new ComprasDePublicacionAFacturar(publicacionPorFacturar.Codigo);
+                publicacionesEmpresa.ShowDialog();
+            }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            List<PublicacionPorFacturarDTO> publicacionesPorFacturar
+                = repoPublicacion.FindPublicacionesAFacturar(empresa.id);
+            dataGridPublicacionesPorFacturar.DataSource = new BindingSource(publicacionesPorFacturar, String.Empty);
         }
 
     }

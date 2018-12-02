@@ -248,6 +248,8 @@
             this.groupBoxGenerarPublicacion.Controls.Add(this.dateTimePickerFechaEvento);
             this.groupBoxGenerarPublicacion.Controls.Add(this.btnAgregarUbicaciones);
             this.groupBoxGenerarPublicacion.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxGenerarPublicacion.MaximumSize = new System.Drawing.Size(513, 247);
+            this.groupBoxGenerarPublicacion.MinimumSize = new System.Drawing.Size(513, 247);
             this.groupBoxGenerarPublicacion.Name = "groupBoxGenerarPublicacion";
             this.groupBoxGenerarPublicacion.Size = new System.Drawing.Size(513, 247);
             this.groupBoxGenerarPublicacion.TabIndex = 23;
@@ -262,6 +264,8 @@
             this.Controls.Add(this.groupBoxGenerarPublicacion);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGuardar);
+            this.MaximumSize = new System.Drawing.Size(553, 354);
+            this.MinimumSize = new System.Drawing.Size(553, 354);
             this.Name = "FormGenerarPublicacion";
             this.Text = "Generar Publicación";
             this.groupBoxGenerarPublicacion.ResumeLayout(false);

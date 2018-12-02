@@ -48,7 +48,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewPublicaciones = new System.Windows.Forms.DataGridView();
-            this.columnComprar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaInicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +58,7 @@
             this.empresaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnComprar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.publicacionDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBoxFiltroEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
@@ -68,7 +68,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(317, 609);
+            this.label4.Location = new System.Drawing.Point(341, 690);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 13);
             this.label4.TabIndex = 13;
@@ -77,7 +77,7 @@
             // txtActualPage
             // 
             this.txtActualPage.Enabled = false;
-            this.txtActualPage.Location = new System.Drawing.Point(276, 607);
+            this.txtActualPage.Location = new System.Drawing.Point(300, 688);
             this.txtActualPage.Name = "txtActualPage";
             this.txtActualPage.Size = new System.Drawing.Size(33, 20);
             this.txtActualPage.TabIndex = 12;
@@ -85,14 +85,14 @@
             // txtTotalPage
             // 
             this.txtTotalPage.Enabled = false;
-            this.txtTotalPage.Location = new System.Drawing.Point(342, 607);
+            this.txtTotalPage.Location = new System.Drawing.Point(366, 688);
             this.txtTotalPage.Name = "txtTotalPage";
             this.txtTotalPage.Size = new System.Drawing.Size(33, 20);
             this.txtTotalPage.TabIndex = 11;
             // 
             // btnBackPage
             // 
-            this.btnBackPage.Location = new System.Drawing.Point(233, 605);
+            this.btnBackPage.Location = new System.Drawing.Point(257, 686);
             this.btnBackPage.Name = "btnBackPage";
             this.btnBackPage.Size = new System.Drawing.Size(37, 23);
             this.btnBackPage.TabIndex = 10;
@@ -102,7 +102,7 @@
             // 
             // btnFirstPage
             // 
-            this.btnFirstPage.Location = new System.Drawing.Point(190, 605);
+            this.btnFirstPage.Location = new System.Drawing.Point(214, 686);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(37, 23);
             this.btnFirstPage.TabIndex = 9;
@@ -112,7 +112,7 @@
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Location = new System.Drawing.Point(381, 605);
+            this.btnNextPage.Location = new System.Drawing.Point(405, 686);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(37, 23);
             this.btnNextPage.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // btnLastPage
             // 
-            this.btnLastPage.Location = new System.Drawing.Point(424, 605);
+            this.btnLastPage.Location = new System.Drawing.Point(448, 686);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(37, 23);
             this.btnLastPage.TabIndex = 7;
@@ -132,7 +132,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(561, 161);
+            this.btnBuscar.Location = new System.Drawing.Point(611, 161);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 6;
@@ -162,7 +162,7 @@
             this.groupBoxFiltroEventos.Controls.Add(this.label1);
             this.groupBoxFiltroEventos.Location = new System.Drawing.Point(12, 21);
             this.groupBoxFiltroEventos.Name = "groupBoxFiltroEventos";
-            this.groupBoxFiltroEventos.Size = new System.Drawing.Size(624, 120);
+            this.groupBoxFiltroEventos.Size = new System.Drawing.Size(674, 120);
             this.groupBoxFiltroEventos.TabIndex = 4;
             this.groupBoxFiltroEventos.TabStop = false;
             this.groupBoxFiltroEventos.Text = "Filtros de Búsqueda";
@@ -170,7 +170,7 @@
             // checkBoxRangoFecha
             // 
             this.checkBoxRangoFecha.AutoSize = true;
-            this.checkBoxRangoFecha.Location = new System.Drawing.Point(472, 81);
+            this.checkBoxRangoFecha.Location = new System.Drawing.Point(486, 81);
             this.checkBoxRangoFecha.Name = "checkBoxRangoFecha";
             this.checkBoxRangoFecha.Size = new System.Drawing.Size(106, 17);
             this.checkBoxRangoFecha.TabIndex = 9;
@@ -193,7 +193,7 @@
             this.dateTimePickerFechaHasta.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePickerFechaHasta.Enabled = false;
             this.dateTimePickerFechaHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerFechaHasta.Location = new System.Drawing.Point(263, 81);
+            this.dateTimePickerFechaHasta.Location = new System.Drawing.Point(277, 81);
             this.dateTimePickerFechaHasta.Name = "dateTimePickerFechaHasta";
             this.dateTimePickerFechaHasta.Size = new System.Drawing.Size(185, 20);
             this.dateTimePickerFechaHasta.TabIndex = 7;
@@ -203,7 +203,7 @@
             this.dateTimePickerFechaDesde.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePickerFechaDesde.Enabled = false;
             this.dateTimePickerFechaDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerFechaDesde.Location = new System.Drawing.Point(51, 81);
+            this.dateTimePickerFechaDesde.Location = new System.Drawing.Point(65, 81);
             this.dateTimePickerFechaDesde.Name = "dateTimePickerFechaDesde";
             this.dateTimePickerFechaDesde.Size = new System.Drawing.Size(185, 20);
             this.dateTimePickerFechaDesde.TabIndex = 6;
@@ -218,7 +218,7 @@
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(393, 41);
+            this.txtDescripcion.Location = new System.Drawing.Point(455, 42);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(185, 20);
             this.txtDescripcion.TabIndex = 4;
@@ -227,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(390, 25);
+            this.label2.Location = new System.Drawing.Point(452, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 2;
@@ -264,15 +264,9 @@
             this.dataGridViewPublicaciones.Location = new System.Drawing.Point(12, 201);
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
-            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(624, 387);
+            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(674, 479);
             this.dataGridViewPublicaciones.TabIndex = 0;
             this.dataGridViewPublicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPublicaciones_CellContentClick);
-            // 
-            // columnComprar
-            // 
-            this.columnComprar.HeaderText = "Comprar";
-            this.columnComprar.Name = "columnComprar";
-            this.columnComprar.ReadOnly = true;
             // 
             // codigoDataGridViewTextBoxColumn
             // 
@@ -282,7 +276,6 @@
             this.codigoDataGridViewTextBoxColumn.Name = "codigoDataGridViewTextBoxColumn";
             this.codigoDataGridViewTextBoxColumn.ReadOnly = true;
             this.codigoDataGridViewTextBoxColumn.Visible = false;
-            this.codigoDataGridViewTextBoxColumn.Width = 65;
             // 
             // fechaInicioDataGridViewTextBoxColumn
             // 
@@ -292,7 +285,6 @@
             this.fechaInicioDataGridViewTextBoxColumn.Name = "fechaInicioDataGridViewTextBoxColumn";
             this.fechaInicioDataGridViewTextBoxColumn.ReadOnly = true;
             this.fechaInicioDataGridViewTextBoxColumn.Visible = false;
-            this.fechaInicioDataGridViewTextBoxColumn.Width = 87;
             // 
             // descripcionDataGridViewTextBoxColumn
             // 
@@ -338,7 +330,6 @@
             this.gradoDataGridViewTextBoxColumn.Name = "gradoDataGridViewTextBoxColumn";
             this.gradoDataGridViewTextBoxColumn.ReadOnly = true;
             this.gradoDataGridViewTextBoxColumn.Visible = false;
-            this.gradoDataGridViewTextBoxColumn.Width = 61;
             // 
             // empresaDataGridViewTextBoxColumn
             // 
@@ -348,7 +339,6 @@
             this.empresaDataGridViewTextBoxColumn.Name = "empresaDataGridViewTextBoxColumn";
             this.empresaDataGridViewTextBoxColumn.ReadOnly = true;
             this.empresaDataGridViewTextBoxColumn.Visible = false;
-            this.empresaDataGridViewTextBoxColumn.Width = 73;
             // 
             // estadoDataGridViewTextBoxColumn
             // 
@@ -358,7 +348,6 @@
             this.estadoDataGridViewTextBoxColumn.Name = "estadoDataGridViewTextBoxColumn";
             this.estadoDataGridViewTextBoxColumn.ReadOnly = true;
             this.estadoDataGridViewTextBoxColumn.Visible = false;
-            this.estadoDataGridViewTextBoxColumn.Width = 65;
             // 
             // stockDataGridViewTextBoxColumn
             // 
@@ -369,6 +358,12 @@
             this.stockDataGridViewTextBoxColumn.ReadOnly = true;
             this.stockDataGridViewTextBoxColumn.Width = 60;
             // 
+            // columnComprar
+            // 
+            this.columnComprar.HeaderText = "Comprar";
+            this.columnComprar.Name = "columnComprar";
+            this.columnComprar.ReadOnly = true;
+            // 
             // publicacionDTOBindingSource
             // 
             this.publicacionDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionDTO);
@@ -377,7 +372,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 647);
+            this.ClientSize = new System.Drawing.Size(698, 721);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtActualPage);
             this.Controls.Add(this.txtTotalPage);
@@ -389,6 +384,8 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxFiltroEventos);
             this.Controls.Add(this.dataGridViewPublicaciones);
+            this.MaximumSize = new System.Drawing.Size(714, 760);
+            this.MinimumSize = new System.Drawing.Size(714, 760);
             this.Name = "FormComprar";
             this.Text = "Comprar";
             this.Load += new System.EventHandler(this.FormComprar_Load);

@@ -165,6 +165,7 @@
     <Compile Include="Config\Hashing.cs" />
     <Compile Include="Config\UserSession.cs" />
     <Compile Include="Config\SystemDate.cs" />
+    <Compile Include="DTO\CompraPorFacturarDTO.cs" />
     <Compile Include="DTO\EmpresaPorFacturarDTO.cs" />
     <Compile Include="DTO\PremioDTO.cs" />
     <Compile Include="DTO\PublicacionDTO.cs" />
@@ -200,6 +201,12 @@
     <Compile Include="Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Rendicion Comisiones\ComprasDePublicacionAFacturar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Rendicion Comisiones\ComprasDePublicacionAFacturar.Designer.cs">
+      <DependentUpon>ComprasDePublicacionAFacturar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Generar Rendicion Comisiones\PublicacionesDeEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +231,7 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\Compra.cs" />
     <Compile Include="Modelo\DetalleCompra.cs" />
     <Compile Include="Modelo\Empresa.cs" />
     <Compile Include="Modelo\Estado.cs" />
@@ -379,6 +387,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Rendicion Comisiones\ComprasDePublicacionAFacturar.resx">
+      <DependentUpon>ComprasDePublicacionAFacturar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Generar Rendicion Comisiones\PublicacionesDeEmpresa.resx">
       <DependentUpon>PublicacionesDeEmpresa.cs</DependentUpon>

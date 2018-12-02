@@ -21,5 +21,13 @@ namespace PalcoNet.Repositorios
             cmd.CommandType = CommandType.StoredProcedure;
             return Conexion.GetData(cmd);
         }
+
+        public DataTable GetAllEstados()
+        {
+            String query = "SELECT * FROM PLEASE_HELP.Estado";
+            SqlCommand cmd = new SqlCommand(query);
+
+            return Conexion.GetData(cmd);
+        }
     }
 }

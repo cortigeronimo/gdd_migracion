@@ -27,6 +27,8 @@ namespace PalcoNet.Generar_Publicacion
         public FormAgregarFechas(List<Publicacion> list)
         {
             InitializeComponent();
+            dataGridViewFechas.AllowUserToResizeRows = false;
+            dataGridViewFechas.RowHeadersVisible = false;
 
             newPublicacion.FechaEvento = DateTime.MinValue;
 
@@ -67,7 +69,7 @@ namespace PalcoNet.Generar_Publicacion
             int errorCount = 0;
 
             if (dateTimePickerFechaEvento.Value <= SystemDate.GetDate()) { errorMessage += "La Fecha de Evento no puede igual o menor a la fecha actual.\n"; errorCount++; }
-            if (dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las fechas a ingresar deben ser posteriores a las últimas ingresadas.\n"; errorCount++; };
+            if (dateTimePickerFechaEvento.Value <= newPublicacion.FechaEvento) { errorMessage += "Las Fechas de Evento a ingresar deben ser posteriores a las últimas ingresadas.\n"; errorCount++; };
 
             return errorCount == 0;       
         }

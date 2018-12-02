@@ -8,7 +8,7 @@ namespace PalcoNet.DTO
 {
     public class PublicacionPorFacturarDTO
     {
-        public long Codigo { get; set; }
+        public decimal Codigo { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaEvento { get; set; }
         public String Descripcion { get; set; }
@@ -17,7 +17,7 @@ namespace PalcoNet.DTO
         public String Grado { get; set; }
         public int Comision { get; set; }
         public int CantidadCompras { get; set; }
-        public float MontoTotal { get; set; }
+        public Decimal MontoTotal { get; set; }
 
     }
 }

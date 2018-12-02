@@ -30,27 +30,31 @@ namespace PalcoNet.Comprar
             txtEmailFacturacion.Text = repoCliente.GetEmailCliente(UserSession.UserId);
         }
 
+        private ValidatorData ValidateForm()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtEmailFacturacion.Text, ValidatorData.REGEX_EMAIL);
+            return validator;
+        }
+
         private void btnAceptarMedioDePago_Click(object sender, EventArgs e)
         {
+            if (ValidatorData.validateEmptyFields(this.groupBoxMedioPago)) return;
+            if (ValidateForm().ShowIfThereAreErrors()) return;
+
             medioDePago = comboBoxMedioPago.SelectedItem.ToString();
             compraEmail = txtEmailFacturacion.Text;
 
-            if (CheckData.Email(compraEmail))
-                this.DialogResult = DialogResult.OK;
-            else
-                MessageBox.Show("Ingrese un email válido para continuar con la compra.", "Error");
+            this.DialogResult = DialogResult.OK;
                                  
         }
-
-        private void FormMediosDePago_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //this.DialogResult = DialogResult.Cancel;
-        }
-
+     
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
+        
 
 
 

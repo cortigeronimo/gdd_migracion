@@ -11,7 +11,7 @@ namespace PalcoNet.Modelo
 {
     public class Publicacion
     {
-        public long Codigo { get; set; }
+        public decimal Codigo { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaEvento { get; set; }
         public String Descripcion { get; set; }
@@ -20,10 +20,7 @@ namespace PalcoNet.Modelo
         public Grado Grado { get; set; }
         public Empresa Empresa { get; set; }
         public Estado Estado { get; set; }
-
         public List<Ubicacion> Ubicaciones { get; set; }
-
-        public int Stock { get; set; }
 
     }
 }
