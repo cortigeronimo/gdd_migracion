@@ -88,6 +88,7 @@ namespace PalcoNet.Abm_Rol
                 if (confirmResult == DialogResult.Yes)
                 {
                     repoRol.DeleteRol(rol);
+                    this.dataGridRoles.Rows.Remove(this.dataGridRoles.CurrentRow);
                     MessageBox.Show("Rol "+ rol.Nombre + " eliminado");
                 }
             }
@@ -95,7 +96,8 @@ namespace PalcoNet.Abm_Rol
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-
+            txtNombre.Clear();
+            txtFuncionalidad.Clear();
         }
     }
 }
