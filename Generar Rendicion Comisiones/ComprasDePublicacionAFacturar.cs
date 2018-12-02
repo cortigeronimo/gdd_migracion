@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
@@ -18,14 +19,18 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         RepoCompra repoCompra = new RepoCompra();
 
+        RepoFacturas repoFacturas = new RepoFacturas();
+
         List<DetalleCompra> compras = new List<DetalleCompra>();
+
+        Publicacion publicacion;
 
         public ComprasDePublicacionAFacturar(decimal id)
         {
             InitializeComponent();
             dataGridCompras.RowHeadersVisible = false;
             dataGridCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Publicacion publicacion = repoPublicacion.FindById(id);
+            publicacion = repoPublicacion.FindById(id);
             lblTituloPublicacion.Text = "#" + publicacion.Codigo + ": " + publicacion.Descripcion;
             compras = repoCompra.FindComprasToCheckIn(publicacion.Codigo);
             dataGridCompras.DataSource = new BindingSource(compras, String.Empty);
@@ -35,7 +40,24 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         private void btnRendir_Click(object sender, EventArgs e)
         {
-            
+            int cantidadARendir = Convert.ToInt32(numCantidadARendir.Value);
+            if (cantidadARendir > compras.Count)
+            {
+                MessageBox.Show("No puede rendir más compras de las que faltan por rendir.");
+                return;
+            }
+            try
+            {
+                repoFacturas.RendirComisiones(cantidadARendir, publicacion.Codigo);
+                compras.RemoveRange(0, cantidadARendir);
+                dataGridCompras.DataSource = new BindingSource(compras, String.Empty);
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                MessageBox.Show(Messages.ERROR_INESPERADO);
+            }
         }
 
     }

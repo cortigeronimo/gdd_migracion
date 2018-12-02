@@ -22,11 +22,11 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
             try
             {
                 repoCliente.InsertCliente(cliente);
-                MessageBox.Show(Messagges.OPERACION_EXITOSA);
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
             }
             catch (Exception)
             {
-                MessageBox.Show(Messagges.ERROR_INESPERADO);
+                MessageBox.Show(Messages.ERROR_INESPERADO);
             }
         }
     }

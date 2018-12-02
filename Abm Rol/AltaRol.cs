@@ -79,10 +79,10 @@ namespace PalcoNet.Abm_Rol
             {
                 repoRol.CreateRol(nuevoRol);
                 this.DialogResult = DialogResult.OK;
-                MessageBox.Show(Messagges.OPERACION_EXITOSA);
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
             }
             catch (Exception) {
-                MessageBox.Show(Messagges.ERROR_INESPERADO);
+                MessageBox.Show(Messages.ERROR_INESPERADO);
             }
             
             this.Close();

@@ -122,6 +122,7 @@ IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP 
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
 
+IF OBJECT_ID('PLEASE_HELP.SP_RENDIR_COMISIONES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES;
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -842,6 +843,11 @@ BEGIN
 	AND p.Pub_Estado = @estadoId
 	LEFT JOIN PLEASE_HELP.Ubicacion u
 	ON u.Ubicacion_Publicacion = p.Pub_Codigo
+	LEFT JOIN PLEASE_HELP.Compra c
+	ON c.Compra_Asiento = u.Ubicacion_Asiento
+	AND c.Compra_Fila = u.Ubicacion_Fila
+	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+	AND c.Compra_Fecha_Rendida IS NULL
 	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END
@@ -895,6 +901,56 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES(@cantidadARendir int, @idPublicacion NUMERIC(18,0))
+AS
+BEGIN
+	IF (SELECT COUNT(c.Compra_Id) 
+		FROM PLEASE_HELP.Compra c 
+		WHERE c.Compra_Publicacion = @idPublicacion
+		AND c.Compra_Fecha_Rendida IS NULL) >= @cantidadARendir
+	BEGIN
+		DECLARE @empresa int, @idFactura NUMERIC(18,0), @total NUMERIC(18,0)
+		SET @total = 0
+
+		SELECT @empresa = p.Pub_Empresa 
+				FROM PLEASE_HELP.Publicacion p
+				WHERE p.Pub_Codigo = @idPublicacion
+
+		INSERT INTO PLEASE_HELP.Factura 
+			VALUES (GETDATE(), 0, @empresa)
+
+		SET @idFactura = @@IDENTITY
+		DECLARE @idCompra int, @monto NUMERIC(18,2), @descripcion NVARCHAR(60)
+
+		WHILE @cantidadARendir > 0
+			BEGIN
+
+				SELECT TOP 1 @idCompra = c.Compra_Id, 
+				@monto = u.Ubicacion_Precio,
+				@descripcion = u.Ubicacion_Descripcion  
+				FROM PLEASE_HELP.Compra c
+				JOIN PLEASE_HELP.Ubicacion u
+				ON c.Compra_Asiento = u.Ubicacion_Asiento
+				AND c.Compra_Fila = u.Ubicacion_Fila
+				AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+				WHERE c.Compra_Publicacion = @idPublicacion
+				AND c.Compra_Fecha_Rendida IS NULL
+				ORDER BY c.Compra_Fecha ASC
+
+				INSERT INTO PLEASE_HELP.Item VALUES 
+				(@monto, 1, @descripcion, @idFactura, @idCompra)
+
+				UPDATE PLEASE_HELP.Compra SET Compra_Fecha_Rendida = GETDATE()
+				WHERE Compra_Id = @idCompra
+
+				SET @total = @total + @monto
+				SET @cantidadARendir = @cantidadARendir - 1
+			END
+
+			UPDATE PLEASE_HELP.Factura SET Factura_Total = @total WHERE Factura_Nro = @idFactura
+	END
+END
+GO
 
 -- STORED PROCEDURES EDITAR PUBLICACION
 

@@ -160,12 +160,12 @@ namespace PalcoNet.Comprar
                 try
                 {
                     repoCompra.GenerateCompras(ubicacionesAComprar, UserSession.UserId, medioDePago, compraEmail);
-                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
+                    MessageBox.Show(Messages.OPERACION_EXITOSA, "Message");
                     this.DialogResult = DialogResult.OK;
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
+                    MessageBox.Show(Messages.ERROR_INESPERADO, "Message");
                 }
 
             }
