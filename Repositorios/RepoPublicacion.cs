@@ -16,10 +16,10 @@ namespace PalcoNet.Repositorios
 {
     public class RepoPublicacion : Repository
     {
-        private String publicacionTable = "PLEASE_HELP.Publicacion";
+        private String table = "PLEASE_HELP.Publicacion";
 
 
-        public Boolean ExistsPublicacionMismaHora(long codigoPublicacion, String descripcion, DateTime fechaHora)
+        public Boolean ExistsPublicacionMismaHora(decimal codigoPublicacion, String descripcion, DateTime fechaHora)
         {
             String query = "PLEASE_HELP.SP_PUBLICACIONES_MISMA_FECHAHORA";
 
@@ -33,6 +33,33 @@ namespace PalcoNet.Repositorios
             DataTable result = Conexion.GetData(cmd);
 
             return result.Rows.Count != 0;
+
+        }
+
+        public Publicacion FindById(decimal id)
+        {
+            String query = "SELECT * FROM " + table + " WHERE Pub_Codigo = @idPublicacion";
+
+            SqlCommand cmd = new SqlCommand(query);
+
+            cmd.Parameters.AddWithValue("@idPublicacion", id);
+
+            return FromRowsToPublicacion(Conexion.GetData(cmd))[0];
+        }
+
+        private List<Publicacion> FromRowsToPublicacion(DataTable table) {
+            List<Publicacion> publicaciones = new List<Publicacion>();
+            foreach (DataRow row in table.Rows)
+            {
+                Publicacion publicacion = new Publicacion();
+                publicacion.Codigo = GetValueOrNull<decimal>(row["Pub_Codigo"]);
+                publicacion.FechaInicio = GetValueOrNull<DateTime>(row["Pub_Fecha_Inicio"]);
+                publicacion.FechaEvento = GetValueOrNull<DateTime>(row["Pub_Fecha_Evento"]);
+                publicacion.Descripcion = GetValueOrNull<String>(row["Pub_Descripcion"]);
+                publicacion.Direccion = GetValueOrNull<String>(row["Pub_Direccion"]);
+                publicaciones.Add(publicacion);
+            }
+            return publicaciones;
 
         }
 
@@ -54,7 +81,7 @@ namespace PalcoNet.Repositorios
             foreach (DataRow row in table.Rows)
             {
                 PublicacionPorFacturarDTO publicacionAFacturar = new PublicacionPorFacturarDTO();
-                publicacionAFacturar.Codigo = GetValueOrNull<long>(row["Pub_Codigo"]);
+                publicacionAFacturar.Codigo = GetValueOrNull<decimal>(row["Pub_Codigo"]);
                 publicacionAFacturar.FechaInicio = GetValueOrNull<DateTime>(row["Pub_Fecha_Inicio"]);
                 publicacionAFacturar.FechaEvento = GetValueOrNull<DateTime>(row["Pub_Fecha_Evento"]);
                 publicacionAFacturar.Descripcion = GetValueOrNull<String>(row["Pub_Descripcion"]);
@@ -63,7 +90,7 @@ namespace PalcoNet.Repositorios
                 publicacionAFacturar.Grado = GetValueOrNull<String>(row["Grado"]);
                 publicacionAFacturar.Comision = GetValueOrNull<int>(row["Comision"]);
                 publicacionAFacturar.CantidadCompras = GetValueOrNull<int>(row["Cantidad Compras"]);
-                publicacionAFacturar.MontoTotal = GetValueOrNull<float>(row["Monto Por Facturar"]);
+                publicacionAFacturar.MontoTotal = GetValueOrNull<Decimal>(row["Monto Por Facturar"]);
                 publicacionesAFacturar.Add(publicacionAFacturar);
             }
             return publicacionesAFacturar;
@@ -199,10 +226,10 @@ namespace PalcoNet.Repositorios
 
             DataTable publicacionesTable = Conexion.GetData(cmd);
 
-            return FromRowsToList(publicacionesTable);
+            return FromRowsToPublicacionDTO(publicacionesTable);
         }
 
-        private List<PublicacionDTO> FromRowsToList(DataTable publicacionesTable)
+        private List<PublicacionDTO> FromRowsToPublicacionDTO(DataTable publicacionesTable)
         {
             List<PublicacionDTO> publicacionesList = new List<PublicacionDTO>();
 
@@ -256,7 +283,7 @@ namespace PalcoNet.Repositorios
 
             if (rubrosList.Count == 0)
             {
-                return FromRowsToList(sourceTable);
+                return FromRowsToPublicacionDTO(sourceTable);
             }
             else
             {
@@ -283,7 +310,7 @@ namespace PalcoNet.Repositorios
                 if (filteredRows.Any())
                     filteredTable = filteredRows.CopyToDataTable();
 
-                return FromRowsToList(filteredTable);
+                return FromRowsToPublicacionDTO(filteredTable);
             }
 
             
