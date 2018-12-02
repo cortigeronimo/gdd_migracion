@@ -14,7 +14,7 @@ using PalcoNet.DTO;
 
 namespace PalcoNet.Repositorios
 {
-    public class RepoPublicacion
+    public class RepoPublicacion : Repository
     {
         private String publicacionTable = "PLEASE_HELP.Publicacion";
 
@@ -36,6 +36,38 @@ namespace PalcoNet.Repositorios
 
         }
 
+        public List<PublicacionPorFacturarDTO> FindPublicacionesAFacturar(int? idEmpresa)
+        {
+            String query = "PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR";
+
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@idEmpresa", idEmpresa);
+
+            return FromRowsToPublicacionPorFacturar(Conexion.GetData(cmd));
+        }
+
+        private List<PublicacionPorFacturarDTO> FromRowsToPublicacionPorFacturar(DataTable table)
+        {
+            List<PublicacionPorFacturarDTO> publicacionesAFacturar = new List<PublicacionPorFacturarDTO>();
+            foreach (DataRow row in table.Rows)
+            {
+                PublicacionPorFacturarDTO publicacionAFacturar = new PublicacionPorFacturarDTO();
+                publicacionAFacturar.Codigo = GetValueOrNull<long>(row["Pub_Codigo"]);
+                publicacionAFacturar.FechaInicio = GetValueOrNull<DateTime>(row["Pub_Fecha_Inicio"]);
+                publicacionAFacturar.FechaEvento = GetValueOrNull<DateTime>(row["Pub_Fecha_Evento"]);
+                publicacionAFacturar.Descripcion = GetValueOrNull<String>(row["Pub_Descripcion"]);
+                publicacionAFacturar.Direccion = GetValueOrNull<String>(row["Pub_Direccion"]);
+                publicacionAFacturar.Rubro = GetValueOrNull<String>(row["Rubro"]);
+                publicacionAFacturar.Grado = GetValueOrNull<String>(row["Grado"]);
+                publicacionAFacturar.Comision = GetValueOrNull<int>(row["Comision"]);
+                publicacionAFacturar.CantidadCompras = GetValueOrNull<int>(row["Cantidad Compras"]);
+                publicacionAFacturar.MontoTotal = GetValueOrNull<float>(row["Monto Por Facturar"]);
+                publicacionesAFacturar.Add(publicacionAFacturar);
+            }
+            return publicacionesAFacturar;
+        }
 
         public void InsertOrUpdatePublicacion(Publicacion publicacion)
         {

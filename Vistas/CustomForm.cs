@@ -20,7 +20,7 @@ namespace PalcoNet.Vistas
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-            FormManager.getInstance().CloseForm(this);
+            FormManager.GetInstance().CloseForm(this);
         }
 
         //protected abstract void InitializeElements();

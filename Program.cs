@@ -17,8 +17,8 @@ namespace PalcoNet
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //minimiza la ventana que dispara un evento en el cual oculta la ventana
-            FormManager.getInstance().WindowState = FormWindowState.Minimized;
-            Application.Run(FormManager.getInstance());
+            FormManager.GetInstance().WindowState = FormWindowState.Minimized;
+            Application.Run(FormManager.GetInstance());
         }
     }
 }
