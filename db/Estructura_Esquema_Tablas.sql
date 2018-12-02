@@ -122,6 +122,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP 
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
 
+IF OBJECT_ID('PLEASE_HELP.SP_TOP5_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_EMPRESAS;
+
 
 -- CREANDO TRIGGERS SI NO EXISTEN
 
@@ -1147,3 +1149,41 @@ BEGIN
 END
 GO
 
+--Listado estadistico empresas con mayor cantidad de localidades no vendidas
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_EMPRESAS](@anio INT, @trimestre INT)
+AS
+BEGIN
+
+DECLARE @mes1 int
+DECLARE @mes2 int
+DECLARE @mes3 int
+
+SET @mes1 = (@trimestre - 1) * 3 + 1
+SET @mes2 = (@trimestre - 1) * 3 + 2
+SET @mes3 = (@trimestre - 1) * 3 + 3
+
+
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes1
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+UNION
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes2
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+UNION
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes3
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+ORDER BY month(p.Pub_Fecha_Evento) asc, count(u.Ubicacion_Publicacion) desc;
+
+END
+GO
