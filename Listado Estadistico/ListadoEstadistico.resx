@@ -117,39 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Rol_Nombre.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="RolHabilitado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Seleccionar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Seleccionar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EwAACxMBAJqcGAAAAN1JREFUOE+V0jEOwWAAxfFiFeIWDAYRDIhLGCw4gs0gYXYDVzC4gyMYnICQGAmL
-        Bf/3RZum+fq1fckv6Vfeq8D7p4ORQwl+6uihYE5E5a/DEn7KuEH398jDPEE3zthGzOCniymqOEEdPTwY
-        UCEu+shP6H0baOSCGhIHwmXfGEWYuAZUfiFcvqOFIHEDfbjKOVR0YRuwlR9oQ1F5jaEOtoEV4srKHLpv
-        HThigAlsZWWH2AFdv6GRBcxvHUnigBzMyR7nQJpYB/TP0gtpXBEM6AvSIasPGjBpQmtZUPa8Hx8FeJZ4
-        eUOIAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="Eliminar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Eliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAACPSURBVDhPzc2xDYQwDIXhMAPL0NAcjMAEDHM9e9wetIxA
-        S0kBBQXH+yUjUQSckid9kuU4dnhdCmmklVn+hpoeb8zc5ifnpzvMPIYrT9zErl65iX26csPQJKUMhppe
-        8oJVKslNbb3kBeglM9Rn3w1Do3D5Y6jpJS/YpZPFUNNLWrAJgzG8uflKbAk93l6VEA5ED0wC2Y4c8AAA
-        AABJRU5ErkJggg==
-</value>
-  </data>
 </root>

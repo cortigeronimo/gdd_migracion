@@ -214,7 +214,6 @@
             // 
             this.Seleccionar.HeaderText = "Editar";
             this.Seleccionar.Image = ((System.Drawing.Image)(resources.GetObject("Seleccionar.Image")));
-            this.Seleccionar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
             this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -224,7 +223,6 @@
             // 
             this.Eliminar.HeaderText = "Eliminar";
             this.Eliminar.Image = ((System.Drawing.Image)(resources.GetObject("Eliminar.Image")));
-            this.Eliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.ReadOnly = true;
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;

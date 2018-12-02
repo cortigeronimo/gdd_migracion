@@ -225,11 +225,11 @@
     <Compile Include="Historial Cliente\HistorialCliente.Designer.cs">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Compra.cs" />
     <Compile Include="Modelo\DetalleCompra.cs" />
@@ -240,6 +240,7 @@
     <Compile Include="Modelo\Grado.cs" />
     <Compile Include="Modelo\Premio.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
+    <Compile Include="Modelo\ResultadoEstadistico.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\Ubicacion.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Repositorios\RepoCliente.cs" />
     <Compile Include="Repositorios\RepoCompra.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
+    <Compile Include="Repositorios\RepoEstadistica.cs" />
     <Compile Include="Repositorios\RepoEstado.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
@@ -399,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateOrUpdateCliente.resx">
       <DependentUpon>CreateOrUpdateCliente.cs</DependentUpon>
