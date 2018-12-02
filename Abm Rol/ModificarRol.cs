@@ -73,6 +73,7 @@ namespace PalcoNet.Abm_Rol
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+
             new RepoRol().UpdateRol(rol);
             this.DialogResult = DialogResult.OK;
             MessageBox.Show("Rol Modificado");

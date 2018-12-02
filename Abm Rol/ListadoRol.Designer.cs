@@ -45,7 +45,7 @@
             this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RolHabilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRoles)).BeginInit();
             this.SuspendLayout();
@@ -223,8 +223,11 @@
             // Eliminar
             // 
             this.Eliminar.HeaderText = "Eliminar";
+            this.Eliminar.Image = ((System.Drawing.Image)(resources.GetObject("Eliminar.Image")));
+            this.Eliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.ReadOnly = true;
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ListadoRol
@@ -264,7 +267,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Rol_Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn RolHabilitado;
         private System.Windows.Forms.DataGridViewImageColumn Seleccionar;
-        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
+        private System.Windows.Forms.DataGridViewImageColumn Eliminar;
 
     }
 }
