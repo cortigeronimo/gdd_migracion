@@ -128,6 +128,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_RENDIR_COMISIONES') IS NOT NULL DROP PROCEDURE PLEA
 
 IF OBJECT_ID('PLEASE_HELP.SP_TOP5_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_EMPRESAS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_TOP5_CLIENTES_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_CLIENTES_PUNTOS;
+
 IF OBJECT_ID('PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS;
 
 
@@ -1246,6 +1248,32 @@ END
 GO
 
 --Listado estadistico clientes con mayores puntos vencidos
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_PUNTOS](@trimestre INT, @anio INT)
+AS
+BEGIN
+
+DECLARE @mesDesde INT
+DECLARE @mesHasta INT
+
+SET @mesDesde = CASE @trimestre WHEN 1 THEN 1
+								WHEN 2 THEN 4
+								WHEN 3 THEN 7
+								WHEN 4 THEN 10 END
+
+SET @mesHasta = CASE @trimestre WHEN 1 THEN 3
+								WHEN 2 THEN 6
+								WHEN 3 THEN 9
+								WHEN 4 THEN 12 END
+
+SELECT TOP 5 C.Cli_Usuario, C.Cli_Apellido, C.Cli_Nombre, SUM(p.Puntuacion_Cantidad) PuntosVencidos FROM PLEASE_HELP.Puntuacion p
+INNER JOIN PLEASE_HELP.Cliente c ON p.Puntuacion_Cliente = c.Cli_Usuario
+WHERE YEAR(p.Puntuacion_Fecha_Vencimiento) = @anio
+	AND MONTH(p.Puntuacion_Fecha_Vencimiento) BETWEEN @mesDesde AND @mesHasta
+GROUP BY C.Cli_Usuario, C.Cli_Apellido, C.Cli_Nombre
+ORDER BY SUM(p.Puntuacion_Cantidad) DESC
+
+END
+GO
 
 --Listado estadistico clientes con mayor cantidad de compras
 CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_COMPRAS](@trimestre INT, @anio INT, @empresa nvarchar(255))

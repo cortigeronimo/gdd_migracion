@@ -70,5 +70,32 @@ namespace PalcoNet.Repositorios
 
             return top5;
         }
+
+        public List<ResultadoEstadistico2> GetTop5ClientesPuntos(int anio, int trimestre)
+        {
+            List<ResultadoEstadistico2> top5 = new List<ResultadoEstadistico2>();
+            string query = "EXEC PLEASE_HELP.SP_TOP5_CLIENTES_PUNTOS @trimestre , @anio ";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@trimestre", trimestre);
+            cmd.Parameters.AddWithValue("@anio", anio);
+            DataTable result = Conexion.GetData(cmd);
+            return FromRowsToResultadoEstadistico2(result);
+        }
+
+        private List<ResultadoEstadistico2> FromRowsToResultadoEstadistico2(DataTable table)
+        {
+            List<ResultadoEstadistico2> top5 = new List<ResultadoEstadistico2>();
+            int i = 0;
+            while (i < table.Rows.Count)
+            {
+                int id = Convert.ToInt32(table.Rows[i]["Cli_Usuario"]);
+                string clienteNombre = Convert.ToString(table.Rows[i]["Cli_Apellido"]) + " " + Convert.ToString(table.Rows[i]["Cli_Nombre"]);
+                int puntos = Convert.ToInt32(table.Rows[i]["PuntosVencidos"]);
+                ResultadoEstadistico2 cliente = new ResultadoEstadistico2(id,clienteNombre,puntos);
+                top5.Add(cliente);
+                i++;
+            }
+            return top5;
+        }
     }
 }
