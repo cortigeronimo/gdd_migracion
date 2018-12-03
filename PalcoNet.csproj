@@ -272,7 +272,7 @@
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoEstadistica.cs" />
     <Compile Include="Repositorios\RepoEstado.cs" />
-    <Compile Include="Repositorios\RepoFacturas.cs" />
+    <Compile Include="Repositorios\RepoFactura.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
