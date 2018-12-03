@@ -50,7 +50,7 @@ namespace PalcoNet.Vistas
             }
             catch (Exception)
             {
-                MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+                MessageBox.Show(Messages.ERROR_INESPERADO, "Error");
             }            
         }
 
