@@ -13,7 +13,7 @@ namespace PalcoNet.Repositorios
     {
         public List<ResultadoEstadistico> GetTop5Empresas(int anio, int trimestre)
         {
-            string query = "EXEC PLEASE_HELP.SP_TOP5_EMPRESAS @anio, @trimestre";
+            string query = "EXEC PLEASE_HELP.SP_TOP5_EMPRESAS @anio , @trimestre";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@anio", anio);
             cmd.Parameters.AddWithValue("@trimestre", trimestre);
@@ -34,5 +34,7 @@ namespace PalcoNet.Repositorios
             }
             return top5;
         }
+
+
     }
 }

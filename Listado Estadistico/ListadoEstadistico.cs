@@ -38,6 +38,7 @@ namespace PalcoNet.Listado_Estadistico
         private void btnListado1_Click(object sender, EventArgs e)
         {
             bindingSource.Clear();
+            dataGridEstadisticas.Columns.Clear();
             if (txtBoxAnio.Text == "")
             {
                 MessageBox.Show("Por favor escriba el año a evaluar");
@@ -59,6 +60,8 @@ namespace PalcoNet.Listado_Estadistico
         private void btnListado3_Click(object sender, EventArgs e)
         {
             bindingSource.Clear();
+            dataGridEstadisticas.Columns.Clear();
+
         }
     }
 }

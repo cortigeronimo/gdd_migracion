@@ -241,6 +241,8 @@
     <Compile Include="Modelo\Premio.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
     <Compile Include="Modelo\ResultadoEstadistico.cs" />
+    <Compile Include="Modelo\ResultadoEstadistico2.cs" />
+    <Compile Include="Modelo\ResultadoEstadistico3.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\Ubicacion.cs" />
