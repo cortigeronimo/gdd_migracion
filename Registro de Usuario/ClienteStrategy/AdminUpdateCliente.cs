@@ -29,11 +29,11 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
             {
                 cliente.baja = checkbox.Checked;
                 repoCliente.UpdateCliente(cliente);
-                MessageBox.Show(Messagges.DATOS_ACTUALIZADOS);
+                MessageBox.Show(Messages.DATOS_ACTUALIZADOS);
             }
             catch (Exception)
             {
-                MessageBox.Show(Messagges.ERROR_INESPERADO);
+                MessageBox.Show(Messages.ERROR_INESPERADO);
             }
         }
     }

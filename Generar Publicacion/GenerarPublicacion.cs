@@ -131,12 +131,12 @@ namespace PalcoNet.Generar_Publicacion
                 try
                 {
                     repoPublicacion.InsertPublicacionesList(publicacionesList);
-                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
+                    MessageBox.Show(Messages.OPERACION_EXITOSA, "Message");
                     ClearAll();
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
+                    MessageBox.Show(Messages.ERROR_INESPERADO, "Message");
                 }
                 
             }
@@ -153,12 +153,12 @@ namespace PalcoNet.Generar_Publicacion
                 try
                 {
                     repoPublicacion.InsertOrUpdatePublicacion(publicacion);
-                    MessageBox.Show(Messagges.OPERACION_EXITOSA, "Message");
+                    MessageBox.Show(Messages.OPERACION_EXITOSA, "Message");
                     ClearAll();
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Message");
+                    MessageBox.Show(Messages.ERROR_INESPERADO, "Message");
                 }
 
                 this.DialogResult = DialogResult.OK;

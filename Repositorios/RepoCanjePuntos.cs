@@ -32,6 +32,7 @@ namespace PalcoNet.Repositorios
 
             cmd.Parameters.AddWithValue("@idUser", idUser);
             cmd.Parameters.AddWithValue("@idPremio", idPremio);
+            cmd.Parameters.AddWithValue("@fechaActual", SystemDate.GetDate());
 
             Conexion.ExecuteProcedure(cmd);
         }

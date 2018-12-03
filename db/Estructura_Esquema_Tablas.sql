@@ -124,6 +124,9 @@ IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP 
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
 
+IF OBJECT_ID('PLEASE_HELP.SP_RENDIR_COMISIONES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES;
+
+IF OBJECT_ID('PLEASE_HELP.SP_TOP5_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_EMPRESAS;
 
 
 
@@ -842,6 +845,11 @@ BEGIN
 	AND p.Pub_Estado = @estadoId
 	LEFT JOIN PLEASE_HELP.Ubicacion u
 	ON u.Ubicacion_Publicacion = p.Pub_Codigo
+	LEFT JOIN PLEASE_HELP.Compra c
+	ON c.Compra_Asiento = u.Ubicacion_Asiento
+	AND c.Compra_Fila = u.Ubicacion_Fila
+	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+	AND c.Compra_Fecha_Rendida IS NULL
 	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END
@@ -895,6 +903,56 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES(@cantidadARendir int, @idPublicacion NUMERIC(18,0), @fechaActual DateTime)
+AS
+BEGIN
+	IF (SELECT COUNT(c.Compra_Id) 
+		FROM PLEASE_HELP.Compra c 
+		WHERE c.Compra_Publicacion = @idPublicacion
+		AND c.Compra_Fecha_Rendida IS NULL) >= @cantidadARendir
+	BEGIN
+		DECLARE @empresa int, @idFactura NUMERIC(18,0), @total NUMERIC(18,0)
+		SET @total = 0
+
+		SELECT @empresa = p.Pub_Empresa 
+				FROM PLEASE_HELP.Publicacion p
+				WHERE p.Pub_Codigo = @idPublicacion
+
+		INSERT INTO PLEASE_HELP.Factura 
+			VALUES (@fechaActual, 0, @empresa)
+
+		SET @idFactura = @@IDENTITY
+		DECLARE @idCompra int, @monto NUMERIC(18,2), @descripcion NVARCHAR(60)
+
+		WHILE @cantidadARendir > 0
+			BEGIN
+
+				SELECT TOP 1 @idCompra = c.Compra_Id, 
+				@monto = u.Ubicacion_Precio,
+				@descripcion = u.Ubicacion_Descripcion  
+				FROM PLEASE_HELP.Compra c
+				JOIN PLEASE_HELP.Ubicacion u
+				ON c.Compra_Asiento = u.Ubicacion_Asiento
+				AND c.Compra_Fila = u.Ubicacion_Fila
+				AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+				WHERE c.Compra_Publicacion = @idPublicacion
+				AND c.Compra_Fecha_Rendida IS NULL
+				ORDER BY c.Compra_Fecha ASC
+
+				INSERT INTO PLEASE_HELP.Item VALUES 
+				(@monto, 1, @descripcion, @idFactura, @idCompra)
+
+				UPDATE PLEASE_HELP.Compra SET Compra_Fecha_Rendida = @fechaActual
+				WHERE Compra_Id = @idCompra
+
+				SET @total = @total + @monto
+				SET @cantidadARendir = @cantidadARendir - 1
+			END
+
+			UPDATE PLEASE_HELP.Factura SET Factura_Total = @total WHERE Factura_Nro = @idFactura
+	END
+END
+GO
 
 -- STORED PROCEDURES EDITAR PUBLICACION
 
@@ -954,7 +1012,7 @@ GO
 
 -- STORED PROCEDURES CANJE DE PUNTOS
 
-CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0))
+CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0), @fechaActual DateTime)
 AS
 	DECLARE @puntosPremio int, @puntosAVencer int, @idPuntosAVencer int
 	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
@@ -968,7 +1026,7 @@ AS
 	BEGIN
 		SELECT TOP 1 @idPuntosAVencer = Puntuacion_Id, @puntosAVencer = Puntuacion_Cantidad 
 		FROM PLEASE_HELP.Puntuacion 
-		WHERE Puntuacion_Cliente = @idUser AND GETDATE() < Puntuacion_Fecha_Vencimiento AND Puntuacion_Cantidad > 0
+		WHERE Puntuacion_Cliente = @idUser AND @fechaActual < Puntuacion_Fecha_Vencimiento AND Puntuacion_Cantidad > 0
 		ORDER BY Puntuacion_Fecha_Vencimiento ASC
 		IF @puntosAVencer >= @puntosPremio
 		BEGIN
@@ -1002,13 +1060,13 @@ GO
 
 -- STORED PROCEDURES COMPRAR
 
-CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null)
+CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null, @fechaActual DateTime)
 AS
 SELECT Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, (SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) as Pub_Rubro,
 	 COUNT(*) as Pub_Stock, (SELECT Grado_Comision FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) as Pub_Comision	 
 FROM PLEASE_HELP.Publicacion INNER JOIN PLEASE_HELP.Ubicacion ON Pub_Codigo = Ubicacion_Publicacion
 WHERE Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'PUBLICADA') AND NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento)
-	AND Pub_Fecha_Evento > CONVERT(DATETIME, '2018-01-01 00:00:00', 121)        --consideramos fecha actual 2018-01-01 00:00:00, aca debería ir un getdate()
+	AND Pub_Fecha_Evento > CONVERT(DATETIME, @fechaActual, 121)
 	--filtros
 	AND (@descripcion is null OR Pub_Descripcion LIKE CONCAT('%',@descripcion,'%'))
 	AND (@fechaDesde is null OR Pub_Fecha_Evento >= CONVERT(DATETIME,@fechaDesde,121))
@@ -1147,3 +1205,41 @@ BEGIN
 END
 GO
 
+--Listado estadistico empresas con mayor cantidad de localidades no vendidas
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_EMPRESAS](@anio INT, @trimestre INT)
+AS
+BEGIN
+
+DECLARE @mes1 int
+DECLARE @mes2 int
+DECLARE @mes3 int
+
+SET @mes1 = (@trimestre - 1) * 3 + 1
+SET @mes2 = (@trimestre - 1) * 3 + 2
+SET @mes3 = (@trimestre - 1) * 3 + 3
+
+
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes1
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+UNION
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes2
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+UNION
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes3
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
+ORDER BY month(p.Pub_Fecha_Evento) asc, count(u.Ubicacion_Publicacion) desc;
+
+END
+GO

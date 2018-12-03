@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridRendicionComisiones = new System.Windows.Forms.DataGridView();
+            this.empresaPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.razonSocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cuitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localidadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,9 +42,7 @@
             this.deptoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadPublicacionesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.montoPorFacturarDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFacturar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.empresaPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnActualizar = new System.Windows.Forms.Button();
+            this.columnFacturar = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRendicionComisiones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaPorFacturarDTOBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +80,20 @@
             this.dataGridRendicionComisiones.Size = new System.Drawing.Size(952, 328);
             this.dataGridRendicionComisiones.TabIndex = 1;
             this.dataGridRendicionComisiones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridRendicionComisiones_CellContentClick);
+            // 
+            // empresaPorFacturarDTOBindingSource
+            // 
+            this.empresaPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.EmpresaPorFacturarDTO);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(890, 379);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 2;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // razonSocialDataGridViewTextBoxColumn
             // 
@@ -147,22 +161,10 @@
             // columnFacturar
             // 
             this.columnFacturar.HeaderText = "Facturar";
+            this.columnFacturar.Image = global::PalcoNet.Properties.Resources.iconfinder_00_ELASTOFONT_STORE_READY_invoice_2703075;
             this.columnFacturar.Name = "columnFacturar";
             this.columnFacturar.ReadOnly = true;
-            // 
-            // empresaPorFacturarDTOBindingSource
-            // 
-            this.empresaPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.EmpresaPorFacturarDTO);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Location = new System.Drawing.Point(890, 379);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizar.TabIndex = 2;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            this.columnFacturar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // SelectEmpresa
             // 
@@ -186,6 +188,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridRendicionComisiones;
         private System.Windows.Forms.BindingSource empresaPorFacturarDTOBindingSource;
+        private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuitDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn localidadDataGridViewTextBoxColumn;
@@ -195,7 +198,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn deptoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidadPublicacionesDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn montoPorFacturarDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn columnFacturar;
-        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.DataGridViewImageColumn columnFacturar;
     }
 }
