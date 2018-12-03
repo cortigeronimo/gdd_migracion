@@ -39,12 +39,12 @@ namespace PalcoNet.Repositorios
         {
             List<ResultadoEstadistico3> top5 = new List<ResultadoEstadistico3>();
             var empresas = new RepoEmpresa().GetEmpresas();
-            string query = "EXEC PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS @trimestre , @anio , @empresa";
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@trimestre", trimestre);
-            cmd.Parameters.AddWithValue("@anio", anio);
             empresas.ForEach(e =>
             {
+                string query = "EXEC PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS @trimestre , @anio , @empresa";
+                SqlCommand cmd = new SqlCommand(query);
+                cmd.Parameters.AddWithValue("@trimestre", trimestre);
+                cmd.Parameters.AddWithValue("@anio", anio);
                 cmd.Parameters.AddWithValue("@empresa", e.razonSocial);
                 DataTable result = Conexion.GetData(cmd);
                 var clientesComprasEmpresa = FromRowsToResultadoEstadistico3(result);
@@ -59,9 +59,11 @@ namespace PalcoNet.Repositorios
             int i = 0;
             while (i < table.Rows.Count)
             {
-                ResultadoEstadistico3 cliente =
-                    new ResultadoEstadistico3((int)table.Rows[i]["Cli_Usuario"], (string)table.Rows[i]["Cli_Apellido"] + (string)table.Rows[i]["Cli_Nombre"],
-                                                    (int)table.Rows[i]["CantCompras"], (string)table.Rows[i]["Emp_Razon_Social"]);
+                int id = (int)table.Rows[i]["Cli_Usuario"];
+                string clienteNombre = (string)table.Rows[i]["Cli_Apellido"] + " " + (string)table.Rows[i]["Cli_Nombre"];
+                int cant = Convert.ToInt32(table.Rows[i]["CantCompras"]);
+                string empresa = (string)table.Rows[i]["Emp_Razon_Social"];
+                ResultadoEstadistico3 cliente = new ResultadoEstadistico3(id, clienteNombre, cant, empresa);
                 top5.Add(cliente);
                 i++;
             }
