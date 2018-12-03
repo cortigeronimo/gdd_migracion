@@ -23,25 +23,17 @@ namespace PalcoNet.Listado_Estadistico
         {
             InitializeComponent();
             this.comboBoxTrimestre.Text = "1";
-        }
-
-        private void ListadoEstadistico_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            this.dataGridEstadisticas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridEstadisticas.RowHeadersVisible = false;
         }
 
         private void btnListado1_Click(object sender, EventArgs e)
         {
             bindingSource.Clear();
             dataGridEstadisticas.Columns.Clear();
-            if (txtBoxAnio.Text == "")
+            if (String.IsNullOrEmpty(txtBoxAnio.Text))
             {
-                MessageBox.Show("Por favor escriba el año a evaluar");
+                MessageBox.Show("Por favor escriba el año a evaluar.");
                 return;
             }
 

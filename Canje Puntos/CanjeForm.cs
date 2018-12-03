@@ -32,7 +32,7 @@ namespace PalcoNet.Canje_Puntos
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            this.txtBusquedaPuntos.Clear();
+            this.txtBusquedaPuntos.Value = 0;
             this.listBoxPremios.DataSource = null;
         }
 

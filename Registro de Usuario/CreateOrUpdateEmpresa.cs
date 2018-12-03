@@ -39,18 +39,18 @@ namespace PalcoNet.Registro_de_Usuario
         //el usuario crea una empresa
         public CreateOrUpdateEmpresa(Usuario usuario)
         {
+            InitializeComponent();
             empresa = new Empresa(usuario);
             this.checkBoxBaja.Visible = false;
-            InitializeComponent();
         }
 
         //el admin modifica una empresa
         public CreateOrUpdateEmpresa(Empresa empresa)
         {
+            InitializeComponent();
             hasToUpdate = true;
             this.empresa = empresa;
-            InitializeComponent();
-            InitializeEmpresa();
+            InitializeEmpresa(empresa);
         }
 
         //el admin crea una empresa
@@ -64,7 +64,7 @@ namespace PalcoNet.Registro_de_Usuario
             usuario.isClient = true;
         }
 
-        private void InitializeEmpresa() {
+        private void InitializeEmpresa(Empresa empresa) {
             this.txtRazonSocial.Text = empresa.razonSocial;
             this.txtCuit.Text = empresa.cuit;
             this.txtTelefono.Text = empresa.telefono.ToString();
@@ -93,7 +93,6 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (ValidatorData.validateEmptyFields(this.groupBoxCliente)) return;
             if (ValidateForm().ShowIfThereAreErrors()) return;
 
             empresa.razonSocial = txtRazonSocial.Text;

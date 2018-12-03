@@ -38,6 +38,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
             {
                 Form publicacionesEmpresa = new PublicacionesDeEmpresa(empresaPorFacturar.Id);
                 publicacionesEmpresa.ShowDialog();
+                btnActualizar_Click(null, null);
             }
         }
 

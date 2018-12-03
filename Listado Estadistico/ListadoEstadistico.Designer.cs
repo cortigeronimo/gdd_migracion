@@ -32,7 +32,7 @@
             this.comboBoxTrimestre = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxAnio = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblAnio = new System.Windows.Forms.Label();
             this.dataGridEstadisticas = new System.Windows.Forms.DataGridView();
             this.btnListado1 = new System.Windows.Forms.Button();
             this.btnListado2 = new System.Windows.Forms.Button();
@@ -46,7 +46,7 @@
             this.groupBox1.Controls.Add(this.comboBoxTrimestre);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtBoxAnio);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.lblAnio);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
@@ -87,22 +87,24 @@
             this.txtBoxAnio.Size = new System.Drawing.Size(58, 20);
             this.txtBoxAnio.TabIndex = 1;
             // 
-            // label1
+            // lblAnio
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(43, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Año";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblAnio.AutoSize = true;
+            this.lblAnio.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblAnio.Location = new System.Drawing.Point(43, 34);
+            this.lblAnio.Name = "lblAnio";
+            this.lblAnio.Size = new System.Drawing.Size(26, 13);
+            this.lblAnio.TabIndex = 0;
+            this.lblAnio.Text = "Año";
             // 
             // dataGridEstadisticas
             // 
+            this.dataGridEstadisticas.AllowUserToAddRows = false;
+            this.dataGridEstadisticas.AllowUserToDeleteRows = false;
             this.dataGridEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridEstadisticas.Location = new System.Drawing.Point(12, 270);
             this.dataGridEstadisticas.Name = "dataGridEstadisticas";
+            this.dataGridEstadisticas.ReadOnly = true;
             this.dataGridEstadisticas.Size = new System.Drawing.Size(519, 295);
             this.dataGridEstadisticas.TabIndex = 1;
             // 
@@ -148,7 +150,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoEstadistico";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadisticas)).EndInit();
@@ -162,7 +163,7 @@
         private System.Windows.Forms.ComboBox comboBoxTrimestre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxAnio;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAnio;
         private System.Windows.Forms.DataGridView dataGridEstadisticas;
         private System.Windows.Forms.Button btnListado1;
         private System.Windows.Forms.Button btnListado2;

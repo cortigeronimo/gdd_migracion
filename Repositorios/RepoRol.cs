@@ -36,6 +36,16 @@ namespace PalcoNet.Repositorios
             return FromRowsToFuncionalidades(result);
         }
 
+        public List<Rol> FindClienteAndEmpresaRolOnlyEnableEnable()
+        {
+            String query = "SELECT * FROM PLEASE_HELP.Rol r ";
+            query += "WHERE Rol_nombre IN ('" + ROL_CLIENTE + "', '" + ROL_EMPRESA + "') ";
+            query += "AND Rol_Habilitado = 1";
+            SqlCommand command = new SqlCommand(query);
+            DataTable result = Conexion.GetData(command);
+            return FromRowsToRoles(result);
+        }
+
         public List<Rol> GetRoles()
         {
             String query = "select * from " + table + " WHERE Rol_Baja = 0;";

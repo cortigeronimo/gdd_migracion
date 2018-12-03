@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
 using PalcoNet.Vistas;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Abm_Grado
 {
@@ -20,8 +21,17 @@ namespace PalcoNet.Abm_Grado
             InitializeComponent();
         }
 
+        private ValidatorData ValidateAllFields()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtNombreGrado.Text, ValidatorData.REGEX_DESCRIPCION_GRADO);
+            validator.ValidateTextWithRegex(txtComision.Text, ValidatorData.REGEX_COMISION);
+            return validator;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (ValidateAllFields().ShowIfThereAreErrors()) return;
             RepoGradoPublicacion repo = new RepoGradoPublicacion();
             Grado grado = new Grado(
                 (int)Convert.ToInt32(txtComision.Text),
@@ -29,10 +39,10 @@ namespace PalcoNet.Abm_Grado
             try
             {
                 repo.InsertGrado(grado);
-                MessageBox.Show("La operación ha sido exitosa");
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
             }
             catch {
-                MessageBox.Show("Hubo un error al guardar la información, reintentelo");
+                MessageBox.Show(Messages.ERROR_INESPERADO);
             }
             
             

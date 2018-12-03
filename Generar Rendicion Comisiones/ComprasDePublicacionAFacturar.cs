@@ -41,11 +41,6 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
         private void btnRendir_Click(object sender, EventArgs e)
         {
             int cantidadARendir = Convert.ToInt32(numCantidadARendir.Value);
-            if (cantidadARendir > compras.Count)
-            {
-                MessageBox.Show("No puede rendir más compras de las que faltan por rendir.");
-                return;
-            }
             try
             {
                 repoFacturas.RendirComisiones(cantidadARendir, publicacion.Codigo);

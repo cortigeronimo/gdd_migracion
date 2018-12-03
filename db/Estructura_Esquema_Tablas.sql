@@ -850,7 +850,7 @@ BEGIN
 	ON c.Compra_Asiento = u.Ubicacion_Asiento
 	AND c.Compra_Fila = u.Ubicacion_Fila
 	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
-	AND c.Compra_Fecha_Rendida IS NULL
+	WHERE c.Compra_Fecha_Rendida IS NULL
 	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END

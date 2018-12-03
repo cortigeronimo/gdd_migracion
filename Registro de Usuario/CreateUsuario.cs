@@ -15,6 +15,9 @@ namespace PalcoNet.Registro_de_Usuario
 {
     public partial class CreateUsuario : CustomForm
     {
+        private RepoRol repoRol = new RepoRol();
+
+        private List<Rol> roles = new List<Rol>();
 
         public CreateUsuario()
         {
@@ -34,14 +37,18 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtUsuario.Text = "";
-            txtPassword.Text = "";
+            txtUsuario.Text = String.Empty;
+            txtPassword.Text = String.Empty;
         }
 
         private void AltaUsuario_Load(object sender, EventArgs e)
         {
-            comboBoxRol.Items.Insert(0, "Cliente");
-            comboBoxRol.Items.Insert(1, "Empresa");
+            roles = repoRol.FindClienteAndEmpresaRolOnlyEnableEnable();
+            int i = 0;
+            foreach(Rol rol in roles){
+                comboBoxRol.Items.Insert(i, rol.nombre);
+                i++;
+            }
         }
 
         private bool validateFields()
@@ -57,12 +64,12 @@ namespace PalcoNet.Registro_de_Usuario
             Form formToRedirect;
             Usuario usuario = new Usuario();
             RepoRol repoRol = new RepoRol();
-            Rol rol = repoRol.FindRolByName(comboBoxRol.SelectedItem.ToString());
+            Rol rol = roles.Find((x) => x.nombre.Equals((String)comboBoxRol.SelectedItem));
             usuario.username = txtUsuario.Text;
             usuario.SetPassword(txtPassword.Text);
             usuario.AddRol(rol);
             
-            if(((String)comboBoxRol.SelectedItem).Equals("Cliente")){
+            if(rol.nombre.Equals("CLIENTE")){
                 formToRedirect = new CreateOrUpdateCliente(usuario);
             }
             else{

@@ -43,9 +43,9 @@
             this.lblNombreGrado.AutoSize = true;
             this.lblNombreGrado.Location = new System.Drawing.Point(6, 29);
             this.lblNombreGrado.Name = "lblNombreGrado";
-            this.lblNombreGrado.Size = new System.Drawing.Size(142, 13);
+            this.lblNombreGrado.Size = new System.Drawing.Size(161, 13);
             this.lblNombreGrado.TabIndex = 0;
-            this.lblNombreGrado.Text = "Ingrese un nombre de Grado";
+            this.lblNombreGrado.Text = "Ingrese un descripción de Grado";
             // 
             // txtNombreGrado
             // 

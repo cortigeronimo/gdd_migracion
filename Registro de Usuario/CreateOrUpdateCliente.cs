@@ -87,7 +87,7 @@ namespace PalcoNet.Registro_de_Usuario
             if (ValidateFields().ShowIfThereAreErrors()) return;
             if (repoCliente.ExistsDNIAndCuil(comboBoxTipoDoc.SelectedText, txtNumeroDocumento.Text, txtCuil.Text))
             {
-                MessageBox.Show("Ya existe un Cliente con el mismo Dni y cuil");
+                MessageBox.Show("Ya existe un Cliente con el mismo Dni y Cuil");
                 return;
             }
 

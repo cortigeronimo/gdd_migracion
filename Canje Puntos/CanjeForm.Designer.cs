@@ -30,20 +30,21 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBusquedaPuntos = new System.Windows.Forms.TextBox();
             this.lblPuntosDisponibles = new System.Windows.Forms.Label();
             this.txtPuntosDisponibles = new System.Windows.Forms.TextBox();
             this.listBoxPremios = new System.Windows.Forms.ListBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnComprar = new System.Windows.Forms.Button();
+            this.txtBusquedaPuntos = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusquedaPuntos)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtBusquedaPuntos);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(228, 82);
@@ -59,13 +60,6 @@
             this.label1.Size = new System.Drawing.Size(163, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Productos con puntos menores a";
-            // 
-            // txtBusquedaPuntos
-            // 
-            this.txtBusquedaPuntos.Location = new System.Drawing.Point(6, 45);
-            this.txtBusquedaPuntos.Name = "txtBusquedaPuntos";
-            this.txtBusquedaPuntos.Size = new System.Drawing.Size(145, 20);
-            this.txtBusquedaPuntos.TabIndex = 0;
             // 
             // lblPuntosDisponibles
             // 
@@ -123,6 +117,18 @@
             this.btnComprar.UseVisualStyleBackColor = true;
             this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
+            // numericUpDown1
+            // 
+            this.txtBusquedaPuntos.Location = new System.Drawing.Point(7, 46);
+            this.txtBusquedaPuntos.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.txtBusquedaPuntos.Name = "numericUpDown1";
+            this.txtBusquedaPuntos.Size = new System.Drawing.Size(159, 20);
+            this.txtBusquedaPuntos.TabIndex = 3;
+            // 
             // CanjeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -139,6 +145,7 @@
             this.Text = "Canje de Puntos";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBusquedaPuntos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,12 +155,12 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBusquedaPuntos;
         private System.Windows.Forms.Label lblPuntosDisponibles;
         private System.Windows.Forms.TextBox txtPuntosDisponibles;
         private System.Windows.Forms.ListBox listBoxPremios;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnComprar;
+        private System.Windows.Forms.NumericUpDown txtBusquedaPuntos;
     }
 }

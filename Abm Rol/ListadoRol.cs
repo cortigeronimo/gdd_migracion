@@ -23,6 +23,7 @@ namespace PalcoNet.Abm_Rol
         {
             InitializeComponent();
             dataGridRoles.AutoGenerateColumns = false;
+            this.dataGridRoles.RowHeadersVisible = false;
             comboBoxHabilitado.Text = "Sí";
         }
 
@@ -68,7 +69,7 @@ namespace PalcoNet.Abm_Rol
 
         private void dataGridRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridRoles.Columns["Seleccionar"].Index)
+            if (e.ColumnIndex == dataGridRoles.Columns.IndexOf(this.Seleccionar))
             {
                 Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
                 rol.funcionalidades = repoRol.GetFuncionalidades(rol.Id);
@@ -77,12 +78,12 @@ namespace PalcoNet.Abm_Rol
                     DialogResult result = form.ShowDialog();
                 }
             }
-            if (e.ColumnIndex == dataGridRoles.Columns["Eliminar"].Index)
+            if (e.ColumnIndex == dataGridRoles.Columns.IndexOf(this.Eliminar))
             {
                 Rol rol = (Rol)dataGridRoles.CurrentRow.DataBoundItem;
                 rol.funcionalidades = repoRol.GetFuncionalidades(rol.Id);
                 
-                var confirmResult = MessageBox.Show("Eliminar el rol " + rol.Nombre + " ??",
+                var confirmResult = MessageBox.Show("Desea eliminar el rol " + rol.Nombre + " ?",
                                      "Confirmar eliminación",
                                      MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
