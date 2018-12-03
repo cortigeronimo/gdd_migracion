@@ -18,6 +18,7 @@ namespace PalcoNet.Listado_Estadistico
 
         private BindingSource bindingSource = new BindingSource();
         List<ResultadoEstadistico> top5 = new List<ResultadoEstadistico>();
+        RepoEstadistica repo = new RepoEstadistica();
 
         public ListadoEstadistico()
         {
@@ -45,7 +46,7 @@ namespace PalcoNet.Listado_Estadistico
                 return;
             }
 
-            top5 = new RepoEstadistica().GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+            top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
             top5.ForEach(t => bindingSource.Add(t));
             dataGridEstadisticas.DataSource = bindingSource;
             
@@ -61,7 +62,15 @@ namespace PalcoNet.Listado_Estadistico
         {
             bindingSource.Clear();
             dataGridEstadisticas.Columns.Clear();
+            if (txtBoxAnio.Text == "")
+            {
+                MessageBox.Show("Por favor escriba el año a evaluar");
+                return;
+            }
 
+            var top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio), Convert.ToInt32(comboBoxTrimestre));
+            top5ClientesCompras.ForEach(c => bindingSource.Add(c));
+            dataGridEstadisticas.DataSource = bindingSource;
         }
     }
 }
