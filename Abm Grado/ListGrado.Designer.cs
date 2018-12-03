@@ -30,6 +30,7 @@
         {
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtComisionGrado = new System.Windows.Forms.TextBox();
             this.lblComisionGrado = new System.Windows.Forms.Label();
             this.txtNombreGrado = new System.Windows.Forms.TextBox();
             this.lblNombreGrado = new System.Windows.Forms.Label();
@@ -38,9 +39,8 @@
             this.columnGradoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGradoDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnGradoComision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEditar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.txtComisionGrado = new System.Windows.Forms.TextBox();
+            this.columnEditar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +67,13 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
+            // 
+            // txtComisionGrado
+            // 
+            this.txtComisionGrado.Location = new System.Drawing.Point(271, 45);
+            this.txtComisionGrado.Name = "txtComisionGrado";
+            this.txtComisionGrado.Size = new System.Drawing.Size(139, 20);
+            this.txtComisionGrado.TabIndex = 4;
             // 
             // lblComisionGrado
             // 
@@ -149,21 +156,18 @@
             // columnEditar
             // 
             this.columnEditar.HeaderText = "Editar";
+            this.columnEditar.Image = global::PalcoNet.Properties.Resources.iconfinder_new_24_103173;
             this.columnEditar.Name = "columnEditar";
             this.columnEditar.ReadOnly = true;
+            this.columnEditar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // columnEliminar
             // 
             this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Image = global::PalcoNet.Properties.Resources.iconfinder_ic_delete_forever_48px_3669360;
             this.columnEliminar.Name = "columnEliminar";
             this.columnEliminar.ReadOnly = true;
-            // 
-            // txtComisionGrado
-            // 
-            this.txtComisionGrado.Location = new System.Drawing.Point(271, 45);
-            this.txtComisionGrado.Name = "txtComisionGrado";
-            this.txtComisionGrado.Size = new System.Drawing.Size(139, 20);
-            this.txtComisionGrado.TabIndex = 4;
+            this.columnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // ListGrado
             // 
@@ -193,11 +197,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.TextBox txtComisionGrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGradoComision;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
-        private System.Windows.Forms.TextBox txtComisionGrado;
+        private System.Windows.Forms.DataGridViewImageColumn columnEditar;
+        private System.Windows.Forms.DataGridViewImageColumn columnEliminar;
     }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListadoRol));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.txtFuncionalidad = new System.Windows.Forms.TextBox();
@@ -213,8 +212,7 @@
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Editar";
-            this.Seleccionar.Image = ((System.Drawing.Image)(resources.GetObject("Seleccionar.Image")));
-            this.Seleccionar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Seleccionar.Image = global::PalcoNet.Properties.Resources.iconfinder_new_24_103173;
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
             this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -223,8 +221,7 @@
             // Eliminar
             // 
             this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Image = ((System.Drawing.Image)(resources.GetObject("Eliminar.Image")));
-            this.Eliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Eliminar.Image = global::PalcoNet.Properties.Resources.iconfinder_ic_delete_forever_48px_3669360;
             this.Eliminar.Name = "Eliminar";
             this.Eliminar.ReadOnly = true;
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;

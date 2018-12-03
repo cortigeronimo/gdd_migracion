@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
+using PalcoNet.Config;
 
 namespace PalcoNet.Repositorios
 {
-    public class RepoFacturas : Repository
+    public class RepoFactura : Repository
     {
         private String table = "PLEASE_HELP.Factura";
 
@@ -20,6 +21,7 @@ namespace PalcoNet.Repositorios
 
             command.Parameters.AddWithValue("@cantidadARendir", cantidadARendir);
             command.Parameters.AddWithValue("@idPublicacion", idPublicacion);
+            command.Parameters.AddWithValue("@fechaActual", SystemDate.GetDate());
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 1)
             {

@@ -225,11 +225,11 @@
     <Compile Include="Historial Cliente\HistorialCliente.Designer.cs">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Compra.cs" />
     <Compile Include="Modelo\DetalleCompra.cs" />
@@ -240,6 +240,7 @@
     <Compile Include="Modelo\Grado.cs" />
     <Compile Include="Modelo\Premio.cs" />
     <Compile Include="Modelo\Publicacion.cs" />
+    <Compile Include="Modelo\ResultadoEstadistico.cs" />
     <Compile Include="Modelo\Rol.cs" />
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\Ubicacion.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Repositorios\RepoCliente.cs" />
     <Compile Include="Repositorios\RepoCompra.cs" />
     <Compile Include="Repositorios\RepoEmpresa.cs" />
+    <Compile Include="Repositorios\RepoEstadistica.cs" />
     <Compile Include="Repositorios\RepoEstado.cs" />
     <Compile Include="Repositorios\RepoFacturas.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
@@ -401,6 +403,9 @@
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateOrUpdateCliente.resx">
       <DependentUpon>CreateOrUpdateCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +438,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Vistas\RolSelector.resx">
       <DependentUpon>RolSelector.cs</DependentUpon>
@@ -462,7 +468,27 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_00-ELASTOFONT-STORE-READY_invoice_2703075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_buy-bill-money-cash-pay_2205221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_cart-empty_126588.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_circle-add_226591.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_ic_delete_forever_48px_3669360.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_ic_highlight_remove_48px_352425.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_new-24_103173.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -223,6 +223,7 @@ namespace PalcoNet.Repositorios
             SqlCommand cmd = new SqlCommand(sp);
             cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.AddWithValue("@fechaActual", SystemDate.GetDate());
             DataTable publicacionesTable = Conexion.GetData(cmd);
 
             return FromRowsToPublicacionDTO(publicacionesTable);
@@ -269,6 +270,7 @@ namespace PalcoNet.Repositorios
 
             cmd.Parameters.AddWithValue("@fechaDesde", desde);
             cmd.Parameters.AddWithValue("@fechaHasta", hasta);
+            cmd.Parameters.AddWithValue("@fechaActual", SystemDate.GetDate());
 
             if (!String.IsNullOrEmpty(descripcion))
             {

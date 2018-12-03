@@ -117,26 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="iconfinder_00-ELASTOFONT-STORE-READY_invoice_2703075" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_00-ELASTOFONT-STORE-READY_invoice_2703075.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_buy-bill-money-cash-pay_2205221" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_buy-bill-money-cash-pay_2205221.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_cart-empty_126588" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_cart-empty_126588.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_circle-add_226591" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_circle-add_226591.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_ic_delete_forever_48px_3669360" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_ic_delete_forever_48px_3669360.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_ic_highlight_remove_48px_352425" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_ic_highlight_remove_48px_352425.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconfinder_new-24_103173" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Recursos\iconfinder_new-24_103173.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

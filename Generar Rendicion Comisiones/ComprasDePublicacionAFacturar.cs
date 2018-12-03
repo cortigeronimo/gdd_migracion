@@ -19,7 +19,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
         RepoCompra repoCompra = new RepoCompra();
 
-        RepoFacturas repoFacturas = new RepoFacturas();
+        RepoFactura repoFacturas = new RepoFactura();
 
         List<DetalleCompra> compras = new List<DetalleCompra>();
 

@@ -302,7 +302,7 @@ namespace PalcoNet.Vistas
         //Evento click para "listado estadistico"
         private void listadoEstadistico_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("soy el form de lsitado estadistico");
+            FormManager.GetInstance().Open(new ListadoEstadistico());
         }
 
         private void verPremios_Click(object sender, EventArgs e)
