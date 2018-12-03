@@ -24,6 +24,7 @@ using PalcoNet.Registro_de_Usuario;
 using PalcoNet.Abm_Empresa_Espectaculo;
 
 using PalcoNet.Config;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Vistas
 {
@@ -197,7 +198,6 @@ namespace PalcoNet.Vistas
                     itemFuncionalidad.Click += new EventHandler(historialCliente_Click);
                     break;
                 case "CANJE ADMINISTRACION PUNTOS":
-                    itemFuncionalidad.Click += new EventHandler(canjeAdministracionPuntos_Click);
                     itemFuncionalidad.DropDownItems["canjearPuntos"].Click += new EventHandler(canjearPuntos_Click);
                     itemFuncionalidad.DropDownItems["verPremios"].Click += new EventHandler(verPremios_Click);
                     break;
@@ -216,11 +216,13 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Grado
         private void crearGrado_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new CreateGrado());
         }
 
         private void listarGrados_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new ListGrado());
         }
 
@@ -264,6 +266,7 @@ namespace PalcoNet.Vistas
         //Evento click para "generar publicacion"
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new FormGenerarPublicacion());
         }
 
@@ -271,6 +274,7 @@ namespace PalcoNet.Vistas
         //Evento click para "editar publicacion"
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new FormEditarPublicacion());
         }
 
@@ -278,6 +282,7 @@ namespace PalcoNet.Vistas
         //Evento click para "comprar"
         private void comprar_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new FormComprar());
         }
 
@@ -285,17 +290,11 @@ namespace PalcoNet.Vistas
         //Evento click para "historial cliente"
         private void historialCliente_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new HistorialCliente());
         }
 
-
-        //Evento click para "canje administracion puntos"
-        private void canjeAdministracionPuntos_Click(object sender, EventArgs e)
-        {
-            FormManager.GetInstance().Open(new CanjeForm());
-        }
-
-
+       
         //Evento click para "generar comisiones"
         private void generarPagosComisiones_Click(object sender, EventArgs e)
         {
@@ -309,13 +308,16 @@ namespace PalcoNet.Vistas
             FormManager.GetInstance().Open(new ListadoEstadistico());
         }
 
+        //Eventos click para "canje administracion de puntos"
         private void verPremios_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new ViewPremios());
         }
 
         private void canjearPuntos_Click(object sender, EventArgs e)
         {
+            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new CanjeForm());
         }
 
@@ -336,6 +338,15 @@ namespace PalcoNet.Vistas
             FormManager.GetInstance().OpenAndClose(new Login(), this);
         }
 
+        private Boolean UserIsAdmin()
+        {
+            if (UserSession.IsAdmin)
+            {
+                MessageBox.Show(Messages.DENEGAR_ADMIN, "Message");
+                return true;
+            }
+            return false;
+        }
         
     }
 }

@@ -34,6 +34,7 @@ namespace PalcoNet
             {
                 UserSession.UserId = user.id;
                 UserSession.Username = user.username;
+                UserSession.IsAdmin = user.isAdmin;
 
                 if (user.CountRoles() > 1)
                 {                  
