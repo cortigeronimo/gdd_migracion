@@ -43,20 +43,14 @@ namespace PalcoNet
                 {
                     Rol rol = new Rol();
                     TakeRolFromUser(rol);                  
-                    UserSession.RolId = rol.id;
-                    
+                    UserSession.RolId = rol.id;                
                     FormManager.GetInstance().OpenAndClose(new HomeMenu(), this);
                 }                                              
             }
             else
             {
                 ClearTextBox();
-
-                user.ClearRolesList();
-                user.username = "";
-                user.SetPassword("");
-                user.isAdmin = false;
-                user.id = null;
+                user = new Usuario();            
             }
             
         }
@@ -64,40 +58,39 @@ namespace PalcoNet
 
         private Boolean IsRegistered()
         {
-            
-
             user.username = txtUsername.Text;
             user.SetPassword(txtPassword.Text);
             user.isAdmin = false;
 
-            if (repo.ExistsUser(user))
+            if (!repo.ExistsUser(user))
             {
-                if (repo.EnabledUser(user))
-                {
-                    if (repo.ValidPassword(user))
-                    {
-                        if (!user.isAdmin)
-                            repo.CleanFailedAttemps(user);
-                        return true;
-                    }
-                    else
-                    {           
-                        if(!user.isAdmin)
-                            repo.AddFailedAttempt(user);
-                        MessageBox.Show("Username y/o Password Incorrecto");
-                        return false;
-                    }
+                MessageBox.Show("Usuario Inexistente.", "Error");
+                return false;
+            }
 
-                }
-                else
-                {
-                    MessageBox.Show("Usuario Inhabilitado");
-                    return false;
-                }
+            if (repo.GetRolesUsuario(user).Count == 0)
+            {
+                MessageBox.Show("No tiene roles asignados para ingresar al sistema.\nContáctese con el ADMINISTRADOR.", "Error");
+                return false;
+            }
+
+            if (!repo.EnabledUser(user))
+            {
+                MessageBox.Show("Usuario Inhabilitado.", "Error");
+                return false;
+            }
+
+            if (repo.ValidPassword(user))
+            {
+                if (!user.isAdmin)
+                    repo.CleanFailedAttemps(user);
+                return true;
             }
             else
-            {          
-                MessageBox.Show("Usuario inexistente");
+            {
+                if (!user.isAdmin)
+                    repo.AddFailedAttempt(user);
+                MessageBox.Show("Username y/o Password Incorrecto.", "Error");
                 return false;
             }
 
@@ -127,8 +120,8 @@ namespace PalcoNet
         {
             if (user.isAdmin)
             {
-                rol.id = 2;
-                rol.nombre = "ADMINISTRATIVO";
+                rol.id = user.GetRoles()[0].id;
+                rol.nombre = user.GetRoles()[0].nombre;
             }
             else
             {
