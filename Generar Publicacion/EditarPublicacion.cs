@@ -63,7 +63,7 @@ namespace PalcoNet.Generar_Publicacion
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+                    MessageBox.Show(Messages.ERROR_INESPERADO, "Error");
                 }
 
             }
@@ -88,7 +88,7 @@ namespace PalcoNet.Generar_Publicacion
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+                    MessageBox.Show(Messages.ERROR_INESPERADO, "Error");
                 }
                 
 

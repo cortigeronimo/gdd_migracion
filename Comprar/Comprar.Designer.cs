@@ -58,7 +58,7 @@
             this.empresaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estadoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stockDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnComprar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnComprar = new System.Windows.Forms.DataGridViewImageColumn();
             this.publicacionDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBoxFiltroEventos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
@@ -68,7 +68,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(341, 690);
+            this.label4.Location = new System.Drawing.Point(342, 642);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 13);
             this.label4.TabIndex = 13;
@@ -77,7 +77,7 @@
             // txtActualPage
             // 
             this.txtActualPage.Enabled = false;
-            this.txtActualPage.Location = new System.Drawing.Point(300, 688);
+            this.txtActualPage.Location = new System.Drawing.Point(301, 640);
             this.txtActualPage.Name = "txtActualPage";
             this.txtActualPage.Size = new System.Drawing.Size(33, 20);
             this.txtActualPage.TabIndex = 12;
@@ -85,14 +85,14 @@
             // txtTotalPage
             // 
             this.txtTotalPage.Enabled = false;
-            this.txtTotalPage.Location = new System.Drawing.Point(366, 688);
+            this.txtTotalPage.Location = new System.Drawing.Point(367, 640);
             this.txtTotalPage.Name = "txtTotalPage";
             this.txtTotalPage.Size = new System.Drawing.Size(33, 20);
             this.txtTotalPage.TabIndex = 11;
             // 
             // btnBackPage
             // 
-            this.btnBackPage.Location = new System.Drawing.Point(257, 686);
+            this.btnBackPage.Location = new System.Drawing.Point(258, 638);
             this.btnBackPage.Name = "btnBackPage";
             this.btnBackPage.Size = new System.Drawing.Size(37, 23);
             this.btnBackPage.TabIndex = 10;
@@ -102,7 +102,7 @@
             // 
             // btnFirstPage
             // 
-            this.btnFirstPage.Location = new System.Drawing.Point(214, 686);
+            this.btnFirstPage.Location = new System.Drawing.Point(215, 638);
             this.btnFirstPage.Name = "btnFirstPage";
             this.btnFirstPage.Size = new System.Drawing.Size(37, 23);
             this.btnFirstPage.TabIndex = 9;
@@ -112,7 +112,7 @@
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Location = new System.Drawing.Point(405, 686);
+            this.btnNextPage.Location = new System.Drawing.Point(406, 638);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(37, 23);
             this.btnNextPage.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // btnLastPage
             // 
-            this.btnLastPage.Location = new System.Drawing.Point(448, 686);
+            this.btnLastPage.Location = new System.Drawing.Point(449, 638);
             this.btnLastPage.Name = "btnLastPage";
             this.btnLastPage.Size = new System.Drawing.Size(37, 23);
             this.btnLastPage.TabIndex = 7;
@@ -264,7 +264,7 @@
             this.dataGridViewPublicaciones.Location = new System.Drawing.Point(12, 201);
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
-            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(674, 479);
+            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(674, 423);
             this.dataGridViewPublicaciones.TabIndex = 0;
             this.dataGridViewPublicaciones.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPublicaciones_CellContentClick);
             // 
@@ -361,8 +361,10 @@
             // columnComprar
             // 
             this.columnComprar.HeaderText = "Comprar";
+            this.columnComprar.Image = global::PalcoNet.Properties.Resources.iconfinder_cart_empty_126588;
             this.columnComprar.Name = "columnComprar";
             this.columnComprar.ReadOnly = true;
+            this.columnComprar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // publicacionDTOBindingSource
             // 
@@ -372,7 +374,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 721);
+            this.ClientSize = new System.Drawing.Size(698, 687);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtActualPage);
             this.Controls.Add(this.txtTotalPage);
@@ -385,7 +387,7 @@
             this.Controls.Add(this.groupBoxFiltroEventos);
             this.Controls.Add(this.dataGridViewPublicaciones);
             this.MaximumSize = new System.Drawing.Size(714, 760);
-            this.MinimumSize = new System.Drawing.Size(714, 760);
+            this.MinimumSize = new System.Drawing.Size(714, 726);
             this.Name = "FormComprar";
             this.Text = "Comprar";
             this.Load += new System.EventHandler(this.FormComprar_Load);
@@ -430,6 +432,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn empresaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn estadoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stockDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn columnComprar;
+        private System.Windows.Forms.DataGridViewImageColumn columnComprar;
     }
 }

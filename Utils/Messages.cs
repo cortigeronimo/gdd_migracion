@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PalcoNet.Utils
 {
-    public class Messagges
+    public class Messages
     {
         public static readonly String ERROR_INESPERADO = "Hubo un error inesperado, por favor reinténtelo.";
         public static readonly String OPERACION_EXITOSA = "Se ha realizado la operación con éxito.";

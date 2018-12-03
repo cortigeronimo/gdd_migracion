@@ -56,7 +56,7 @@ namespace PalcoNet.Canje_Puntos
                     MessageBox.Show("Puntos canjeados correctamente.");
                 }
                 catch(Exception){
-                    MessageBox.Show(Messagges.ERROR_INESPERADO);
+                    MessageBox.Show(Messages.ERROR_INESPERADO);
                 }
                  
             }

@@ -33,6 +33,22 @@ namespace PalcoNet.Repositorios
             Conexion.ExecuteProcedure(cmd);
         }
 
+        public void ChangePasswordFirstLogin(String password)
+        {
+            String sp = "PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN";
+            SqlCommand cmd = new SqlCommand(sp);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            byte[] hashPassword = Hashing.GetSHA256Encrypt(password);
+
+            cmd.Parameters.AddWithValue("@idUser", UserSession.UserId);
+            cmd.Parameters.AddWithValue("@password", hashPassword);
+            cmd.Parameters.AddWithValue("@fechaCreacion", SystemDate.GetDate());
+            cmd.Parameters.AddWithValue("@rolId", UserSession.RolId);
+
+            Conexion.ExecuteProcedure(cmd);
+        }
+
 
 
         public Boolean FirstLogin(int? userId, int rolId)

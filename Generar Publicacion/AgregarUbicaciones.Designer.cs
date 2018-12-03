@@ -40,12 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.columnFila = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnAsiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDelete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.columnDelete = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUbicaciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrecio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAsiento)).BeginInit();
@@ -230,6 +230,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Agregar Ubicación";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(15, 493);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 12;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // columnFila
             // 
             this.columnFila.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -275,18 +285,10 @@
             this.columnDelete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnDelete.DataPropertyName = "Eliminar";
             this.columnDelete.HeaderText = "Eliminar";
+            this.columnDelete.Image = global::PalcoNet.Properties.Resources.iconfinder_ic_delete_forever_48px_3669360;
             this.columnDelete.Name = "columnDelete";
             this.columnDelete.ReadOnly = true;
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(15, 493);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 12;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.columnDelete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // FormAgregarUbicaciones
             // 
@@ -326,11 +328,11 @@
         private System.Windows.Forms.DataGridView dataGridViewUbicaciones;
         private System.Windows.Forms.Button btnConfirmarSeleccion;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFila;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnAsiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPrecio;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnDescripcion;
-        private System.Windows.Forms.DataGridViewButtonColumn columnDelete;
-        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.DataGridViewImageColumn columnDelete;
     }
 }

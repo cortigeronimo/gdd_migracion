@@ -94,6 +94,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HE
 
 IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN;
+
 IF OBJECT_ID('PLEASE_HELP.SP_CANJEAR_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS;
 
 IF OBJECT_ID('PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE;
@@ -122,7 +124,10 @@ IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP 
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
 
+IF OBJECT_ID('PLEASE_HELP.SP_RENDIR_COMISIONES') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES;
+
 IF OBJECT_ID('PLEASE_HELP.SP_TOP5_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_EMPRESAS;
+
 
 
 -- CREANDO TRIGGERS SI NO EXISTEN
@@ -480,10 +485,11 @@ BEGIN
 			Cli_Tarjeta_Credito,
 			Cli_Habilitado,
 			Cli_Intentos_Fallidos,
-			Cli_Baja
+			Cli_Baja,
+			Cli_Primer_Login
 		)
 		SELECT DISTINCT u.Usuario_Id, m.Cli_Nombre, m.Cli_Apeliido, 'DNI', m.Cli_Dni, NULL, m.Cli_Mail, NULL, NULL, m.Cli_Dom_Calle + CAST(m.Cli_Nro_Calle AS nvarchar(255))
-		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, getDate(), NULL, 1, 0, 0 
+		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, NULL, NULL, 1, 0, 0, 1 
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('USUARIO' + CAST(m.Cli_Dni AS varchar(225))) AND m.Cli_Dni IS NOT NULL
 		
@@ -526,10 +532,11 @@ BEGIN
 			Emp_Cuit,
 			Emp_Habilitado,
 			Emp_Intentos_Fallidos,
-			Emp_Baja
+			Emp_Baja,
+			Emp_Primer_Login
 		)
 		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
-		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0
+		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0, 1
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('EMPRESA' + CAST(m.Espec_Empresa_Cuit AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
 
@@ -642,11 +649,22 @@ GO
 
 -- STORED PROCEDURES LOGIN
 
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN(@idUser INT, @password VARBINARY(255), @fechaCreacion DATETIME, @rolId INT)
+AS
+BEGIN
+UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
+DECLARE @rolNombre NVARCHAR(20)
+SELECT @rolNombre = Rol_Nombre FROM PLEASE_HELP.Rol WHERE Rol_Id = @rolId
+IF(@rolNombre = 'CLIENTE')
+	UPDATE PLEASE_HELP.Cliente SET Cli_Fecha_Creacion = CONVERT(DATETIME, @fechaCreacion, 121) WHERE Cli_Usuario = @idUser
+END
+GO
+
 CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA(@idUser INT, @password VARBINARY(255))
 AS
 BEGIN
 UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
-END
+END 
 GO
 
 CREATE PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_CLIENTE(@userId INT)
@@ -672,23 +690,6 @@ on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
 END
 GO
 
---CREATE PROCEDURE PLEASE_HELP.SP_VERIFICAR_ADMIN (@username NVARCHAR(50))
---AS
---BEGIN
---	DECLARE @idAdmin INT, @idUsuario INT, @esAdmin BIT
---	SELECT @idAdmin = Rol_Id FROM Rol WHERE Rol_Nombre = 'ADMINISTRATIVO'
---	SELECT @idUsuario = Usuario_Id FROM PLEASE_HELP.Usuario WHERE Usuario_Username = @username
---	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Usuario_Rol UXR WHERE UXR.Usuario_Id = @idUsuario AND UXR.Rol_Id = @idAdmin)
---		BEGIN
---			SET @esAdmin = 1
---		END
---	ELSE
---		BEGIN
---			SET @esAdmin = 0
---		END
---	RETURN @esAdmin
---END
---GO
 
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_ROLES_USUARIO(@USERNAME NVARCHAR(50))
@@ -844,6 +845,11 @@ BEGIN
 	AND p.Pub_Estado = @estadoId
 	LEFT JOIN PLEASE_HELP.Ubicacion u
 	ON u.Ubicacion_Publicacion = p.Pub_Codigo
+	LEFT JOIN PLEASE_HELP.Compra c
+	ON c.Compra_Asiento = u.Ubicacion_Asiento
+	AND c.Compra_Fila = u.Ubicacion_Fila
+	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+	AND c.Compra_Fecha_Rendida IS NULL
 	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
 	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
 END
@@ -897,6 +903,56 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE PLEASE_HELP.SP_RENDIR_COMISIONES(@cantidadARendir int, @idPublicacion NUMERIC(18,0), @fechaActual DateTime)
+AS
+BEGIN
+	IF (SELECT COUNT(c.Compra_Id) 
+		FROM PLEASE_HELP.Compra c 
+		WHERE c.Compra_Publicacion = @idPublicacion
+		AND c.Compra_Fecha_Rendida IS NULL) >= @cantidadARendir
+	BEGIN
+		DECLARE @empresa int, @idFactura NUMERIC(18,0), @total NUMERIC(18,0)
+		SET @total = 0
+
+		SELECT @empresa = p.Pub_Empresa 
+				FROM PLEASE_HELP.Publicacion p
+				WHERE p.Pub_Codigo = @idPublicacion
+
+		INSERT INTO PLEASE_HELP.Factura 
+			VALUES (@fechaActual, 0, @empresa)
+
+		SET @idFactura = @@IDENTITY
+		DECLARE @idCompra int, @monto NUMERIC(18,2), @descripcion NVARCHAR(60)
+
+		WHILE @cantidadARendir > 0
+			BEGIN
+
+				SELECT TOP 1 @idCompra = c.Compra_Id, 
+				@monto = u.Ubicacion_Precio,
+				@descripcion = u.Ubicacion_Descripcion  
+				FROM PLEASE_HELP.Compra c
+				JOIN PLEASE_HELP.Ubicacion u
+				ON c.Compra_Asiento = u.Ubicacion_Asiento
+				AND c.Compra_Fila = u.Ubicacion_Fila
+				AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+				WHERE c.Compra_Publicacion = @idPublicacion
+				AND c.Compra_Fecha_Rendida IS NULL
+				ORDER BY c.Compra_Fecha ASC
+
+				INSERT INTO PLEASE_HELP.Item VALUES 
+				(@monto, 1, @descripcion, @idFactura, @idCompra)
+
+				UPDATE PLEASE_HELP.Compra SET Compra_Fecha_Rendida = @fechaActual
+				WHERE Compra_Id = @idCompra
+
+				SET @total = @total + @monto
+				SET @cantidadARendir = @cantidadARendir - 1
+			END
+
+			UPDATE PLEASE_HELP.Factura SET Factura_Total = @total WHERE Factura_Nro = @idFactura
+	END
+END
+GO
 
 -- STORED PROCEDURES EDITAR PUBLICACION
 
@@ -956,7 +1012,7 @@ GO
 
 -- STORED PROCEDURES CANJE DE PUNTOS
 
-CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0))
+CREATE PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS(@idUser NUMERIC(18,0), @idPremio NUMERIC(18,0), @fechaActual DateTime)
 AS
 	DECLARE @puntosPremio int, @puntosAVencer int, @idPuntosAVencer int
 	SELECT @puntosPremio = Premio_Puntos FROM PLEASE_HELP.Premio WHERE Premio_Id = @idPremio
@@ -970,7 +1026,7 @@ AS
 	BEGIN
 		SELECT TOP 1 @idPuntosAVencer = Puntuacion_Id, @puntosAVencer = Puntuacion_Cantidad 
 		FROM PLEASE_HELP.Puntuacion 
-		WHERE Puntuacion_Cliente = @idUser AND GETDATE() < Puntuacion_Fecha_Vencimiento AND Puntuacion_Cantidad > 0
+		WHERE Puntuacion_Cliente = @idUser AND @fechaActual < Puntuacion_Fecha_Vencimiento AND Puntuacion_Cantidad > 0
 		ORDER BY Puntuacion_Fecha_Vencimiento ASC
 		IF @puntosAVencer >= @puntosPremio
 		BEGIN
@@ -1004,13 +1060,13 @@ GO
 
 -- STORED PROCEDURES COMPRAR
 
-CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null)
+CREATE PROCEDURE PLEASE_HELP.SP_GET_PUBLICACIONES_ACTIVAS(@descripcion NVARCHAR(255) = null, @fechaDesde DATETIME = null, @fechaHasta DATETIME = null, @fechaActual DateTime)
 AS
 SELECT Pub_Codigo, Pub_Descripcion, Pub_Fecha_Evento, Pub_Direccion, (SELECT Rubro_Descripcion FROM PLEASE_HELP.Rubro WHERE Rubro_Id = Pub_Rubro) as Pub_Rubro,
 	 COUNT(*) as Pub_Stock, (SELECT Grado_Comision FROM PLEASE_HELP.Grado WHERE Grado_Id = Pub_Grado) as Pub_Comision	 
 FROM PLEASE_HELP.Publicacion INNER JOIN PLEASE_HELP.Ubicacion ON Pub_Codigo = Ubicacion_Publicacion
 WHERE Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'PUBLICADA') AND NOT EXISTS (SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento)
-	AND Pub_Fecha_Evento > CONVERT(DATETIME, '2018-01-01 00:00:00', 121)        --consideramos fecha actual 2018-01-01 00:00:00, aca debería ir un getdate()
+	AND Pub_Fecha_Evento > CONVERT(DATETIME, @fechaActual, 121)
 	--filtros
 	AND (@descripcion is null OR Pub_Descripcion LIKE CONCAT('%',@descripcion,'%'))
 	AND (@fechaDesde is null OR Pub_Fecha_Evento >= CONVERT(DATETIME,@fechaDesde,121))

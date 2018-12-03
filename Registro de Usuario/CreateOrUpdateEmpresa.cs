@@ -111,7 +111,7 @@ namespace PalcoNet.Registro_de_Usuario
             {
                 empresa.baja = this.checkBoxBaja.Checked;
                 repoEmpresa.UpdateEmpresa(empresa);
-                MessageBox.Show(Messagges.DATOS_ACTUALIZADOS);
+                MessageBox.Show(Messages.DATOS_ACTUALIZADOS);
             }
             else {
                 if(String.IsNullOrEmpty(empresa.username)){

@@ -63,12 +63,16 @@ namespace PalcoNet.Vistas
 
             if (FirstLogin())
             {
-                using (FormChangePassword form = new FormChangePassword())
+                using (FormChangePassword form = new FormChangePassword(true))
                 {
                     DialogResult result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
                         form.Close();
+                    }
+                    else
+                    {
+                        Application.Exit();
                     }
                 }
             }

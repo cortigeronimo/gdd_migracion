@@ -272,6 +272,7 @@
     <Compile Include="Repositorios\RepoEmpresa.cs" />
     <Compile Include="Repositorios\RepoEstadistica.cs" />
     <Compile Include="Repositorios\RepoEstado.cs" />
+    <Compile Include="Repositorios\RepoFactura.cs" />
     <Compile Include="Repositorios\RepoGradoPublicacion.cs" />
     <Compile Include="Repositorios\RepoPremio.cs" />
     <Compile Include="Repositorios\RepoPublicacion.cs" />
@@ -437,6 +438,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Vistas\RolSelector.resx">
       <DependentUpon>RolSelector.cs</DependentUpon>
@@ -466,7 +468,27 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_00-ELASTOFONT-STORE-READY_invoice_2703075.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_buy-bill-money-cash-pay_2205221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_cart-empty_126588.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_circle-add_226591.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_ic_delete_forever_48px_3669360.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_ic_highlight_remove_48px_352425.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\iconfinder_new-24_103173.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
