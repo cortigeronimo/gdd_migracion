@@ -33,12 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxAnio = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridEstadisticas = new System.Windows.Forms.DataGridView();
             this.btnListado1 = new System.Windows.Forms.Button();
             this.btnListado2 = new System.Windows.Forms.Button();
             this.btnListado3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadisticas)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -98,13 +98,13 @@
             this.label1.Text = "Año";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // dataGridView1
+            // dataGridEstadisticas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 270);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(519, 295);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridEstadisticas.Location = new System.Drawing.Point(12, 270);
+            this.dataGridEstadisticas.Name = "dataGridEstadisticas";
+            this.dataGridEstadisticas.Size = new System.Drawing.Size(519, 295);
+            this.dataGridEstadisticas.TabIndex = 1;
             // 
             // btnListado1
             // 
@@ -144,14 +144,14 @@
             this.Controls.Add(this.btnListado3);
             this.Controls.Add(this.btnListado2);
             this.Controls.Add(this.btnListado1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridEstadisticas);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoEstadistico";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.ListadoEstadistico_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadisticas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -163,7 +163,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxAnio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridEstadisticas;
         private System.Windows.Forms.Button btnListado1;
         private System.Windows.Forms.Button btnListado2;
         private System.Windows.Forms.Button btnListado3;

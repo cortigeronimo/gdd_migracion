@@ -23,7 +23,7 @@ namespace PalcoNet.Modelo
         public ResultadoEstadistico(string razonSocial, string grado, string mes, int cantSinVender)
         {
             this.razonSocial = razonSocial;
-            this.grado = grado;
+            this.grado = grado == null ? "" : grado;
             this.mes = mes;
             this.sinVender = cantSinVender;
         }

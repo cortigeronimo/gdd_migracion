@@ -45,6 +45,9 @@ namespace PalcoNet.Listado_Estadistico
             }
 
             top5 = new RepoEstadistica().GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+            top5.ForEach(t => bindingSource.Add(t));
+            dataGridEstadisticas.DataSource = bindingSource;
+            
 
         }
 

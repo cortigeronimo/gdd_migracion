@@ -9,7 +9,7 @@ using System.Data;
 
 namespace PalcoNet.Repositorios
 {
-    class RepoEstadistica
+    class RepoEstadistica : Repository
     {
         public List<ResultadoEstadistico> GetTop5Empresas(int anio, int trimestre)
         {
@@ -28,7 +28,7 @@ namespace PalcoNet.Repositorios
             while (i < table.Rows.Count)
             {
                 ResultadoEstadistico empresa =
-                    new ResultadoEstadistico((string)table.Rows[i]["Emp_Razon_Social"], (string)table.Rows[i]["Pub_Grado"], (string)table.Rows[i]["Mes"], (int)table.Rows[i]["Localidades no vendidas"]);
+                    new ResultadoEstadistico((string)table.Rows[i]["Emp_Razon_Social"], GetValueOrNull<string>(table.Rows[i]["Pub_Grado"]), table.Rows[i]["Mes"].ToString(), (int)table.Rows[i]["Localidades no vendidas"]);
                 top5.Add(empresa);
                 i++;
             }
