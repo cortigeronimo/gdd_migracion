@@ -11,6 +11,6 @@ namespace PalcoNet.Config
         public static int? UserId { get; set; }
         public static String Username { get; set; }
         public static int RolId { get; set; }
-
+        public static Boolean IsAdmin { get; set; }
     }
 }

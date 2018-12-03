@@ -69,7 +69,7 @@ namespace PalcoNet.Repositorios
 
         }
 
-        //Verifica si el usario existe en la DB
+        //Verifica si el usuario existe en la DB, si existe se guarda el "Id" en el objeto user
         public Boolean ExistsUser(Usuario user)
         {
             DataTable table = new DataTable();
@@ -81,8 +81,6 @@ namespace PalcoNet.Repositorios
                 return true;
             }
             return false;
-
-            //return table.Rows.Count != 0;
         }
 
         //Verifica si la contraseña ingresada es correcta
@@ -99,32 +97,28 @@ namespace PalcoNet.Repositorios
           
         }
 
-        //Verifica si el usuario esta habilitado y si es cliente, empresa o usuario
+        //Verifica si el usuario esta habilitado y si es cliente, empresa o administrador
         public Boolean EnabledUser(Usuario user)
         {
             DataTable table = new DataTable();
 
             if (IsAdmin(user))
             {
-                user.isAdmin = true;
-                
+                user.isAdmin = true;        
                 return true;
+            }
+
+            if (IsClient(user))
+            {
+                user.isClient = true;
+                table = GetClientRow(user);
+                return Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]);
             }
             else
             {
-                if (IsClient(user))
-                {
-                    user.isClient = true;
-                    table = GetClientRow(user);
-                    return Convert.ToBoolean(table.Rows[0]["Cli_Habilitado"]);
-                }
-                else
-                {
-                    user.isClient = false;
-                    table = GetEmpresaRow(user);
-                    return Convert.ToBoolean(table.Rows[0]["Emp_Habilitado"]);
-                }
-
+                user.isClient = false;
+                table = GetEmpresaRow(user);
+                return Convert.ToBoolean(table.Rows[0]["Emp_Habilitado"]);
             }
 
         }
@@ -161,10 +155,7 @@ namespace PalcoNet.Repositorios
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@username", user.username);
 
-            DataTable table = new DataTable();
-            table = Conexion.GetData(command);
-
-            return table;
+            return Conexion.GetData(command);
         }
 
         //Obtener el row del cliente asociado al usuario del login
@@ -174,10 +165,7 @@ namespace PalcoNet.Repositorios
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@userId", user.id);
 
-            DataTable table = new DataTable();
-            table = Conexion.GetData(command);
-
-            return table;
+            return Conexion.GetData(command);         
         }
 
         //Obtener el row de la empresa asociado al usuario del login
@@ -186,25 +174,22 @@ namespace PalcoNet.Repositorios
             String query = "select * from " + empresaTable + " where Emp_Usuario = @userId";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@userId", user.id);
-
-            DataTable table = new DataTable();
-            table = Conexion.GetData(command);
-
-            return table;
+    
+            return Conexion.GetData(command);          
         }
 
         //Obtener lista de roles de usuario
-        private List<Rol> GetRolesUsuario(Usuario user)
+        public List<Rol> GetRolesUsuario(Usuario user)
         {
             String query = "PLEASE_HELP.SP_LISTA_ROLES_USUARIO";
             SqlCommand command = new SqlCommand(query);
             command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@USERNAME", user.username);
+            command.Parameters.AddWithValue("@userId", user.id);
 
             DataTable table = new DataTable();
             table = Conexion.GetData(command);
 
-            //Seteo en el objeto usuario los objetos roles obtenidos
+            //Guardo en el objeto user los objetos roles obtenidos
             user.SetRoles(FromRowsToRoles(table));
 
             return user.GetRoles();
@@ -230,13 +215,10 @@ namespace PalcoNet.Repositorios
         //Toma la lista de roles del usuario y verifica si tiene el rol de ADMIN
         private Boolean IsAdmin(Usuario user)
         {
-            List<Rol> list = new List<Rol>();
-            list = GetRolesUsuario(user);
-
             int i = 0;
-            while (list.Count > i)
+            while (user.GetRoles().Count > i)
             {
-                string nombreRol = list[i].nombre;
+                string nombreRol = user.GetRoles()[i].nombre;
                 if (nombreRol == "ADMINISTRATIVO")
                     return true;
                 else

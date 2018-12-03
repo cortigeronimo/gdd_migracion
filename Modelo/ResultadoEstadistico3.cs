@@ -8,17 +8,25 @@ namespace PalcoNet.Modelo
 {
     class ResultadoEstadistico3
     {
-        public int UsuarioId;
-        public string Cliente;
-        public int CantCompras;
-        public string Empresa;
+        public string empresa;
+        public string Empresa { get { return this.empresa; } }
+
+        public int usuarioId;
+        public int UsuarioId { get { return this.usuarioId; } }
+
+        public string cliente;
+        public string Cliente { get { return this.cliente; } }
+
+        public int cantCompras;
+        public int CantCompras { get { return this.cantCompras; } }
+
 
         public ResultadoEstadistico3(int id, string cliente, int cant, string emp)
         {
-            this.UsuarioId = id;
-            this.Cliente = cliente;
-            this.CantCompras = cant;
-            this.Empresa = emp;
+            this.usuarioId = id;
+            this.cliente = cliente;
+            this.cantCompras = cant;
+            this.empresa = emp;
         }
     }
 }

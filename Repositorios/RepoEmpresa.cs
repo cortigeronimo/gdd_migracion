@@ -179,5 +179,13 @@ namespace PalcoNet.Repositorios
             }
             return empresasToCheckIn;
         }
+
+        public List<Empresa> GetEmpresas()
+        {
+            string query = "SELECT * FROM " + table;
+            SqlCommand cmd = new SqlCommand(query);
+            DataTable result = Conexion.GetData(cmd);
+            return FromRowsToEmpresas(result);
+        }
     }
 }
