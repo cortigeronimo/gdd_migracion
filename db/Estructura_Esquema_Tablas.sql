@@ -128,6 +128,9 @@ IF OBJECT_ID('PLEASE_HELP.SP_RENDIR_COMISIONES') IS NOT NULL DROP PROCEDURE PLEA
 
 IF OBJECT_ID('PLEASE_HELP.SP_TOP5_EMPRESAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_EMPRESAS;
 
+IF OBJECT_ID('PLEASE_HELP.SP_TOP5_CLIENTES_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_CLIENTES_PUNTOS;
+
+IF OBJECT_ID('PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS;
 
 
 -- CREANDO TRIGGERS SI NO EXISTEN
@@ -1226,23 +1229,81 @@ SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,coun
 INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
 INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
 LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes1
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes1
 GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
 UNION
 SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
 INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
 INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
 LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes2
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes2
 GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
 UNION
 SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
 INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
 INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
 LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = 2018 AND month(p.Pub_Fecha_Evento) = @mes3
+WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes3
 GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
 ORDER BY month(p.Pub_Fecha_Evento) asc, count(u.Ubicacion_Publicacion) desc;
 
+END
+GO
+
+--Listado estadistico clientes con mayores puntos vencidos
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_PUNTOS](@trimestre INT, @anio INT)
+AS
+BEGIN
+
+DECLARE @mesDesde INT
+DECLARE @mesHasta INT
+
+SET @mesDesde = CASE @trimestre WHEN 1 THEN 1
+								WHEN 2 THEN 4
+								WHEN 3 THEN 7
+								WHEN 4 THEN 10 END
+
+SET @mesHasta = CASE @trimestre WHEN 1 THEN 3
+								WHEN 2 THEN 6
+								WHEN 3 THEN 9
+								WHEN 4 THEN 12 END
+
+SELECT TOP 5 C.Cli_Usuario, C.Cli_Apellido, C.Cli_Nombre, SUM(p.Puntuacion_Cantidad) PuntosVencidos FROM PLEASE_HELP.Puntuacion p
+INNER JOIN PLEASE_HELP.Cliente c ON p.Puntuacion_Cliente = c.Cli_Usuario
+WHERE YEAR(p.Puntuacion_Fecha_Vencimiento) = @anio
+	AND MONTH(p.Puntuacion_Fecha_Vencimiento) BETWEEN @mesDesde AND @mesHasta
+GROUP BY C.Cli_Usuario, C.Cli_Apellido, C.Cli_Nombre
+ORDER BY SUM(p.Puntuacion_Cantidad) DESC
+
+END
+GO
+
+--Listado estadistico clientes con mayor cantidad de compras
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_COMPRAS](@trimestre INT, @anio INT, @empresa nvarchar(255))
+AS
+BEGIN
+
+DECLARE @mesDesde INT
+DECLARE @mesHasta INT
+
+SET @mesDesde = CASE @trimestre WHEN 1 THEN 1
+								WHEN 2 THEN 4
+								WHEN 3 THEN 7
+								WHEN 4 THEN 10 END
+
+SET @mesHasta = CASE @trimestre WHEN 1 THEN 3
+								WHEN 2 THEN 6
+								WHEN 3 THEN 9
+								WHEN 4 THEN 12 END
+
+SELECT TOP 5 cl.Cli_Usuario, cl.Cli_Apellido, cl.Cli_Nombre, sum(c.Compra_Cantidad) CantCompras, e.Emp_Razon_Social FROM PLEASE_HELP.Compra c
+INNER JOIN PLEASE_HELP.Cliente cl ON c.Compra_Cliente = cl.Cli_Usuario
+INNER JOIN PLEASE_HELP.Publicacion p ON c.Compra_Publicacion = p.Pub_Codigo
+INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
+WHERE e.Emp_Razon_Social = @empresa
+	AND YEAR(c.Compra_Fecha) = @anio
+	AND MONTH(c.Compra_Fecha) BETWEEN @mesDesde AND @mesHasta
+GROUP BY cl.Cli_Usuario, cl.Cli_Apellido, cl.Cli_Nombre, e.Emp_Razon_Social
+ORDER BY  sum(c.Compra_Cantidad) desc;
 END
 GO
