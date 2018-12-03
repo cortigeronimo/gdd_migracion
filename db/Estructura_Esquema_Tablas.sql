@@ -94,6 +94,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HE
 
 IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN;
+
 IF OBJECT_ID('PLEASE_HELP.SP_CANJEAR_PUNTOS') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_CANJEAR_PUNTOS;
 
 IF OBJECT_ID('PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_HISTORIAL_CLIENTE;
@@ -121,6 +123,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR;
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR;
+
+
 
 
 -- CREANDO TRIGGERS SI NO EXISTEN
@@ -478,10 +482,11 @@ BEGIN
 			Cli_Tarjeta_Credito,
 			Cli_Habilitado,
 			Cli_Intentos_Fallidos,
-			Cli_Baja
+			Cli_Baja,
+			Cli_Primer_Login
 		)
 		SELECT DISTINCT u.Usuario_Id, m.Cli_Nombre, m.Cli_Apeliido, 'DNI', m.Cli_Dni, NULL, m.Cli_Mail, NULL, NULL, m.Cli_Dom_Calle + CAST(m.Cli_Nro_Calle AS nvarchar(255))
-		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, getDate(), NULL, 1, 0, 0 
+		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, NULL, NULL, 1, 0, 0, 1 
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('USUARIO' + CAST(m.Cli_Dni AS varchar(225))) AND m.Cli_Dni IS NOT NULL
 		
@@ -524,10 +529,11 @@ BEGIN
 			Emp_Cuit,
 			Emp_Habilitado,
 			Emp_Intentos_Fallidos,
-			Emp_Baja
+			Emp_Baja,
+			Emp_Primer_Login
 		)
 		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
-		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0
+		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0, 1
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('EMPRESA' + CAST(m.Espec_Empresa_Cuit AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
 
@@ -640,11 +646,22 @@ GO
 
 -- STORED PROCEDURES LOGIN
 
+CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA_PRIMER_LOGIN(@idUser INT, @password VARBINARY(255), @fechaCreacion DATETIME, @rolId INT)
+AS
+BEGIN
+UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
+DECLARE @rolNombre NVARCHAR(20)
+SELECT @rolNombre = Rol_Nombre FROM PLEASE_HELP.Rol WHERE Rol_Id = @rolId
+IF(@rolNombre = 'CLIENTE')
+	UPDATE PLEASE_HELP.Cliente SET Cli_Fecha_Creacion = CONVERT(DATETIME, @fechaCreacion, 121) WHERE Cli_Usuario = @idUser
+END
+GO
+
 CREATE PROCEDURE PLEASE_HELP.SP_CAMBIAR_CONTRASEÑA(@idUser INT, @password VARBINARY(255))
 AS
 BEGIN
 UPDATE PLEASE_HELP.Usuario SET Usuario_Password = @password WHERE Usuario_Id = @idUser
-END
+END 
 GO
 
 CREATE PROCEDURE PLEASE_HELP.SP_AGREGAR_INTENTOS_FALLIDOS_CLIENTE(@userId INT)
@@ -670,23 +687,6 @@ on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
 END
 GO
 
---CREATE PROCEDURE PLEASE_HELP.SP_VERIFICAR_ADMIN (@username NVARCHAR(50))
---AS
---BEGIN
---	DECLARE @idAdmin INT, @idUsuario INT, @esAdmin BIT
---	SELECT @idAdmin = Rol_Id FROM Rol WHERE Rol_Nombre = 'ADMINISTRATIVO'
---	SELECT @idUsuario = Usuario_Id FROM PLEASE_HELP.Usuario WHERE Usuario_Username = @username
---	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Usuario_Rol UXR WHERE UXR.Usuario_Id = @idUsuario AND UXR.Rol_Id = @idAdmin)
---		BEGIN
---			SET @esAdmin = 1
---		END
---	ELSE
---		BEGIN
---			SET @esAdmin = 0
---		END
---	RETURN @esAdmin
---END
---GO
 
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_ROLES_USUARIO(@USERNAME NVARCHAR(50))

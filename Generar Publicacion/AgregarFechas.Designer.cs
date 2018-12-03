@@ -120,6 +120,7 @@
             this.columnEliminar.HeaderText = "Eliminar";
             this.columnEliminar.Name = "columnEliminar";
             this.columnEliminar.ReadOnly = true;
+            this.columnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // FormAgregarFechas
             // 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using PalcoNet.Vistas;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Vistas
 {
@@ -17,34 +18,59 @@ namespace PalcoNet.Vistas
     {
 
         RepoUsuario repoUsuario = new RepoUsuario();
+        String password;
+        Boolean firstLogin = false;
 
         public FormChangePassword()
         {
             InitializeComponent();
         }
 
+        public FormChangePassword(Boolean firstLogin)
+        {
+            InitializeComponent();
+            this.firstLogin = firstLogin;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (CheckPasswords())
+            if (!CheckPasswords())
             {
-                String password = txtConfirmarPassword.Text;
-                repoUsuario.ChangePassword(password);
-                MessageBox.Show("Contraseña actualizada.");
+                MessageBox.Show("Las contraseñas ingresadas no coinciden", "Error");
+                return;   
+            }
+     
+            password = txtConfirmarPassword.Text;
 
+            try
+            {
+                ChangePassword();
+                MessageBox.Show("Contraseña actualizada.", "Message");
                 this.DialogResult = DialogResult.OK;
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Error, las contraseñas ingresadas no coinciden");
-            }
+                MessageBox.Show(Messagges.ERROR_INESPERADO, "Error");
+            }            
         }
+
+        private void ChangePassword()
+        {
+            if (firstLogin)
+                repoUsuario.ChangePasswordFirstLogin(password);            
+            else
+                repoUsuario.ChangePassword(password);                 
+        }
+
+
 
         private Boolean CheckPasswords()
         {
             return txtPassword.Text == txtConfirmarPassword.Text;
         }
 
-        private void CheckTextBox()
+        
+        private void TxtBoxes_TextChanged(object sender, EventArgs e)
         {
             if (txtPassword.Text != string.Empty && txtConfirmarPassword.Text != string.Empty)
             {
@@ -54,16 +80,6 @@ namespace PalcoNet.Vistas
             {
                 btnAceptar.Enabled = false;
             }
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-            CheckTextBox();
-        }
-
-        private void txtConfirmarPassword_TextChanged(object sender, EventArgs e)
-        {
-            CheckTextBox();
         }
 
 
