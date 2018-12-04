@@ -11,6 +11,7 @@ using PalcoNet.Vistas;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Utils;
+using PalcoNet.Config;
 using PalcoNet.Registro_de_Usuario.ClienteStrategy;
 
 namespace PalcoNet.Registro_de_Usuario
@@ -21,28 +22,32 @@ namespace PalcoNet.Registro_de_Usuario
         private RepoCliente repoCliente = new RepoCliente();
         private ClienteStrategy.ClienteStrategy clienteStrategy;
 
-        //el usuario se da de alta
+        //El usuario se da de alta
         public CreateOrUpdateCliente(Usuario usuario)
         {
             InitializeComponent();
             checkBoxBaja.Visible = false;
             cliente = new Cliente(usuario);
+            cliente.id = 0;
+            cliente.primerLogin = false;
+            cliente.fechaCreacion = SystemDate.GetDate();   
             clienteStrategy = new ClienteSignUp();
             this.Text = "Registrar Cliente";
             this.groupBoxCliente.Text = "Registro Cliente";
         }
 
-        //el admin lo quiere crear
+        //El admin lo quiere crear
         public CreateOrUpdateCliente() {
             InitializeComponent();
             checkBoxBaja.Visible = false;
             cliente = new Cliente();
+            cliente.primerLogin = true;
             clienteStrategy = new AdminCreaCliente();
             this.Text = "Crear Cliente";
             this.groupBoxCliente.Text = "Creación Cliente";
         }
 
-        //el admin lo quiere modificar
+        //El admin lo quiere modificar
         public CreateOrUpdateCliente(Cliente cliente)
         {
             InitializeComponent();
@@ -69,9 +74,8 @@ namespace PalcoNet.Registro_de_Usuario
             txtCodigoPostal.Text = cliente.codigoPostal;
             pickerFechaNacimiento.Value = cliente.fechaNacimiento;
             txtTarjetaCredito.Text = cliente.tarjetaCredito;
+            checkBoxBaja.Checked = cliente.baja;  
             
-
-
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -139,7 +143,6 @@ namespace PalcoNet.Registro_de_Usuario
             cliente.localidad = txtLocalidad.Text;
             cliente.codigoPostal = txtCodigoPostal.Text;
             cliente.fechaNacimiento = pickerFechaNacimiento.Value;
-            cliente.SetFechaCreacion();
             cliente.tarjetaCredito = txtTarjetaCredito.Text;
             
         }

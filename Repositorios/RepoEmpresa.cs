@@ -75,7 +75,6 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", empresa.telefono);
             command.Parameters.AddWithValue("@localidad", empresa.localidad);
             command.Parameters.AddWithValue("@direccion", empresa.direccion);
-            //command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
             if (empresa.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
             command.Parameters.AddWithValue("@depto", empresa.depto);
             command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
@@ -109,7 +108,6 @@ namespace PalcoNet.Repositorios
                 cmd.Parameters.AddWithValue("@email", email);
             }
 
-            //query += " AND Emp_Baja != 1";
 
             cmd.CommandText = query;
             result = Conexion.GetData(cmd);
@@ -142,15 +140,7 @@ namespace PalcoNet.Repositorios
             return empresas;
         }
 
-        //public bool RepiteCUIT(string cuit)
-        //{
-        //    string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit";
-        //    var cmd = new SqlCommand(query);
-        //    cmd.Parameters.AddWithValue("@cuit", cuit);
-
-        //    var result = Conexion.GetData(cmd);
-        //    return (int)result.Rows[0]["Total"] > 0;
-        //}
+        
 
         public bool RepiteCUIT(string cuit, Boolean hasToUpdate, int? empresaId)
         {
@@ -164,17 +154,6 @@ namespace PalcoNet.Repositorios
             return (int)result.Rows[0]["Total"] > 0;
         }
 
-
-
-        //public bool RepiteRazonSocial(string razonSocial)
-        //{
-        //    string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Razon_Social = @razonSocial";
-        //    var cmd = new SqlCommand(query);
-        //    cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
-
-        //    var result = Conexion.GetData(cmd);
-        //    return (int)result.Rows[0]["Total"] > 0;
-        //}
 
         public bool RepiteRazonSocial(string razonSocial, Boolean hasToUpdate, int? empresaId )
         {

@@ -37,7 +37,12 @@ namespace PalcoNet
 
         private void btnLogin_Click(object sender, EventArgs e)
         {      
-            if(ValidateAllFields().ShowIfThereAreErrors()) return;
+            if (ValidateAllFields().ShowIfThereAreErrors())
+            {
+                user = new Usuario();
+                return;
+            }
+
             if (IsRegistered())
             {
                 UserSession.UserId = user.id;
@@ -45,16 +50,20 @@ namespace PalcoNet
                 UserSession.IsAdmin = user.isAdmin;
 
                 if (user.CountRoles() > 1)
-                {                  
+                {
                     FormManager.GetInstance().OpenAndClose(new RolSelector(user.GetRoles()), this);
                 }
                 else
                 {
                     Rol rol = new Rol();
-                    TakeRolFromUser(rol);                  
-                    UserSession.RolId = rol.id;                
+                    TakeRolFromUser(rol);
+                    UserSession.RolId = rol.id;
                     FormManager.GetInstance().OpenAndClose(new HomeMenu(), this);
-                }                                              
+                }
+            }
+            else
+            {
+                user = new Usuario();
             }
             
         }

@@ -35,6 +35,7 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
             {
                 MessageBox.Show(Messages.ERROR_INESPERADO);
             }
+
         }
     }
 }

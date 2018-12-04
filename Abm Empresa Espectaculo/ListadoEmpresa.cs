@@ -28,6 +28,11 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            LoadDataGridEmpresas();
+        }
+
+        private void LoadDataGridEmpresas()
+        {
             List<Empresa> empresas = repoEmpresa.GetEmpresasByFilter(txtBoxRazonSocial.Text, txtBoxCUIT.Text, txtBoxEmail.Text);
             empresas.Sort((e1, e2) => e1.razonSocial.CompareTo(e1.razonSocial));
             bindingSource = new BindingSource(empresas, String.Empty);
@@ -47,6 +52,7 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
             {
                 Form EditForm = new CreateOrUpdateEmpresa(empresa);
                 EditForm.ShowDialog();
+                LoadDataGridEmpresas();
             }
             if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.Eliminar))
             {
@@ -54,7 +60,8 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
                 if (dialogResult == DialogResult.Yes)
                 {
                     repoEmpresa.DeleteEmpresa(empresa);
-                    this.dataGridEmpresas.Rows.Remove(this.dataGridEmpresas.CurrentRow);
+                    //this.dataGridEmpresas.Rows.Remove(this.dataGridEmpresas.CurrentRow);
+                    LoadDataGridEmpresas();
                 }
             }
         }
