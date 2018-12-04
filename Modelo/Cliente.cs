@@ -30,6 +30,7 @@ namespace PalcoNet.Modelo
 
         public Cliente()
         {
+            id = 0;
         }
 
         public Cliente(Usuario usuario)

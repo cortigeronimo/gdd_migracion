@@ -25,7 +25,7 @@ namespace PalcoNet.Registro_de_Usuario
         public CreateOrUpdateCliente(Usuario usuario)
         {
             InitializeComponent();
-            checkBoxTipoDocumento.Visible = false;
+            checkBoxBaja.Visible = false;
             cliente = new Cliente(usuario);
             clienteStrategy = new ClienteSignUp();
         }
@@ -33,7 +33,7 @@ namespace PalcoNet.Registro_de_Usuario
         //el admin lo quiere crear
         public CreateOrUpdateCliente() {
             InitializeComponent();
-            checkBoxTipoDocumento.Visible = false;
+            checkBoxBaja.Visible = false;
             cliente = new Cliente();
             clienteStrategy = new AdminCreaCliente();
         }
@@ -42,15 +42,16 @@ namespace PalcoNet.Registro_de_Usuario
         public CreateOrUpdateCliente(Cliente cliente)
         {
             InitializeComponent();
+            this.cliente = cliente;
             InitializeTextsBoxes(cliente);
-            clienteStrategy = new AdminUpdateCliente(checkBoxTipoDocumento);
+            clienteStrategy = new AdminUpdateCliente(checkBoxBaja);
         }
 
         private void InitializeTextsBoxes(Cliente cliente)
         {
             txtNombre.Text = cliente.nombre;
             txtApellido.Text = cliente.apellido;
-            comboBoxTipoDoc.SelectedText = cliente.tipoDocumento;
+            comboBoxTipoDoc.SelectedItem = cliente.tipoDocumento;
             txtNumeroDocumento.Text = cliente.nroDocumento.ToString();
             txtCuil.Text = cliente.cuil.ToString();
             txtEmail.Text = cliente.email;
@@ -62,6 +63,7 @@ namespace PalcoNet.Registro_de_Usuario
             txtCodigoPostal.Text = cliente.codigoPostal;
             pickerFechaNacimiento.Value = cliente.fechaNacimiento;
             txtTarjetaCredito.Text = cliente.tarjetaCredito;
+            //checkBoxBaja.Checked = cliente.baja;
 
 
         }
@@ -85,7 +87,7 @@ namespace PalcoNet.Registro_de_Usuario
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidateFields().ShowIfThereAreErrors()) return;
-            if (repoCliente.ExistsDNIAndCuil(comboBoxTipoDoc.SelectedText, txtNumeroDocumento.Text, txtCuil.Text))
+            if (repoCliente.ExistsDNIAndCuil(cliente.id, comboBoxTipoDoc.SelectedItem.ToString(), txtNumeroDocumento.Text, txtCuil.Text))
             {
                 MessageBox.Show("Ya existe un Cliente con el mismo Dni y Cuil");
                 return;
@@ -126,7 +128,7 @@ namespace PalcoNet.Registro_de_Usuario
             cliente.email = txtEmail.Text;
             cliente.telefono = Convert.ToInt64(txtTelefono.Text);
             cliente.direccion = txtDireccion.Text;
-            cliente.nroPiso = Convert.ToDecimal(txtNumPiso.Text);  
+            if (String.IsNullOrEmpty(txtNumPiso.Text)) cliente.nroPiso = null; else cliente.nroPiso = Convert.ToDecimal(txtNumPiso.Text);       
             cliente.depto = txtDepartamento.Text;
             cliente.localidad = txtLocalidad.Text;
             cliente.codigoPostal = txtCodigoPostal.Text;

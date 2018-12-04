@@ -27,6 +27,11 @@ namespace PalcoNet.Abm_Cliente
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            LoadDataGrid();
+        }
+
+        private void LoadDataGrid()
+        {
             List<Cliente> clientes = repoCliente.GetClientesByFilter(txtNombre.Text, txtApellido.Text, txtNroDocumento.Text, txtEmail.Text);
             BindingSource binding = new BindingSource(clientes, "");
             this.dataGridViewClientes.DataSource = binding;
@@ -52,11 +57,18 @@ namespace PalcoNet.Abm_Cliente
             }
             if (e.ColumnIndex == dataGridViewClientes.Columns.IndexOf(this.columnEliminar))
             {
-                DialogResult dialogResult = MessageBox.Show("¿Desea eliminar la fila?", "Eliminar Cliente", MessageBoxButtons.YesNo);
+                DialogResult dialogResult;
+
+                if(cliente.baja)
+                    dialogResult = MessageBox.Show("¿Desea dar de alta al cliente?", "Alta Cliente", MessageBoxButtons.YesNo);
+                else
+                    dialogResult = MessageBox.Show("¿Desea eliminar la fila?", "Eliminar Cliente", MessageBoxButtons.YesNo);
+
                 if (dialogResult == DialogResult.Yes)
                 {
                     repoCliente.AltaBajaCliente(cliente.id, cliente.baja);
-                    cliente.baja = true;
+                    LoadDataGrid();
+                    
                 }
             }
         }

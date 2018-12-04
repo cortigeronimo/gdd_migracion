@@ -319,6 +319,7 @@ namespace PalcoNet.Vistas
             FormManager.GetInstance().Open(new CanjeForm());
         }
 
+
         private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FormChangePassword form = new FormChangePassword())

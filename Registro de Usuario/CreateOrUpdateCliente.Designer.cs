@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
-            this.checkBoxTipoDocumento = new System.Windows.Forms.CheckBox();
+            this.checkBoxBaja = new System.Windows.Forms.CheckBox();
             this.comboBoxTipoDoc = new System.Windows.Forms.ComboBox();
             this.txtCuil = new System.Windows.Forms.TextBox();
             this.txtNumPiso = new System.Windows.Forms.TextBox();
@@ -65,7 +65,7 @@
             // 
             // groupBoxCliente
             // 
-            this.groupBoxCliente.Controls.Add(this.checkBoxTipoDocumento);
+            this.groupBoxCliente.Controls.Add(this.checkBoxBaja);
             this.groupBoxCliente.Controls.Add(this.comboBoxTipoDoc);
             this.groupBoxCliente.Controls.Add(this.txtCuil);
             this.groupBoxCliente.Controls.Add(this.txtNumPiso);
@@ -101,15 +101,15 @@
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Cliente";
             // 
-            // checkBoxTipoDocumento
+            // checkBoxBaja
             // 
-            this.checkBoxTipoDocumento.AutoSize = true;
-            this.checkBoxTipoDocumento.Location = new System.Drawing.Point(20, 409);
-            this.checkBoxTipoDocumento.Name = "checkBoxTipoDocumento";
-            this.checkBoxTipoDocumento.Size = new System.Drawing.Size(82, 17);
-            this.checkBoxTipoDocumento.TabIndex = 26;
-            this.checkBoxTipoDocumento.Text = "Dar de Baja";
-            this.checkBoxTipoDocumento.UseVisualStyleBackColor = true;
+            this.checkBoxBaja.AutoSize = true;
+            this.checkBoxBaja.Location = new System.Drawing.Point(20, 409);
+            this.checkBoxBaja.Name = "checkBoxBaja";
+            this.checkBoxBaja.Size = new System.Drawing.Size(82, 17);
+            this.checkBoxBaja.TabIndex = 26;
+            this.checkBoxBaja.Text = "Dar de Baja";
+            this.checkBoxBaja.UseVisualStyleBackColor = true;
             // 
             // comboBoxTipoDoc
             // 
@@ -426,6 +426,6 @@
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtCuil;
         private System.Windows.Forms.ComboBox comboBoxTipoDoc;
-        private System.Windows.Forms.CheckBox checkBoxTipoDocumento;
+        private System.Windows.Forms.CheckBox checkBoxBaja;
     }
 }

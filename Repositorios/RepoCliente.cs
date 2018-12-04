@@ -29,15 +29,16 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", cliente.telefono);
             command.Parameters.AddWithValue("@localidad", cliente.localidad);
             command.Parameters.AddWithValue("@direccion", cliente.direccion);
-            command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);
+            if (cliente.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);
+            
             command.Parameters.AddWithValue("@depto", cliente.depto);
             command.Parameters.AddWithValue("@codpostal", cliente.codigoPostal);
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
             command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
             command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
-            command.Parameters.AddWithValue("@firstLogin", cliente.primerLogin);            
+            command.Parameters.AddWithValue("@firstLogin", 1);            
             command.Parameters.AddWithValue("@username", cliente.username);
-            command.Parameters.AddWithValue("@password", cliente.GetPassword());
+            command.Parameters.AddWithValue("@password", cliente.GetPassword());    
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar el cliente, intentelo nuevamente.");
@@ -72,13 +73,13 @@ namespace PalcoNet.Repositorios
             return FromRowsToClientes(Conexion.GetData(command));
         }         
 
-        //Verifica DNI y cuil para Update
-        public Boolean ExistsDNIAndCuil(String user, String tipoDoc, String nroDoc, String cuil)
+        //Verifica DNI y cuil
+        public Boolean ExistsDNIAndCuil(int? user, String tipoDoc, String nroDoc, String cuil)
         {
             String query = "SELECT * FROM ";
             query += clienteTable;
             query += " WHERE Cli_Usuario != @user";
-            query += " AND Cli_Tipo_Documento = @tipoDoc";
+            //query += " AND Cli_Tipo_Documento = @tipoDoc";
             query += " AND (Cli_Nro_Documento = @nroDoc";
             query += " OR Cli_Cuil = @cuil)";
 
@@ -90,28 +91,30 @@ namespace PalcoNet.Repositorios
 
 
             DataTable table = Conexion.GetData(command);
-            return table.Rows.Count != 0; 
-        }
-
-        //Verifica DNI y cuil para Insert
-        public Boolean ExistsDNIAndCuil(String tipoDoc, String nroDoc, String cuil)
-        {
-            String query = "SELECT * FROM ";
-            query += clienteTable;
-            
-            query += " WHERE (Cli_Tipo_Documento = @tipoDoc";
-            query += " AND Cli_Nro_Documento = @nroDoc)";
-            query += " OR Cli_Cuil = @cuil";
-
-            SqlCommand command = new SqlCommand(query);
-            command.Parameters.AddWithValue("@tipoDoc", tipoDoc);
-            command.Parameters.AddWithValue("@nroDoc", nroDoc);
-            command.Parameters.AddWithValue("@cuil", cuil);
-
-
-            DataTable table = Conexion.GetData(command);
             return table.Rows.Count != 0;
         }
+
+
+
+        //Verifica DNI y cuil para Insert
+        //public Boolean ExistsDNIAndCuil(String tipoDoc, String nroDoc, String cuil)
+        //{
+        //    String query = "SELECT * FROM ";
+        //    query += clienteTable;
+            
+        //    query += " WHERE (Cli_Tipo_Documento = @tipoDoc";
+        //    query += " AND Cli_Nro_Documento = @nroDoc)";
+        //    query += " OR Cli_Cuil = @cuil";
+
+        //    SqlCommand command = new SqlCommand(query);
+        //    command.Parameters.AddWithValue("@tipoDoc", tipoDoc);
+        //    command.Parameters.AddWithValue("@nroDoc", nroDoc);
+        //    command.Parameters.AddWithValue("@cuil", cuil);
+
+
+        //    DataTable table = Conexion.GetData(command);
+        //    return table.Rows.Count != 0;
+        //}
 
         public int UpdateCliente(Cliente cliente)
         {
@@ -229,7 +232,7 @@ namespace PalcoNet.Repositorios
                 cliente.nroDocumento = GetValueOrNull<decimal>(row["Cli_Nro_Documento"]);
                 cliente.cuil = GetValueOrNull<decimal>(row["Cli_Cuil"]);
                 cliente.email = GetValueOrNull<String>(row["Cli_Email"]);
-                cliente.telefono = GetValueOrNull<int>(row["Cli_Telefono"]);
+                cliente.telefono = Convert.ToInt64(GetValueOrNull<decimal>(row["Cli_Telefono"]));           //cambié int por decimal 4/12
                 cliente.localidad = GetValueOrNull<String>(row["Cli_Localidad"]);
                 cliente.direccion = GetValueOrNull<String>(row["Cli_Direccion"]);
                 cliente.nroPiso = GetValueOrNull<decimal>(row["Cli_Nro_Piso"]);

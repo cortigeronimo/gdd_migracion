@@ -619,11 +619,14 @@ GO
 EXEC PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_FACTURA
 GO
 
+-- CREACION DE COMPRAS
+
 INSERT INTO PLEASE_HELP.Compra
 SELECT (SELECT c.Cli_Usuario  FROM PLEASE_HELP.Cliente c WHERE Cli_Nro_Documento = g.Cli_Dni), g.Compra_Cantidad, g.Compra_Fecha, g.Forma_Pago_Desc, g.Cli_Mail, g.Factura_Fecha, g.Ubicacion_Fila, g.Ubicacion_Asiento, g.Espectaculo_Cod
 FROM gd_esquema.Maestra g
 WHERE g.Cli_Dni IS NOT NULL AND g.Forma_Pago_Desc IS NOT NULL 
 ORDER BY g.Compra_Fecha ASC
+GO
 
 -- CREACION DE ITEMS
 
@@ -633,6 +636,8 @@ FROM gd_esquema.Maestra G
 WHERE G.Factura_Nro IS NOT NULL
 
 GO
+
+-- CREACION DE PREMIOS
 
 INSERT INTO PLEASE_HELP.Premio 
 VALUES ('Heladera', 30000),
@@ -649,6 +654,10 @@ VALUES ('Heladera', 30000),
 ('Cenicero', 70)
 
 GO
+
+
+-----------------------------------------STORED PROCEDURES-------------------------------------------------------------------------------------------------
+
 
 -- STORED PROCEDURES LOGIN
 
@@ -684,22 +693,8 @@ UPDATE PLEASE_HELP.Empresa SET Emp_Intentos_Fallidos = Emp_Intentos_Fallidos + 1
 END
 GO
 
-CREATE PROCEDURE PLEASE_HELP.SP_GET_PREMIOS(@clienteId INT)
-AS
-BEGIN
-SELECT up.Premio_Cantidad as Cantidad, p.Premio_Descripcion as Descripcion, p.Premio_Puntos as Puntos
-from Premio p inner join Usuario_Premio up
-on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
-END
-GO
 
---CREATE PROCEDURE PLEASE_HELP.SP_LISTA_ROLES_USUARIO(@USERNAME NVARCHAR(50))
---AS
---SELECT UR.Rol_Id, (SELECT R.Rol_Nombre FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id), 
---(SELECT R.Rol_Habilitado FROM PLEASE_HELP.Rol R WHERE R.Rol_Id = UR.Rol_Id) 
---FROM PLEASE_HELP.Usuario U INNER JOIN PLEASE_HELP.Usuario_Rol UR ON U.Usuario_Id = UR.Usuario_Id
---WHERE U.Usuario_Username = @USERNAME
---GO
+
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_ROLES_USUARIO(@userId INT)
 AS
@@ -739,7 +734,8 @@ BEGIN
 END
 GO
 
--- STORED PROCEDURES ROL
+
+-- STORED PROCEDURES ABM ROL
 
 CREATE PROCEDURE PLEASE_HELP.SP_LISTA_FUNCIONALIDADES(@idRol INT) 
 AS
@@ -747,6 +743,7 @@ SELECT RF.Rol_Id, (SELECT F.Func_Desc FROM PLEASE_HELP.Funcionalidad F WHERE F.F
 FROM PLEASE_HELP.Rol R INNER JOIN PLEASE_HELP.Rol_Funcionalidad RF ON R.Rol_Id = RF.Rol_Id
 WHERE R.Rol_Id = @idRol
 GO
+
 
 -- STORED PROCEDURES ABM EMPRESA
 
@@ -780,7 +777,9 @@ BEGIN
 END
 GO
 
+
 -- STORED PROCEDURES ABM CLIENTE
+
 CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
 AS
 BEGIN
@@ -795,6 +794,17 @@ BEGIN
 		@telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @fechanac, 
 		@fechacreacion, @tarjetacredito, @firstLogin) 
 	COMMIT TRANSACTION
+END
+GO
+
+-- STORED PROCEDURES CANJE DE PUNTOS
+
+CREATE PROCEDURE PLEASE_HELP.SP_GET_PREMIOS(@clienteId INT)
+AS
+BEGIN
+SELECT up.Premio_Cantidad as Cantidad, p.Premio_Descripcion as Descripcion, p.Premio_Puntos as Puntos
+from Premio p inner join Usuario_Premio up
+on p.Premio_Id = up.Premio_Id and up.Cli_Usuario = @clienteId
 END
 GO
 
@@ -1129,96 +1139,8 @@ FROM PLEASE_HELP.Compra INNER JOIN PLEASE_HELP.Ubicacion ON Compra_Publicacion =
 WHERE Compra_Cliente = @idUser
 GO
 	
--- TRIGGERS LOGIN
 
-CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE
-ON PLEASE_HELP.Cliente
-AFTER UPDATE
-AS
-BEGIN
-	IF UPDATE(Cli_Intentos_Fallidos)
-		DECLARE @userId INT, @intentosFallidos SMALLINT
-		SELECT @userId = Cli_Usuario, @intentosFallidos = Cli_Intentos_Fallidos FROM INSERTED
-		IF(@intentosFallidos) >= 3
-			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 0, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
-END
-GO
-
-CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_EMPRESA
-ON PLEASE_HELP.Empresa
-AFTER UPDATE
-AS
-BEGIN
-	IF UPDATE(Emp_Intentos_Fallidos)
-		DECLARE @userId INT, @intentosFallidos SMALLINT
-		SELECT @userId = Emp_Usuario, @intentosFallidos = Emp_Intentos_Fallidos FROM INSERTED
-		IF(@intentosFallidos) >= 3
-			UPDATE PLEASE_HELP.Empresa SET Emp_Habilitado = 0, Emp_Intentos_Fallidos = 0 WHERE Emp_Usuario = @userId
-END
-GO
-
-
-CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE
-ON PLEASE_HELP.Cliente
-AFTER INSERT
-AS
-BEGIN
-	DECLARE @userId INT
-	SELECT @userId = Cli_Usuario FROM INSERTED
-	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
-		VALUES (@userId, 3)
-END
-GO
-
-
-CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA
-ON PLEASE_HELP.Empresa
-AFTER INSERT
-AS
-BEGIN
-	DECLARE @userId INT
-	SELECT @userId = Emp_Usuario FROM INSERTED
-	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
-		VALUES (@userId, 1)
-END
-GO
-
-
-CREATE TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN
-ON PLEASE_HELP.Usuario
-AFTER UPDATE
-AS
-BEGIN
-	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Cliente INNER JOIN inserted i ON Cli_Usuario = i.Usuario_Id)
-	BEGIN
-		IF UPDATE(Usuario_Password) AND (SELECT Cli_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Cliente ON Usuario_Id = Cli_Usuario) = 1
-			UPDATE PLEASE_HELP.Cliente SET Cli_Primer_Login = 0 WHERE Cli_Usuario = (SELECT Usuario_Id FROM inserted)
-	END
-	
-	ELSE
-
-	BEGIN
-		IF UPDATE(Usuario_Password) AND (SELECT Emp_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Empresa ON Usuario_Id = Emp_Usuario) = 1
-			UPDATE PLEASE_HELP.Empresa SET Emp_Primer_Login = 0 WHERE Emp_Usuario = (SELECT Usuario_Id FROM inserted)
-	END
-
-END	
-GO
-
-
-CREATE TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA
-ON PLEASE_HELP.Compra
-AFTER INSERT
-AS
-BEGIN
-	DECLARE @codigoPublicacion NUMERIC(18,0)
-	SELECT @codigoPublicacion = Compra_Publicacion FROM inserted 
-	IF NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Ubicacion 
-					WHERE Ubicacion_Publicacion = @codigoPublicacion 
-						AND NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento))
-		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'FINALIZADA') WHERE Pub_Codigo = @codigoPublicacion
-END
-GO
+-- STORED PROCEDURES LISTADO ESTADISTICO
 
 --Listado estadistico empresas con mayor cantidad de localidades no vendidas
 CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_EMPRESAS](@anio INT, @trimestre INT)
@@ -1316,3 +1238,99 @@ GROUP BY cl.Cli_Usuario, cl.Cli_Apellido, cl.Cli_Nombre, e.Emp_Razon_Social
 ORDER BY  sum(c.Compra_Cantidad) desc;
 END
 GO
+
+
+
+-----------------------------------------------TRIGGERS------------------------------------------------------------------------------------------
+
+
+CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE
+ON PLEASE_HELP.Cliente
+AFTER UPDATE
+AS
+BEGIN
+	IF UPDATE(Cli_Intentos_Fallidos)
+		DECLARE @userId INT, @intentosFallidos SMALLINT
+		SELECT @userId = Cli_Usuario, @intentosFallidos = Cli_Intentos_Fallidos FROM INSERTED
+		IF(@intentosFallidos) >= 3
+			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 0, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
+END
+GO
+
+CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_EMPRESA
+ON PLEASE_HELP.Empresa
+AFTER UPDATE
+AS
+BEGIN
+	IF UPDATE(Emp_Intentos_Fallidos)
+		DECLARE @userId INT, @intentosFallidos SMALLINT
+		SELECT @userId = Emp_Usuario, @intentosFallidos = Emp_Intentos_Fallidos FROM INSERTED
+		IF(@intentosFallidos) >= 3
+			UPDATE PLEASE_HELP.Empresa SET Emp_Habilitado = 0, Emp_Intentos_Fallidos = 0 WHERE Emp_Usuario = @userId
+END
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_CLIENTE
+ON PLEASE_HELP.Cliente
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @userId INT
+	SELECT @userId = Cli_Usuario FROM INSERTED
+	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
+		VALUES (@userId, 3)
+END
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_ADD_ROL_AFTER_INSERT_EMPRESA
+ON PLEASE_HELP.Empresa
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @userId INT
+	SELECT @userId = Emp_Usuario FROM INSERTED
+	INSERT INTO PLEASE_HELP.Usuario_Rol(Usuario_Id, Rol_Id) 
+		VALUES (@userId, 1)
+END
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN
+ON PLEASE_HELP.Usuario
+AFTER UPDATE
+AS
+BEGIN
+	IF EXISTS(SELECT 1 FROM PLEASE_HELP.Cliente INNER JOIN inserted i ON Cli_Usuario = i.Usuario_Id)
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Cli_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Cliente ON Usuario_Id = Cli_Usuario) = 1
+			UPDATE PLEASE_HELP.Cliente SET Cli_Primer_Login = 0 WHERE Cli_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+	
+	ELSE
+
+	BEGIN
+		IF UPDATE(Usuario_Password) AND (SELECT Emp_Primer_Login  FROM inserted INNER JOIN PLEASE_HELP.Empresa ON Usuario_Id = Emp_Usuario) = 1
+			UPDATE PLEASE_HELP.Empresa SET Emp_Primer_Login = 0 WHERE Emp_Usuario = (SELECT Usuario_Id FROM inserted)
+	END
+
+END	
+GO
+
+
+CREATE TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA
+ON PLEASE_HELP.Compra
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @codigoPublicacion NUMERIC(18,0)
+	SELECT @codigoPublicacion = Compra_Publicacion FROM inserted 
+	IF NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Ubicacion 
+					WHERE Ubicacion_Publicacion = @codigoPublicacion 
+						AND NOT EXISTS(SELECT 1 FROM PLEASE_HELP.Compra WHERE Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento))
+		UPDATE PLEASE_HELP.Publicacion SET Pub_Estado = (SELECT Estado_Id FROM PLEASE_HELP.Estado WHERE Estado_Descripcion = 'FINALIZADA') WHERE Pub_Codigo = @codigoPublicacion
+END
+GO
+
+
