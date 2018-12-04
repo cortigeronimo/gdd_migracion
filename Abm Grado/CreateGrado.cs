@@ -21,13 +21,14 @@ namespace PalcoNet.Abm_Grado
         public CreateGrado()
         {
             InitializeComponent();
+            numComisionGrado.Minimum = 0;
+            numComisionGrado.Maximum = 100;
         }
 
         private ValidatorData ValidateAllFields()
         {
             ValidatorData validator = new ValidatorData();
             validator.ValidateTextWithRegex(txtNombreGrado.Text, ValidatorData.REGEX_DESCRIPCION_GRADO);
-            validator.ValidateTextWithRegex(txtComision.Text, ValidatorData.REGEX_COMISION);
             return validator;
         }
 
@@ -40,7 +41,7 @@ namespace PalcoNet.Abm_Grado
                 return;
             }
             Grado grado = new Grado(
-                (int)Convert.ToInt32(txtComision.Text),
+                (int)numComisionGrado.Value,
                 txtNombreGrado.Text);
             try
             {
@@ -56,7 +57,7 @@ namespace PalcoNet.Abm_Grado
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtComision.Clear();
+            numComisionGrado.Value = 0;
             txtNombreGrado.Clear();
         }
 

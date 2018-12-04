@@ -33,9 +33,10 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.lblComisionGrado = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtComision = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
+            this.numComisionGrado = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombreGrado
@@ -75,7 +76,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtComision);
+            this.groupBox1.Controls.Add(this.numComisionGrado);
             this.groupBox1.Controls.Add(this.lblComisionGrado);
             this.groupBox1.Controls.Add(this.txtNombreGrado);
             this.groupBox1.Controls.Add(this.lblNombreGrado);
@@ -86,13 +87,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alta Grado";
             // 
-            // txtComision
-            // 
-            this.txtComision.Location = new System.Drawing.Point(6, 102);
-            this.txtComision.Name = "txtComision";
-            this.txtComision.Size = new System.Drawing.Size(139, 20);
-            this.txtComision.TabIndex = 4;
-            // 
             // btnLimpiar
             // 
             this.btnLimpiar.Location = new System.Drawing.Point(34, 163);
@@ -102,6 +96,13 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numComisionGrado.Location = new System.Drawing.Point(6, 101);
+            this.numComisionGrado.Name = "numericUpDown1";
+            this.numComisionGrado.Size = new System.Drawing.Size(139, 20);
+            this.numComisionGrado.TabIndex = 4;
             // 
             // CreateGrado
             // 
@@ -115,6 +116,7 @@
             this.Text = "Crear Grado";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numComisionGrado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -127,6 +129,6 @@
         private System.Windows.Forms.Label lblComisionGrado;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.TextBox txtComision;
+        private System.Windows.Forms.NumericUpDown numComisionGrado;
     }
 }
