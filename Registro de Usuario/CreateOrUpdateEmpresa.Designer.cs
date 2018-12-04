@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBoxCliente = new System.Windows.Forms.GroupBox();
+            this.checkBoxBaja = new System.Windows.Forms.CheckBox();
             this.txtNumeroPiso = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtCuit = new System.Windows.Forms.TextBox();
@@ -51,7 +52,6 @@
             this.lblRazonSocial = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.checkBoxBaja = new System.Windows.Forms.CheckBox();
             this.groupBoxCliente.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,6 +84,16 @@
             this.groupBoxCliente.TabIndex = 0;
             this.groupBoxCliente.TabStop = false;
             this.groupBoxCliente.Text = "Alta De Empresa";
+            // 
+            // checkBoxBaja
+            // 
+            this.checkBoxBaja.AutoSize = true;
+            this.checkBoxBaja.Location = new System.Drawing.Point(6, 291);
+            this.checkBoxBaja.Name = "checkBoxBaja";
+            this.checkBoxBaja.Size = new System.Drawing.Size(82, 17);
+            this.checkBoxBaja.TabIndex = 34;
+            this.checkBoxBaja.Text = "Dar de Baja";
+            this.checkBoxBaja.UseVisualStyleBackColor = true;
             // 
             // txtNumeroPiso
             // 
@@ -118,9 +128,9 @@
             this.lblCiudad.AutoSize = true;
             this.lblCiudad.Location = new System.Drawing.Point(214, 238);
             this.lblCiudad.Name = "lblCiudad";
-            this.lblCiudad.Size = new System.Drawing.Size(40, 13);
+            this.lblCiudad.Size = new System.Drawing.Size(44, 13);
             this.lblCiudad.TabIndex = 25;
-            this.lblCiudad.Text = "Ciudad";
+            this.lblCiudad.Text = "Ciudad*";
             // 
             // txtCodigoPostal
             // 
@@ -134,9 +144,9 @@
             this.lblCodigoPostal.AutoSize = true;
             this.lblCodigoPostal.Location = new System.Drawing.Point(6, 238);
             this.lblCodigoPostal.Name = "lblCodigoPostal";
-            this.lblCodigoPostal.Size = new System.Drawing.Size(72, 13);
+            this.lblCodigoPostal.Size = new System.Drawing.Size(76, 13);
             this.lblCodigoPostal.TabIndex = 21;
-            this.lblCodigoPostal.Text = "Codigo Postal";
+            this.lblCodigoPostal.Text = "Codigo Postal*";
             // 
             // txtLocalidad
             // 
@@ -150,9 +160,9 @@
             this.lblLocalidad.AutoSize = true;
             this.lblLocalidad.Location = new System.Drawing.Point(3, 139);
             this.lblLocalidad.Name = "lblLocalidad";
-            this.lblLocalidad.Size = new System.Drawing.Size(53, 13);
+            this.lblLocalidad.Size = new System.Drawing.Size(57, 13);
             this.lblLocalidad.TabIndex = 19;
-            this.lblLocalidad.Text = "Localidad";
+            this.lblLocalidad.Text = "Localidad*";
             // 
             // lblDepartamento
             // 
@@ -191,18 +201,18 @@
             this.lblDireccion.AutoSize = true;
             this.lblDireccion.Location = new System.Drawing.Point(214, 139);
             this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new System.Drawing.Size(78, 13);
+            this.lblDireccion.Size = new System.Drawing.Size(82, 13);
             this.lblDireccion.TabIndex = 13;
-            this.lblDireccion.Text = "Calle y Número";
+            this.lblDireccion.Text = "Calle y Número*";
             // 
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
             this.lblTelefono.Location = new System.Drawing.Point(3, 83);
             this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(49, 13);
+            this.lblTelefono.Size = new System.Drawing.Size(53, 13);
             this.lblTelefono.TabIndex = 11;
-            this.lblTelefono.Text = "Telefono";
+            this.lblTelefono.Text = "Telefono*";
             // 
             // txtEmail
             // 
@@ -216,18 +226,18 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.Location = new System.Drawing.Point(214, 83);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(32, 13);
+            this.lblEmail.Size = new System.Drawing.Size(36, 13);
             this.lblEmail.TabIndex = 9;
-            this.lblEmail.Text = "Email";
+            this.lblEmail.Text = "Email*";
             // 
             // lblCuit
             // 
             this.lblCuit.AutoSize = true;
             this.lblCuit.Location = new System.Drawing.Point(214, 32);
             this.lblCuit.Name = "lblCuit";
-            this.lblCuit.Size = new System.Drawing.Size(25, 13);
+            this.lblCuit.Size = new System.Drawing.Size(29, 13);
             this.lblCuit.TabIndex = 7;
-            this.lblCuit.Text = "Cuit";
+            this.lblCuit.Text = "Cuit*";
             // 
             // txtRazonSocial
             // 
@@ -241,9 +251,9 @@
             this.lblRazonSocial.AutoSize = true;
             this.lblRazonSocial.Location = new System.Drawing.Point(3, 32);
             this.lblRazonSocial.Name = "lblRazonSocial";
-            this.lblRazonSocial.Size = new System.Drawing.Size(70, 13);
+            this.lblRazonSocial.Size = new System.Drawing.Size(74, 13);
             this.lblRazonSocial.TabIndex = 0;
-            this.lblRazonSocial.Text = "Razón Social";
+            this.lblRazonSocial.Text = "Razón Social*";
             // 
             // btnLimpiar
             // 
@@ -265,17 +275,7 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBoxBaja.AutoSize = true;
-            this.checkBoxBaja.Location = new System.Drawing.Point(6, 291);
-            this.checkBoxBaja.Name = "checkBox1";
-            this.checkBoxBaja.Size = new System.Drawing.Size(82, 17);
-            this.checkBoxBaja.TabIndex = 34;
-            this.checkBoxBaja.Text = "Dar de Baja";
-            this.checkBoxBaja.UseVisualStyleBackColor = true;
-            // 
-            // CreateEmpresa
+            // CreateOrUpdateEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -283,7 +283,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxCliente);
-            this.Name = "CreateEmpresa";
+            this.Name = "CreateOrUpdateEmpresa";
             this.Text = "Alta De Empresa";
             this.groupBoxCliente.ResumeLayout(false);
             this.groupBoxCliente.PerformLayout();

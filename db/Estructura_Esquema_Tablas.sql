@@ -917,7 +917,7 @@ BEGIN
 		WHERE c.Compra_Publicacion = @idPublicacion
 		AND c.Compra_Fecha_Rendida IS NULL) >= @cantidadARendir
 	BEGIN
-		DECLARE @empresa int, @idFactura NUMERIC(18,0), @total NUMERIC(18,0)
+		DECLARE @empresa int, @idFactura NUMERIC(18,0), @total NUMERIC(18,2), @comision int
 		SET @total = 0
 
 		SELECT @empresa = p.Pub_Empresa 
@@ -930,6 +930,11 @@ BEGIN
 		SET @idFactura = @@IDENTITY
 		DECLARE @idCompra int, @monto NUMERIC(18,2), @descripcion NVARCHAR(60)
 
+		SELECT @comision 
+		FROM PLEASE_HELP.Grado g
+		INNER JOIN PLEASE_HELP.Publicacion p
+		ON g.Grado_Id = p.Pub_Codigo
+		
 		WHILE @cantidadARendir > 0
 			BEGIN
 
@@ -946,7 +951,7 @@ BEGIN
 				ORDER BY c.Compra_Fecha ASC
 
 				INSERT INTO PLEASE_HELP.Item VALUES 
-				(@monto, 1, @descripcion, @idFactura, @idCompra)
+				(@monto * @comision / 100, 1, @descripcion, @idFactura, @idCompra)
 
 				UPDATE PLEASE_HELP.Compra SET Compra_Fecha_Rendida = @fechaActual
 				WHERE Compra_Id = @idCompra

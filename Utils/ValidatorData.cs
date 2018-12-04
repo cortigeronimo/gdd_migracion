@@ -65,12 +65,12 @@ namespace PalcoNet.Utils
             = new PairData("La comisión debe estar entre 0 y 100 y representa un porcentaje.",
                 "([0-9]|[1-9][0-9]|100)");
         public static readonly PairData REGEX_PASSWORD
-            = new PairData("La contraseña debe tener un mínimo de 8 y un máximo de 20 caracters, con al menos 1 número.",
-                "(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,20}");
+            = new PairData("La contraseña debe tener un mínimo de 4 y un máximo de 25 caracters.",
+                "[\\w\\d-]{4,25}");
         public static readonly PairData REGEX_USUARIO
-            = new PairData("El usuario debe debe tener un minimo de 5 y un máximo de 15 caracteres.",
-                "(?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,20}");
-
+            = new PairData("El usuario debe debe tener un minimo de 5 y un máximo de 20 caracteres.",
+                "[\\w\\d-].{4,20}");
+        // regex password: (?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,25}
         public void ValidateTextWithRegex(String text, PairData pair)
         {
             if(!Regex.IsMatch(text, pair.regex)){

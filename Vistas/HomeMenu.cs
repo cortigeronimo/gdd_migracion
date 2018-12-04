@@ -90,7 +90,7 @@ namespace PalcoNet.Vistas
                 String idFuncionalidad = row[0].ToString();
                 String funcionalidad = row[1].ToString();
 
-                if (funcionalidad != "REGISTRO_USUARIO")
+                if (funcionalidad != "REGISTRO_USUARIO" && funcionalidad != "ABM_RUBRO")
                 {
                     funcionalidad = funcionalidad.Replace('_', ' ');
 

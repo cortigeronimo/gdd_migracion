@@ -27,9 +27,17 @@ namespace PalcoNet
             InitializeComponent();
         }
 
+        private ValidatorData ValidateAllFields()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtUsername.Text, ValidatorData.REGEX_USUARIO);
+            validator.ValidateTextWithRegex(txtPassword.Text, ValidatorData.REGEX_PASSWORD);
+            return validator;
+        }
 
         private void btnLogin_Click(object sender, EventArgs e)
-        {                  
+        {      
+            if(ValidateAllFields().ShowIfThereAreErrors()) return;
             if (IsRegistered())
             {
                 UserSession.UserId = user.id;
@@ -47,11 +55,6 @@ namespace PalcoNet
                     UserSession.RolId = rol.id;                
                     FormManager.GetInstance().OpenAndClose(new HomeMenu(), this);
                 }                                              
-            }
-            else
-            {
-                ClearTextBox();
-                user = new Usuario();            
             }
             
         }

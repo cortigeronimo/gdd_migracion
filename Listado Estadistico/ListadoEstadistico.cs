@@ -34,11 +34,8 @@ namespace PalcoNet.Listado_Estadistico
         {
             bindingSource.Clear();
             dataGridEstadisticas.Columns.Clear();
-
-            
             bindingSource = new BindingSource();
             if (String.IsNullOrEmpty(txtBoxAnio.Text))
-
             {
                 MessageBox.Show("Por favor escriba el año a evaluar.");
                 return;
@@ -58,7 +55,7 @@ namespace PalcoNet.Listado_Estadistico
             bindingSource = new BindingSource();
             if (txtBoxAnio.Text == "")
             {
-                MessageBox.Show("Por favor escriba el año a evaluar");
+                MessageBox.Show("Por favor escriba el año a evaluar.");
                 return;
             }
 
@@ -74,7 +71,7 @@ namespace PalcoNet.Listado_Estadistico
             bindingSource = new BindingSource();
             if (txtBoxAnio.Text == "")
             {
-                MessageBox.Show("Por favor escriba el año a evaluar");
+                MessageBox.Show("Por favor escriba el año a evaluar.");
                 return;
             }
 

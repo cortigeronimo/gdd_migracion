@@ -32,6 +32,14 @@ namespace PalcoNet.Vistas
             this.firstLogin = firstLogin;
         }
 
+        private ValidatorData ValidateAllFields()
+        {
+            ValidatorData validatorData = new ValidatorData();
+            validatorData.ValidateTextWithRegex(txtPassword.Text, ValidatorData.REGEX_PASSWORD);
+            validatorData.ValidateTextWithRegex(txtConfirmarPassword.Text, ValidatorData.REGEX_PASSWORD);
+            return validatorData;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (!CheckPasswords())
@@ -39,7 +47,7 @@ namespace PalcoNet.Vistas
                 MessageBox.Show("Las contraseñas ingresadas no coinciden", "Error");
                 return;   
             }
-     
+            if (ValidateAllFields().ShowIfThereAreErrors()) return;
             password = txtConfirmarPassword.Text;
 
             try
@@ -68,20 +76,5 @@ namespace PalcoNet.Vistas
         {
             return txtPassword.Text == txtConfirmarPassword.Text;
         }
-
-        
-        private void TxtBoxes_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPassword.Text != string.Empty && txtConfirmarPassword.Text != string.Empty)
-            {
-                btnAceptar.Enabled = true;
-            }
-            else
-            {
-                btnAceptar.Enabled = false;
-            }
-        }
-
-
     }
 }

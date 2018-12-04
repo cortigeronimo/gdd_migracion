@@ -10,9 +10,12 @@ namespace PalcoNet.Config
 {
     public static class SystemDate
     {
+        public static readonly DateTime actualDate 
+            = Convert.ToDateTime(ConfigurationManager.AppSettings["systemDate"]);
+
         public static DateTime GetDate()
         {
-            return Convert.ToDateTime(ConfigurationManager.AppSettings["systemDate"]);
+            return actualDate;
         }
     }
 }

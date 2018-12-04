@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Registro_de_Usuario
 {
@@ -22,17 +23,6 @@ namespace PalcoNet.Registro_de_Usuario
         public CreateUsuario()
         {
             InitializeComponent();
-        }
-
-        private void AllDataIsCompleted(object sender, EventArgs e)
-        { 
-            if(String.IsNullOrEmpty(txtUsuario.Text) || String.IsNullOrEmpty(txtPassword.Text) 
-                || comboBoxRol.SelectedItem == null){
-                    btnSiguiente.Enabled = false;
-            }
-            else {
-                btnSiguiente.Enabled = true;
-            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -51,16 +41,23 @@ namespace PalcoNet.Registro_de_Usuario
             }
         }
 
-        private bool validateFields()
+        private ValidatorData ValidateAllFields()
         {
-            return txtPassword.Text != String.Empty &&
-                txtUsuario.Text != String.Empty &&
-                comboBoxRol.SelectedItem.ToString() != String.Empty;
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtUsuario.Text, ValidatorData.REGEX_USUARIO);
+            validator.ValidateTextWithRegex(txtPassword.Text, ValidatorData.REGEX_PASSWORD);
+            return validator;
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            if (!validateFields()) return;
+            
+            if (ValidateAllFields().ShowIfThereAreErrors()) return;
+            if (comboBoxRol.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un rol", "Error");
+                return;
+            }
             Form formToRedirect;
             Usuario usuario = new Usuario();
             RepoRol repoRol = new RepoRol();
