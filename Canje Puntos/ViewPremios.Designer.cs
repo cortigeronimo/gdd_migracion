@@ -31,11 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.lblPremios = new System.Windows.Forms.Label();
             this.dataGridPremios = new System.Windows.Forms.DataGridView();
-            this.btnActualizar = new System.Windows.Forms.Button();
-            this.premioDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.descripcionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Puntos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.premioDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPremios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.premioDTOBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -45,11 +45,11 @@
             this.lblPremios.AutoSize = true;
             this.lblPremios.Location = new System.Drawing.Point(12, 9);
             this.lblPremios.Name = "lblPremios";
-            this.lblPremios.Size = new System.Drawing.Size(44, 13);
+            this.lblPremios.Size = new System.Drawing.Size(96, 13);
             this.lblPremios.TabIndex = 0;
-            this.lblPremios.Text = "Premios";
+            this.lblPremios.Text = "Premios Adquiridos";
             // 
-            // dataGridView1
+            // dataGridPremios
             // 
             this.dataGridPremios.AllowUserToAddRows = false;
             this.dataGridPremios.AllowUserToDeleteRows = false;
@@ -61,24 +61,10 @@
             this.amountDataGridViewTextBoxColumn});
             this.dataGridPremios.DataSource = this.premioDTOBindingSource;
             this.dataGridPremios.Location = new System.Drawing.Point(13, 26);
-            this.dataGridPremios.Name = "dataGridView1";
+            this.dataGridPremios.Name = "dataGridPremios";
             this.dataGridPremios.ReadOnly = true;
             this.dataGridPremios.Size = new System.Drawing.Size(240, 150);
             this.dataGridPremios.TabIndex = 1;
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Location = new System.Drawing.Point(178, 182);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizar.TabIndex = 2;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
-            // 
-            // premioDTOBindingSource
-            // 
-            this.premioDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PremioDTO);
             // 
             // descripcionDataGridViewTextBoxColumn
             // 
@@ -100,6 +86,20 @@
             this.amountDataGridViewTextBoxColumn.HeaderText = "Cantidad Canjeada";
             this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
             this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // premioDTOBindingSource
+            // 
+            this.premioDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PremioDTO);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(178, 182);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 2;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // ViewPremios
             // 

@@ -28,6 +28,8 @@ namespace PalcoNet.Registro_de_Usuario
             checkBoxBaja.Visible = false;
             cliente = new Cliente(usuario);
             clienteStrategy = new ClienteSignUp();
+            this.Text = "Registrar Cliente";
+            this.groupBoxCliente.Text = "Registro Cliente";
         }
 
         //el admin lo quiere crear
@@ -36,6 +38,8 @@ namespace PalcoNet.Registro_de_Usuario
             checkBoxBaja.Visible = false;
             cliente = new Cliente();
             clienteStrategy = new AdminCreaCliente();
+            this.Text = "Crear Cliente";
+            this.groupBoxCliente.Text = "Creación Cliente";
         }
 
         //el admin lo quiere modificar
@@ -45,6 +49,8 @@ namespace PalcoNet.Registro_de_Usuario
             this.cliente = cliente;
             InitializeTextsBoxes(cliente);
             clienteStrategy = new AdminUpdateCliente(checkBoxBaja);
+            this.Text = "Modificar Cliente";
+            this.groupBoxCliente.Text = "Modificación Cliente";
         }
 
         private void InitializeTextsBoxes(Cliente cliente)

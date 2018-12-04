@@ -42,6 +42,8 @@ namespace PalcoNet.Registro_de_Usuario
             InitializeComponent();
             empresa = new Empresa(usuario);
             this.checkBoxBaja.Visible = false;
+            this.Text = "Registrar Empresa";
+            this.groupBoxCliente.Text = "Registro Empresa";
         }
 
         //el admin modifica una empresa
@@ -51,6 +53,8 @@ namespace PalcoNet.Registro_de_Usuario
             hasToUpdate = true;
             this.empresa = empresa;
             InitializeEmpresa(empresa);
+            this.Text = "Modificar Empresa";
+            this.groupBoxCliente.Text = "Modificación Empresa";
         }
 
         //el admin crea una empresa
@@ -73,6 +77,8 @@ namespace PalcoNet.Registro_de_Usuario
             empresa = new Empresa(usuario);
             empresa.id = 0;
             empresa.primerLogin = true;
+            this.Text = "Crear Empresa";
+            this.groupBoxCliente.Text = "Creación Empresa";
         }
 
         private void InitializeEmpresa(Empresa empresa) {

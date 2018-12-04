@@ -154,7 +154,7 @@
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.label1);
             this.Name = "ModificarRol";
-            this.Text = "ModificarRol";
+            this.Text = "Modificar Rol";
             this.ResumeLayout(false);
             this.PerformLayout();
 

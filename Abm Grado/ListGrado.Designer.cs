@@ -179,7 +179,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnBuscar);
             this.Name = "ListGrado";
-            this.Text = "Consulta de Grados";
+            this.Text = "Gestionar Grados";
             this.Load += new System.EventHandler(this.ListGrado_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

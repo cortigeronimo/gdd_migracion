@@ -70,7 +70,7 @@
             this.ClientSize = new System.Drawing.Size(263, 195);
             this.Controls.Add(this.groupBoxAddRubro);
             this.Name = "FormAddRubros";
-            this.Text = "AddRubros";
+            this.Text = "Agregar Rubros";
             this.groupBoxAddRubro.ResumeLayout(false);
             this.ResumeLayout(false);
 

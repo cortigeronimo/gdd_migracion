@@ -149,7 +149,7 @@
             this.Controls.Add(this.dataGridEstadisticas);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoEstadistico";
-            this.Text = "Form1";
+            this.Text = "Listado Estadístico";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEstadisticas)).EndInit();

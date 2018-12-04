@@ -87,7 +87,7 @@ namespace PalcoNet.Vistas
             this.Controls.Add(this.lblPalcoNet);
             this.Controls.Add(this.menuStripHome);
             this.Name = "HomeMenu";
-            this.Text = "HomeMenu";
+            this.Text = "Home";
             this.Load += new System.EventHandler(this.HomeMenu_Load);
             this.menuStripHome.ResumeLayout(false);
             this.menuStripHome.PerformLayout();

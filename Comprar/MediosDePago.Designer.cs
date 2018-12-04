@@ -117,7 +117,7 @@
             this.Controls.Add(this.btnAceptarMedioDePago);
             this.Controls.Add(this.groupBoxMedioPago);
             this.Name = "FormMediosDePago";
-            this.Text = "MediosDePago";
+            this.Text = "Datos de Compra";
             this.groupBoxMedioPago.ResumeLayout(false);
             this.groupBoxMedioPago.PerformLayout();
             this.ResumeLayout(false);

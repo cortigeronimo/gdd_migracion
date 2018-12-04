@@ -69,7 +69,8 @@ namespace PalcoNet.Generar_Publicacion
 
             LoadPublicacionDataToForm(publicacionToEdit);
 
-            
+            this.Text = "Editar Publicación";
+            this.groupBoxGenerarPublicacion.Text = "Editar Publicación";
         }
 
 
