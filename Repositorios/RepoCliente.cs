@@ -34,9 +34,9 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@depto", cliente.depto);
             command.Parameters.AddWithValue("@codpostal", cliente.codigoPostal);
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
-            command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
-            command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
-            command.Parameters.AddWithValue("@firstLogin", 1);            
+            if (cliente.fechaCreacion == SystemDate.GetDate()) command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
+            if (String.IsNullOrEmpty(cliente.tarjetaCredito)) command.Parameters.AddWithValue("@tarjetacredito", DBNull.Value); else command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
+            command.Parameters.AddWithValue("@firstLogin", cliente.primerLogin);            
             command.Parameters.AddWithValue("@username", cliente.username);
             command.Parameters.AddWithValue("@password", cliente.GetPassword());    
 
@@ -79,7 +79,6 @@ namespace PalcoNet.Repositorios
             String query = "SELECT * FROM ";
             query += clienteTable;
             query += " WHERE Cli_Usuario != @user";
-            //query += " AND Cli_Tipo_Documento = @tipoDoc";
             query += " AND (Cli_Nro_Documento = @nroDoc";
             query += " OR Cli_Cuil = @cuil)";
 
@@ -93,28 +92,7 @@ namespace PalcoNet.Repositorios
             DataTable table = Conexion.GetData(command);
             return table.Rows.Count != 0;
         }
-
-
-
-        //Verifica DNI y cuil para Insert
-        //public Boolean ExistsDNIAndCuil(String tipoDoc, String nroDoc, String cuil)
-        //{
-        //    String query = "SELECT * FROM ";
-        //    query += clienteTable;
-            
-        //    query += " WHERE (Cli_Tipo_Documento = @tipoDoc";
-        //    query += " AND Cli_Nro_Documento = @nroDoc)";
-        //    query += " OR Cli_Cuil = @cuil";
-
-        //    SqlCommand command = new SqlCommand(query);
-        //    command.Parameters.AddWithValue("@tipoDoc", tipoDoc);
-        //    command.Parameters.AddWithValue("@nroDoc", nroDoc);
-        //    command.Parameters.AddWithValue("@cuil", cuil);
-
-
-        //    DataTable table = Conexion.GetData(command);
-        //    return table.Rows.Count != 0;
-        //}
+        
 
         public int UpdateCliente(Cliente cliente)
         {
@@ -133,7 +111,8 @@ namespace PalcoNet.Repositorios
             query += "Cli_Depto = @depto, ";
             query += "Cli_Cod_Postal = @codPostal, ";
             query += "Cli_Fecha_Nac = @fechaNac, ";
-            query += "Cli_Fecha_Creacion = @fechaCreacion ";
+            
+            query += "Cli_Baja = @baja ";
             query += "WHERE Cli_Usuario = @idUsuario";
 
             SqlCommand cmd = new SqlCommand(query);
@@ -152,38 +131,26 @@ namespace PalcoNet.Repositorios
             if (String.IsNullOrEmpty(cliente.depto)) cmd.Parameters.AddWithValue("@depto", DBNull.Value); else cmd.Parameters.AddWithValue("@depto", cliente.depto);
             if (String.IsNullOrEmpty(cliente.codigoPostal)) cmd.Parameters.AddWithValue("@codPostal", DBNull.Value); else cmd.Parameters.AddWithValue("@codPostal", cliente.codigoPostal);
             cmd.Parameters.AddWithValue("@fechaNac", cliente.fechaNacimiento);
-            cmd.Parameters.AddWithValue("@fechaCreacion", cliente.fechaCreacion);
+            //cmd.Parameters.AddWithValue("@fechaCreacion", cliente.fechaCreacion);
+            cmd.Parameters.AddWithValue("@baja", cliente.baja);
             cmd.Parameters.AddWithValue("@idUsuario", cliente.id);
 
             return Conexion.InsertUpdateOrDeleteData(cmd);
         }
 
-        public int AltaBajaCliente(int? id, bool baja)
+               
+        public void BajaCliente(Cliente cliente)
         {
-            String query = "UPDATE " + clienteTable + " SET ";
-            query += "Cli_Baja = @baja, ";
-            query += "Cli_Habilitado = @habilitado, ";
-            query += "Cli_Intentos_Fallidos = 0 ";
-            query += "WHERE Cli_Usuario = @id";
+            String sp = "PLEASE_HELP.SP_BAJA_CLIENTE";
+            SqlCommand command = new SqlCommand(sp);
+            command.CommandType = CommandType.StoredProcedure;
 
-            SqlCommand cmd = new SqlCommand(query);
+            command.Parameters.AddWithValue("@id", cliente.id);
 
-            if (baja)
+            if (Conexion.InsertUpdateOrDeleteData(command) < 1)
             {
-                cmd.Parameters.AddWithValue("@baja", 0);
-                cmd.Parameters.AddWithValue("@habilitado", 1);
+                throw new Exception("No se ha podido dar de baja al cliente.");
             }
-            else
-            {
-                cmd.Parameters.AddWithValue("@baja", 1);
-                cmd.Parameters.AddWithValue("@habilitado", 0);
-            }
-                
-
-
-            cmd.Parameters.AddWithValue("@id", id);
-
-            return Conexion.InsertUpdateOrDeleteData(cmd);
         }
 
         public Boolean HasCreditCard(int? userId)
@@ -232,7 +199,7 @@ namespace PalcoNet.Repositorios
                 cliente.nroDocumento = GetValueOrNull<decimal>(row["Cli_Nro_Documento"]);
                 cliente.cuil = GetValueOrNull<decimal>(row["Cli_Cuil"]);
                 cliente.email = GetValueOrNull<String>(row["Cli_Email"]);
-                cliente.telefono = Convert.ToInt64(GetValueOrNull<decimal>(row["Cli_Telefono"]));           //cambié int por decimal 4/12
+                cliente.telefono = Convert.ToInt64(GetValueOrNull<decimal>(row["Cli_Telefono"]));          
                 cliente.localidad = GetValueOrNull<String>(row["Cli_Localidad"]);
                 cliente.direccion = GetValueOrNull<String>(row["Cli_Direccion"]);
                 cliente.nroPiso = GetValueOrNull<decimal>(row["Cli_Nro_Piso"]);

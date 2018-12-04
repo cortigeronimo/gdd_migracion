@@ -114,6 +114,8 @@ IF OBJECT_ID('PLEASE_HELP.SP_MODIFICACION_EMPRESA') IS NOT NULL DROP PROCEDURE P
 
 IF OBJECT_ID('PLEASE_HELP.SP_BAJA_EMPRESA') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BAJA_EMPRESA;
 
+IF OBJECT_ID('PLEASE_HELP.SP_BAJA_CLIENTE') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BAJA_CLIENTE;
+
 IF OBJECT_ID('PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_GET_ESTADOS_TO_GENERAR_PUBLICACION;
 
 IF OBJECT_ID('PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR') IS NOT NULL DROP PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR;
@@ -134,6 +136,10 @@ IF OBJECT_ID('PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS') IS NOT NULL DROP PROCEDURE 
 
 
 -- CREANDO TRIGGERS SI NO EXISTEN
+
+IF OBJECT_ID('PLEASE_HELP.TR_ALTA_BAJA_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ALTA_BAJA_CLIENTE;
+
+IF OBJECT_ID('PLEASE_HELP.TR_ALTA_BAJA_EMPRESA') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_ALTA_BAJA_EMPRESA;
 
 IF OBJECT_ID('PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE') IS NOT NULL DROP TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE;
 
@@ -491,7 +497,7 @@ BEGIN
 			Cli_Baja,
 			Cli_Primer_Login
 		)
-		SELECT DISTINCT u.Usuario_Id, m.Cli_Nombre, m.Cli_Apeliido, 'DNI', m.Cli_Dni, NULL, m.Cli_Mail, NULL, NULL, m.Cli_Dom_Calle + CAST(m.Cli_Nro_Calle AS nvarchar(255))
+		SELECT DISTINCT u.Usuario_Id, m.Cli_Nombre, m.Cli_Apeliido, 'DNI', m.Cli_Dni, NULL, m.Cli_Mail, NULL, NULL, m.Cli_Dom_Calle + ' ' + CAST(m.Cli_Nro_Calle AS nvarchar(255))
 		, m.Cli_Piso, m.Cli_Depto, m.Cli_Cod_Postal, m.Cli_Fecha_Nac, NULL, NULL, 1, 0, 0, 1 
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('USUARIO' + CAST(m.Cli_Dni AS varchar(225))) AND m.Cli_Dni IS NOT NULL
@@ -538,7 +544,7 @@ BEGIN
 			Emp_Baja,
 			Emp_Primer_Login
 		)
-		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
+		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + ' ' + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
 		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0, 1
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
 		WHERE u.Usuario_Username = ('EMPRESA' + CAST(m.Espec_Empresa_Cuit AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
@@ -782,7 +788,14 @@ GO
 
 -- STORED PROCEDURES ABM CLIENTE
 
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
+CREATE PROCEDURE PLEASE_HELP.SP_BAJA_CLIENTE(@id int)
+AS
+BEGIN
+	UPDATE PLEASE_HELP.Cliente SET Cli_Baja = 1 WHERE Cli_Usuario = @id
+END
+GO
+
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_CLIENTE(@nombre NVARCHAR(255), @apellido NVARCHAR(255), @tipo_doc NVARCHAR(255), @nro_doc NUMERIC(18,0), @cuil NUMERIC(11,0), @email NVARCHAR(255), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(255), @nropiso NUMERIC(18,0), @depto NVARCHAR(255), @codpostal NVARCHAR(255), @fechanac DATETIME, @fechacreacion DATETIME = null, @tarjetacredito NVARCHAR(255), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
 AS
 BEGIN
 	BEGIN TRANSACTION
@@ -1246,29 +1259,73 @@ GO
 -----------------------------------------------TRIGGERS------------------------------------------------------------------------------------------
 
 
+--RESETEA LOS INTENTOS FALLIDOS A CERO E INHABILITA/HABILITA A UN CLIENTE CUANDO ESTE ES DADO DE BAJA/ALTA
+CREATE TRIGGER PLEASE_HELP.TR_ALTA_BAJA_CLIENTE
+ON PLEASE_HELP.Cliente
+AFTER UPDATE
+AS
+BEGIN
+	IF UPDATE(Cli_Baja)
+	BEGIN
+		DECLARE @baja BIT, @userId INT
+		SELECT @userId = Cli_Usuario, @baja = Cli_Baja FROM INSERTED
+		IF(@baja = 1)
+			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 0, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
+		ELSE
+			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 1, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
+	END
+END 
+GO
+
+
+--RESETEA LOS INTENTOS FALLIDOS A CERO E INHABILITA/HABILITA A UNA EMPRESA CUANDO ESTA ES DADA DE BAJA/ALTA
+CREATE TRIGGER PLEASE_HELP.TR_ALTA_BAJA_EMPRESA
+ON PLEASE_HELP.Empresa
+AFTER UPDATE
+AS
+BEGIN
+	IF UPDATE(Emp_Baja)
+	BEGIN
+		DECLARE @baja BIT, @userId INT
+		SELECT @userId = Emp_Usuario, @baja = Emp_Baja FROM INSERTED
+		IF(@baja = 1)
+			UPDATE PLEASE_HELP.Empresa SET Emp_Habilitado = 0, Emp_Intentos_Fallidos = 0 WHERE Emp_Usuario = @userId
+		ELSE
+			UPDATE PLEASE_HELP.Empresa SET Emp_Habilitado = 1, Emp_Intentos_Fallidos = 0 WHERE Emp_Usuario = @userId
+	END
+END 
+GO
+
+
+--INHABILITA AL CLIENTE ANTE LOS TRES INTENTOS FALLIDOS AL INGRESAR LA CONTRASEÑA
 CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_CLIENTE
 ON PLEASE_HELP.Cliente
 AFTER UPDATE
 AS
 BEGIN
 	IF UPDATE(Cli_Intentos_Fallidos)
+	BEGIN
 		DECLARE @userId INT, @intentosFallidos SMALLINT
 		SELECT @userId = Cli_Usuario, @intentosFallidos = Cli_Intentos_Fallidos FROM INSERTED
 		IF(@intentosFallidos) >= 3
 			UPDATE PLEASE_HELP.Cliente SET Cli_Habilitado = 0, Cli_Intentos_Fallidos = 0 WHERE Cli_Usuario = @userId
+	END
 END
 GO
 
+--INHABILITA A LA EMPRESA ANTE LOS TRES INTENTOS FALLIDOS
 CREATE TRIGGER PLEASE_HELP.TR_INHABILITAR_USUARIO_EMPRESA
 ON PLEASE_HELP.Empresa
 AFTER UPDATE
 AS
 BEGIN
 	IF UPDATE(Emp_Intentos_Fallidos)
+	BEGIN
 		DECLARE @userId INT, @intentosFallidos SMALLINT
 		SELECT @userId = Emp_Usuario, @intentosFallidos = Emp_Intentos_Fallidos FROM INSERTED
 		IF(@intentosFallidos) >= 3
 			UPDATE PLEASE_HELP.Empresa SET Emp_Habilitado = 0, Emp_Intentos_Fallidos = 0 WHERE Emp_Usuario = @userId
+	END
 END
 GO
 
@@ -1298,7 +1355,7 @@ BEGIN
 END
 GO
 
-
+--CAMBIA EL VALOR INDICADOR DE INICIO DE SESION A 'FALSE' UNA VEZ QUE EL USUARIO ACTUALIZA SU CONTRASEÑA EN EL PRIMER INICIO DE SESION
 CREATE TRIGGER PLEASE_HELP.TR_AFTER_FIRST_LOGIN
 ON PLEASE_HELP.Usuario
 AFTER UPDATE
@@ -1321,6 +1378,7 @@ END
 GO
 
 
+--CAMBIA EL ESTADO DE UNA PUBLICACIÓN A 'FINALIZADA' CUANDO NO HAY MAS ENTRADAS EN STOCK
 CREATE TRIGGER PLEASE_HELP.TR_AFTER_COMPRA_ENTRADA
 ON PLEASE_HELP.Compra
 AFTER INSERT

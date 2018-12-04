@@ -239,7 +239,7 @@
             // txtDepartamento
             // 
             this.txtDepartamento.Location = new System.Drawing.Point(215, 263);
-            this.txtDepartamento.MaxLength = 255;
+            this.txtDepartamento.MaxLength = 50;
             this.txtDepartamento.Name = "txtDepartamento";
             this.txtDepartamento.Size = new System.Drawing.Size(131, 20);
             this.txtDepartamento.TabIndex = 10;

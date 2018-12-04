@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using PalcoNet.Config;
+
 namespace PalcoNet.Modelo
 {
     public class Cliente : Usuario
@@ -60,13 +62,13 @@ namespace PalcoNet.Modelo
             this.depto = depto;
             this.codigoPostal = codPostal;
             this.fechaNacimiento = fechaNac;
-            this.fechaCreacion = DateTime.Today;
+            this.fechaCreacion = SystemDate.GetDate();
             this.tarjetaCredito = tarjetaCredito;
         }
 
         public void SetFechaCreacion()
         {
-            this.fechaCreacion = DateTime.Today;
+            this.fechaCreacion = SystemDate.GetDate();
         }
     }
 }

@@ -35,6 +35,7 @@
             this.razonSocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cuit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.baja = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -52,7 +53,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(569, 145);
+            this.btnBuscar.Location = new System.Drawing.Point(611, 145);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(76, 23);
             this.btnBuscar.TabIndex = 3;
@@ -81,13 +82,14 @@
             this.razonSocialDataGridViewTextBoxColumn,
             this.email,
             this.cuit,
+            this.baja,
             this.Seleccionar,
             this.Eliminar});
             this.dataGridEmpresas.DataSource = this.empresaBindingSource;
             this.dataGridEmpresas.Location = new System.Drawing.Point(13, 191);
             this.dataGridEmpresas.Name = "dataGridEmpresas";
             this.dataGridEmpresas.ReadOnly = true;
-            this.dataGridEmpresas.Size = new System.Drawing.Size(632, 370);
+            this.dataGridEmpresas.Size = new System.Drawing.Size(674, 370);
             this.dataGridEmpresas.TabIndex = 1;
             this.dataGridEmpresas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridEmpresas_CellContentClick);
             // 
@@ -111,6 +113,13 @@
             this.cuit.HeaderText = "Cuit";
             this.cuit.Name = "cuit";
             this.cuit.ReadOnly = true;
+            // 
+            // baja
+            // 
+            this.baja.DataPropertyName = "baja";
+            this.baja.HeaderText = "Baja";
+            this.baja.Name = "baja";
+            this.baja.ReadOnly = true;
             // 
             // Seleccionar
             // 
@@ -145,14 +154,14 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(632, 126);
+            this.groupBox1.Size = new System.Drawing.Size(674, 126);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
             // 
             // txtBoxEmail
             // 
-            this.txtBoxEmail.Location = new System.Drawing.Point(487, 43);
+            this.txtBoxEmail.Location = new System.Drawing.Point(506, 42);
             this.txtBoxEmail.Name = "txtBoxEmail";
             this.txtBoxEmail.Size = new System.Drawing.Size(139, 20);
             this.txtBoxEmail.TabIndex = 5;
@@ -161,7 +170,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label3.Location = new System.Drawing.Point(484, 27);
+            this.label3.Location = new System.Drawing.Point(503, 26);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 4;
@@ -169,7 +178,7 @@
             // 
             // txtBoxCUIT
             // 
-            this.txtBoxCUIT.Location = new System.Drawing.Point(6, 90);
+            this.txtBoxCUIT.Location = new System.Drawing.Point(22, 89);
             this.txtBoxCUIT.Name = "txtBoxCUIT";
             this.txtBoxCUIT.Size = new System.Drawing.Size(139, 20);
             this.txtBoxCUIT.TabIndex = 3;
@@ -178,7 +187,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label2.Location = new System.Drawing.Point(3, 74);
+            this.label2.Location = new System.Drawing.Point(19, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 2;
@@ -186,7 +195,7 @@
             // 
             // txtBoxRazonSocial
             // 
-            this.txtBoxRazonSocial.Location = new System.Drawing.Point(6, 43);
+            this.txtBoxRazonSocial.Location = new System.Drawing.Point(22, 42);
             this.txtBoxRazonSocial.Name = "txtBoxRazonSocial";
             this.txtBoxRazonSocial.Size = new System.Drawing.Size(139, 20);
             this.txtBoxRazonSocial.TabIndex = 1;
@@ -195,7 +204,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label1.Location = new System.Drawing.Point(3, 27);
+            this.label1.Location = new System.Drawing.Point(19, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
@@ -205,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 573);
+            this.ClientSize = new System.Drawing.Size(699, 573);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.dataGridEmpresas);
@@ -238,6 +247,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn baja;
         private System.Windows.Forms.DataGridViewImageColumn Seleccionar;
         private System.Windows.Forms.DataGridViewImageColumn Eliminar;
     }

@@ -54,19 +54,17 @@ namespace PalcoNet.Abm_Cliente
             {
                 Form EditForm = new CreateOrUpdateCliente(cliente);
                 EditForm.ShowDialog();
+                LoadDataGrid();
             }
             if (e.ColumnIndex == dataGridViewClientes.Columns.IndexOf(this.columnEliminar))
             {
                 DialogResult dialogResult;
 
-                if(cliente.baja)
-                    dialogResult = MessageBox.Show("¿Desea dar de alta al cliente?", "Alta Cliente", MessageBoxButtons.YesNo);
-                else
-                    dialogResult = MessageBox.Show("¿Desea eliminar la fila?", "Eliminar Cliente", MessageBoxButtons.YesNo);
+                dialogResult = MessageBox.Show("¿Desea dar de baja al cliente?", "Eliminar Cliente", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    repoCliente.AltaBajaCliente(cliente.id, cliente.baja);
+                    repoCliente.BajaCliente(cliente);
                     LoadDataGrid();
                     
                 }

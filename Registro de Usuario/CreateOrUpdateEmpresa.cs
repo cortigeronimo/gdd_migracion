@@ -36,7 +36,7 @@ namespace PalcoNet.Registro_de_Usuario
             return validator;
         }
 
-        //el usuario crea una empresa
+        //El usuario crea una empresa
         public CreateOrUpdateEmpresa(Usuario usuario)
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace PalcoNet.Registro_de_Usuario
             this.checkBoxBaja.Visible = false;
         }
 
-        //el admin modifica una empresa
+        //El admin modifica una empresa
         public CreateOrUpdateEmpresa(Empresa empresa)
         {
             InitializeComponent();
@@ -53,7 +53,7 @@ namespace PalcoNet.Registro_de_Usuario
             InitializeEmpresa(empresa);
         }
 
-        //el admin crea una empresa
+        //El admin crea una empresa
         public CreateOrUpdateEmpresa() {
             //InitializeComponent();
             //this.checkBoxBaja.Visible = false;
@@ -86,6 +86,7 @@ namespace PalcoNet.Registro_de_Usuario
             this.txtDepartamento.Text = empresa.depto;
             this.txtCodigoPostal.Text = empresa.codigoPostal;
             this.txtCiudad.Text = empresa.ciudad;
+            this.checkBoxBaja.Checked = empresa.baja;
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -135,8 +136,8 @@ namespace PalcoNet.Registro_de_Usuario
             }
             else {
                 if(String.IsNullOrEmpty(empresa.username)){
-                    empresa.username = "EMPRESA" + empresa.cuit;
-                    empresa.SetPassword(empresa.cuit);
+                    empresa.username = "EMPRESA" + empresa.cuit.Replace("-","");
+                    empresa.SetPassword(empresa.cuit.Replace("-",""));
                 }
                 repoEmpresa.InsertEmpresa(empresa);
                 MessageBox.Show(Messages.OPERACION_EXITOSA);
