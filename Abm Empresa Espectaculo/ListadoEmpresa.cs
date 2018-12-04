@@ -43,12 +43,12 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
         {
             Empresa empresa = (Empresa)dataGridEmpresas.CurrentRow.DataBoundItem;
 
-            if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEditar))
+            if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.Seleccionar))
             {
                 Form EditForm = new CreateOrUpdateEmpresa(empresa);
                 EditForm.ShowDialog();
             }
-            if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.columnEliminar))
+            if (e.ColumnIndex == dataGridEmpresas.Columns.IndexOf(this.Eliminar))
             {
                 DialogResult dialogResult = MessageBox.Show("¿Desea eliminar la fila?", "Eliminar Empresa", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)

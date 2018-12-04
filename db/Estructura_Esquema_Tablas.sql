@@ -765,14 +765,16 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE PLEASE_HELP.SP_ALTA_EMPRESA(@razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), @localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50), @ciudad NVARCHAR(50), @username NVARCHAR(255), @password VARBINARY(255))
+CREATE PROCEDURE PLEASE_HELP.SP_ALTA_EMPRESA(@razonSocial NVARCHAR(255), @cuit NVARCHAR(255), @email NVARCHAR(50), @telefono NUMERIC(15,0), 
+												@localidad NVARCHAR(255), @direccion NVARCHAR(50), @nropiso NUMERIC(18,0), @depto NVARCHAR(50), @codpostal NVARCHAR(50),
+												 @ciudad NVARCHAR(50), @username NVARCHAR(255), @password VARBINARY(255), @firstLogin BIT)
 AS
 BEGIN
 	BEGIN TRANSACTION
 		INSERT INTO PLEASE_HELP.Usuario(Usuario_Username, Usuario_Password) 
 			VALUES (@username, @password)
-		INSERT INTO PLEASE_HELP.Empresa(Emp_Usuario, Emp_Razon_Social, Emp_Email, Emp_Telefono, Emp_Localidad, Emp_Direccion, Emp_Piso, Emp_Depto, Emp_Cod_Postal, Emp_Ciudad, Emp_Cuit)
-			VALUES (@@IDENTITY, @razonSocial, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @ciudad, @cuit)  
+		INSERT INTO PLEASE_HELP.Empresa(Emp_Usuario, Emp_Razon_Social, Emp_Email, Emp_Telefono, Emp_Localidad, Emp_Direccion, Emp_Piso, Emp_Depto, Emp_Cod_Postal, Emp_Ciudad, Emp_Cuit, Emp_Primer_Login)
+			VALUES (@@IDENTITY, @razonSocial, @email, @telefono, @localidad, @direccion, @nropiso, @depto, @codpostal, @ciudad, @cuit, @firstLogin)  
 	COMMIT TRANSACTION
 END
 GO

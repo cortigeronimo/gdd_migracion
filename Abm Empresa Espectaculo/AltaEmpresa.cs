@@ -52,16 +52,18 @@ namespace PalcoNet.Abm_Empresa_Espectaculo
 
             var repoEmpresa = new RepoEmpresa();
             string cuit = txtBoxCuit1 + "-" + txtBoxCuit2 + "-" + txtBoxCuit3;
-            if (repoEmpresa.RepiteCUIT(cuit))
-            {
-                MessageBox.Show("Ya existe una empresa con ese CUIT");
-                return;
-            }
-            if (repoEmpresa.RepiteRazonSocial(txtBoxRazonSocial.Text))
-            {
-                MessageBox.Show("Ya existe una empresa con esa Razón Social");
-                return;
-            }
+            //if (repoEmpresa.RepiteCUIT(cuit))
+            //{
+            //    MessageBox.Show("Ya existe una empresa con ese CUIT");
+            //    return;
+            //}
+            //if (repoEmpresa.RepiteRazonSocial(txtBoxRazonSocial.Text))
+            //{
+            //    MessageBox.Show("Ya existe una empresa con esa Razón Social");
+            //    return;
+            //}
+
+            //COMENTO PARA QUE NO ROMPA....
 
 
         }

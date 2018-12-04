@@ -55,13 +55,24 @@ namespace PalcoNet.Registro_de_Usuario
 
         //el admin crea una empresa
         public CreateOrUpdateEmpresa() {
+            //InitializeComponent();
+            //this.checkBoxBaja.Visible = false;
+            //Rol rol = repoRol.FindRolByName(RepoRol.ROL_CLIENTE);
+            //Usuario usuario = new Usuario();
+            //usuario.AddRol(rol);
+            //usuario.isAdmin = false;
+            //usuario.isClient = true;
+
             InitializeComponent();
             this.checkBoxBaja.Visible = false;
-            Rol rol = repoRol.FindRolByName(RepoRol.ROL_CLIENTE);
+            Rol rol = repoRol.FindRolByName(RepoRol.ROL_EMPRESA);
             Usuario usuario = new Usuario();
             usuario.AddRol(rol);
             usuario.isAdmin = false;
-            usuario.isClient = true;
+            usuario.isClient = false;
+            empresa = new Empresa(usuario);
+            empresa.id = 0;
+            empresa.primerLogin = true;
         }
 
         private void InitializeEmpresa(Empresa empresa) {
@@ -94,12 +105,12 @@ namespace PalcoNet.Registro_de_Usuario
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidateForm().ShowIfThereAreErrors()) return;
-            if (repoEmpresa.RepiteCUIT(txtCuit.Text))
+            if (repoEmpresa.RepiteCUIT(txtCuit.Text, hasToUpdate, empresa.id))
             {
                 MessageBox.Show("Ya existe un usuario con ese cuit.");
                 return;
             }
-            if (repoEmpresa.RepiteRazonSocial(txtRazonSocial.Text))
+            if (repoEmpresa.RepiteRazonSocial(txtRazonSocial.Text, hasToUpdate, empresa.id))
             {
                 MessageBox.Show("Ya existe un usuario con esa Razon Social.");
                 return;
@@ -109,7 +120,8 @@ namespace PalcoNet.Registro_de_Usuario
             empresa.email = txtEmail.Text;
             empresa.telefono = (long)Convert.ToInt64(txtTelefono.Text);
             empresa.direccion = txtDireccion.Text;
-            empresa.nroPiso = Convert.ToByte(txtNumeroPiso.Text);
+            //empresa.nroPiso = Convert.ToDecimal(txtNumeroPiso.Text);  //error aca!!!!
+            if (String.IsNullOrEmpty(txtNumeroPiso.Text)) empresa.nroPiso = null; else empresa.nroPiso = Convert.ToDecimal(txtNumeroPiso.Text);  
             empresa.ciudad = txtCiudad.Text;
             empresa.depto = txtDepartamento.Text;
             empresa.localidad = txtLocalidad.Text;
@@ -127,6 +139,7 @@ namespace PalcoNet.Registro_de_Usuario
                     empresa.SetPassword(empresa.cuit);
                 }
                 repoEmpresa.InsertEmpresa(empresa);
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
             }
             
         }

@@ -28,6 +28,7 @@ namespace PalcoNet.Repositorios
             }
         }
 
+
         public void UpdateEmpresa(Empresa empresa) {
 
             String sp = "PLEASE_HELP.SP_MODIFICACION_EMPRESA";
@@ -41,7 +42,7 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", empresa.telefono);
             command.Parameters.AddWithValue("@localidad", empresa.localidad);
             command.Parameters.AddWithValue("@direccion", empresa.direccion);
-            command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
+            if (empresa.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
             command.Parameters.AddWithValue("@depto", empresa.depto);
             command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
             command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
@@ -74,12 +75,14 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", empresa.telefono);
             command.Parameters.AddWithValue("@localidad", empresa.localidad);
             command.Parameters.AddWithValue("@direccion", empresa.direccion);
-            command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
+            //command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
+            if (empresa.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", empresa.nroPiso);
             command.Parameters.AddWithValue("@depto", empresa.depto);
             command.Parameters.AddWithValue("@codpostal", empresa.codigoPostal);
             command.Parameters.AddWithValue("@ciudad", empresa.ciudad);
             command.Parameters.AddWithValue("@username", empresa.username);
             command.Parameters.AddWithValue("@password", empresa.GetPassword());
+            command.Parameters.AddWithValue("@firstLogin", empresa.primerLogin);
 
             if (Conexion.InsertUpdateOrDeleteData(command) < 2)
                 throw new Exception("No se ha podido registrar la empresa, intentelo nuevamente.");
@@ -106,7 +109,7 @@ namespace PalcoNet.Repositorios
                 cmd.Parameters.AddWithValue("@email", email);
             }
 
-            query += " AND Emp_Baja != 1";
+            //query += " AND Emp_Baja != 1";
 
             cmd.CommandText = query;
             result = Conexion.GetData(cmd);
@@ -139,25 +142,53 @@ namespace PalcoNet.Repositorios
             return empresas;
         }
 
-        public bool RepiteCUIT(string cuit)
+        //public bool RepiteCUIT(string cuit)
+        //{
+        //    string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit";
+        //    var cmd = new SqlCommand(query);
+        //    cmd.Parameters.AddWithValue("@cuit", cuit);
+
+        //    var result = Conexion.GetData(cmd);
+        //    return (int)result.Rows[0]["Total"] > 0;
+        //}
+
+        public bool RepiteCUIT(string cuit, Boolean hasToUpdate, int? empresaId)
         {
-            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit";
+            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Cuit = @cuit AND Emp_Usuario != @empresaId";
             var cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@cuit", cuit);
 
+            if (hasToUpdate) cmd.Parameters.AddWithValue("@empresaId", empresaId); else cmd.Parameters.AddWithValue("@empresaId", 0);
+
             var result = Conexion.GetData(cmd);
             return (int)result.Rows[0]["Total"] > 0;
         }
 
-        public bool RepiteRazonSocial(string razonSocial)
+
+
+        //public bool RepiteRazonSocial(string razonSocial)
+        //{
+        //    string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Razon_Social = @razonSocial";
+        //    var cmd = new SqlCommand(query);
+        //    cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
+
+        //    var result = Conexion.GetData(cmd);
+        //    return (int)result.Rows[0]["Total"] > 0;
+        //}
+
+        public bool RepiteRazonSocial(string razonSocial, Boolean hasToUpdate, int? empresaId )
         {
-            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Razon_Social = @razonSocial";
+            string query = "SELECT COUNT(*) Total FROM PLEASE_HELP.Empresa WHERE Emp_Razon_Social = @razonSocial AND Emp_Usuario != @empresaId";
             var cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@razonSocial", razonSocial);
 
+            if (hasToUpdate) cmd.Parameters.AddWithValue("@empresaId", empresaId); else cmd.Parameters.AddWithValue("@empresaId", 0);
+
             var result = Conexion.GetData(cmd);
             return (int)result.Rows[0]["Total"] > 0;
         }
+
+
 
         public List<EmpresaPorFacturarDTO> FindAllEmpresasToCheckIn()
         {

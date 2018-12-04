@@ -17,7 +17,7 @@ namespace PalcoNet.Utils
             = new PairData("El número de cuit debe contar con una longitud de 11 cifras, y comenzar con 30, 33 o 34. Se permiten guiones. No debe ser nulo.",
                 "(30|33|34)(-)?[0-9]{8}(-)?[0-9]");
         public static readonly PairData REGEX_CUIL
-            = new PairData("El número de cuit debe contar con una longitud de 11 cifras, y comenzar con 20, 23, 24 0 27. Se permiten guiones. No debe ser nulo.",
+            = new PairData("El número de cuil debe contar con una longitud de 11 cifras, y comenzar con 20, 23, 24 0 27. No se permiten guiones. No debe ser nulo.",
                 "(20|23|24|27)(-)?[0-9]{8}(-)?[0-9]");
         public static readonly PairData REGEX_EMAIL 
             = new PairData("El formato de email debe corresponder a uno válido. No debe ser nulo.",

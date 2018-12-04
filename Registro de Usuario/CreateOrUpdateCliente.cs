@@ -63,7 +63,7 @@ namespace PalcoNet.Registro_de_Usuario
             txtCodigoPostal.Text = cliente.codigoPostal;
             pickerFechaNacimiento.Value = cliente.fechaNacimiento;
             txtTarjetaCredito.Text = cliente.tarjetaCredito;
-            //checkBoxBaja.Checked = cliente.baja;
+            
 
 
         }
