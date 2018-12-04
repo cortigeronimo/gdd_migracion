@@ -11,7 +11,17 @@ namespace PalcoNet.Abm_Grado
     {
         public int Id {get; set;}
         public int Comision { get; set; }
-        public String Descripcion { get; set; }
+        private String descripcion;
+        public String Descripcion 
+        {
+            get
+            {
+                return this.descripcion;
+            }
+            set {
+                this.descripcion = value.ToUpper();
+            } 
+        }
 
         public Grado()
         {
@@ -21,12 +31,12 @@ namespace PalcoNet.Abm_Grado
         {
             this.Id = id;
             this.Comision = comision;
-            this.Descripcion = descripcion.ToUpper();
+            this.Descripcion = descripcion;
         }
 
         public Grado(int comision, String descripcion){
             this.Comision = comision;
-            this.Descripcion = descripcion.ToUpper();
+            this.Descripcion = descripcion;
         }
 
     }

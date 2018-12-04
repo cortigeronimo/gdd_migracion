@@ -90,5 +90,13 @@ namespace PalcoNet.Repositorios
             return Conexion.GetData(command);
         }
 
+        public bool ExistsGrado(String nombre)
+        {
+            String query = "SELECT 1 FROM " + table + " WHERE Grado_Descripcion = @nombre";
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddWithValue("@nombre", nombre.ToUpper());
+            return Conexion.GetData(command).Rows.Count == 0;
+        }
+
     }
 }

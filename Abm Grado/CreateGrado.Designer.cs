@@ -69,9 +69,9 @@
             this.lblComisionGrado.AutoSize = true;
             this.lblComisionGrado.Location = new System.Drawing.Point(6, 85);
             this.lblComisionGrado.Name = "lblComisionGrado";
-            this.lblComisionGrado.Size = new System.Drawing.Size(98, 13);
+            this.lblComisionGrado.Size = new System.Drawing.Size(115, 13);
             this.lblComisionGrado.TabIndex = 3;
-            this.lblComisionGrado.Text = "Ingrese la Comisión";
+            this.lblComisionGrado.Text = "Ingrese la Comisión (%)";
             // 
             // groupBox1
             // 

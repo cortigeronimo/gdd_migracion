@@ -73,9 +73,9 @@
             this.lblComisionGrado.AutoSize = true;
             this.lblComisionGrado.Location = new System.Drawing.Point(3, 82);
             this.lblComisionGrado.Name = "lblComisionGrado";
-            this.lblComisionGrado.Size = new System.Drawing.Size(98, 13);
+            this.lblComisionGrado.Size = new System.Drawing.Size(115, 13);
             this.lblComisionGrado.TabIndex = 3;
-            this.lblComisionGrado.Text = "Ingrese la Comisión";
+            this.lblComisionGrado.Text = "Ingrese la Comisión (%)";
             // 
             // txtNombreGrado
             // 
@@ -89,9 +89,9 @@
             this.lblNombreGrado.AutoSize = true;
             this.lblNombreGrado.Location = new System.Drawing.Point(3, 29);
             this.lblNombreGrado.Name = "lblNombreGrado";
-            this.lblNombreGrado.Size = new System.Drawing.Size(142, 13);
+            this.lblNombreGrado.Size = new System.Drawing.Size(167, 13);
             this.lblNombreGrado.TabIndex = 0;
-            this.lblNombreGrado.Text = "Ingrese un nombre de Grado";
+            this.lblNombreGrado.Text = "Ingrese una descripción de Grado";
             // 
             // btnModificar
             // 

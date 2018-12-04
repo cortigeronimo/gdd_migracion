@@ -16,6 +16,8 @@ namespace PalcoNet.Abm_Grado
 {
     public partial class CreateGrado : CustomForm
     {
+        RepoGradoPublicacion repo = new RepoGradoPublicacion();
+
         public CreateGrado()
         {
             InitializeComponent();
@@ -32,7 +34,11 @@ namespace PalcoNet.Abm_Grado
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidateAllFields().ShowIfThereAreErrors()) return;
-            RepoGradoPublicacion repo = new RepoGradoPublicacion();
+            if (repo.ExistsGrado(this.txtNombreGrado.Text))
+            {
+                MessageBox.Show("Ya existe el grado " + this.txtNombreGrado.Text + ".");
+                return;
+            }
             Grado grado = new Grado(
                 (int)Convert.ToInt32(txtComision.Text),
                 txtNombreGrado.Text);

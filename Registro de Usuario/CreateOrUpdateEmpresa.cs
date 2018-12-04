@@ -94,7 +94,16 @@ namespace PalcoNet.Registro_de_Usuario
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidateForm().ShowIfThereAreErrors()) return;
-
+            if (repoEmpresa.RepiteCUIT(txtCuit.Text))
+            {
+                MessageBox.Show("Ya existe un usuario con ese cuit.");
+                return;
+            }
+            if (repoEmpresa.RepiteRazonSocial(txtRazonSocial.Text))
+            {
+                MessageBox.Show("Ya existe un usuario con esa Razon Social.");
+                return;
+            }
             empresa.razonSocial = txtRazonSocial.Text;
             empresa.cuit = txtCuit.Text;
             empresa.email = txtEmail.Text;

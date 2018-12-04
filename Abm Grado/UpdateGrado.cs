@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Vistas;
 using PalcoNet.Repositorios;
+using PalcoNet.Utils;
 
 namespace PalcoNet.Abm_Grado
 {
     public partial class UpdateGrado : CustomForm
     {
         Grado grado;
+        RepoGradoPublicacion repo = new RepoGradoPublicacion();
+
 
         public UpdateGrado(Grado grado)
         {
@@ -22,18 +25,31 @@ namespace PalcoNet.Abm_Grado
             InitializeComponent();
         }
 
+        private ValidatorData ValidateAllFields()
+        {
+            ValidatorData validator = new ValidatorData();
+            validator.ValidateTextWithRegex(txtNombreGrado.Text, ValidatorData.REGEX_DESCRIPCION_GRADO);
+            return validator;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            RepoGradoPublicacion repo = new RepoGradoPublicacion();
+            if (ValidateAllFields().ShowIfThereAreErrors()) return;
+            if (repo.ExistsGrado(txtNombreGrado.Text))
+            {
+                MessageBox.Show("Ya existe el grado " + this.txtNombreGrado.Text + ".");
+                return;
+            }
+            
             Grado grado = new Grado(
                 (int)this.grado.Id,
                 Convert.ToInt32(txtComision.Text),
                 txtNombreGrado.Text);
             if(repo.UpdateGrado(grado) > 0){
-                MessageBox.Show("Los Cambios se realizaron con Éxito");
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
             }
             else{
-                MessageBox.Show("Hubo un error al realizar la operación, reintentelo");   
+                MessageBox.Show(Messages.ERROR_INESPERADO);   
             }
             
         }
