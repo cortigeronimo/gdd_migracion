@@ -928,18 +928,20 @@ BEGIN
 			VALUES (@fechaActual, 0, @empresa)
 
 		SET @idFactura = @@IDENTITY
+
 		DECLARE @idCompra int, @monto NUMERIC(18,2), @descripcion NVARCHAR(60)
 
-		SELECT @comision 
+		SELECT @comision = CAST(g.Grado_Comision as NUMERIC(18,2))
 		FROM PLEASE_HELP.Grado g
 		INNER JOIN PLEASE_HELP.Publicacion p
-		ON g.Grado_Id = p.Pub_Codigo
+		ON g.Grado_Id = p.Pub_Grado
+		AND p.Pub_Codigo = @idPublicacion
 		
 		WHILE @cantidadARendir > 0
 			BEGIN
 
 				SELECT TOP 1 @idCompra = c.Compra_Id, 
-				@monto = u.Ubicacion_Precio,
+				@monto = CAST(u.Ubicacion_Precio as NUMERIC(18,2)),
 				@descripcion = u.Ubicacion_Descripcion  
 				FROM PLEASE_HELP.Compra c
 				JOIN PLEASE_HELP.Ubicacion u
@@ -950,8 +952,10 @@ BEGIN
 				AND c.Compra_Fecha_Rendida IS NULL
 				ORDER BY c.Compra_Fecha ASC
 
+				SET @monto = @monto * @comision / 100
+
 				INSERT INTO PLEASE_HELP.Item VALUES 
-				(@monto * @comision / 100, 1, @descripcion, @idFactura, @idCompra)
+				(@monto, 1, @descripcion, @idFactura, @idCompra)
 
 				UPDATE PLEASE_HELP.Compra SET Compra_Fecha_Rendida = @fechaActual
 				WHERE Compra_Id = @idCompra
