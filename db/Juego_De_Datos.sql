@@ -11,14 +11,18 @@ BEGIN
 	SET @IdPublicacion = @@IDENTITY
 
 	insert into PLEASE_HELP.Ubicacion VALUES
-	(@IdPublicacion, 'A', 1, 101, null, 'Asiento Creado por Nosotros', 1)
+	(@IdPublicacion, 'A', 1, 101, null, 'Asiento Creado por Nosotros', 1),
+	(@IdPublicacion, 'B', 1, 101, null, 'Asiento Creado por Nosotros', 1),
+	(@IdPublicacion, 'C', 1, 101, null, 'Asiento Creado por Nosotros', 1),
+	(@IdPublicacion, 'D', 1, 101, null, 'Asiento Creado por Nosotros', 1),
+	(@IdPublicacion, 'E', 1, 101, null, 'Asiento Creado por Nosotros', 1)
 
 	insert into PLEASE_HELP.Compra VALUES	
 	(2, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario@dominio.com', NULL, 'A', 1, @IdPublicacion),
-	(2, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario@dominio.com', NULL, 'A', 1, @IdPublicacion),
-	(2, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario@dominio.com', NULL, 'A', 1, @IdPublicacion),
-	(3, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario2@dominio.com', NULL, 'A', 1, @IdPublicacion),
-	(3, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario2@dominio.com', NULL, 'A', 1, @IdPublicacion)
+	(2, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario@dominio.com', NULL, 'B', 1, @IdPublicacion),
+	(2, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario@dominio.com', NULL, 'C', 1, @IdPublicacion),
+	(3, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario2@dominio.com', NULL, 'D', 1, @IdPublicacion),
+	(3, 1, DATEADD(DAY, -1, GETDATE()), 'TARJETA', 'usuario2@dominio.com', NULL, 'E', 1, @IdPublicacion)
 END
 GO
 
