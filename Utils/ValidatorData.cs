@@ -63,7 +63,7 @@ namespace PalcoNet.Utils
                 "[\\wáéíóú]{3,10}");
         public static readonly PairData REGEX_COMISION
             = new PairData("La comisión debe estar entre 0 y 100 y representa un porcentaje.",
-                "([0-9]|[1-9][0-9]|100)");
+                "[0-9]|[1-9][0-9]|[100]");
         public static readonly PairData REGEX_PASSWORD
             = new PairData("La contraseña debe tener un mínimo de 4 y un máximo de 25 caracters.",
                 "[\\w\\d-]{4,25}");

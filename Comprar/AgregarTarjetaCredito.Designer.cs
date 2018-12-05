@@ -55,7 +55,7 @@
             this.groupBoxTarjetaCredito.Size = new System.Drawing.Size(316, 79);
             this.groupBoxTarjetaCredito.TabIndex = 0;
             this.groupBoxTarjetaCredito.TabStop = false;
-            this.groupBoxTarjetaCredito.Text = "Registrar Tarjeta de Crédito";
+            this.groupBoxTarjetaCredito.Text = "Registro Tarjeta de Crédito";
             // 
             // txtTarjetaCredito
             // 

@@ -248,7 +248,7 @@
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.groupBoxFiltroBusqueda);
             this.Name = "ListCliente";
-            this.Text = "ListCliente";
+            this.Text = "Gestionar Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.clienteBindingSource)).EndInit();
             this.groupBoxFiltroBusqueda.ResumeLayout(false);

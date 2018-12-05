@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.lblTituloPublicacion = new System.Windows.Forms.Label();
             this.dataGridCompras = new System.Windows.Forms.DataGridView();
-            this.btnRendir = new System.Windows.Forms.Button();
-            this.lblCantidadARendir = new System.Windows.Forms.Label();
-            this.lblDescripcion = new System.Windows.Forms.Label();
             this.fechaCompraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metodoDePagoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.filaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +40,9 @@
             this.descripcionPublicacionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.detalleCompraBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnRendir = new System.Windows.Forms.Button();
+            this.lblCantidadARendir = new System.Windows.Forms.Label();
+            this.lblDescripcion = new System.Windows.Forms.Label();
             this.numCantidadARendir = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.detalleCompraBindingSource)).BeginInit();
@@ -80,34 +80,6 @@
             this.dataGridCompras.ReadOnly = true;
             this.dataGridCompras.Size = new System.Drawing.Size(815, 222);
             this.dataGridCompras.TabIndex = 1;
-            // 
-            // btnRendir
-            // 
-            this.btnRendir.Location = new System.Drawing.Point(752, 311);
-            this.btnRendir.Name = "btnRendir";
-            this.btnRendir.Size = new System.Drawing.Size(75, 20);
-            this.btnRendir.TabIndex = 3;
-            this.btnRendir.Text = "Rendir";
-            this.btnRendir.UseVisualStyleBackColor = true;
-            this.btnRendir.Click += new System.EventHandler(this.btnRendir_Click);
-            // 
-            // lblCantidadARendir
-            // 
-            this.lblCantidadARendir.AutoSize = true;
-            this.lblCantidadARendir.Location = new System.Drawing.Point(517, 315);
-            this.lblCantidadARendir.Name = "lblCantidadARendir";
-            this.lblCantidadARendir.Size = new System.Drawing.Size(92, 13);
-            this.lblCantidadARendir.TabIndex = 4;
-            this.lblCantidadARendir.Text = "Cantidad a Rendir";
-            // 
-            // lblDescripcion
-            // 
-            this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(9, 47);
-            this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(295, 13);
-            this.lblDescripcion.TabIndex = 6;
-            this.lblDescripcion.Text = "Las Rendiciones se Realizan a partir de la fecha más antigua";
             // 
             // fechaCompraDataGridViewTextBoxColumn
             // 
@@ -169,10 +141,38 @@
             // 
             this.detalleCompraBindingSource.DataSource = typeof(PalcoNet.Modelo.DetalleCompra);
             // 
-            // numericUpDown1
+            // btnRendir
+            // 
+            this.btnRendir.Location = new System.Drawing.Point(752, 311);
+            this.btnRendir.Name = "btnRendir";
+            this.btnRendir.Size = new System.Drawing.Size(75, 20);
+            this.btnRendir.TabIndex = 3;
+            this.btnRendir.Text = "Rendir";
+            this.btnRendir.UseVisualStyleBackColor = true;
+            this.btnRendir.Click += new System.EventHandler(this.btnRendir_Click);
+            // 
+            // lblCantidadARendir
+            // 
+            this.lblCantidadARendir.AutoSize = true;
+            this.lblCantidadARendir.Location = new System.Drawing.Point(517, 315);
+            this.lblCantidadARendir.Name = "lblCantidadARendir";
+            this.lblCantidadARendir.Size = new System.Drawing.Size(92, 13);
+            this.lblCantidadARendir.TabIndex = 4;
+            this.lblCantidadARendir.Text = "Cantidad a Rendir";
+            // 
+            // lblDescripcion
+            // 
+            this.lblDescripcion.AutoSize = true;
+            this.lblDescripcion.Location = new System.Drawing.Point(9, 47);
+            this.lblDescripcion.Name = "lblDescripcion";
+            this.lblDescripcion.Size = new System.Drawing.Size(295, 13);
+            this.lblDescripcion.TabIndex = 6;
+            this.lblDescripcion.Text = "Las Rendiciones se Realizan a partir de la fecha más antigua";
+            // 
+            // numCantidadARendir
             // 
             this.numCantidadARendir.Location = new System.Drawing.Point(615, 311);
-            this.numCantidadARendir.Name = "numericUpDown1";
+            this.numCantidadARendir.Name = "numCantidadARendir";
             this.numCantidadARendir.Size = new System.Drawing.Size(120, 20);
             this.numCantidadARendir.TabIndex = 7;
             // 
@@ -188,7 +188,7 @@
             this.Controls.Add(this.dataGridCompras);
             this.Controls.Add(this.lblTituloPublicacion);
             this.Name = "ComprasDePublicacionAFacturar";
-            this.Text = "ComprasDePublicacionAFacturar";
+            this.Text = "Compras A Rendir";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompras)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.detalleCompraBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCantidadARendir)).EndInit();

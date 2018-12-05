@@ -214,7 +214,6 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Grado
         private void crearGrado_Click(object sender, EventArgs e)
         {
-            if (UserIsAdmin()) return;
             FormManager.GetInstance().Open(new CreateGrado());
         }
 

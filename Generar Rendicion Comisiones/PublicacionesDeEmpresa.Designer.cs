@@ -32,8 +32,6 @@
             this.lblIndicacion = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.dataGridPublicacionesPorFacturar = new System.Windows.Forms.DataGridView();
-            this.publicacionPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnActualizar = new System.Windows.Forms.Button();
             this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaInicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,8 @@
             this.gradoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comisionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFacturar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.publicacionPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPublicacionesPorFacturar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionPorFacturarDTOBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -52,9 +52,9 @@
             this.lblIndicacion.AutoSize = true;
             this.lblIndicacion.Location = new System.Drawing.Point(17, 50);
             this.lblIndicacion.Name = "lblIndicacion";
-            this.lblIndicacion.Size = new System.Drawing.Size(190, 13);
+            this.lblIndicacion.Size = new System.Drawing.Size(182, 13);
             this.lblIndicacion.TabIndex = 0;
-            this.lblIndicacion.Text = "Seleccione una Publicación a Facturar";
+            this.lblIndicacion.Text = "Seleccione una Publicación a Rendir";
             // 
             // lblEmpresa
             // 
@@ -89,20 +89,6 @@
             this.dataGridPublicacionesPorFacturar.Size = new System.Drawing.Size(858, 273);
             this.dataGridPublicacionesPorFacturar.TabIndex = 2;
             this.dataGridPublicacionesPorFacturar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // publicacionPorFacturarDTOBindingSource
-            // 
-            this.publicacionPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionPorFacturarDTO);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Location = new System.Drawing.Point(803, 360);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizar.TabIndex = 3;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // codigoDataGridViewTextBoxColumn
             // 
@@ -169,6 +155,20 @@
             this.columnFacturar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.columnFacturar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // publicacionPorFacturarDTOBindingSource
+            // 
+            this.publicacionPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionPorFacturarDTO);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(803, 360);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // PublicacionesDeEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,7 +179,7 @@
             this.Controls.Add(this.lblEmpresa);
             this.Controls.Add(this.lblIndicacion);
             this.Name = "PublicacionesDeEmpresa";
-            this.Text = "PublicacionesDeEmpresa";
+            this.Text = "Publicaciones A Rendir";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPublicacionesPorFacturar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionPorFacturarDTOBindingSource)).EndInit();
             this.ResumeLayout(false);

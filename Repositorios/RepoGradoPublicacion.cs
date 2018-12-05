@@ -92,10 +92,10 @@ namespace PalcoNet.Repositorios
 
         public bool ExistsGrado(String nombre)
         {
-            String query = "SELECT 1 FROM " + table + " WHERE Grado_Descripcion = @nombre";
+            String query = "SELECT 1 FROM " + table + " WHERE Grado_Descripcion LIKE @nombre";
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddWithValue("@nombre", nombre.ToUpper());
-            return Conexion.GetData(command).Rows.Count == 0;
+            return Conexion.GetData(command).Rows.Count != 0;
         }
 
     }

@@ -220,7 +220,7 @@
             this.Controls.Add(this.dataGridEmpresas);
             this.Controls.Add(this.groupBox1);
             this.Name = "ListadoEmpresa";
-            this.Text = "ListadoEmpresa";
+            this.Text = "Gestionar Empresas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEmpresas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
