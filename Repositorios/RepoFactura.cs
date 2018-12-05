@@ -10,9 +10,7 @@ using PalcoNet.Config;
 namespace PalcoNet.Repositorios
 {
     public class RepoFactura : Repository
-    {
-        private String table = "PLEASE_HELP.Factura";
-
+    {      
         public void RendirComisiones(int cantidadARendir, Decimal idPublicacion)
         {
             String sp = "PLEASE_HELP.SP_RENDIR_COMISIONES";

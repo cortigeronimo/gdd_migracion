@@ -242,8 +242,6 @@
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.BindingSource empresaBindingSource;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEditar;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
         private System.Windows.Forms.DataGridViewTextBoxColumn razonSocialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn email;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuit;
