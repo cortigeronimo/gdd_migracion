@@ -35,7 +35,7 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dataGridViewFechas = new System.Windows.Forms.DataGridView();
             this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.columnEliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFechas)).BeginInit();
             this.SuspendLayout();
@@ -118,6 +118,7 @@
             // 
             this.columnEliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnEliminar.HeaderText = "Eliminar";
+            this.columnEliminar.Image = global::PalcoNet.Properties.Resources.iconfinder_ic_delete_forever_48px_3669360;
             this.columnEliminar.Name = "columnEliminar";
             this.columnEliminar.ReadOnly = true;
             this.columnEliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -151,6 +152,6 @@
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaEvento;
-        private System.Windows.Forms.DataGridViewButtonColumn columnEliminar;
+        private System.Windows.Forms.DataGridViewImageColumn columnEliminar;
     }
 }

@@ -29,6 +29,15 @@
         private void InitializeComponent()
         {
             this.dataGridViewPublicaciones = new System.Windows.Forms.DataGridView();
+            this.columnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnFechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnPublicar = new System.Windows.Forms.Button();
             this.btnFinalizar = new System.Windows.Forms.Button();
@@ -39,15 +48,6 @@
             this.groupBoxFiltrosBusqueda = new System.Windows.Forms.GroupBox();
             this.checkBoxEstado = new System.Windows.Forms.CheckBox();
             this.comboBoxEstado = new System.Windows.Forms.ComboBox();
-            this.columnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
             this.groupBoxFiltrosBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -71,13 +71,77 @@
             this.dataGridViewPublicaciones.MultiSelect = false;
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
-            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(644, 266);
+            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(843, 299);
             this.dataGridViewPublicaciones.TabIndex = 6;
+            // 
+            // columnCodigo
+            // 
+            this.columnCodigo.DataPropertyName = "Pub_Codigo";
+            this.columnCodigo.HeaderText = "Código";
+            this.columnCodigo.Name = "columnCodigo";
+            this.columnCodigo.ReadOnly = true;
+            // 
+            // columnFechaInicio
+            // 
+            this.columnFechaInicio.DataPropertyName = "Pub_Fecha_Inicio";
+            this.columnFechaInicio.HeaderText = "Fecha Inicio";
+            this.columnFechaInicio.Name = "columnFechaInicio";
+            this.columnFechaInicio.ReadOnly = true;
+            // 
+            // columnFechaEvento
+            // 
+            this.columnFechaEvento.DataPropertyName = "Pub_Fecha_Evento";
+            this.columnFechaEvento.HeaderText = "Fecha Evento";
+            this.columnFechaEvento.Name = "columnFechaEvento";
+            this.columnFechaEvento.ReadOnly = true;
+            // 
+            // columnDescripcion
+            // 
+            this.columnDescripcion.DataPropertyName = "Pub_Descripcion";
+            this.columnDescripcion.HeaderText = "Descripción";
+            this.columnDescripcion.Name = "columnDescripcion";
+            this.columnDescripcion.ReadOnly = true;
+            // 
+            // columnDireccion
+            // 
+            this.columnDireccion.DataPropertyName = "Pub_Direccion";
+            this.columnDireccion.HeaderText = "Dirección";
+            this.columnDireccion.Name = "columnDireccion";
+            this.columnDireccion.ReadOnly = true;
+            // 
+            // columnRubro
+            // 
+            this.columnRubro.DataPropertyName = "Pub_Rubro";
+            this.columnRubro.HeaderText = "Rubro";
+            this.columnRubro.Name = "columnRubro";
+            this.columnRubro.ReadOnly = true;
+            // 
+            // columnGrado
+            // 
+            this.columnGrado.DataPropertyName = "Pub_Grado";
+            this.columnGrado.HeaderText = "Grado";
+            this.columnGrado.Name = "columnGrado";
+            this.columnGrado.ReadOnly = true;
+            // 
+            // columnEmpresa
+            // 
+            this.columnEmpresa.DataPropertyName = "Pub_Empresa";
+            this.columnEmpresa.HeaderText = "ID Empresa";
+            this.columnEmpresa.Name = "columnEmpresa";
+            this.columnEmpresa.ReadOnly = true;
+            this.columnEmpresa.Visible = false;
+            // 
+            // columnEstado
+            // 
+            this.columnEstado.DataPropertyName = "Pub_Estado";
+            this.columnEstado.HeaderText = "Estado";
+            this.columnEstado.Name = "columnEstado";
+            this.columnEstado.ReadOnly = true;
             // 
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(514, 419);
+            this.btnEditar.Location = new System.Drawing.Point(713, 454);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 5;
@@ -88,7 +152,7 @@
             // btnPublicar
             // 
             this.btnPublicar.Enabled = false;
-            this.btnPublicar.Location = new System.Drawing.Point(433, 419);
+            this.btnPublicar.Location = new System.Drawing.Point(632, 454);
             this.btnPublicar.Name = "btnPublicar";
             this.btnPublicar.Size = new System.Drawing.Size(75, 23);
             this.btnPublicar.TabIndex = 4;
@@ -99,7 +163,7 @@
             // btnFinalizar
             // 
             this.btnFinalizar.Enabled = false;
-            this.btnFinalizar.Location = new System.Drawing.Point(595, 419);
+            this.btnFinalizar.Location = new System.Drawing.Point(794, 454);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 3;
@@ -109,7 +173,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(551, 75);
+            this.btnBuscar.Location = new System.Drawing.Point(612, 75);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(119, 23);
             this.btnBuscar.TabIndex = 2;
@@ -176,75 +240,11 @@
             this.comboBoxEstado.Size = new System.Drawing.Size(121, 21);
             this.comboBoxEstado.TabIndex = 2;
             // 
-            // columnCodigo
-            // 
-            this.columnCodigo.DataPropertyName = "Pub_Codigo";
-            this.columnCodigo.HeaderText = "Código";
-            this.columnCodigo.Name = "columnCodigo";
-            this.columnCodigo.ReadOnly = true;
-            // 
-            // columnFechaInicio
-            // 
-            this.columnFechaInicio.DataPropertyName = "Pub_Fecha_Inicio";
-            this.columnFechaInicio.HeaderText = "Fecha Inicio";
-            this.columnFechaInicio.Name = "columnFechaInicio";
-            this.columnFechaInicio.ReadOnly = true;
-            // 
-            // columnFechaEvento
-            // 
-            this.columnFechaEvento.DataPropertyName = "Pub_Fecha_Evento";
-            this.columnFechaEvento.HeaderText = "Fecha Evento";
-            this.columnFechaEvento.Name = "columnFechaEvento";
-            this.columnFechaEvento.ReadOnly = true;
-            // 
-            // columnDescripcion
-            // 
-            this.columnDescripcion.DataPropertyName = "Pub_Descripcion";
-            this.columnDescripcion.HeaderText = "Descripción";
-            this.columnDescripcion.Name = "columnDescripcion";
-            this.columnDescripcion.ReadOnly = true;
-            // 
-            // columnDireccion
-            // 
-            this.columnDireccion.DataPropertyName = "Pub_Direccion";
-            this.columnDireccion.HeaderText = "Dirección";
-            this.columnDireccion.Name = "columnDireccion";
-            this.columnDireccion.ReadOnly = true;
-            // 
-            // columnRubro
-            // 
-            this.columnRubro.DataPropertyName = "Pub_Rubro";
-            this.columnRubro.HeaderText = "Rubro";
-            this.columnRubro.Name = "columnRubro";
-            this.columnRubro.ReadOnly = true;
-            // 
-            // columnGrado
-            // 
-            this.columnGrado.DataPropertyName = "Pub_Grado";
-            this.columnGrado.HeaderText = "Grado";
-            this.columnGrado.Name = "columnGrado";
-            this.columnGrado.ReadOnly = true;
-            // 
-            // columnEmpresa
-            // 
-            this.columnEmpresa.DataPropertyName = "Pub_Empresa";
-            this.columnEmpresa.HeaderText = "ID Empresa";
-            this.columnEmpresa.Name = "columnEmpresa";
-            this.columnEmpresa.ReadOnly = true;
-            this.columnEmpresa.Visible = false;
-            // 
-            // columnEstado
-            // 
-            this.columnEstado.DataPropertyName = "Pub_Estado";
-            this.columnEstado.HeaderText = "Estado";
-            this.columnEstado.Name = "columnEstado";
-            this.columnEstado.ReadOnly = true;
-            // 
             // FormEditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 454);
+            this.ClientSize = new System.Drawing.Size(881, 489);
             this.Controls.Add(this.groupBoxFiltrosBusqueda);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridViewPublicaciones);
@@ -252,8 +252,6 @@
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.btnBuscar);
-            this.MaximumSize = new System.Drawing.Size(715, 493);
-            this.MinimumSize = new System.Drawing.Size(715, 493);
             this.Name = "FormEditarPublicacion";
             this.Text = "Editar Publicación";
             this.Load += new System.EventHandler(this.FormEditarPublicacion_Load);
