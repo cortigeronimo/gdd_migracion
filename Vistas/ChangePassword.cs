@@ -19,18 +19,14 @@ namespace PalcoNet.Vistas
 
         RepoUsuario repoUsuario = new RepoUsuario();
         String password;
-        Boolean firstLogin = false;
+       
 
         public FormChangePassword()
         {
             InitializeComponent();
         }
 
-        public FormChangePassword(Boolean firstLogin)
-        {
-            InitializeComponent();
-            this.firstLogin = firstLogin;
-        }
+        
 
         private ValidatorData ValidateAllFields()
         {
@@ -52,7 +48,7 @@ namespace PalcoNet.Vistas
 
             try
             {
-                ChangePassword();
+                repoUsuario.ChangePassword(password);
                 MessageBox.Show("Contraseña actualizada.", "Message");
                 this.DialogResult = DialogResult.OK;
             }
@@ -62,15 +58,7 @@ namespace PalcoNet.Vistas
             }            
         }
 
-        private void ChangePassword()
-        {
-            if (firstLogin)
-                repoUsuario.ChangePasswordFirstLogin(password);            
-            else
-                repoUsuario.ChangePassword(password);                 
-        }
-
-
+        
 
         private Boolean CheckPasswords()
         {
