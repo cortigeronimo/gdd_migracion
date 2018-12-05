@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridViewPublicaciones = new System.Windows.Forms.DataGridView();
-            this.columnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnPublicar = new System.Windows.Forms.Button();
             this.btnFinalizar = new System.Windows.Forms.Button();
@@ -48,6 +39,15 @@
             this.groupBoxFiltrosBusqueda = new System.Windows.Forms.GroupBox();
             this.checkBoxEstado = new System.Windows.Forms.CheckBox();
             this.comboBoxEstado = new System.Windows.Forms.ComboBox();
+            this.columnCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnFechaInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnFechaEvento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnRubro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnGrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPublicaciones)).BeginInit();
             this.groupBoxFiltrosBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -73,69 +73,6 @@
             this.dataGridViewPublicaciones.ReadOnly = true;
             this.dataGridViewPublicaciones.Size = new System.Drawing.Size(644, 266);
             this.dataGridViewPublicaciones.TabIndex = 6;
-            // 
-            // columnCodigo
-            // 
-            this.columnCodigo.DataPropertyName = "Pub_Codigo";
-            this.columnCodigo.HeaderText = "Código";
-            this.columnCodigo.Name = "columnCodigo";
-            this.columnCodigo.ReadOnly = true;
-            // 
-            // columnFechaInicio
-            // 
-            this.columnFechaInicio.DataPropertyName = "Pub_Fecha_Inicio";
-            this.columnFechaInicio.HeaderText = "Fecha Inicio";
-            this.columnFechaInicio.Name = "columnFechaInicio";
-            this.columnFechaInicio.ReadOnly = true;
-            // 
-            // columnFechaEvento
-            // 
-            this.columnFechaEvento.DataPropertyName = "Pub_Fecha_Evento";
-            this.columnFechaEvento.HeaderText = "Fecha Evento";
-            this.columnFechaEvento.Name = "columnFechaEvento";
-            this.columnFechaEvento.ReadOnly = true;
-            // 
-            // columnDescripcion
-            // 
-            this.columnDescripcion.DataPropertyName = "Pub_Descripcion";
-            this.columnDescripcion.HeaderText = "Descripción";
-            this.columnDescripcion.Name = "columnDescripcion";
-            this.columnDescripcion.ReadOnly = true;
-            // 
-            // columnDireccion
-            // 
-            this.columnDireccion.DataPropertyName = "Pub_Direccion";
-            this.columnDireccion.HeaderText = "Dirección";
-            this.columnDireccion.Name = "columnDireccion";
-            this.columnDireccion.ReadOnly = true;
-            // 
-            // columnRubro
-            // 
-            this.columnRubro.DataPropertyName = "Pub_Rubro";
-            this.columnRubro.HeaderText = "Rubro";
-            this.columnRubro.Name = "columnRubro";
-            this.columnRubro.ReadOnly = true;
-            // 
-            // columnGrado
-            // 
-            this.columnGrado.DataPropertyName = "Pub_Grado";
-            this.columnGrado.HeaderText = "Grado";
-            this.columnGrado.Name = "columnGrado";
-            this.columnGrado.ReadOnly = true;
-            // 
-            // columnEmpresa
-            // 
-            this.columnEmpresa.DataPropertyName = "Pub_Empresa";
-            this.columnEmpresa.HeaderText = "ID Empresa";
-            this.columnEmpresa.Name = "columnEmpresa";
-            this.columnEmpresa.ReadOnly = true;
-            // 
-            // columnEstado
-            // 
-            this.columnEstado.DataPropertyName = "Pub_Estado";
-            this.columnEstado.HeaderText = "Estado";
-            this.columnEstado.Name = "columnEstado";
-            this.columnEstado.ReadOnly = true;
             // 
             // btnEditar
             // 
@@ -239,6 +176,70 @@
             this.comboBoxEstado.Size = new System.Drawing.Size(121, 21);
             this.comboBoxEstado.TabIndex = 2;
             // 
+            // columnCodigo
+            // 
+            this.columnCodigo.DataPropertyName = "Pub_Codigo";
+            this.columnCodigo.HeaderText = "Código";
+            this.columnCodigo.Name = "columnCodigo";
+            this.columnCodigo.ReadOnly = true;
+            // 
+            // columnFechaInicio
+            // 
+            this.columnFechaInicio.DataPropertyName = "Pub_Fecha_Inicio";
+            this.columnFechaInicio.HeaderText = "Fecha Inicio";
+            this.columnFechaInicio.Name = "columnFechaInicio";
+            this.columnFechaInicio.ReadOnly = true;
+            // 
+            // columnFechaEvento
+            // 
+            this.columnFechaEvento.DataPropertyName = "Pub_Fecha_Evento";
+            this.columnFechaEvento.HeaderText = "Fecha Evento";
+            this.columnFechaEvento.Name = "columnFechaEvento";
+            this.columnFechaEvento.ReadOnly = true;
+            // 
+            // columnDescripcion
+            // 
+            this.columnDescripcion.DataPropertyName = "Pub_Descripcion";
+            this.columnDescripcion.HeaderText = "Descripción";
+            this.columnDescripcion.Name = "columnDescripcion";
+            this.columnDescripcion.ReadOnly = true;
+            // 
+            // columnDireccion
+            // 
+            this.columnDireccion.DataPropertyName = "Pub_Direccion";
+            this.columnDireccion.HeaderText = "Dirección";
+            this.columnDireccion.Name = "columnDireccion";
+            this.columnDireccion.ReadOnly = true;
+            // 
+            // columnRubro
+            // 
+            this.columnRubro.DataPropertyName = "Pub_Rubro";
+            this.columnRubro.HeaderText = "Rubro";
+            this.columnRubro.Name = "columnRubro";
+            this.columnRubro.ReadOnly = true;
+            // 
+            // columnGrado
+            // 
+            this.columnGrado.DataPropertyName = "Pub_Grado";
+            this.columnGrado.HeaderText = "Grado";
+            this.columnGrado.Name = "columnGrado";
+            this.columnGrado.ReadOnly = true;
+            // 
+            // columnEmpresa
+            // 
+            this.columnEmpresa.DataPropertyName = "Pub_Empresa";
+            this.columnEmpresa.HeaderText = "ID Empresa";
+            this.columnEmpresa.Name = "columnEmpresa";
+            this.columnEmpresa.ReadOnly = true;
+            this.columnEmpresa.Visible = false;
+            // 
+            // columnEstado
+            // 
+            this.columnEstado.DataPropertyName = "Pub_Estado";
+            this.columnEstado.HeaderText = "Estado";
+            this.columnEstado.Name = "columnEstado";
+            this.columnEstado.ReadOnly = true;
+            // 
             // FormEditarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,6 +274,10 @@
         private System.Windows.Forms.Button btnPublicar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.DataGridView dataGridViewPublicaciones;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBoxFiltrosBusqueda;
+        private System.Windows.Forms.ComboBox comboBoxEstado;
+        private System.Windows.Forms.CheckBox checkBoxEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaEvento;
@@ -282,9 +287,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEstado;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBoxFiltrosBusqueda;
-        private System.Windows.Forms.ComboBox comboBoxEstado;
-        private System.Windows.Forms.CheckBox checkBoxEstado;
     }
 }
