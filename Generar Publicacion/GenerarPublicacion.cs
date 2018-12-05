@@ -24,7 +24,7 @@ namespace PalcoNet.Generar_Publicacion
         RepoEstado repoEstado = new RepoEstado();
         RepoPublicacion repoPublicacion = new RepoPublicacion();
  
-        //Lista de publicaciones para varias fechas
+        //Lista de publicaciones para varias fechas (mismo espectaculo)
         List<Publicacion> publicacionesList = new List<Publicacion>();
 
         Publicacion publicacion = new Publicacion();
@@ -170,6 +170,7 @@ namespace PalcoNet.Generar_Publicacion
         }
 
 
+        //Verifica si existen publicaciones del mismo nombre y con la misma fecha de evento (Para una publicación)
         private Boolean ExistsPublicacionMismaHora(decimal publicacionCodigo, String descripcionPublicacion, DateTime fechaHoraEvento)
         {
             if (repoPublicacion.ExistsPublicacionMismaHora(publicacionCodigo, descripcionPublicacion, fechaHoraEvento))
@@ -183,6 +184,7 @@ namespace PalcoNet.Generar_Publicacion
             }
         }
 
+        //Verifica si existen publicaciones del mismo nombre y con las mismas fechas de evento ingresadas (Para una publicación con varias fechas)
         private Boolean ExistsPublicacionMismaHora(List<Publicacion> publicaciones)
         {
             int countPublicacionesMismaFechaHora = 0;
@@ -208,6 +210,7 @@ namespace PalcoNet.Generar_Publicacion
         }
 
 
+        //Agrega varias fechas a un mismo evento
         private void btnProgramarFechas_Click(object sender, EventArgs e)
         {
             using (FormAgregarFechas form = new FormAgregarFechas(this.publicacionesList))
@@ -220,7 +223,7 @@ namespace PalcoNet.Generar_Publicacion
             }
         }
 
-
+        //Agerga ubicaciones disponibles para el evento (Stock)
         private void btnAgregarUbicaciones_Click(object sender, EventArgs e)
         {
             using (FormAgregarUbicaciones form = new FormAgregarUbicaciones(publicacion.Ubicaciones))
@@ -235,7 +238,7 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
-
+        //Cargar datos para lista publicaciones del mismo espectaculo con varias fechas
         private void LoadDataForPublicacionesList()
         {
             foreach (Publicacion p in publicacionesList)
@@ -262,6 +265,7 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
+        //Cargar datos de una publicación
         private void LoadData(Publicacion publicacion)
         {
             if (!checkBoxVariasFechas.Checked)
@@ -304,7 +308,7 @@ namespace PalcoNet.Generar_Publicacion
             
         }
 
-
+        //Validaciones
         private Boolean FormDataOK()
         {
             int errorCount = 0;

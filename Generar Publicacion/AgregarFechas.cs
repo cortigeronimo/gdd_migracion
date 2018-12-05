@@ -44,6 +44,7 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
+        //Agregar fecha al datagrid
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (CheckDatesOK())
@@ -77,6 +78,7 @@ namespace PalcoNet.Generar_Publicacion
 
         private void dataGridViewFechas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //Elimina una fecha cargada al datagrid
             if (e.ColumnIndex == dataGridViewFechas.Columns.IndexOf(this.columnEliminar))
             {             
                 try
@@ -99,7 +101,7 @@ namespace PalcoNet.Generar_Publicacion
                 }
 
 
-                //Setear el ultimo par de fechas de la lista para compararlos con el proximo ingreso
+                //Setear la ultima fecha de la lista para compararla con el proximo ingreso
                 int lastIndex = publicacionList.Count - 1;
 
                 if (lastIndex == -1)
@@ -111,6 +113,7 @@ namespace PalcoNet.Generar_Publicacion
             
             
         }
+
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {

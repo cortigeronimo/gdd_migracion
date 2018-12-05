@@ -23,6 +23,7 @@ namespace PalcoNet.Generar_Publicacion
         public FormGenerarPublicacion form;
         
 
+        //Recibe como parámetro las ubicaciones del espectáculo a editar
         public FormAgregarUbicaciones(List<Ubicacion> _ubicaciones)
         {
             InitializeComponent();
@@ -93,6 +94,7 @@ namespace PalcoNet.Generar_Publicacion
             return errorCount == 0;
         }
 
+        //Verifica las filas y asientos ingresados
         private Boolean NoRepeatedUbication()
         {           
             Char fila = Convert.ToChar(comboBoxFila.SelectedItem);
@@ -139,6 +141,7 @@ namespace PalcoNet.Generar_Publicacion
         }
 
 
+        //Cargar la lista con datos del datagrid
         private void FromDataGridToList()
         {
             Ubicaciones = new List<Ubicacion>();
