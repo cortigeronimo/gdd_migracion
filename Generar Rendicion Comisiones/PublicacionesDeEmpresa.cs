@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.DTO;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
-    public partial class PublicacionesDeEmpresa : Form
+    public partial class PublicacionesDeEmpresa : CustomForm
     {
         Empresa empresa = new Empresa();
 

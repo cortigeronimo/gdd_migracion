@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
 using PalcoNet.Utils;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
-    public partial class ComprasDePublicacionAFacturar : Form
+    public partial class ComprasDePublicacionAFacturar : CustomForm
     {
         RepoPublicacion repoPublicacion = new RepoPublicacion();
 

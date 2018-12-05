@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.DTO;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Generar_Rendicion_Comisiones
 {
-    public partial class SelectEmpresa : Form
+    public partial class SelectEmpresa : CustomForm
     {
         private RepoEmpresa repoEmpresa = new RepoEmpresa();
 

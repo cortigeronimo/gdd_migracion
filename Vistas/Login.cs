@@ -51,14 +51,14 @@ namespace PalcoNet
 
                 if (user.CountRoles() > 1)
                 {
-                    FormManager.GetInstance().OpenAndClose(new RolSelector(user.GetRoles()), this);
+                    this.OpenAndClose(new RolSelector(user.GetRoles()));
                 }
                 else
                 {
                     Rol rol = new Rol();
                     TakeRolFromUser(rol);
                     UserSession.RolId = rol.id;
-                    FormManager.GetInstance().OpenAndClose(new HomeMenu(), this);
+                    this.OpenAndClose(new HomeMenu());
                 }
             }
             else
@@ -153,7 +153,7 @@ namespace PalcoNet
 
         private void lblRegistroUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormManager.GetInstance().Open(new CreateUsuario());
+            this.Open(new CreateUsuario());
         }
 
     }

@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Abm_Rol
 {
-    public partial class ModificarRol : Form
+    public partial class ModificarRol : CustomForm
     {
         Rol rolNoModificado;
         Rol rol;

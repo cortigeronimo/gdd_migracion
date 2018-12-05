@@ -10,10 +10,11 @@ using System.Windows.Forms;
 using PalcoNet.Modelo;
 using PalcoNet.Repositorios;
 using PalcoNet.Utils;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Abm_Rol
 {
-    public partial class AltaRol : Form
+    public partial class AltaRol : CustomForm
     {
         Rol rol = new Rol();
         RepoRol repoRol = new RepoRol();

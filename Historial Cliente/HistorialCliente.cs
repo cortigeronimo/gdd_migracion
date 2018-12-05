@@ -11,10 +11,11 @@ using PalcoNet.Utils;
 using PalcoNet.Repositorios;
 using PalcoNet.Modelo;
 using PalcoNet.Config;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Historial_Cliente
 {
-    public partial class HistorialCliente : Form
+    public partial class HistorialCliente : CustomForm
     {
         private Page<DetalleCompra> page;
         private const int sizePage = 10;

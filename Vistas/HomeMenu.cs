@@ -44,11 +44,13 @@ namespace PalcoNet.Vistas
             
         }
 
+        /*
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
             Application.Exit();
         }
+        */
 
         //Verifica si es el primer login de un usuario
         private Boolean FirstLogin()
@@ -216,49 +218,49 @@ namespace PalcoNet.Vistas
         //Eventos para el menu de ABM Grado
         private void crearGrado_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new CreateGrado());
+            this.Open(new CreateGrado());
         }
 
         private void listarGrados_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new ListGrado());
+            this.Open(new ListGrado());
         }
 
 
         //Eventos para el menu de ABM Empresa
         private void crearEmpresa_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new CreateOrUpdateEmpresa());
+            this.Open(new CreateOrUpdateEmpresa());
         }
 
         private void listarEmpresas_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new ListadoEmpresa());
+            this.Open(new ListadoEmpresa());
         }
 
 
         //Eventos para el menu de ABM Cliente
         private void crearCliente_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new CreateOrUpdateCliente());       
+            this.Open(new CreateOrUpdateCliente());       
         }
 
         private void listarClientes_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new ListCliente());
+            this.Open(new ListCliente());
         }
 
 
         //Eventos para el menu de ABM Rol
         private void crearRol_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new AltaRol());
+            this.Open(new AltaRol());
         }
 
         private void listarRoles_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new ListadoRol());
+            this.Open(new ListadoRol());
         }
        
 
@@ -266,7 +268,7 @@ namespace PalcoNet.Vistas
         private void generarPublicacion_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new FormGenerarPublicacion());
+            this.Open(new FormGenerarPublicacion());
         }
 
 
@@ -274,7 +276,7 @@ namespace PalcoNet.Vistas
         private void editarPublicacion_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new FormEditarPublicacion());
+            this.Open(new FormEditarPublicacion());
         }
 
 
@@ -282,7 +284,7 @@ namespace PalcoNet.Vistas
         private void comprar_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new FormComprar());
+            this.Open(new FormComprar());
         }
 
 
@@ -290,34 +292,34 @@ namespace PalcoNet.Vistas
         private void historialCliente_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new HistorialCliente());
+            this.Open(new HistorialCliente());
         }
 
        
         //Evento click para "generar comisiones"
         private void generarPagosComisiones_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new SelectEmpresa());
+            this.Open(new SelectEmpresa());
         }
 
 
         //Evento click para "listado estadistico"
         private void listadoEstadistico_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().Open(new ListadoEstadistico());
+            this.Open(new ListadoEstadistico());
         }
 
         //Eventos click para "canje administracion de puntos"
         private void verPremios_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new ViewPremios());
+            this.Open(new ViewPremios());
         }
 
         private void canjearPuntos_Click(object sender, EventArgs e)
         {
             if (UserIsAdmin()) return;
-            FormManager.GetInstance().Open(new CanjeForm());
+            this.Open(new CanjeForm());
         }
 
 
@@ -335,7 +337,7 @@ namespace PalcoNet.Vistas
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormManager.GetInstance().OpenAndClose(new Login(), this);
+            this.OpenAndClose(new Login());
         }
 
         private Boolean UserIsAdmin()

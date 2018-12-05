@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PalcoNet.Repositorios;
 using PalcoNet.Config;
+using PalcoNet.Vistas;
 
 namespace PalcoNet.Canje_Puntos
 {
-    public partial class ViewPremios : Form
+    public partial class ViewPremios : CustomForm
     {
         RepoPremio repoPremio = new RepoPremio();
 
