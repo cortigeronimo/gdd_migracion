@@ -59,14 +59,7 @@ namespace PalcoNet.Registro_de_Usuario
 
         //El admin crea una empresa
         public CreateOrUpdateEmpresa() {
-            //InitializeComponent();
-            //this.checkBoxBaja.Visible = false;
-            //Rol rol = repoRol.FindRolByName(RepoRol.ROL_CLIENTE);
-            //Usuario usuario = new Usuario();
-            //usuario.AddRol(rol);
-            //usuario.isAdmin = false;
-            //usuario.isClient = true;
-
+            
             InitializeComponent();
             this.checkBoxBaja.Visible = false;
             Rol rol = repoRol.FindRolByName(RepoRol.ROL_EMPRESA);
@@ -127,7 +120,6 @@ namespace PalcoNet.Registro_de_Usuario
             empresa.email = txtEmail.Text;
             empresa.telefono = (long)Convert.ToInt64(txtTelefono.Text);
             empresa.direccion = txtDireccion.Text;
-            //empresa.nroPiso = Convert.ToDecimal(txtNumeroPiso.Text);  //error aca!!!!
             if (String.IsNullOrEmpty(txtNumeroPiso.Text)) empresa.nroPiso = null; else empresa.nroPiso = Convert.ToDecimal(txtNumeroPiso.Text);  
             empresa.ciudad = txtCiudad.Text;
             empresa.depto = txtDepartamento.Text;
@@ -143,10 +135,19 @@ namespace PalcoNet.Registro_de_Usuario
             else {
                 if(String.IsNullOrEmpty(empresa.username)){
                     empresa.username = "EMPRESA" + empresa.cuit.Replace("-","");
+                    String generatedPassword = empresa.cuit.Replace("-","");
                     empresa.SetPassword(empresa.cuit.Replace("-",""));
+                    repoEmpresa.InsertEmpresa(empresa);
+
+                    MessageBox.Show(Messages.OPERACION_EXITOSA);
+                    MessageBox.Show("Los datos autogenerados del login son:\nUsername: "+empresa.username+"\nPassword: "+generatedPassword, "Message");
                 }
-                repoEmpresa.InsertEmpresa(empresa);
-                MessageBox.Show(Messages.OPERACION_EXITOSA);
+                else
+                {
+                    repoEmpresa.InsertEmpresa(empresa);
+                    MessageBox.Show(Messages.OPERACION_EXITOSA);
+                }
+                            
             }
             
         }

@@ -1183,6 +1183,7 @@ AS
 SELECT Compra_Fecha, Ubicacion_Precio, Compra_Metodo_Pago, Ubicacion_Descripcion, Ubicacion_Fila, Ubicacion_Asiento, (SELECT Pub_Fecha_Evento FROM PLEASE_HELP.Publicacion WHERE Pub_Codigo = Ubicacion_Publicacion) AS Compra_Fecha_Evento, (SELECT Pub_Descripcion FROM PLEASE_HELP.Publicacion WHERE Pub_Codigo = Ubicacion_Publicacion) AS Compra_Publicacion_Descripcion
 FROM PLEASE_HELP.Compra INNER JOIN PLEASE_HELP.Ubicacion ON Compra_Publicacion = Ubicacion_Publicacion AND Compra_Fila = Ubicacion_Fila AND Compra_Asiento = Ubicacion_Asiento
 WHERE Compra_Cliente = @idUser
+ORDER BY Compra_Fecha DESC
 GO
 	
 
