@@ -34,6 +34,9 @@ namespace PalcoNet.Vistas
             this.menúToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarContraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStripHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,11 +82,43 @@ namespace PalcoNet.Vistas
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar sesión";
             this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 106);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(447, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Bienvenido a PalcoNet, aplicaciòn destinada a la compra y publicación de espectác" +
+    "ulos para";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(28, 123);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(444, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "las empresas. Click en Menú para poder ver las funcionalidades del sistema acorde" +
+    "  a su rol. ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 140);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Que tenga buen día.";
+            // 
             // HomeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 216);
+            this.ClientSize = new System.Drawing.Size(532, 231);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPalcoNet);
             this.Controls.Add(this.menuStripHome);
             this.Name = "HomeMenu";
@@ -103,6 +138,9 @@ namespace PalcoNet.Vistas
         private System.Windows.Forms.ToolStripMenuItem menúToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
 
         
 
