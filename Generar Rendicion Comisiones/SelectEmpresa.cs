@@ -30,7 +30,7 @@ namespace PalcoNet.Generar_Rendicion_Comisiones
 
             if (empresaPorFacturar.CantidadPublicaciones == 0)
             {
-                MessageBox.Show("La Empresa elegida, no tiene publicaciones en estado FINALIZADA.");
+                MessageBox.Show("La Empresa elegida, no tiene publicaciones con compras sin rendir.");
                 return;
             }
 
