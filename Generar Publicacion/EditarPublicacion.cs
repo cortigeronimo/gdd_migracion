@@ -45,11 +45,14 @@ namespace PalcoNet.Generar_Publicacion
             comboBoxEstado.SelectedValue = 0;
         }
 
+        //Buscar publicación por filtro
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             dataGridViewPublicaciones.DataSource = repoPublicacion.GetPublicacionesToEditForm(txtDescripcion.Text, Convert.ToInt32(comboBoxEstado.SelectedValue));
         }
 
+
+        //Dar por finalizada una publicación
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("¿Desea dar por finalizada la publicación?", "Finalizar Publicación", MessageBoxButtons.YesNo);
@@ -69,8 +72,10 @@ namespace PalcoNet.Generar_Publicacion
             }
         }
 
+        //Publicar un espectáculo
         private void btnPublicar_Click(object sender, EventArgs e)
         {
+            //Verifica que la fecha de evento sea anterior a la fecha actual
             if (publicacionToEdit.FechaEvento <= SystemDate.GetDate())
             {
                 MessageBox.Show("La Fecha del Evento a publicar es anterior a la fecha actual.", "Error");
@@ -95,7 +100,7 @@ namespace PalcoNet.Generar_Publicacion
             }
         }
 
-
+        //Abre el form para editar la publicación seleccionada
         private void btnEditar_Click(object sender, EventArgs e)
         {
             LoadUbicaciones();
@@ -125,6 +130,8 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
+
+        //Botonera dinámica, activa y desactiva botones segun el estado del espectáculo
         private void OnSelectionChanged(object sender, EventArgs e)
         {           
             if (this.dataGridViewPublicaciones.SelectedRows.Count == 1)
@@ -161,6 +168,7 @@ namespace PalcoNet.Generar_Publicacion
 
         }
 
+        //Cargar las ubicaciones del espectáculo seleccionado
         private void LoadUbicaciones()
         {
             List<Ubicacion> filteredUbicaciones = new List<Ubicacion>();
@@ -173,6 +181,8 @@ namespace PalcoNet.Generar_Publicacion
 
             publicacionToEdit.Ubicaciones = filteredUbicaciones;
         }
+
+
 
         private Publicacion BuildPublicacion(DataGridViewRow row)
         {

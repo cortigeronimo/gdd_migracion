@@ -193,7 +193,6 @@ create table PLEASE_HELP.Usuario
 (
 	Usuario_Id int identity(1,1), 
 	Usuario_Username nvarchar(50) NOT NULL, 
-	--Usuario_Password nvarchar(100),
 	Usuario_Password varbinary(255),
 	CONSTRAINT UQ_USUARIO_USERNAME UNIQUE (Usuario_Username),
 	CONSTRAINT PK_USUARIO_ID PRIMARY KEY (Usuario_Id)
@@ -298,7 +297,6 @@ create table PLEASE_HELP.Ubicacion
 
 create table PLEASE_HELP.Compra
 (
---	Compra_Id int,
 	Compra_Id int identity(1,1),
 	Compra_Cliente int,
 	Compra_Cantidad numeric(18,0) NOT NULL,
@@ -323,7 +321,6 @@ create table PLEASE_HELP.Factura
 
 create table PLEASE_HELP.Item
 (
---	Item_Id int,
 	Item_Id int identity(1,1),
 	Item_Monto numeric(18,2) NOT NULL,
 	Item_Cantidad numeric(18,0) NOT NULL,
@@ -665,6 +662,7 @@ VALUES ('Heladera', 30000),
 ('Cenicero', 70)
 
 GO
+
 
 
 -----------------------------------------STORED PROCEDURES-------------------------------------------------------------------------------------------------

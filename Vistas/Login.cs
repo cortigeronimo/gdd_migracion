@@ -75,24 +75,28 @@ namespace PalcoNet
             user.SetPassword(txtPassword.Text);
             user.isAdmin = false;
 
+            //Verifica si existe el username ingresado en el login
             if (!repo.ExistsUser(user))
             {
                 MessageBox.Show("Usuario Inexistente.", "Error");
                 return false;
             }
 
+            //Verifica si el username ingresado tiene roles asignados
             if (repo.GetRolesUsuario(user).Count == 0)
             {
                 MessageBox.Show("No tiene roles asignados para ingresar al sistema.\nContáctese con el ADMINISTRADOR.", "Error");
                 return false;
             }
 
+            //Verifica si el user está habilitado para ingresar al sistema
             if (!repo.EnabledUser(user))
             {
                 MessageBox.Show("Usuario Inhabilitado.", "Error");
                 return false;
             }
 
+            //Verifica el password ingresado, y agrega intentos fallidos ante un ingreso incorrecto por parte de un user no admin
             if (repo.ValidPassword(user))
             {
                 if (!user.isAdmin)

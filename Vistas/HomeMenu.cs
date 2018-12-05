@@ -50,12 +50,14 @@ namespace PalcoNet.Vistas
             Application.Exit();
         }
 
+        //Verifica si es el primer login de un usuario
         private Boolean FirstLogin()
         {
             return repoUsuario.FirstLogin(UserSession.UserId, UserSession.RolId);
         }
 
 
+        //Se cargan al menu las funcionalidades del rol. Y si es el primer login, se solicita el cambio de la contraseña
         private void HomeMenu_Load(object sender, EventArgs e)
         {
             LoadFuncionalidades();
