@@ -126,6 +126,7 @@ namespace PalcoNet.Generar_Publicacion
                 if (ExistsPublicacionMismaHora(publicacionesList))
                 {
                     MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                     return;
                 }
 
@@ -148,6 +149,7 @@ namespace PalcoNet.Generar_Publicacion
                 if (ExistsPublicacionMismaHora(publicacion.Codigo, publicacion.Descripcion, publicacion.FechaEvento))
                 {
                     MessageBox.Show(errorMessage, "Error");
+                    errorMessage = String.Empty;
                     return;
                 }
 
@@ -196,7 +198,7 @@ namespace PalcoNet.Generar_Publicacion
 
             if (countPublicacionesMismaFechaHora != 0)
             {
-                errorMessage = "Ya existen Espectáculos del mismo Nombre en la/s siguientes Fechas de Evento ingresadas: \n" + repeatDates;
+                errorMessage = "Ya existen Espectáculos del mismo Nombre en la/s siguiente/s Fecha/s de Evento ingresada/s: \n" + repeatDates;
                 return true;
             }
             else

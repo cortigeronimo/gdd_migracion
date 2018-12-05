@@ -71,7 +71,7 @@
             this.dataGridViewPublicaciones.MultiSelect = false;
             this.dataGridViewPublicaciones.Name = "dataGridViewPublicaciones";
             this.dataGridViewPublicaciones.ReadOnly = true;
-            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(644, 266);
+            this.dataGridViewPublicaciones.Size = new System.Drawing.Size(843, 299);
             this.dataGridViewPublicaciones.TabIndex = 6;
             // 
             // columnCodigo
@@ -129,6 +129,7 @@
             this.columnEmpresa.HeaderText = "ID Empresa";
             this.columnEmpresa.Name = "columnEmpresa";
             this.columnEmpresa.ReadOnly = true;
+            this.columnEmpresa.Visible = false;
             // 
             // columnEstado
             // 
@@ -140,7 +141,7 @@
             // btnEditar
             // 
             this.btnEditar.Enabled = false;
-            this.btnEditar.Location = new System.Drawing.Point(514, 419);
+            this.btnEditar.Location = new System.Drawing.Point(713, 454);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(75, 23);
             this.btnEditar.TabIndex = 5;
@@ -151,7 +152,7 @@
             // btnPublicar
             // 
             this.btnPublicar.Enabled = false;
-            this.btnPublicar.Location = new System.Drawing.Point(433, 419);
+            this.btnPublicar.Location = new System.Drawing.Point(632, 454);
             this.btnPublicar.Name = "btnPublicar";
             this.btnPublicar.Size = new System.Drawing.Size(75, 23);
             this.btnPublicar.TabIndex = 4;
@@ -162,7 +163,7 @@
             // btnFinalizar
             // 
             this.btnFinalizar.Enabled = false;
-            this.btnFinalizar.Location = new System.Drawing.Point(595, 419);
+            this.btnFinalizar.Location = new System.Drawing.Point(794, 454);
             this.btnFinalizar.Name = "btnFinalizar";
             this.btnFinalizar.Size = new System.Drawing.Size(75, 23);
             this.btnFinalizar.TabIndex = 3;
@@ -172,7 +173,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(551, 75);
+            this.btnBuscar.Location = new System.Drawing.Point(612, 75);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(119, 23);
             this.btnBuscar.TabIndex = 2;
@@ -243,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 454);
+            this.ClientSize = new System.Drawing.Size(881, 489);
             this.Controls.Add(this.groupBoxFiltrosBusqueda);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridViewPublicaciones);
@@ -251,8 +252,6 @@
             this.Controls.Add(this.btnPublicar);
             this.Controls.Add(this.btnFinalizar);
             this.Controls.Add(this.btnBuscar);
-            this.MaximumSize = new System.Drawing.Size(715, 493);
-            this.MinimumSize = new System.Drawing.Size(715, 493);
             this.Name = "FormEditarPublicacion";
             this.Text = "Editar Publicación";
             this.Load += new System.EventHandler(this.FormEditarPublicacion_Load);
@@ -273,6 +272,10 @@
         private System.Windows.Forms.Button btnPublicar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.DataGridView dataGridViewPublicaciones;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBoxFiltrosBusqueda;
+        private System.Windows.Forms.ComboBox comboBoxEstado;
+        private System.Windows.Forms.CheckBox checkBoxEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnFechaEvento;
@@ -282,9 +285,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnGrado;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEmpresa;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnEstado;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBoxFiltrosBusqueda;
-        private System.Windows.Forms.ComboBox comboBoxEstado;
-        private System.Windows.Forms.CheckBox checkBoxEstado;
     }
 }
