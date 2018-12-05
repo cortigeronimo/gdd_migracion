@@ -66,7 +66,7 @@ namespace PalcoNet.Vistas
 
             if (FirstLogin())
             {
-                using (FormChangePassword form = new FormChangePassword(true))
+                using (FormChangePassword form = new FormChangePassword())
                 {
                     DialogResult result = form.ShowDialog();
                     if (result == DialogResult.OK)
@@ -80,7 +80,6 @@ namespace PalcoNet.Vistas
                 }
             }
             
-
         }
 
 

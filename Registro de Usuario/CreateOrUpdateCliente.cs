@@ -29,8 +29,7 @@ namespace PalcoNet.Registro_de_Usuario
             checkBoxBaja.Visible = false;
             cliente = new Cliente(usuario);
             cliente.id = 0;
-            cliente.primerLogin = false;
-            cliente.fechaCreacion = SystemDate.GetDate();   
+            cliente.primerLogin = false;  
             clienteStrategy = new ClienteSignUp();
             this.Text = "Registrar Cliente";
             this.groupBoxCliente.Text = "Registro Cliente";
@@ -106,7 +105,7 @@ namespace PalcoNet.Registro_de_Usuario
             ReadAllTextBox(cliente);
             clienteStrategy.BuildCliente(cliente);
             clienteStrategy.Execute(repoCliente, cliente);
-            
+            this.Close();
         }
 
         private ValidatorData ValidateFields()

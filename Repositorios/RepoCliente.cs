@@ -29,12 +29,12 @@ namespace PalcoNet.Repositorios
             command.Parameters.AddWithValue("@telefono", cliente.telefono);
             command.Parameters.AddWithValue("@localidad", cliente.localidad);
             command.Parameters.AddWithValue("@direccion", cliente.direccion);
-            if (cliente.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);
-            
+            if (cliente.nroPiso == null) command.Parameters.AddWithValue("@nropiso", DBNull.Value); else command.Parameters.AddWithValue("@nropiso", cliente.nroPiso);        
             command.Parameters.AddWithValue("@depto", cliente.depto);
             command.Parameters.AddWithValue("@codpostal", cliente.codigoPostal);
             command.Parameters.AddWithValue("@fechanac", cliente.fechaNacimiento);
-            if (cliente.fechaCreacion == SystemDate.GetDate()) command.Parameters.AddWithValue("@fechacreacion", cliente.fechaCreacion);
+            
+            command.Parameters.AddWithValue("@fechacreacion", SystemDate.GetDate());
             if (String.IsNullOrEmpty(cliente.tarjetaCredito)) command.Parameters.AddWithValue("@tarjetacredito", DBNull.Value); else command.Parameters.AddWithValue("@tarjetacredito", cliente.tarjetaCredito);
             command.Parameters.AddWithValue("@firstLogin", cliente.primerLogin);            
             command.Parameters.AddWithValue("@username", cliente.username);
@@ -131,7 +131,7 @@ namespace PalcoNet.Repositorios
             if (String.IsNullOrEmpty(cliente.depto)) cmd.Parameters.AddWithValue("@depto", DBNull.Value); else cmd.Parameters.AddWithValue("@depto", cliente.depto);
             if (String.IsNullOrEmpty(cliente.codigoPostal)) cmd.Parameters.AddWithValue("@codPostal", DBNull.Value); else cmd.Parameters.AddWithValue("@codPostal", cliente.codigoPostal);
             cmd.Parameters.AddWithValue("@fechaNac", cliente.fechaNacimiento);
-            //cmd.Parameters.AddWithValue("@fechaCreacion", cliente.fechaCreacion);
+            
             cmd.Parameters.AddWithValue("@baja", cliente.baja);
             cmd.Parameters.AddWithValue("@idUsuario", cliente.id);
 

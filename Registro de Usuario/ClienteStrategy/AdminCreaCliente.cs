@@ -1,8 +1,12 @@
-﻿using System;
+﻿using PalcoNet.Modelo;
+using PalcoNet.Repositorios;
+using PalcoNet.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
 {
@@ -12,7 +16,22 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
         {
             base.BuildCliente(cliente);
             cliente.username = "USUARIO" + cliente.nroDocumento;
-            cliente.SetPassword(cliente.cuil.ToString());
+            cliente.SetPassword(cliente.nroDocumento.ToString());          
+        }
+
+        public override void Execute(RepoCliente repoCliente, Cliente cliente)
+        {
+            try
+            {
+                repoCliente.InsertCliente(cliente);
+                MessageBox.Show(Messages.OPERACION_EXITOSA);
+                MessageBox.Show("Los datos autogenerados del login son:\nUsername: " + cliente.username + "\nPassword: " + cliente.nroDocumento.ToString(), "Message");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Messages.ERROR_INESPERADO);
+            }
+
         }
     }
 }
