@@ -118,7 +118,7 @@ namespace PalcoNet.Generar_Publicacion
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Close();
+            this.CloseThis();
         }
 
 

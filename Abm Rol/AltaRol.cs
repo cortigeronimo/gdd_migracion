@@ -86,7 +86,7 @@ namespace PalcoNet.Abm_Rol
                 MessageBox.Show(Messages.ERROR_INESPERADO);
             }
             
-            this.Close();
+            this.CloseThis();
         }
 
         private void CargarListFuncionalidades()

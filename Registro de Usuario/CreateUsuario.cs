@@ -33,7 +33,7 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void AltaUsuario_Load(object sender, EventArgs e)
         {
-            roles = repoRol.FindClienteAndEmpresaRolOnlyEnableEnable();
+            roles = repoRol.FindAllRolesOnlyEnable();
             int i = 0;
             foreach(Rol rol in roles){
                 comboBoxRol.Items.Insert(i, rol.nombre);
@@ -68,11 +68,19 @@ namespace PalcoNet.Registro_de_Usuario
             
             if(rol.nombre.Equals("CLIENTE")){
                 formToRedirect = new CreateOrUpdateCliente(usuario);
+                this.OpenAndClose(formToRedirect);
             }
-            else{
+            else if (rol.nombre.Equals("EMPRESA"))
+            {
                 formToRedirect = new CreateOrUpdateEmpresa(usuario);
+                this.OpenAndClose(formToRedirect);
             }
-            this.OpenAndClose(formToRedirect);
+            else
+            {
+                MessageBox.Show("Usuario creado.");
+                this.CloseThis();
+            }
+            
         }
 
     }

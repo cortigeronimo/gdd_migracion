@@ -80,7 +80,7 @@ namespace PalcoNet.Generar_Publicacion
         private void btnConfirmarSeleccion_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
-            this.Close();
+            this.CloseThis();
             
         }
 

@@ -78,7 +78,7 @@ namespace PalcoNet.Abm_Rol
             new RepoRol().UpdateRol(rol);
             this.DialogResult = DialogResult.OK;
             MessageBox.Show("Rol Modificado");
-            this.Close();
+            this.CloseThis();
         }
 
         private void comboBoxHabilitado_SelectedIndexChanged(object sender, EventArgs e)
