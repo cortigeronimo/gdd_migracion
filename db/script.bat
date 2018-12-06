@@ -1,1 +1,0 @@
-sqlcmd -S localhost\SQLSERVER2012 -U gdEspectaculos2018 -P gd2018 -i Estructura_Esquema_Tablas.sql -a 32767

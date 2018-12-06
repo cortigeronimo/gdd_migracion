@@ -32,6 +32,8 @@
             this.lblIndicacion = new System.Windows.Forms.Label();
             this.lblEmpresa = new System.Windows.Forms.Label();
             this.dataGridPublicacionesPorFacturar = new System.Windows.Forms.DataGridView();
+            this.publicacionPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.codigoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaInicioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaEventoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,9 +42,9 @@
             this.rubroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gradoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comisionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidadComprasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.montoTotalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnFacturar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.publicacionPorFacturarDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnActualizar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPublicacionesPorFacturar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.publicacionPorFacturarDTOBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +83,8 @@
             this.rubroDataGridViewTextBoxColumn,
             this.gradoDataGridViewTextBoxColumn,
             this.comisionDataGridViewTextBoxColumn,
+            this.cantidadComprasDataGridViewTextBoxColumn,
+            this.montoTotalDataGridViewTextBoxColumn,
             this.columnFacturar});
             this.dataGridPublicacionesPorFacturar.DataSource = this.publicacionPorFacturarDTOBindingSource;
             this.dataGridPublicacionesPorFacturar.Location = new System.Drawing.Point(20, 81);
@@ -89,6 +93,20 @@
             this.dataGridPublicacionesPorFacturar.Size = new System.Drawing.Size(858, 273);
             this.dataGridPublicacionesPorFacturar.TabIndex = 2;
             this.dataGridPublicacionesPorFacturar.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // publicacionPorFacturarDTOBindingSource
+            // 
+            this.publicacionPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionPorFacturarDTO);
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(803, 360);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
+            this.btnActualizar.TabIndex = 3;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // codigoDataGridViewTextBoxColumn
             // 
@@ -146,6 +164,20 @@
             this.comisionDataGridViewTextBoxColumn.Name = "comisionDataGridViewTextBoxColumn";
             this.comisionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // cantidadComprasDataGridViewTextBoxColumn
+            // 
+            this.cantidadComprasDataGridViewTextBoxColumn.DataPropertyName = "CantidadCompras";
+            this.cantidadComprasDataGridViewTextBoxColumn.HeaderText = "CantidadCompras";
+            this.cantidadComprasDataGridViewTextBoxColumn.Name = "cantidadComprasDataGridViewTextBoxColumn";
+            this.cantidadComprasDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // montoTotalDataGridViewTextBoxColumn
+            // 
+            this.montoTotalDataGridViewTextBoxColumn.DataPropertyName = "MontoTotal";
+            this.montoTotalDataGridViewTextBoxColumn.HeaderText = "MontoTotal";
+            this.montoTotalDataGridViewTextBoxColumn.Name = "montoTotalDataGridViewTextBoxColumn";
+            this.montoTotalDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // columnFacturar
             // 
             this.columnFacturar.HeaderText = "Facturar";
@@ -154,20 +186,6 @@
             this.columnFacturar.ReadOnly = true;
             this.columnFacturar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.columnFacturar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // publicacionPorFacturarDTOBindingSource
-            // 
-            this.publicacionPorFacturarDTOBindingSource.DataSource = typeof(PalcoNet.DTO.PublicacionPorFacturarDTO);
-            // 
-            // btnActualizar
-            // 
-            this.btnActualizar.Location = new System.Drawing.Point(803, 360);
-            this.btnActualizar.Name = "btnActualizar";
-            this.btnActualizar.Size = new System.Drawing.Size(75, 23);
-            this.btnActualizar.TabIndex = 3;
-            this.btnActualizar.Text = "Actualizar";
-            this.btnActualizar.UseVisualStyleBackColor = true;
-            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // PublicacionesDeEmpresa
             // 
@@ -202,6 +220,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rubroDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gradoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn comisionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidadComprasDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn montoTotalDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewImageColumn columnFacturar;
     }
 }
