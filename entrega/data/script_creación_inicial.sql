@@ -874,7 +874,42 @@ BEGIN
 	INSERT INTO PLEASE_HELP.Usuario_Rol VALUES (@idUser, @idRol)
 END
 GO
+
+
 -- STORED PROCEDURES RENDICION DE COMISIONES
+
+
+-- OBTENER LAS EMPRESAS A FACTURAR
+--ALTER PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
+--AS
+--BEGIN
+--	DECLARE @estadoId int
+--	SELECT @estadoId = es.Estado_Id FROM Estado es WHERE es.Estado_Descripcion = 'FINALIZADA'
+
+--	SELECT e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, 
+--	e.Emp_Ciudad, e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto,
+--	COUNT(DISTINCT p.Pub_Codigo) as [Cantidad Publicaciones],
+--	SUM(ISNULL(u.Ubicacion_Precio, 0)) as [Monto Total Por Facturar]
+
+--	FROM PLEASE_HELP.Empresa e
+--	LEFT JOIN PLEASE_HELP.Publicacion p
+--	ON p.Pub_Empresa = e.Emp_Usuario
+--	AND p.Pub_Estado = @estadoId
+
+--	LEFT JOIN PLEASE_HELP.Ubicacion u
+--	ON u.Ubicacion_Publicacion = p.Pub_Codigo
+
+--	LEFT JOIN PLEASE_HELP.Compra c
+--	ON c.Compra_Asiento = u.Ubicacion_Asiento
+--	AND c.Compra_Fila = u.Ubicacion_Fila
+--	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
+
+--	WHERE c.Compra_Fecha_Rendida IS NULL
+--	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
+--	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
+--END
+--GO
+
 
 -- OBTENER LAS EMPRESAS A FACTURAR
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
@@ -882,23 +917,14 @@ AS
 BEGIN
 	DECLARE @estadoId int
 	SELECT @estadoId = es.Estado_Id FROM Estado es WHERE es.Estado_Descripcion = 'FINALIZADA'
-	SELECT e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, 
-	e.Emp_Ciudad, e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto,
-	COUNT(DISTINCT p.Pub_Codigo) as [Cantidad Publicaciones],
-	SUM(ISNULL(u.Ubicacion_Precio, 0)) as [Monto Total Por Facturar]
-	FROM PLEASE_HELP.Empresa e
-	LEFT JOIN PLEASE_HELP.Publicacion p
-	ON p.Pub_Empresa = e.Emp_Usuario
-	AND p.Pub_Estado = @estadoId
-	LEFT JOIN PLEASE_HELP.Ubicacion u
-	ON u.Ubicacion_Publicacion = p.Pub_Codigo
-	LEFT JOIN PLEASE_HELP.Compra c
-	ON c.Compra_Asiento = u.Ubicacion_Asiento
-	AND c.Compra_Fila = u.Ubicacion_Fila
-	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
-	WHERE c.Compra_Fecha_Rendida IS NULL
-	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
-	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
+
+	SELECT E.Emp_Usuario, E.Emp_Razon_Social, E.Emp_Cuit, E.Emp_Localidad, E.Emp_Ciudad, E.Emp_Direccion, E.Emp_Piso, E.Emp_Depto,
+			COUNT(DISTINCT(P.Pub_Codigo)) as [Cantidad Publicaciones], 
+			ISNULL(SUM(U.Ubicacion_Precio), 0) as [Monto Total Por Facturar]
+	FROM PLEASE_HELP.Empresa E LEFT JOIN PLEASE_HELP.Publicacion P ON E.Emp_Usuario = P.Pub_Empresa AND P.Pub_Estado = @estadoId AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C WHERE C.Compra_Publicacion = P.Pub_Codigo AND C.Compra_Fecha_Rendida IS NULL)
+				LEFT JOIN PLEASE_HELP.Ubicacion U ON U.Ubicacion_Publicacion = P.Pub_Codigo AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C INNER JOIN PLEASE_HELP.Ubicacion U2 ON C.Compra_Publicacion = U2.Ubicacion_Publicacion AND C.Compra_Fila = U2.Ubicacion_Fila AND C.Compra_Asiento = U2.Ubicacion_Asiento AND C.Compra_Fecha_Rendida IS NULL AND C.Compra_Cliente IS NOT NULL
+																										WHERE U2.Ubicacion_Publicacion = U.Ubicacion_Publicacion AND U2.Ubicacion_Fila = U.Ubicacion_Fila AND U2.Ubicacion_Asiento = U.Ubicacion_Asiento) 
+	GROUP BY E.Emp_Usuario, E.Emp_Razon_Social, E.Emp_Cuit, E.Emp_Localidad, E.Emp_Ciudad, E.Emp_Direccion, E.Emp_Piso, E.Emp_Depto
 END
 GO
 
@@ -917,8 +943,9 @@ BEGIN
 		(SELECT COUNT(C1.Compra_Id) FROM PLEASE_HELP.Compra C1 WHERE C1.Compra_Publicacion = P.Pub_Codigo AND C1.Compra_Fecha_Rendida IS NULL GROUP BY C1.Compra_Publicacion) as [Cantidad Compras],
 		SUM(ISNULL(U.Ubicacion_Precio, 0)) as [Monto Por Facturar]
 
-		FROM PLEASE_HELP.Publicacion P INNER JOIN PLEASE_HELP.Ubicacion U ON P.Pub_Codigo = U.Ubicacion_Publicacion 
+	FROM PLEASE_HELP.Publicacion P INNER JOIN PLEASE_HELP.Ubicacion U ON P.Pub_Codigo = U.Ubicacion_Publicacion 
 	WHERE P.Pub_Empresa = @idEmpresa AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C WHERE C.Compra_Publicacion = P.Pub_Codigo AND C.Compra_Asiento = U.Ubicacion_Asiento AND C.Compra_Fila = U.Ubicacion_Fila AND C.Compra_Fecha_Rendida IS NULL) 
+									 AND P.Pub_Estado = @estadoId
 	GROUP BY P.Pub_Codigo, P.Pub_Fecha_Inicio, P.Pub_Fecha_Evento, P.Pub_Descripcion, P.Pub_Direccion, P.Pub_Rubro, P.Pub_Grado
 	HAVING (SELECT COUNT(C1.Compra_Id) FROM PLEASE_HELP.Compra C1 WHERE C1.Compra_Publicacion = P.Pub_Codigo AND C1.Compra_Fecha_Rendida IS NULL GROUP BY C1.Compra_Publicacion) > 0
 END 
@@ -934,12 +961,9 @@ BEGIN
 	u.Ubicacion_Descripcion, u.Ubicacion_Fila, u.Ubicacion_Asiento,
 	(SELECT p.Pub_Fecha_Evento FROM PLEASE_HELP.Publicacion p WHERE p.Pub_Codigo = u.Ubicacion_Publicacion) AS Compra_Fecha_Evento, 
 	(SELECT p.Pub_Descripcion FROM PLEASE_HELP.Publicacion p WHERE p.Pub_Codigo = u.Ubicacion_Publicacion) AS Compra_Publicacion_Descripcion
-	FROM PLEASE_HELP.Compra c
-	INNER JOIN PLEASE_HELP.Ubicacion u
-	ON c.Compra_Publicacion = u.Ubicacion_Publicacion 
-	AND c.Compra_Fila = u.Ubicacion_Fila 
-	AND c.Compra_Asiento = u.Ubicacion_Asiento
-	WHERE c.Compra_Publicacion = @idPublicacion
+
+	FROM PLEASE_HELP.Compra c INNER JOIN PLEASE_HELP.Ubicacion u ON c.Compra_Publicacion = u.Ubicacion_Publicacion AND c.Compra_Fila = u.Ubicacion_Fila AND c.Compra_Asiento = u.Ubicacion_Asiento
+	WHERE c.Compra_Publicacion = @idPublicacion AND c.Compra_Fecha_Rendida IS NULL
 	ORDER BY c.Compra_Fecha ASC
 END
 GO
