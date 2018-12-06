@@ -15,7 +15,7 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
         public override void BuildCliente(Modelo.Cliente cliente)
         {
             base.BuildCliente(cliente);
-            cliente.username = "USUARIO" + cliente.nroDocumento;
+            cliente.username = "USUARIO" + cliente.nroDocumento.ToString();
             cliente.SetPassword(cliente.nroDocumento.ToString());          
         }
 
