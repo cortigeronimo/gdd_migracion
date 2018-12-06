@@ -894,35 +894,28 @@ END
 GO
 
 
--- OBTENER LAS PUBLICACIONES A FACTURAR
+-- OBTENER PUBLICACIONES A FACTURAR
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_PUBLICACIONES_A_FACTURAR(@idEmpresa int)
 AS
 BEGIN
 	DECLARE @estadoId int
 	SELECT @estadoId = es.Estado_Id FROM PLEASE_HELP.Estado es WHERE es.Estado_Descripcion = 'FINALIZADA'
-	SELECT p.Pub_Codigo, p.Pub_Fecha_Inicio, p.Pub_Fecha_Evento,
-	p.Pub_Descripcion, p.Pub_Direccion, 
-	p.Pub_Rubro, p.Pub_Grado,
-	c.Compra_Asiento, c.Compra_Fila, c.Compra_Publicacion,
-	(SELECT r.Rubro_Descripcion FROM PLEASE_HELP.Rubro r WHERE r.Rubro_Id = p.Pub_Rubro) as Rubro,
-	(SELECT g.Grado_Descripcion FROM PLEASE_HELP.Grado g WHERE g.Grado_Id = p.Pub_Grado) as Grado,
-	(SELECT g.Grado_Comision FROM PLEASE_HELP.Grado g WHERE g.Grado_Id = p.Pub_Grado) as Comision,
-	COUNT(c.Compra_Id) as [Cantidad Compras],
-	(SELECT SUM(ISNULL(u.Ubicacion_Precio, 0)) FROM PLEASE_HELP.Ubicacion u 
-	WHERE u.Ubicacion_Asiento = c.Compra_Asiento 
-	and u.Ubicacion_Fila = c.Compra_Fila 
-	and u.Ubicacion_Publicacion = c.Compra_Publicacion) as [Monto Por Facturar]
-	FROM PLEASE_HELP.Publicacion p
-	LEFT JOIN PLEASE_HELP.Compra c
-	ON c.Compra_Publicacion = p.Pub_Codigo
-	WHERE p.Pub_Empresa = @idEmpresa AND p.Pub_Estado = @estadoId AND c.Compra_Fecha_Rendida IS NULL
-	GROUP BY p.Pub_Codigo, p.Pub_Fecha_Inicio, p.Pub_Fecha_Evento,
-	p.Pub_Descripcion, p.Pub_Direccion, 
-	p.Pub_Rubro, p.Pub_Grado,
-	c.Compra_Asiento, c.Compra_Fila, c.Compra_Publicacion
-	HAVING COUNT(c.Compra_Id) > 0
-END
+
+	SELECT P.Pub_Codigo, P.Pub_Fecha_Inicio, P.Pub_Fecha_Evento, P.Pub_Descripcion, P.Pub_Direccion,
+		(SELECT R.Rubro_Descripcion FROM PLEASE_HELP.Rubro R WHERE R.Rubro_Id = P.Pub_Rubro) as Rubro,
+		(SELECT G.Grado_Descripcion FROM PLEASE_HELP.Grado G WHERE G.Grado_Id = P.Pub_Grado) as Grado,
+		(SELECT G.Grado_Comision FROM PLEASE_HELP.Grado G WHERE G.Grado_Id = P.Pub_Grado) as Comision,
+		(SELECT COUNT(C1.Compra_Id) FROM PLEASE_HELP.Compra C1 WHERE C1.Compra_Publicacion = P.Pub_Codigo AND C1.Compra_Fecha_Rendida IS NULL GROUP BY C1.Compra_Publicacion) as [Cantidad Compras],
+		SUM(ISNULL(U.Ubicacion_Precio, 0)) as [Monto Por Facturar]
+
+		FROM PLEASE_HELP.Publicacion P INNER JOIN PLEASE_HELP.Ubicacion U ON P.Pub_Codigo = U.Ubicacion_Publicacion 
+	WHERE P.Pub_Empresa = @idEmpresa AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C WHERE C.Compra_Publicacion = P.Pub_Codigo AND C.Compra_Asiento = U.Ubicacion_Asiento AND C.Compra_Fila = U.Ubicacion_Fila AND C.Compra_Fecha_Rendida IS NULL) 
+	GROUP BY P.Pub_Codigo, P.Pub_Fecha_Inicio, P.Pub_Fecha_Evento, P.Pub_Descripcion, P.Pub_Direccion, P.Pub_Rubro, P.Pub_Grado
+	HAVING (SELECT COUNT(C1.Compra_Id) FROM PLEASE_HELP.Compra C1 WHERE C1.Compra_Publicacion = P.Pub_Codigo AND C1.Compra_Fecha_Rendida IS NULL GROUP BY C1.Compra_Publicacion) > 0
+END 
 GO
+
+
 
 -- OBTENER LAS COMPRAS A FACTURAR
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_COMPRAR_PARA_FACTURAR(@idPublicacion NUMERIC(18,0))
