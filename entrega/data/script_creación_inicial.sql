@@ -518,7 +518,7 @@ BEGIN
 	BEGIN TRANSACTION
 
 		INSERT INTO PLEASE_HELP.Usuario (Usuario_Username, Usuario_Password) 
-		SELECT 'EMPRESA' + CAST(Espec_Empresa_Cuit AS varchar(225)), HASHBYTES('SHA2_256', CAST(Espec_Empresa_Cuit AS varchar(255))) 
+		SELECT 'EMPRESA' + CAST(REPLACE(Espec_Empresa_Cuit,'-','') AS varchar(225)), HASHBYTES('SHA2_256', CAST(REPLACE(Espec_Empresa_Cuit,'-','') AS varchar(255))) 
 		FROM gd_esquema.Maestra 
 		WHERE Espec_Empresa_Cuit IS NOT NULL
 		GROUP BY Espec_Empresa_Cuit
@@ -543,7 +543,7 @@ BEGIN
 		SELECT DISTINCT u.Usuario_Id, m.Espec_Empresa_Razon_Social, m.Espec_Empresa_Mail, NULL, NULL, m.Espec_Empresa_Dom_Calle + ' ' + CAST(m.Espec_Empresa_Nro_Calle AS nvarchar(255)),
 		m.Espec_Empresa_Piso, m.Espec_Empresa_Depto, m.Espec_Empresa_Cod_Postal, NULL, m.Espec_Empresa_Cuit, 1, 0, 0, 1
 		FROM PLEASE_HELP.Usuario u, gd_esquema.Maestra m 
-		WHERE u.Usuario_Username = ('EMPRESA' + CAST(m.Espec_Empresa_Cuit AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
+		WHERE u.Usuario_Username = ('EMPRESA' + CAST(REPLACE(m.Espec_Empresa_Cuit,'-','') AS varchar(225))) AND m.Espec_Empresa_Cuit IS NOT NULL
 
 		INSERT INTO PLEASE_HELP.Usuario_Rol (Usuario_Id, Rol_Id)
 		SELECT e.Emp_Usuario, (select r.Rol_Id from PLEASE_HELP.Rol r where r.Rol_Nombre = 'EMPRESA') from PLEASE_HELP.EMPRESA e
@@ -922,8 +922,7 @@ BEGIN
 			COUNT(DISTINCT(P.Pub_Codigo)) as [Cantidad Publicaciones], 
 			ISNULL(SUM(U.Ubicacion_Precio), 0) as [Monto Total Por Facturar]
 	FROM PLEASE_HELP.Empresa E LEFT JOIN PLEASE_HELP.Publicacion P ON E.Emp_Usuario = P.Pub_Empresa AND P.Pub_Estado = @estadoId AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C WHERE C.Compra_Publicacion = P.Pub_Codigo AND C.Compra_Fecha_Rendida IS NULL)
-				LEFT JOIN PLEASE_HELP.Ubicacion U ON U.Ubicacion_Publicacion = P.Pub_Codigo AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C INNER JOIN PLEASE_HELP.Ubicacion U2 ON C.Compra_Publicacion = U2.Ubicacion_Publicacion AND C.Compra_Fila = U2.Ubicacion_Fila AND C.Compra_Asiento = U2.Ubicacion_Asiento AND C.Compra_Fecha_Rendida IS NULL AND C.Compra_Cliente IS NOT NULL
-																										WHERE U2.Ubicacion_Publicacion = U.Ubicacion_Publicacion AND U2.Ubicacion_Fila = U.Ubicacion_Fila AND U2.Ubicacion_Asiento = U.Ubicacion_Asiento) 
+				LEFT JOIN PLEASE_HELP.Ubicacion U ON U.Ubicacion_Publicacion = P.Pub_Codigo AND EXISTS(SELECT 1 FROM PLEASE_HELP.Compra C WHERE C.Compra_Publicacion = U.Ubicacion_Publicacion AND C.Compra_Fila = U.Ubicacion_Fila AND C.Compra_Asiento = U.Ubicacion_Asiento AND C.Compra_Fecha_Rendida IS NULL) 
 	GROUP BY E.Emp_Usuario, E.Emp_Razon_Social, E.Emp_Cuit, E.Emp_Localidad, E.Emp_Ciudad, E.Emp_Direccion, E.Emp_Piso, E.Emp_Depto
 END
 GO
