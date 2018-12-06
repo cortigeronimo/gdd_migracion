@@ -1,1 +1,1 @@
-sqlcmd -S localhost\SQLSERVER2012 -U gdEspectaculos2018 -P gd2018 -i script_creación_inicial.sql -a 32767
+sqlcmd -S localhost\SQLSERVER2012 -U gdEspectaculos2018 -P gd2018 -i script_creacion_inicial.sql -a 32767

@@ -67,7 +67,9 @@ namespace PalcoNet.Vistas
                     }
                     else
                     {
-                        Application.Exit();
+                        MessageBox.Show("No puede acceder a la plataforma sin cambiar la contraseña. Volviendo al login...");
+                        this.OpenAndClose(new Login());
+                        
                     }
                 }
             }
