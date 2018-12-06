@@ -33,6 +33,18 @@ namespace PalcoNet.Repositorios
             Conexion.ExecuteProcedure(cmd);
         }
 
+        public void InsertUserWithRol(Usuario user, Rol rol)
+        {
+            String query = "PLEASE_HELP.SP_INSERTAR_USUARIO_CON_ROL";
+            SqlCommand command = new SqlCommand(query);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@username", user.username);
+            command.Parameters.AddWithValue("@password", user.GetPassword());
+            command.Parameters.AddWithValue("@idRol", rol.Id);
+
+            Conexion.ExecuteProcedure(command);
+        }
+
        
         public Boolean FirstLogin(int? userId, int rolId)
         {
@@ -53,7 +65,7 @@ namespace PalcoNet.Repositorios
         }
 
         //Verifica si el usuario existe en la DB, si existe se guarda el "Id" en el objeto user
-        public Boolean ExistsUser(Usuario user)
+        public Boolean ExistsUserWithSideEffect(Usuario user)
         {
             DataTable table = new DataTable();
             table = GetUserRow(user);
@@ -64,6 +76,14 @@ namespace PalcoNet.Repositorios
                 return true;
             }
             return false;
+        }
+
+        public Boolean ExistsUser(Usuario user)
+        {
+            DataTable table = new DataTable();
+            table = GetUserRow(user);
+
+            return table.Rows.Count != 0;
         }
 
         //Verifica si la contraseña ingresada es correcta
