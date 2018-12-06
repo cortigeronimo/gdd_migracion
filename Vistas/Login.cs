@@ -76,7 +76,7 @@ namespace PalcoNet
             user.isAdmin = false;
 
             //Verifica si existe el username ingresado en el login
-            if (!repo.ExistsUser(user))
+            if (!repo.ExistsUserWithSideEffect(user))
             {
                 MessageBox.Show("Usuario Inexistente.", "Error");
                 return false;

@@ -70,7 +70,7 @@ namespace PalcoNet.Abm_Rol
                 }
                 elegida = funcionalidades.Find(x => x.Nombre == (string)listBoxFuncionalidades.SelectedItem);
                 this.DialogResult = DialogResult.OK; this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.CloseThis();
             }
             else MessageBox.Show("Elija una funcionalidad, por favor.");
 

@@ -58,7 +58,6 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(156, 23);
             this.txtUsername.TabIndex = 1;
-            this.txtUsername.Text = "empresa06-68361819-16";
             this.txtUsername.TextChanged += new System.EventHandler(this.TxtBoxes_TextChanged);
             // 
             // txtPassword
@@ -69,7 +68,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(156, 23);
             this.txtPassword.TabIndex = 2;
-            this.txtPassword.Text = "06-68361819-16";
             this.txtPassword.TextChanged += new System.EventHandler(this.TxtBoxes_TextChanged);
             // 
             // lblUsername

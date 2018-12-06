@@ -20,6 +20,8 @@ namespace PalcoNet.Registro_de_Usuario
 
         private List<Rol> roles = new List<Rol>();
 
+        private RepoUsuario repoUsuario = new RepoUsuario();
+
         public CreateUsuario()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace PalcoNet.Registro_de_Usuario
 
         private void AltaUsuario_Load(object sender, EventArgs e)
         {
-            roles = repoRol.FindClienteAndEmpresaRolOnlyEnableEnable();
+            roles = repoRol.FindAllRolesOnlyEnable();
             int i = 0;
             foreach(Rol rol in roles){
                 comboBoxRol.Items.Insert(i, rol.nombre);
@@ -61,18 +63,33 @@ namespace PalcoNet.Registro_de_Usuario
             Form formToRedirect;
             Usuario usuario = new Usuario();
             RepoRol repoRol = new RepoRol();
-            Rol rol = roles.Find((x) => x.nombre.Equals((String)comboBoxRol.SelectedItem));
+            Rol selectedRol = roles.Find((x) => x.nombre.Equals((String)comboBoxRol.SelectedItem));
             usuario.username = txtUsuario.Text;
             usuario.SetPassword(txtPassword.Text);
-            usuario.AddRol(rol);
+            usuario.AddRol(selectedRol);
             
-            if(rol.nombre.Equals("CLIENTE")){
+            if(selectedRol.nombre.Equals("CLIENTE")){
                 formToRedirect = new CreateOrUpdateCliente(usuario);
+                this.OpenAndClose(formToRedirect);
             }
-            else{
+            else if (selectedRol.nombre.Equals("EMPRESA"))
+            {
                 formToRedirect = new CreateOrUpdateEmpresa(usuario);
+                this.OpenAndClose(formToRedirect);
             }
-            this.OpenAndClose(formToRedirect);
+            else
+            {
+                if(!repoUsuario.ExistsUser(usuario)){
+                    repoUsuario.InsertUserWithRol(usuario, selectedRol);
+                    MessageBox.Show("Usuario creado.");
+                    this.CloseThis();
+                    return;
+                }
+                MessageBox.Show("El usuario ya existe en la BD");
+                return;
+                
+            }
+            
         }
 
     }

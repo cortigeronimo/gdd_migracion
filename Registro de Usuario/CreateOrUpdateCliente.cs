@@ -105,7 +105,7 @@ namespace PalcoNet.Registro_de_Usuario
             ReadAllTextBox(cliente);
             clienteStrategy.BuildCliente(cliente);
             clienteStrategy.Execute(repoCliente, cliente);
-            this.Close();
+            this.CloseThis();
         }
 
         private ValidatorData ValidateFields()

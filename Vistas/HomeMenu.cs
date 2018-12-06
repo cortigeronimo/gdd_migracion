@@ -44,14 +44,6 @@ namespace PalcoNet.Vistas
             
         }
 
-        /*
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-            Application.Exit();
-        }
-        */
-
         //Verifica si es el primer login de un usuario
         private Boolean FirstLogin()
         {

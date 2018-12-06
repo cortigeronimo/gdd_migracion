@@ -37,5 +37,11 @@ namespace PalcoNet.Vistas
             killChildForms = false;
             FormManager.GetInstance().OpenAndClose(form, this);
         }
+
+        protected void CloseThis()
+        {
+            killChildForms = false;
+            this.Close();
+        }
     }
 }
