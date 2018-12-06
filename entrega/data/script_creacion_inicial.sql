@@ -192,7 +192,7 @@ create table PLEASE_HELP.Usuario
 (
 	Usuario_Id int identity(1,1), 
 	Usuario_Username nvarchar(50) NOT NULL, 
-	Usuario_Password varbinary(255),
+	Usuario_Password varbinary(255) NOT NULL,
 	CONSTRAINT UQ_USUARIO_USERNAME UNIQUE (Usuario_Username),
 	CONSTRAINT PK_USUARIO_ID PRIMARY KEY (Usuario_Id)
 )
@@ -219,7 +219,9 @@ create table PLEASE_HELP.Cliente
 	Cli_Intentos_Fallidos smallint DEFAULT 0,
 	Cli_Baja bit DEFAULT 0,
 	Cli_Primer_Login bit DEFAULT 0,
-	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario)
+	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario),
+	CONSTRAINT UQ_CLIENTE_CUIL UNIQUE (Cli_Cuil),
+	CONSTRAINT UQ_CLIENTE_NRO_DOCUMENTO UNIQUE (Cli_Nro_Documento)
 )
 
 create table PLEASE_HELP.Empresa
@@ -239,7 +241,9 @@ create table PLEASE_HELP.Empresa
 	Emp_Intentos_Fallidos smallint DEFAULT 0,
 	Emp_Baja bit DEFAULT 0,
 	Emp_Primer_Login bit DEFAULT 0,
-	CONSTRAINT PK_EMPRESA_USUARIO PRIMARY KEY (Emp_Usuario)
+	CONSTRAINT PK_EMPRESA_USUARIO PRIMARY KEY (Emp_Usuario),
+	CONSTRAINT UQ_EMPRESA_CUIT UNIQUE (Emp_Cuit),
+	CONSTRAINT UQ_EMPRESA_RAZON_SOCIAL UNIQUE (Emp_Razon_Social)
 )
 
 create table PLEASE_HELP.Publicacion
@@ -253,7 +257,7 @@ create table PLEASE_HELP.Publicacion
 	Pub_Grado int,
 	Pub_Empresa int,
 	Pub_Estado int,
-	CONSTRAINT PK_PUBLICACION_CODIGO PRIMARY KEY (Pub_Codigo),
+	CONSTRAINT PK_PUBLICACION_CODIGO PRIMARY KEY (Pub_Codigo)
 )
 
 create table PLEASE_HELP.Rubro
@@ -306,7 +310,7 @@ create table PLEASE_HELP.Compra
 	Compra_Fila varchar(3) NOT NULL,
 	Compra_Asiento numeric(18,0) NOT NULL,
 	Compra_Publicacion numeric(18,0),
-	CONSTRAINT PK_COMPRA_ID PRIMARY KEY (Compra_Id),
+	CONSTRAINT PK_COMPRA_ID PRIMARY KEY (Compra_Id)
 )
 
 create table PLEASE_HELP.Factura
@@ -326,7 +330,7 @@ create table PLEASE_HELP.Item
 	Item_Descripcion nvarchar(60) NOT NULL,
 	Item_Factura numeric(18,0),
 	Item_Compra int,
-	CONSTRAINT PK_ITEM_ID PRIMARY KEY (Item_Id),
+	CONSTRAINT PK_ITEM_ID PRIMARY KEY (Item_Id)
 )
 
 create table PLEASE_HELP.Puntuacion
@@ -335,7 +339,7 @@ create table PLEASE_HELP.Puntuacion
 	Puntuacion_Cantidad int DEFAULT 0,
 	Puntuacion_Fecha_Vencimiento datetime,
 	Puntuacion_Cliente int,
-	CONSTRAINT PK_PUNTUACION_ID PRIMARY KEY (Puntuacion_Id), 
+	CONSTRAINT PK_PUNTUACION_ID PRIMARY KEY (Puntuacion_Id)
 )
 
 create table PLEASE_HELP.Premio
@@ -343,7 +347,7 @@ create table PLEASE_HELP.Premio
 	Premio_Id int identity(1,1),
 	Premio_Descripcion nvarchar(50),
 	Premio_Puntos int,
-	CONSTRAINT PK_PREMIO_ID PRIMARY KEY (Premio_Id),
+	CONSTRAINT PK_PREMIO_ID PRIMARY KEY (Premio_Id)
 )
 
 create table PLEASE_HELP.Usuario_Premio
@@ -351,7 +355,7 @@ create table PLEASE_HELP.Usuario_Premio
 	Cli_Usuario int,
 	Premio_Id int,
 	Premio_Cantidad int DEFAULT 1,
-	CONSTRAINT PK_USUARIOXPREMIO PRIMARY KEY (Cli_Usuario, Premio_Id),
+	CONSTRAINT PK_USUARIOXPREMIO PRIMARY KEY (Cli_Usuario, Premio_Id)
 )
 
 GO
@@ -376,9 +380,7 @@ ADD CONSTRAINT FK_CLIENTE_USUARIO FOREIGN KEY (Cli_Usuario) REFERENCES PLEASE_HE
 GO
 
 ALTER TABLE PLEASE_HELP.Empresa
-ADD CONSTRAINT FK_EMPRESA_USUARIO FOREIGN KEY (Emp_Usuario) REFERENCES PLEASE_HELP.Usuario(Usuario_Id),
-CONSTRAINT UQ_EMPRESA_RAZON_SOCIAL UNIQUE (Emp_Razon_Social),
-CONSTRAINT UQ_EMPRESA_CUIT UNIQUE (Emp_Cuit)
+ADD CONSTRAINT FK_EMPRESA_USUARIO FOREIGN KEY (Emp_Usuario) REFERENCES PLEASE_HELP.Usuario(Usuario_Id)
 
 GO
 

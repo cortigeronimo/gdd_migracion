@@ -91,6 +91,7 @@ namespace PalcoNet.Registro_de_Usuario
             txtLocalidad.Clear();
             txtCodigoPostal.Clear();
             txtTarjetaCredito.Clear();
+            checkBoxBaja.Checked = false;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -143,6 +144,10 @@ namespace PalcoNet.Registro_de_Usuario
             cliente.codigoPostal = txtCodigoPostal.Text;
             cliente.fechaNacimiento = pickerFechaNacimiento.Value;
             cliente.tarjetaCredito = txtTarjetaCredito.Text;
+            if (checkBoxBaja.Enabled)
+            {
+                cliente.baja = checkBoxBaja.Checked;
+            }
             
         }
 
