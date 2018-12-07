@@ -1210,40 +1210,34 @@ GO
 -- STORED PROCEDURES LISTADO ESTADISTICO
 
 --Listado estadistico empresas con mayor cantidad de localidades no vendidas
-CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_EMPRESAS](@anio INT, @trimestre INT)
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_EMPRESAS](@anio INT, @trimestre INT, @grado INT)
 AS
 BEGIN
 
-DECLARE @mes1 int
-DECLARE @mes2 int
-DECLARE @mes3 int
+DECLARE @mesDesde INT
+DECLARE @mesHasta INT
 
-SET @mes1 = (@trimestre - 1) * 3 + 1
-SET @mes2 = (@trimestre - 1) * 3 + 2
-SET @mes3 = (@trimestre - 1) * 3 + 3
+SET @mesDesde = CASE @trimestre WHEN 1 THEN 1
+								WHEN 2 THEN 4
+								WHEN 3 THEN 7
+								WHEN 4 THEN 10 END
+
+SET @mesHasta = CASE @trimestre WHEN 1 THEN 3
+								WHEN 2 THEN 6
+								WHEN 3 THEN 9
+								WHEN 4 THEN 12 END
 
 
-SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
+SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
 INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
 INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
 LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes1
-GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
-UNION
-SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
-INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
-INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
-LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes2
-GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
-UNION
-SELECT TOP 5 e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento) Mes,count(u.Ubicacion_Publicacion) [Localidades no vendidas] FROM PLEASE_HELP.Ubicacion u
-INNER JOIN PLEASE_HELP.Publicacion p ON u.Ubicacion_Publicacion = p.Pub_Codigo
-INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
-LEFT JOIN PLEASE_HELP.Compra c ON u.Ubicacion_Publicacion = c.Compra_Publicacion AND u.Ubicacion_Fila = c.Compra_Fila AND u.Ubicacion_Asiento = c.Compra_Asiento
-WHERE c.Compra_Id IS NULL AND year(p.Pub_Fecha_Evento) = @anio AND month(p.Pub_Fecha_Evento) = @mes3
-GROUP BY e.Emp_Razon_Social, p.Pub_Grado, month(p.Pub_Fecha_Evento)
-ORDER BY month(p.Pub_Fecha_Evento) asc, count(u.Ubicacion_Publicacion) desc;
+WHERE c.Compra_Id IS NULL 
+	and p.Pub_Grado = @grado
+	AND year(p.Pub_Fecha_Evento) = @anio 
+	AND month(p.Pub_Fecha_Evento) BETWEEN @mesDesde AND @mesHasta
+GROUP BY e.Emp_Razon_Social, p.Pub_Grado
+ORDER BY count(u.Ubicacion_Publicacion) desc
 
 END
 GO
