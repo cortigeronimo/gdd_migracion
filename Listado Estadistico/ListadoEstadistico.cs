@@ -44,9 +44,8 @@ namespace PalcoNet.Listado_Estadistico
             DialogResult result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
-                //aca tenes el grado id, usalo en la funcion que busca
                 int gradoid = form.grado.Id;
-                top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+                top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text), gradoid);
                 bindingSource = new BindingSource(top5, String.Empty);
                 dataGridEstadisticas.DataSource = bindingSource;
             }
@@ -90,9 +89,8 @@ namespace PalcoNet.Listado_Estadistico
             DialogResult result = form.ShowDialog();
             if (result == DialogResult.OK)
             {
-                //aca tenes  el empresa id, usalo en la funcion que busca
                 int? empresaId = form.empresa.id;
-                top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+                top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text),empresaId);
                 bindingSource = new BindingSource(top5ClientesCompras, String.Empty);
                 dataGridEstadisticas.DataSource = bindingSource;
             }

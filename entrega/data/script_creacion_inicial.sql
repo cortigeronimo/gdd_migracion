@@ -1271,7 +1271,7 @@ END
 GO
 
 --Listado estadistico clientes con mayor cantidad de compras
-CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_COMPRAS](@trimestre INT, @anio INT, @empresa nvarchar(255))
+CREATE PROCEDURE [PLEASE_HELP].[SP_TOP5_CLIENTES_COMPRAS](@trimestre INT, @anio INT, @empresa INT)
 AS
 BEGIN
 
@@ -1292,7 +1292,7 @@ SELECT TOP 5 cl.Cli_Usuario, cl.Cli_Apellido, cl.Cli_Nombre, sum(c.Compra_Cantid
 INNER JOIN PLEASE_HELP.Cliente cl ON c.Compra_Cliente = cl.Cli_Usuario
 INNER JOIN PLEASE_HELP.Publicacion p ON c.Compra_Publicacion = p.Pub_Codigo
 INNER JOIN PLEASE_HELP.Empresa e ON p.Pub_Empresa = e.Emp_Usuario
-WHERE e.Emp_Razon_Social = @empresa
+WHERE e.Emp_Usuario = @empresa
 	AND YEAR(c.Compra_Fecha) = @anio
 	AND MONTH(c.Compra_Fecha) BETWEEN @mesDesde AND @mesHasta
 GROUP BY cl.Cli_Usuario, cl.Cli_Apellido, cl.Cli_Nombre, e.Emp_Razon_Social

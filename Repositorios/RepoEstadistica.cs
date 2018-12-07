@@ -11,12 +11,13 @@ namespace PalcoNet.Repositorios
 {
     class RepoEstadistica : Repository
     {
-        public List<ResultadoEstadistico> GetTop5Empresas(int anio, int trimestre)
+        public List<ResultadoEstadistico> GetTop5Empresas(int anio, int trimestre, int grado)
         {
-            string query = "EXEC PLEASE_HELP.SP_TOP5_EMPRESAS @anio , @trimestre";
+            string query = "EXEC PLEASE_HELP.SP_TOP5_EMPRESAS @anio , @trimestre , @grado";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@anio", anio);
             cmd.Parameters.AddWithValue("@trimestre", trimestre);
+            cmd.Parameters.AddWithValue("@grado", grado);
             DataTable result = Conexion.GetData(cmd);
             return FromRowsToResultadoEstadistico(result);
         }
@@ -28,28 +29,23 @@ namespace PalcoNet.Repositorios
             while (i < table.Rows.Count)
             {
                 ResultadoEstadistico empresa =
-                    new ResultadoEstadistico((string)table.Rows[i]["Emp_Razon_Social"], GetValueOrNull<string>(table.Rows[i]["Pub_Grado"]), table.Rows[i]["Mes"].ToString(), (int)table.Rows[i]["Localidades no vendidas"]);
+                    new ResultadoEstadistico((string)table.Rows[i]["Emp_Razon_Social"], GetValueOrNull<string>(table.Rows[i]["Pub_Grado"]), (int)table.Rows[i]["Localidades no vendidas"]);
                 top5.Add(empresa);
                 i++;
             }
             return top5;
         }
 
-        public List<ResultadoEstadistico3> GetTop5ClientesCompras(int anio, int trimestre)
+        public List<ResultadoEstadistico3> GetTop5ClientesCompras(int anio, int trimestre, int? empresaId)
         {
             List<ResultadoEstadistico3> top5 = new List<ResultadoEstadistico3>();
-            var empresas = new RepoEmpresa().GetEmpresas();
-            empresas.ForEach(e =>
-            {
-                string query = "EXEC PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS @trimestre , @anio , @empresa";
-                SqlCommand cmd = new SqlCommand(query);
-                cmd.Parameters.AddWithValue("@trimestre", trimestre);
-                cmd.Parameters.AddWithValue("@anio", anio);
-                cmd.Parameters.AddWithValue("@empresa", e.razonSocial);
-                DataTable result = Conexion.GetData(cmd);
-                var clientesComprasEmpresa = FromRowsToResultadoEstadistico3(result);
-                top5.AddRange(clientesComprasEmpresa);
-            });
+            string query = "EXEC PLEASE_HELP.SP_TOP5_CLIENTES_COMPRAS @trimestre , @anio , @empresa";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@trimestre", trimestre);
+            cmd.Parameters.AddWithValue("@anio", anio);
+            cmd.Parameters.AddWithValue("@empresa", empresaId);
+            DataTable result = Conexion.GetData(cmd);
+            top5 = FromRowsToResultadoEstadistico3(result);
             return top5;
         }
 

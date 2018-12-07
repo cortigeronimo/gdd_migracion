@@ -14,17 +14,13 @@ namespace PalcoNet.Modelo
         private string grado;
         public string Grado { get { return this.grado; } }
 
-        private string mes;
-        public string Mes { get { return this.mes; } }
-
         private int sinVender;
         public int SinVender { get { return this.sinVender; } }
 
-        public ResultadoEstadistico(string razonSocial, string grado, string mes, int cantSinVender)
+        public ResultadoEstadistico(string razonSocial, string grado, int cantSinVender)
         {
             this.razonSocial = razonSocial;
             this.grado = grado == null ? "" : grado;
-            this.mes = mes;
             this.sinVender = cantSinVender;
         }
     }
