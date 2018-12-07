@@ -18,7 +18,7 @@ namespace PalcoNet.Utils
                 "(30|33|34)(-)?[0-9]{8}(-)?[0-9]");
         public static readonly PairData REGEX_CUIL
             = new PairData("El número de cuil debe contar con una longitud de 11 cifras, y comenzar con 20, 23, 24 0 27. No se permiten guiones. No debe ser nulo.",
-                "(20|23|24|27)(-)?[0-9]{8}(-)?[0-9]");
+                "(20|23|24|27)[0-9]{8}[0-9]");
         public static readonly PairData REGEX_EMAIL 
             = new PairData("El formato de email debe corresponder a uno válido. No debe ser nulo.",
                 "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*");
@@ -66,10 +66,10 @@ namespace PalcoNet.Utils
                 "[0-9]|[1-9][0-9]|[100]");
         public static readonly PairData REGEX_PASSWORD
             = new PairData("La contraseña debe tener un mínimo de 4 y un máximo de 25 caracters.",
-                "[\\w\\d-]{4,25}");
+                "[\\w\\d]{4,25}");
         public static readonly PairData REGEX_USUARIO
             = new PairData("El usuario debe debe tener un minimo de 5 y un máximo de 20 caracteres.",
-                "[\\w\\d-].{4,20}");
+                "[\\w\\d].{4,20}");
         // regex password: (?=.*\\d)(?=.*[a-z])[0-9a-zA-Z]{8,25}
         public void ValidateTextWithRegex(String text, PairData pair)
         {

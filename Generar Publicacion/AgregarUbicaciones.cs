@@ -58,12 +58,11 @@ namespace PalcoNet.Generar_Publicacion
                     Ubicaciones.Add(ubicacion);
 
                     
-
                     bindingSource.Add(ubicacion);
                     
                     dataGridViewUbicaciones.DataSource = bindingSource;
 
-                    numericUpDownAsiento.Value++;
+                    UpAsientoNumber();
                 }
                 else{
                     MessageBox.Show("La Ubicación ya existe en la lista.", "Error");
@@ -72,9 +71,15 @@ namespace PalcoNet.Generar_Publicacion
 
             }
             else{
-                MessageBox.Show(errorMessage);
+                MessageBox.Show(errorMessage, "Error");
                 errorMessage = String.Empty;        
             }
+        }
+
+        private void UpAsientoNumber()
+        {
+            if(numericUpDownAsiento.Value < numericUpDownAsiento.Maximum)
+                numericUpDownAsiento.Value++;            
         }
 
         private void btnConfirmarSeleccion_Click(object sender, EventArgs e)

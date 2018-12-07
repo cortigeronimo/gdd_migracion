@@ -48,6 +48,8 @@ namespace PalcoNet.Historial_Cliente
             int totalCompras = compras.Count;
             decimal totalPage = Math.Ceiling((decimal)totalCompras / sizePage);
 
+            if (totalPage == 0) totalPage = 1;
+
             txtActualPage.Text = "1";
             txtTotalPage.Text = totalPage.ToString();
 

@@ -17,8 +17,21 @@ namespace PalcoNet.Utils
             if (value != String.Empty)
             {
 
-                filter += "and " + alias + "." + columnName + " = " + "@" + columnName + " ";
+                filter += "and " + alias + columnName + " = " + "@" + columnName + " ";
                 command.Parameters.AddWithValue("@" + columnName, value);
+            }
+            return filter;
+        }
+
+        public static String AddFilterFullLikeThan(String alias, String columnName, String value, SqlCommand command)
+        {
+            String filter = String.Empty;
+            alias = (alias == String.Empty) ? String.Empty : alias + ".";
+            if (value != String.Empty)
+            {
+
+                filter += "and " + alias + columnName + " LIKE " + "@" + columnName + " ";
+                command.Parameters.AddWithValue("@" + columnName, "%" + value + "%");
             }
             return filter;
         }

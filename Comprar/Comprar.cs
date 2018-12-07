@@ -70,6 +70,8 @@ namespace PalcoNet.Comprar
             int totalPublicaciones = publicaciones.Count;
             decimal totalPage = Math.Ceiling((decimal)totalPublicaciones / sizePage);
 
+            if (totalPage == 0) totalPage = 1;
+
             txtActualPage.Text = "1";
             txtTotalPage.Text = totalPage.ToString();
 

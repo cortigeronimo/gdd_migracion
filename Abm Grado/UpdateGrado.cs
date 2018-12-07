@@ -35,22 +35,27 @@ namespace PalcoNet.Abm_Grado
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (ValidateAllFields().ShowIfThereAreErrors()) return;
-            if (repo.ExistsGrado(txtNombreGrado.Text))
-            {
-                MessageBox.Show("Ya existe el grado " + this.txtNombreGrado.Text + ".");
-                return;
-            }
             
             Grado grado = new Grado(
                 (int)this.grado.Id,
                 Convert.ToInt32(txtComision.Text),
                 txtNombreGrado.Text);
-            if(repo.UpdateGrado(grado) > 0){
-                MessageBox.Show(Messages.OPERACION_EXITOSA);
+            try
+            {
+                if (repo.UpdateGrado(grado) > 0)
+                {
+                    MessageBox.Show(Messages.OPERACION_EXITOSA);
+                }
+                else
+                {
+                    MessageBox.Show(Messages.ERROR_INESPERADO);
+                }
             }
-            else{
-                MessageBox.Show(Messages.ERROR_INESPERADO);   
+            catch (Exception)
+            {
+                MessageBox.Show("Ya existe un grado con ese nombre");
             }
+            
             
         }
 

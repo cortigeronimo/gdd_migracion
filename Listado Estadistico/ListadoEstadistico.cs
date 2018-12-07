@@ -42,7 +42,7 @@ namespace PalcoNet.Listado_Estadistico
             }
 
             top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
-            top5.ForEach(t => bindingSource.Add(t));
+            bindingSource = new BindingSource(top5, String.Empty);
             dataGridEstadisticas.DataSource = bindingSource;
             
 
@@ -60,7 +60,7 @@ namespace PalcoNet.Listado_Estadistico
             }
 
             top5ClientesPuntos = repo.GetTop5ClientesPuntos(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
-            top5ClientesPuntos.ForEach(c => bindingSource.Add(c));
+            bindingSource = new BindingSource(top5ClientesPuntos, String.Empty);
             dataGridEstadisticas.DataSource = bindingSource;
         }
 
@@ -76,7 +76,7 @@ namespace PalcoNet.Listado_Estadistico
             }
 
             top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
-            top5ClientesCompras.ForEach(c => bindingSource.Add(c));
+            bindingSource = new BindingSource(top5ClientesCompras, String.Empty);
             dataGridEstadisticas.DataSource = bindingSource;
         }
     }

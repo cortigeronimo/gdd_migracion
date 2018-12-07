@@ -25,7 +25,7 @@ namespace PalcoNet.Registro_de_Usuario.ClienteStrategy
             {
                 repoCliente.InsertCliente(cliente);
                 MessageBox.Show(Messages.OPERACION_EXITOSA);
-                MessageBox.Show("Los datos autogenerados para el login son:\nUsername: " + cliente.username + "\nPassword: " + cliente.GetPassword(), "Info");
+                MessageBox.Show("Los datos autogenerados para el login son:\nUsername: " + cliente.username + "\nPassword: " + cliente.nroDocumento, "Info");
             }
             catch (Exception)
             {
