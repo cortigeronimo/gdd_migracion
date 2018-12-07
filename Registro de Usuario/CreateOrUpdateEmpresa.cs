@@ -134,13 +134,14 @@ namespace PalcoNet.Registro_de_Usuario
             }
             else {
                 if(String.IsNullOrEmpty(empresa.username)){
-                    empresa.username = "EMPRESA" + empresa.cuit.Replace("-","");
-                    String generatedPassword = empresa.cuit.Replace("-","");
-                    empresa.SetPassword(empresa.cuit.Replace("-",""));
+                    String cuitSinGuiones = empresa.cuit.Replace("-", "");
+                    empresa.username = "EMPRESA" + cuitSinGuiones;
+                    
+                    empresa.SetPassword(cuitSinGuiones);
                     repoEmpresa.InsertEmpresa(empresa);
 
                     MessageBox.Show(Messages.OPERACION_EXITOSA);
-                    MessageBox.Show("Los datos autogenerados del login son:\nUsername: "+empresa.username+"\nPassword: "+generatedPassword, "Message");
+                    MessageBox.Show("Los datos autogenerados para el login son:\nUsername: "+empresa.username+"\nPassword: "+ cuitSinGuiones , "Info");
                 }
                 else
                 {
