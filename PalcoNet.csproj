@@ -201,6 +201,12 @@
     <Compile Include="Historial Cliente\HistorialCliente.Designer.cs">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listado Estadistico\AddEmpresaFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\AddEmpresaFilter.Designer.cs">
+      <DependentUpon>AddEmpresaFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -380,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\AddEmpresaFilter.resx">
+      <DependentUpon>AddEmpresaFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>

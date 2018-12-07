@@ -40,5 +40,10 @@ namespace PalcoNet.Listado_Estadistico
             DialogResult = DialogResult.OK;
             this.CloseThis();
         }
+
+        private void groupBoxFiltroGrado_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

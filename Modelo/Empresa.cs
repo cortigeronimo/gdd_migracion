@@ -54,5 +54,10 @@ namespace PalcoNet.Modelo
             this.codigoPostal = codPostal;
             this.primerLogin = primerLogin;
         }
+
+        public override string ToString()
+        {
+            return this.razonSocial;
+        }
     }
 }
