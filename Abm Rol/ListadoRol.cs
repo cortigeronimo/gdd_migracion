@@ -76,6 +76,7 @@ namespace PalcoNet.Abm_Rol
                 using (ModificarRol form = new ModificarRol(rol))
                 {
                     DialogResult result = form.ShowDialog();
+                    btnBuscar_Click(sender, e);
                 }
             }
             if (e.ColumnIndex == dataGridRoles.Columns.IndexOf(this.Eliminar))

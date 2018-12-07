@@ -74,8 +74,15 @@ namespace PalcoNet.Abm_Rol
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            new RepoRol().UpdateRol(rol);
+            var repo = new RepoRol();
+            if(textBoxNombre.Text != rol.Nombre && repo.RepiteNombre(textBoxNombre.Text))
+            {
+                MessageBox.Show("Ya existe ese nombre de rol");
+                return;
+            }
+            rol.nombre = textBoxNombre.Text;
+            rol.habilitado = comboBoxHabilitado.Text == "Sí" ? true : false;
+            repo.UpdateRol(rol);
             this.DialogResult = DialogResult.OK;
             MessageBox.Show("Rol Modificado");
             this.CloseThis();
