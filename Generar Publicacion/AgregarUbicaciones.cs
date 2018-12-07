@@ -78,7 +78,7 @@ namespace PalcoNet.Generar_Publicacion
 
         private void UpAsientoNumber()
         {
-            if(numericUpDownAsiento.Value < 100)
+            if(numericUpDownAsiento.Value < numericUpDownAsiento.Maximum)
                 numericUpDownAsiento.Value++;            
         }
 

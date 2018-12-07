@@ -216,7 +216,6 @@ namespace PalcoNet.Vistas
 
         private void listarGrados_Click(object sender, EventArgs e)
         {
-            if (UserIsAdmin()) return;
             this.Open(new ListGrado());
         }
 
