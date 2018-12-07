@@ -220,7 +220,6 @@ create table PLEASE_HELP.Cliente
 	Cli_Baja bit DEFAULT 0,
 	Cli_Primer_Login bit DEFAULT 0,
 	CONSTRAINT PK_CLIENTE_USUARIO PRIMARY KEY (Cli_Usuario),
-	--CONSTRAINT UQ_CLIENTE_CUIL UNIQUE (Cli_Cuil),
 	CONSTRAINT UQ_CLIENTE_NRO_DOCUMENTO UNIQUE (Cli_Nro_Documento)
 )
 
@@ -592,6 +591,7 @@ END
 GO
 EXEC PLEASE_HELP.SP_CREATE_IDENTITY_CONSTRAINT_PUBLICACION
 GO
+
 -- CREACION DE UBICACION
 
 INSERT INTO PLEASE_HELP.Ubicacion SELECT DISTINCT m.Espectaculo_Cod, m.Ubicacion_Fila, m.Ubicacion_Asiento, m.Ubicacion_Precio, m.Ubicacion_Tipo_Codigo,
@@ -599,11 +599,11 @@ m.Ubicacion_Tipo_Descripcion, m.Ubicacion_Sin_Numerar FROM gd_esquema.Maestra m
 
 GO
 
-
 -- CREACION DE GRADOS
 
 INSERT INTO PLEASE_HELP.Grado (Grado_Comision, Grado_Descripcion) VALUES (30, 'ALTA'), (20, 'MEDIA'), (10, 'BAJA')
 GO
+
 
 -- CREACION DE FACTURA
 --inserta las facturas y busca el numero de factura mas alto
@@ -884,39 +884,6 @@ GO
 
 
 -- STORED PROCEDURES RENDICION DE COMISIONES
-
-
--- OBTENER LAS EMPRESAS A FACTURAR
---ALTER PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
---AS
---BEGIN
---	DECLARE @estadoId int
---	SELECT @estadoId = es.Estado_Id FROM Estado es WHERE es.Estado_Descripcion = 'FINALIZADA'
-
---	SELECT e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, 
---	e.Emp_Ciudad, e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto,
---	COUNT(DISTINCT p.Pub_Codigo) as [Cantidad Publicaciones],
---	SUM(ISNULL(u.Ubicacion_Precio, 0)) as [Monto Total Por Facturar]
-
---	FROM PLEASE_HELP.Empresa e
---	LEFT JOIN PLEASE_HELP.Publicacion p
---	ON p.Pub_Empresa = e.Emp_Usuario
---	AND p.Pub_Estado = @estadoId
-
---	LEFT JOIN PLEASE_HELP.Ubicacion u
---	ON u.Ubicacion_Publicacion = p.Pub_Codigo
-
---	LEFT JOIN PLEASE_HELP.Compra c
---	ON c.Compra_Asiento = u.Ubicacion_Asiento
---	AND c.Compra_Fila = u.Ubicacion_Fila
---	AND c.Compra_Publicacion = u.Ubicacion_Publicacion
-
---	WHERE c.Compra_Fecha_Rendida IS NULL
---	GROUP BY e.Emp_Usuario, e.Emp_Razon_Social, e.Emp_Cuit, e.Emp_Localidad, e.Emp_Ciudad,
---	e.Emp_Direccion, e.Emp_Piso, e.Emp_Depto
---END
---GO
-
 
 -- OBTENER LAS EMPRESAS A FACTURAR
 CREATE PROCEDURE PLEASE_HELP.SP_BUSCAR_EMPRESAS_POR_FACTURAR
