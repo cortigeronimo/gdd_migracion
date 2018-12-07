@@ -40,7 +40,7 @@ namespace PalcoNet.Repositorios
         {
             String query = "SELECT * FROM PLEASE_HELP.Rol r ";
             query += "WHERE Rol_nombre NOT LIKE 'ADMINISTRATIVO' ";
-            query += "AND Rol_Habilitado = 1";
+            query += "AND Rol_Habilitado = 1 AND Rol_Baja = 0";
             SqlCommand command = new SqlCommand(query);
             DataTable result = Conexion.GetData(command);
             return FromRowsToRoles(result);
@@ -222,6 +222,15 @@ namespace PalcoNet.Repositorios
                 throw new Exception("Error al eliminar el rol");
             }
             DeleteRolFromUsers(rol);
+        }
+
+        public bool RepiteNombre(string nombre)
+        {
+            string query = "SELECT COUNT(*) Cantidad FROM " + table + " WHERE Rol_Nombre = @nombre AND Rol_Baja = 0";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            int result = Convert.ToInt32(Conexion.GetData(cmd).Rows[0]["Cantidad"]);
+            return result > 0;
         }
     }
 }
