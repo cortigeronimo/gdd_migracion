@@ -40,10 +40,21 @@ namespace PalcoNet.Listado_Estadistico
                 MessageBox.Show("Por favor escriba el año a evaluar.");
                 return;
             }
-
-            top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
-            bindingSource = new BindingSource(top5, String.Empty);
-            dataGridEstadisticas.DataSource = bindingSource;
+            LoadGradoFilter form = new LoadGradoFilter();
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                //aca tenes el grado id, usalo en la funcion que busca
+                int gradoid = form.grado.Id;
+                top5 = repo.GetTop5Empresas(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+                bindingSource = new BindingSource(top5, String.Empty);
+                dataGridEstadisticas.DataSource = bindingSource;
+            }
+            else
+            {
+                MessageBox.Show("Debe completar el filtro para buscar el top 5");
+                return;
+            }
             
 
         }
@@ -75,9 +86,23 @@ namespace PalcoNet.Listado_Estadistico
                 return;
             }
 
-            top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
-            bindingSource = new BindingSource(top5ClientesCompras, String.Empty);
-            dataGridEstadisticas.DataSource = bindingSource;
+            AddEmpresaFilter form = new AddEmpresaFilter();
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                //aca tenes  el empresa id, usalo en la funcion que busca
+                int? empresaId = form.empresa.id;
+                top5ClientesCompras = repo.GetTop5ClientesCompras(Convert.ToInt32(txtBoxAnio.Text), Convert.ToInt32(comboBoxTrimestre.Text));
+                bindingSource = new BindingSource(top5ClientesCompras, String.Empty);
+                dataGridEstadisticas.DataSource = bindingSource;
+            }
+            else
+            {
+                MessageBox.Show("Debe completar el filtro para buscar el top 5");
+                return;
+            }
+
+            
         }
     }
 }

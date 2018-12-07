@@ -206,5 +206,13 @@ namespace PalcoNet.Repositorios
             DataTable result = Conexion.GetData(cmd);
             return FromRowsToEmpresas(result);
         }
+
+        public List<Empresa> GetEmpresasHabilite()
+        {
+            string query = "SELECT * FROM " + table + " WHERE Emp_baja = 0";
+            SqlCommand cmd = new SqlCommand(query);
+            DataTable result = Conexion.GetData(cmd);
+            return FromRowsToEmpresas(result);
+        }
     }
 }

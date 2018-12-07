@@ -201,11 +201,23 @@
     <Compile Include="Historial Cliente\HistorialCliente.Designer.cs">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listado Estadistico\AddEmpresaFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\AddEmpresaFilter.Designer.cs">
+      <DependentUpon>AddEmpresaFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\ListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Listado Estadistico\ListadoEstadistico.Designer.cs">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\LoadGradoFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\LoadGradoFilter.Designer.cs">
+      <DependentUpon>LoadGradoFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\Compra.cs" />
     <Compile Include="Modelo\DetalleCompra.cs" />
@@ -375,8 +387,14 @@
     <EmbeddedResource Include="Historial Cliente\HistorialCliente.resx">
       <DependentUpon>HistorialCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\AddEmpresaFilter.resx">
+      <DependentUpon>AddEmpresaFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\LoadGradoFilter.resx">
+      <DependentUpon>LoadGradoFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\CreateOrUpdateCliente.resx">
       <DependentUpon>CreateOrUpdateCliente.cs</DependentUpon>

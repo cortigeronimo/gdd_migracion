@@ -39,5 +39,10 @@ namespace PalcoNet.Abm_Grado
             this.Descripcion = descripcion;
         }
 
+        public override string ToString()
+        {
+            return this.descripcion;
+        }
+
     }
 }
